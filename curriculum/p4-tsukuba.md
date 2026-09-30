@@ -86,3 +86,51 @@ B035 Days 1–6:
 4. Q3B-style source-linked English composition
 5. mixed reading-to-output timing drill
 6. 60-minute Tsukuba part-set checkpoint
+
+
+## Recent-paper matrix (2023–2026)
+
+### 2023
+- Q1 / Q2: long reading with multiple Japanese content-explanation questions.
+- Japanese answer examples include roughly 24–67 characters.
+- Q3A: 3 word-order questions.
+- Q3B: free composition; third-party model answer 83 words.
+
+### 2024
+- 120 minutes, 3 major questions.
+- Q1: approximately 980 words; Japanese explanation (30 / 50 / 30 characters), cloze, heading matching, chronological ordering.
+- Q2: approximately 600 words; Japanese explanation and cloze-centered comprehension.
+- Q3A: 3 word-order questions.
+- Q3B: research-related free composition.
+- Direct translation was not the central output; short Japanese explanation was.
+
+### 2025
+- Q1: predictive-processing passage; several 30–50-character Japanese explanation / summary items.
+- Q2: creativity-research history; includes a high-load 89-character three-stage summary.
+- Q3A: 3 word-order items; designated 3rd / 5th words.
+- Q3B: opinion writing; published third-party model answer 82 words.
+
+### 2026
+- Q1: animal-reference / “who” vs “that” passage; Japanese 50–60-character explanation, cloze, content choice.
+- Q2: rogue-planet science passage; Japanese 40–60-character explanation, cloze, sentence insertion.
+- Q3A: 3 word-order items with designated word positions.
+- Q3B: identify the health challenge with the greatest effect on one’s generation, explain why, and give a concrete example in about 100 words.
+
+## P4 priority after paper review
+
+1. Strict-character-limit Japanese content explanation
+2. Long-passage logical structure and reference tracking
+3. Contextual cloze / heading / chronology / sentence insertion
+4. Word-order reconstruction and designated-position accuracy
+5. Roughly 80–100-word free composition with direct answer, reason, and concrete example
+
+B035 was recalibrated on 2026-09-30 to reflect this matrix. Generic T/F-heavy practice and artificial “use two source ideas” constraints were removed from the priority design.
+
+## Source-access note
+
+The University of Tsukuba does not publish the main English front-exam paper on its official past-question page because the front-exam papers are supplied to publishers and include third-party copyrighted material. The format matrix above is cross-checked against:
+- University official schedule / FAQ
+- 2027 Akahon listing for 2023–2026 English coverage
+- detailed 2024 question commentary
+- detailed 2025 question commentary based on Obunsha / exam material
+- detailed 2026 multi-year paper analysis
