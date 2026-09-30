@@ -123,6 +123,8 @@ These concepts are highly transferable and recur in later exam-like materials.
 - IDEA0054 public benefit vs alternative use
 - IDEA0055 benefit-risk frame
 
+**Priority B status: completed 2026-10-01.** Twelve concepts were audited against the actual lessons. Four received transfer-only Post-solve revisions (IDEA0001→E113, IDEA0018→E149, IDEA0049→E217, IDEA0055→E151); eight were intentionally left unchanged because the concept was already sufficiently visible or an extra block would dilute the lesson focus. See `curriculum/priority-b-review.md`.
+
 ### Priority C — keep explicit but do not force extra transfer
 
 - IDEA0031 fixed-cost service maintenance
@@ -134,6 +136,8 @@ These concepts are highly transferable and recur in later exam-like materials.
 Detailed machine-readable paths:
 - `management/idea-learning-path.csv`
 - `management/post-solve-priority-a.csv`
+- `management/priority-b-review.csv`
+- `management/post-solve-priority-b-selected.csv`
 
 Canonical framework:
 - `curriculum/content-framework.md`
