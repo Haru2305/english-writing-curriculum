@@ -60,7 +60,7 @@ This review preserves the fixed E001–E234 corpus and minimizes learner-facing 
 - Reviewed: 12 / 12
 - Transfer-only revisions published: 4
 - No-revision decisions: 8
-- Drive readback QA: pending only in the publication ledger until final verification
+- Drive readback QA: **4 / 4 pass**
 - New lesson IDs: 0
 
 Selected revision ledger:
