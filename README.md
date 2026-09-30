@@ -26,7 +26,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - Material count: **frozen at E234**
-- Current content work: **Priority A Post-solve revision complete / next = selective Priority B review / no new lesson IDs**
+- Current content work: **Priority A complete / Priority B selective review complete / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -47,6 +47,8 @@ english-writing-curriculum/
 │   ├── phase-design.md
 │   ├── content-framework.md
 │   ├── learner-facing-concepts.md
+│   ├── priority-b-review.md
+│   ├── post-solve-priority-b.md
 │   └── p4-tsukuba.md
 ├── bundles/
 │   └── README.md
@@ -58,6 +60,8 @@ english-writing-curriculum/
 │   ├── material-axis-map.csv
 │   ├── idea-learning-path.csv
 │   ├── post-solve-priority-a.csv
+│   ├── priority-b-review.csv
+│   ├── post-solve-priority-b-selected.csv
 │   └── content-axis-audit.md
 └── specs/
     ├── repository-policy.md
@@ -104,4 +108,4 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
 - `management/idea-learning-path.csv`
   - machine-readable learning paths for the 27 Core ideas
 
-The material remap and concept-path design are complete. Priority A Post-solve revision is complete across 33 existing materials at v1.1. The next content task is selective Priority B review, not E235+.
+The material remap and concept-path design are complete. Priority A is complete across 33 existing materials at v1.1. Priority B selective review is also complete: 4 transfer-only revisions were published at v1.1 and 8 concepts were intentionally left without extra Post-solve blocks. No E235+.
