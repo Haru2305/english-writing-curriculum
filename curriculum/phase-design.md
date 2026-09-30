@@ -23,7 +23,7 @@
 
 Current:
 - B022–B034 / E127–E204 completed
-- P3 completed at B034 / E204. Next: P4 Tsukuba
+- P3 completed at B034 / E204. P4 started: B035 / E205–E210 completed
 - planned end = E204前後
 - B034 = P3 Final Gate
 
