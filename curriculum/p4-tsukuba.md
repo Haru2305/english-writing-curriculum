@@ -80,12 +80,20 @@ Before the learner actually enters P4, re-check the 2027 official detailed guide
 `TPL-v4-P4-TSK`
 
 B035 Days 1–6:
-1. Q1-style long reading / Japanese explanation / T-F
-2. Q2-style long reading / paraphrase / Japanese explanation / T-F
-3. Q3A-style integrated word order / grammar
-4. Q3B-style source-linked English composition
-5. mixed reading-to-output timing drill
-6. 60-minute Tsukuba part-set checkpoint
+1. Q1-style long reading / 30–60-character Japanese explanation / cloze / heading / order
+2. Q2-style long reading / 40–80-character Japanese explanation / cloze / sentence insertion
+3. Q3A-style three word-order items / designated 3rd and 5th positions
+4. Q3B-style about-100-word free composition
+5. 30/50/60/90-character Japanese explanation packing
+6. 60-minute mixed-format Tsukuba checkpoint
+
+B036 Days 7–12:
+7. final 60-minute Q1-style speed drill / strict Japanese explanation / cloze / heading / order
+8. final 60-minute Q3 integration / three word-order items + about-100-word free composition
+9. 90-minute Semi-full A / Q1-style reading + Q3A + Q3B
+10. 100-minute Semi-full B / Q2-style science reading + Q3A + Q3B
+11. 110-minute Semi-full C / Q1-style reading + Q2-style reading
+12. 120-minute B036 Checkpoint / Q1 + Q2 + Q3A + Q3B
 
 
 ## Recent-paper matrix (2023–2026)
