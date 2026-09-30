@@ -716,11 +716,12 @@ Therefore the next content task is **remapping and selective revision**, not les
 # 10. Next audit sequence
 
 1. Freeze material count at E234.
-2. Map IDEA0001–IDEA0057 to TH / EV.
-3. Remap E001–E234 with Primary TH / Secondary TH / EV.
-4. Identify reasoning content in P2–P4 that requires new canonical Idea Bank entries.
-5. Measure over-concentration and gaps across TH / EV / Topic family.
-6. Revise only lessons whose Post-solve does not make the reusable reasoning visible.
-7. Preserve Published lesson immutability and version revisions according to repository policy.
+2. Map IDEA0001–IDEA0057 to TH / EV. **Completed: `management/idea-axis-map.csv`**
+3. Remap E001–E234 with Primary TH / Secondary TH / EV. **Completed: `management/material-axis-map.csv`**
+4. Audit the resulting distribution. **Completed: `management/content-axis-audit.md`**
+5. Identify reasoning content in P2–P4 that requires new canonical Idea Bank entries.
+6. Measure over-concentration and gaps across TH / EV / Topic family.
+7. Revise only lessons whose Post-solve does not make the reusable reasoning visible.
+8. Preserve Published lesson immutability and version revisions according to repository policy.
 
 The final curriculum should allow 234 individual experiences to compress into a small set of reusable intellectual operations.
