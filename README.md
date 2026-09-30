@@ -22,9 +22,9 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 
 ## Current status
 
-- Published: **B001–B038**
-- Materials: **E001–E228**
-- Current phase: **P4 Tsukuba / B038 completed (Day 1–24)**
+- Published: **B001–B039**
+- Materials: **E001–E234**
+- Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
