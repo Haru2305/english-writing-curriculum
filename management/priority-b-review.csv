@@ -11,3 +11,5 @@ IDEA0043,保存と開発は完全な二者択一ではない,No revision,,E028�
 IDEA0049,危機前の投資は成果が見えにくい,Transfer-only,E217,E011でinvisible prevention benefitを明示済み。E217ではbridge/software maintenanceへ移り、counterfactualまで発展するため再会接続が有効,Revise
 IDEA0054,公的資金は便益の広がりと代替用途で評価する,No revision,,E033でpublic benefitとopportunity costを明示。E093はcriteria-based prioritizationが主目的で、追加は重複,Keep implicit
 IDEA0055,便益とリスクは別々でなく同じ判断枠で比較する,Transfer-only,E151,E035でbenefit-risk frameは明示済み。E151でuncertaintyにreversibilityとdelay costを足すため、発展的転用として価値が高い,Revise
+IDEA0011,格差には個人要因と構造要因がある,No revision,,E004で個人要因と構造要因を直接教授。E113には同系統のIDEA0001 transfer blockが既にあり、IDEA0011まで重ねると1教材に概念ラベルが過密になる,Keep implicit
+IDEA0047,機械翻訳は速度と費用を改善しても文脈判断に限界がある,No revision,,E017で速度・費用と文脈判断の限界を明示し、E110で高リスク用途ではqualified reviewが必要という形へ自然に転用済み。追加Post-solveは重複,Keep implicit
