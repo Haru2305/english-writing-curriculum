@@ -26,7 +26,7 @@ The curriculum now uses five distinct layers.
 | Topic family | **What is the issue about?** | Existing TF01–TF19 |
 | Thinking axis | **How should I reason about it?** | New TH01–TH10 |
 | Evaluation axis | **By what criterion should I judge it?** | New EV01–EV10 |
-| Idea bank | **What reusable proposition can I retrieve?** | Existing IDEA0001–IDEA0078, to be remapped |
+| Idea bank | **What reusable proposition can I retrieve?** | IDEA0001–IDEA0078, mapped to TH / EV |
 | Writing/output system | **How do I express the reasoning?** | Existing WF / WT / WQ / WP |
 
 Existing `TL01–TL06` thinking lenses remain valid, but they have a different role.  
@@ -720,8 +720,9 @@ Therefore the next content task is **remapping and selective revision**, not les
 3. Remap E001–E234 with Primary TH / Secondary TH / EV. **Completed: `management/material-axis-map.csv`**
 4. Audit the resulting distribution. **Completed: `management/content-axis-audit.md`**
 5. Identify reasoning content in P2–P4 that requires new canonical Idea Bank entries. **Completed: IDEA0058–IDEA0078 / `management/idea-bank.csv`**
-6. Measure over-concentration and gaps across TH / EV / Topic family.
-7. Revise only lessons whose Post-solve does not make the reusable reasoning visible.
-8. Preserve Published lesson immutability and version revisions according to repository policy.
+6. Measure over-concentration and gaps across TH / EV / Topic family. **Completed: `management/content-axis-audit.md`**
+7. Define learner-facing Core concepts and Introduce / Recall / Transfer paths. **Completed: 27 Core / 24 Full / 3 Partial — `curriculum/learner-facing-concepts.md`, `management/idea-learning-path.csv`**
+8. Revise only lessons whose Post-solve does not make the reusable reasoning visible.
+9. Preserve Published lesson immutability and version revisions according to repository policy.
 
 The final curriculum should allow 234 individual experiences to compress into a small set of reusable intellectual operations.
