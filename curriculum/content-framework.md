@@ -19,7 +19,7 @@ The intended endpoint is:
 
 ## 1. Architecture
 
-The curriculum now uses five distinct layers.
+The curriculum now uses six distinct layers.
 
 | Layer | Question | Existing / new system |
 |---|---|---|
@@ -27,7 +27,8 @@ The curriculum now uses five distinct layers.
 | Thinking axis | **How should I reason about it?** | New TH01–TH10 |
 | Evaluation axis | **By what criterion should I judge it?** | New EV01–EV10 |
 | Idea bank | **What reusable proposition can I retrieve?** | IDEA0001–IDEA0078, mapped to TH / EV |
-| Writing/output system | **How do I express the reasoning?** | Existing WF / WT / WQ / WP |
+| Argument construction | **How do I turn one useful thought into a coherent argument?** | ARG01–ARG06 |
+| Writing/output system | **How do I express and execute the reasoning?** | Existing WF / WT / WQ / WP |
 
 Existing `TL01–TL06` thinking lenses remain valid, but they have a different role.  
 TL is an optional broad philosophical question. TH is a concrete reasoning operation that should transfer across topics.
@@ -47,6 +48,14 @@ Thinking:
 Evaluation:
 - EV06 Safety
 - EV07 Autonomy / Rights where human responsibility or consent matters
+
+Argument construction:
+- ARG01 Answer / Position
+- ARG02 Reason
+- ARG03 Mechanism
+- ARG04 Support
+- ARG05 Qualification as needed
+- ARG06 Return / Decision
 
 Output:
 - WF01 opinion/reason or WF05 evaluation
@@ -532,6 +541,15 @@ They may coexist with TH, but they do not replace it.
 
 TH / EV operate **before and during idea formation**.
 
+ARG operates between idea formation and final writing execution:
+- TH / EV / Idea generate candidate content
+- ARG selects and develops one line of reasoning
+- WF determines the task shape
+- WP executes plan → draft → revise
+- WQ evaluates the final answer
+
+See `curriculum/argument-construction.md`.
+
 ---
 
 # 5. Tagging rules for E001–E234
@@ -722,7 +740,9 @@ Therefore the next content task is **remapping and selective revision**, not les
 5. Identify reasoning content in P2–P4 that requires new canonical Idea Bank entries. **Completed: IDEA0058–IDEA0078 / `management/idea-bank.csv`**
 6. Measure over-concentration and gaps across TH / EV / Topic family. **Completed: `management/content-axis-audit.md`**
 7. Define learner-facing Core concepts and Introduce / Recall / Transfer paths. **Completed: 27 Core / 24 Full / 3 Partial — `curriculum/learner-facing-concepts.md`, `management/idea-learning-path.csv`**
-8. Revise only lessons whose Post-solve does not make the reusable reasoning visible.
-9. Preserve Published lesson immutability and version revisions according to repository policy.
+8. Revise only lessons whose Post-solve does not make the reusable reasoning visible. **Completed for Core review: Priority A/B/C selective revisions**
+9. Formalize the bridge from thought to paragraph. **Completed: `curriculum/argument-construction.md`, `management/writing-type-argument-map.csv`, `management/argument-construction-audit.md`**
+10. Selectively review only a few bridge lessons where naming ARG materially improves transfer.
+11. Preserve Published lesson immutability and version revisions according to repository policy.
 
 The final curriculum should allow 234 individual experiences to compress into a small set of reusable intellectual operations.
