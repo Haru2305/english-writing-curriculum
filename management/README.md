@@ -13,6 +13,7 @@ Primary files:
 - `post-solve-priority-b-selected.csv`: Priority Bで選択した4教材の改訂台帳
 - `priority-c-review.csv`: Priority C 3概念の改訂不要監査
 - `writing-type-argument-map.csv`: WF01–WF07 → ARG01–ARG06の推奨route
+- `argument-bridge-selected.csv`: 論証生成の共通回路を見せる4教材の改訂台帳
 - `argument-construction-audit.md`: 思考部品→論証→英作文の橋渡し監査
 - `content-axis-audit.md`: E001–E234 content-axis coverage audit
 - 将来追加: `dependencies.csv`
