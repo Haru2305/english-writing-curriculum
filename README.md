@@ -26,7 +26,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - Material count: **frozen at E234**
-- Current content work: **argument-construction framework added / selective bridge review next / no new lesson IDs**
+- Current content work: **argument-construction framework + selected bridge revision complete / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -47,6 +47,7 @@ english-writing-curriculum/
 │   ├── phase-design.md
 │   ├── content-framework.md
 │   ├── argument-construction.md
+│   ├── argument-bridge-revisions.md
 │   ├── learner-facing-concepts.md
 │   ├── priority-b-review.md
 │   ├── post-solve-priority-b.md
@@ -66,6 +67,7 @@ english-writing-curriculum/
 │   ├── post-solve-priority-b-selected.csv
 │   ├── priority-c-review.csv
 │   ├── writing-type-argument-map.csv
+│   ├── argument-bridge-selected.csv
 │   ├── argument-construction-audit.md
 │   └── content-axis-audit.md
 └── specs/
@@ -118,5 +120,7 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
   - WF01–WF07 → recommended argument-function routes
 - `management/argument-construction-audit.md`
   - audit of the bridge from idea generation to written argument
+- `management/argument-bridge-selected.csv`
+  - four selected bridge revisions: E087 / E117 / E119 / E208
 
-The material remap and concept-path design are complete. All 27 Learner-facing Core concepts have been selectively reviewed. The next layer—argument construction—has now been formalized as ARG01–ARG06 without adding lessons. No E235+.
+The material remap, Core review, and argument-construction layer are complete. ARG01–ARG06 was added without new lessons, and only four existing materials (E087, E117, E119, E208) received selected bridge revisions at v1.1. No E235+.
