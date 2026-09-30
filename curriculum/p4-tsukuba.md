@@ -54,3 +54,35 @@ P4本文の本格作成前に必ず確認:
 6. 過去問での近年傾向
 
 公式条件と教材設計が衝突した場合、公式条件を優先する。
+
+
+## Verified format basis
+
+As of 2026-09-30:
+
+- University of Tsukuba official 2026 general-selection schedule: foreign language 10:00–12:00 (120 minutes) for the medical program on the first examination day.
+- University FAQ: no listening test in the second-stage examination.
+- University 2027 selection outline is published, but the detailed 2027 general-selection application guidelines are not yet available.
+- Akahon / Kyogakusha trend summary: typically three major questions; Questions 1–2 are long reading passages; Question 3 since 2020 combines reading-based word-order/grammar work and English composition; written Japanese explanation and other constructed responses are common; composition tasks are generally in roughly the 50–100-word range.
+
+Sources:
+- https://ac.tsukuba.ac.jp/apply/application-guidelines/
+- https://ac.tsukuba.ac.jp/wp/wp-content/uploads/2025/10/R8_kobetu_sec.pdf
+- https://ac.tsukuba.ac.jp/consultation/faq/
+- https://akahon.net/university/tendency_countermeasure/tsukuba
+
+### Revalidation gate
+
+Before the learner actually enters P4, re-check the 2027 official detailed guidelines and any newly available 2026/2027 exam evidence. If official conditions differ, update P4 materials before use.
+
+## P4 design version
+
+`TPL-v4-P4-TSK`
+
+B035 Days 1–6:
+1. Q1-style long reading / Japanese explanation / T-F
+2. Q2-style long reading / paraphrase / Japanese explanation / T-F
+3. Q3A-style integrated word order / grammar
+4. Q3B-style source-linked English composition
+5. mixed reading-to-output timing drill
+6. 60-minute Tsukuba part-set checkpoint
