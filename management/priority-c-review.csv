@@ -1,0 +1,4 @@
+idea_id,label,decision,evidence_path,rationale,status
+IDEA0031,人口減少下では固定費の高いサービス維持が難しくなる,No revision,E014 → E020,E014でfixed costを名称つきで直接教授し、E020の狙いに「人口減少下の固定費問題を別の公共サービスへRecallする」と明記されている。追加ブロックは完全な重複,Reviewed / No revision
+IDEA0037,越境課題は単独国では解きにくい,No revision,E013 → E019,E013で国際協調の利点を本文内で扱い、E019の狙いに「越境課題には協力が必要という発想を別題材でRecall」と明記。Transferを新設しなくても概念接続は可視,Reviewed / No revision
+IDEA0056,同意は署名ではなく理解と自発性を含む,No revision,E029 → E031,E029がinformed consentをprocessとして明示し、E031の狙いにIDEA0056 information → understanding → voluntary choiceをRecallすると明記。追加説明は冗長,Reviewed / No revision
