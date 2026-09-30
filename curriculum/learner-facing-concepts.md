@@ -106,6 +106,8 @@ E001–E234の全てのIdeaを学習者に明示するのではなく、**反復
 
 These concepts are highly transferable and recur in later exam-like materials.
 
+**Status: completed on 2026-10-01.** Post-solve blocks were added to 33 existing materials and published as v1.1. Problem text, answer keys, and lesson count were unchanged. See `management/post-solve-priority-a.csv`.
+
 ### Priority B — useful argument-building concepts
 
 - IDEA0001 structural causes
@@ -129,8 +131,9 @@ These concepts are highly transferable and recur in later exam-like materials.
 
 ## Source
 
-Detailed machine-readable path:
+Detailed machine-readable paths:
 - `management/idea-learning-path.csv`
+- `management/post-solve-priority-a.csv`
 
 Canonical framework:
 - `curriculum/content-framework.md`
