@@ -1,0 +1,235 @@
+material_id,phase,title,topic_family,idea_ids,primary_th,secondary_th,evaluation_axes,mapping_basis,confidence
+E001,P1,都市・地方で医療アクセスが異なる理由,TF01,IDEA0001,TH01,,"EV01,EV06",IdeaBank+Metadata,High
+E002,P1,遠隔医療はアクセスを改善しても対面診療を代替できるか,TF01,IDEA0003,TH10,TH06,"EV01,EV06,EV02",IdeaBank+Metadata,High
+E003,P1,オンライン教育で学習機会を広げる方法,TF05,IDEA0013,TH02,TH07,"EV02,EV01",IdeaBank+Metadata,High
+E004,P1,教育格差を個人要因だけで説明できるか,TF04,"IDEA0011,IDEA0001",TH01,TH03,"EV05,EV01",IdeaBank+Metadata,High
+E005,P1,高齢化でケア需要はどう変わるか,TF03,IDEA0007,TH01,TH04,"EV10,EV04",IdeaBank+Metadata,High
+E006,P1,Bundle 1 Checkpoint｜アクセス・格差・高齢化,TF01,"IDEA0003,IDEA0011",TH01,"TH10,TH02","EV01,EV06,EV02",BlockComposite,Medium
+E007,P1,地方の医療人材：短期インセンティブと長期定着,TF01,IDEA0002,TH04,TH05,"EV10,EV06",IdeaBank+Metadata,High
+E008,P1,個人データ利用：利便性とプライバシー,TF07,IDEA0020,TH02,"TH07,TH09","EV08,EV01,EV02",IdeaBank+Metadata,High
+E009,P1,医療AI：人間の判断を置き換えるか、補完するか,TF06,"IDEA0018,IDEA0003",TH10,"TH06,TH08","EV06,EV02,EV01",IdeaBank+Metadata,High
+E010,P1,再生可能エネルギー：初期費用と長期便益,TF09,IDEA0026,TH04,TH02,"EV04,EV10",IdeaBank+Metadata,High
+E011,P1,災害対策：被害が起きない投資をどう評価するか,TF17,IDEA0049,TH08,"TH06,TH04","EV06,EV04",IdeaBank+Metadata,High
+E012,P1,Bundle 2 Checkpoint｜AI・プライバシー・投資・危機対応,TF07,"IDEA0018,IDEA0020,IDEA0026",TH04,"TH02,TH10","EV10,EV06,EV08",BlockComposite,Medium
+E013,P1,国際早期警戒ネットワーク：平時の投資は無駄か,TF13,"IDEA0037,IDEA0049",TH10,"TH04,TH09","EV10,EV04,EV06",IdeaBank+Metadata,High
+E014,P1,人口減少下で公共交通を維持するには,TF11,IDEA0031,TH01,TH04,"EV04,EV10,EV01",IdeaBank+Metadata,High
+E015,P1,食料供給網：効率性とresilience,TF10,IDEA0028,TH02,TH08,"EV09,EV03",IdeaBank+Metadata,High
+E016,P1,自動化は仕事をなくすのか、taskを変えるのか,TF12,IDEA0035,TH01,TH04,"EV03,EV10",IdeaBank+Metadata,High
+E017,P1,機械翻訳は人間を置き換えるか、補完するか,TF16,IDEA0047,TH10,"TH02,TH06","EV02,EV03,EV04",IdeaBank+Metadata,High
+E018,P1,Bundle 3 Checkpoint｜交通・供給網・仕事・翻訳,TF11,"IDEA0031,IDEA0028,IDEA0035,IDEA0047",TH01,"TH10,TH02","EV10,EV04,EV06",BlockComposite,Medium
+E019,P1,越境大気汚染：一国だけで解決できるか,TF13,IDEA0037,TH10,TH09,EV10,IdeaBank+Metadata,High
+E020,P1,限られた公共予算をどう配分するか,TF14,"IDEA0041,IDEA0031",TH02,"TH09,TH06","EV04,EV05,EV10",IdeaBank+Metadata,High
+E021,P1,都市の水供給：効率性と予備能力,TF09,IDEA0028,TH02,TH08,"EV09,EV03",IdeaBank+Metadata,High
+E022,P1,セルフレジは店員をなくすのか,TF12,IDEA0035,TH01,TH04,"EV03,EV10",IdeaBank+Metadata,High
+E023,P1,災害警報はどう伝えるべきか,TF17,"IDEA0050,IDEA0047",TH08,"TH06,TH02","EV06,EV02,EV03",IdeaBank+Metadata,High
+E024,P1,Bundle 4 Checkpoint｜予算・水供給・仕事・警報,TF14,"IDEA0041,IDEA0050",TH02,"TH10,TH01","EV10,EV04,EV05",BlockComposite,Medium
+E025,P1,健康リスクをどう伝えるか：不確実性と行動,TF02,IDEA0050,TH08,"TH05,TH06","EV06,EV02",IdeaBank+Metadata,High
+E026,P1,緊急通知：inform・notify・alertを使い分ける,TF17,,TH08,TH06,EV06,ManualContentReview,Medium
+E027,P1,研究結果を社会へどう伝えるか,TF19,IDEA0057,TH07,TH08,,IdeaBank+Metadata,High
+E028,P1,歴史的建造物：保存か再利用か,TF15,IDEA0043,TH10,TH02,"EV10,EV01,EV02",IdeaBank+Metadata,High
+E029,P1,研究参加のinformed consent：説明から自発的選択へ,TF19,IDEA0056,TH07,"TH09,TH06","EV07,EV01",IdeaBank+Metadata,High
+E030,P1,Bundle 5 Checkpoint｜健康情報・研究・文化保存・同意,TF19,"IDEA0050,IDEA0057,IDEA0043",TH07,"TH08,TH10","EV06,EV02,EV10",BlockComposite,Medium
+E031,P1,治療選択：患者は何を選ぶのか,TF19,IDEA0056,TH09,TH06,"EV07,EV06",IdeaBank+Metadata,High
+E032,P1,限られた医療資源は何を優先するか,TF01,IDEA0041,TH02,,"EV04,EV06,EV10",IdeaBank+Metadata,High
+E033,P1,公共スポーツ施設に税金を使うべきか,TF18,IDEA0054,TH02,TH03,"EV05,EV04",IdeaBank+Metadata,High
+E034,P1,研究の限界をどう認めるか,TF19,IDEA0057,TH07,TH08,,IdeaBank+Metadata,High
+E035,P1,新しい治療：期待される便益と未知のリスク,TF19,IDEA0055,TH08,TH02,"EV06,EV02",IdeaBank+Metadata,High
+E036,P1,Bundle 6 Checkpoint｜選択・優先順位・研究判断,TF19,"IDEA0056,IDEA0054",TH02,"TH09,TH07","EV07,EV06,EV04",BlockComposite,Medium
+E037,P1,AI採用支援：効率化と未知のリスク,TF06,IDEA0055,TH08,TH02,"EV06,EV02,EV03",IdeaBank+Metadata,High
+E038,P1,学校の開始時刻をどう提案するか,TF05,,TH06,,,Title+TopicFamily,Medium
+E039,P1,渋滞課金：提案を政策にする条件,TF14,IDEA0042,TH09,"TH06,TH05",EV07,IdeaBank+Metadata,High
+E040,P1,住民意見をどう退けるか：reject・refuse・decline・dismiss,TF14,IDEA0042,TH09,TH05,EV07,IdeaBank+Metadata,High
+E041,P1,風力発電計画：反対意見をどう扱うか,TF09,IDEA0042,TH09,TH05,EV07,IdeaBank+Metadata,High
+E042,P1,Bundle 7 Checkpoint｜提案・判断・異議,TF14,"IDEA0055,IDEA0042",TH09,"TH08,TH06","EV06,EV02,EV03",BlockComposite,Medium
+E043,P2,生物多様性保全：文の骨格を見抜く,TF08,,TH02,TH06,EV10,ManualContentReview,Medium
+E044,P2,介護支援制度：長い文でも主節を保つ,TF03,,TH06,,,Title+TopicFamily,Medium
+E045,P2,学習法：知っている表現を思い出す,TF05,,TH07,TH04,EV02,ManualContentReview,Medium
+E046,P2,消費行動：正確な英文を組み立てる,TF10,,TH05,,,Title+TopicFamily,High
+E047,P2,観光混雑：時間内に論理を処理する,TF11,,TH02,TH03,"EV05,EV10",ManualContentReview,Medium
+E048,P2,P2 Bridge 1 Checkpoint｜構造・想起・正確性・速度,TF08,,TH02,"TH06,TH07","EV10,EV02,EV05",BlockComposite,Medium
+E049,P2,誤情報：文脈から語の意味を決める,TF07,,TH07,TH09,EV02,ManualContentReview,Medium
+E050,P2,歴史記述：this・they・suchを追う,TF15,,TH07,,,ManualContentReview,Medium
+E051,P2,多言語コミュニケーション：近義語を英語文脈で選ぶ,TF16,,TH10,TH06,"EV01,EV02",ManualContentReview,Medium
+E052,P2,柔軟な働き方：自然な英文へ直す,TF12,,TH02,TH06,"EV03,EV10",ManualContentReview,Medium
+E053,P2,予防情報：段落をつなぐ,TF02,,TH04,,,Title+TopicFamily,High
+E054,P2,P2 Bridge 2 Checkpoint｜文脈・照応・自然さ・cohesion,TF07,,TH07,"TH10,TH02","EV02,EV01,EV03",BlockComposite,Medium
+E055,P2,障害のある人のスポーツ参加：同じ扱いは本当に公平か,TF04,IDEA0010,TH03,,"EV05,EV06,EV01",IdeaBank+Metadata,High
+E056,P2,大規模スポーツ大会：便益と費用のどちらが主旨か,TF18,,TH02,,"EV02,EV04",Title+TopicFamily,Medium
+E057,P2,多言語の公共案内：英語を毎文訳さず日本語に切り替える,TF16,,TH06,TH03,"EV01,EV05",ManualContentReview,Medium
+E058,P2,研究紹介：長い名詞句をほどいて日本語で説明する,TF19,,TH07,,,Title+TopicFamily,High
+E059,P2,都市計画の説明文：並列・省略・挿入を崩さず和訳する,TF11,,TH06,,EV01,ManualContentReview,Medium
+E060,P2,B010 Checkpoint：段落機能・主旨・日本語出力・構造処理,TF04,IDEA0010,TH06,"TH03,TH02","EV05,EV06,EV01",BlockComposite,Medium
+E061,P2,生成AIと仕事：研究結果はどこまで言い切れるか,TF06,,TH07,,,Title+TopicFamily,High
+E062,P2,国際協力の成果報告：段落機能と筆者の確信度を同時に読む,TF13,,TH07,,EV02,Title+TopicFamily,High
+E063,P2,歴史資料のデジタル保存：何を主語にすると情報の流れが変わるか,TF15,,TH07,,EV10,Title+TopicFamily,High
+E064,P2,食品ロス対策：old→newで段落をつなぐ,TF10,,TH06,,,Title+TopicFamily,Medium
+E065,P2,生態系復元：長い構造を日本語で処理する,TF08,,TH06,TH10,EV10,ManualContentReview,Medium
+E066,P2,B011 Checkpoint：確信度・情報構造・日本語出力,TF05,,TH07,TH06,"EV02,EV10",BlockComposite,Medium
+E067,P2,健康案内：同じ本文を英語短答・日本語説明・和訳へ切り替える,TF02,,TH06,TH08,"EV01,EV06",ManualContentReview,Medium
+E068,P2,録画授業は学習機会を広げるか：2つの立場を比較する,TF05,,TH02,,EV02,Title+TopicFamily,Medium
+E069,P2,高齢者支援の連携：誰を主語にするかで説明の流れを保つ,TF03,,TH06,,EV05,Title+TopicFamily,Medium
+E070,P2,オンラインレビュー：匿名性と本人確認をどう比較するか,TF07,,TH09,"TH02,TH06","EV08,EV07",Title+TopicFamily,High
+E071,P2,再生可能エネルギーの蓄電：2本文を複数形式へ変換する,TF09,,TH02,TH10,"EV09,EV10,EV04",ManualContentReview,Medium
+E072,P2,B012 Checkpoint：複数本文比較・形式適応・情報構造,TF11,,TH02,"TH06,TH09","EV01,EV06,EV02",BlockComposite,Medium
+E073,P2,地下空間の案内設計：知らない題材でも本文から組み立てる,TF11,,TH06,,"EV01,EV06",ManualContentReview,Medium
+E074,P2,図書館の夜間開館：本文と表を一緒に読んで判断する,TF05,,TH02,TH04,"EV01,EV04",ManualContentReview,Medium
+E075,P2,海岸保全：2つの立場を同じ評価軸で比較する,TF08,,TH02,,EV10,Title+TopicFamily,Medium
+E076,P2,博物館の展示照明：未知概念と表を組み合わせる,TF15,,TH02,TH06,"EV10,EV02",ManualContentReview,Medium
+E077,P2,雨水をためる街区：本文のルールを運用表へ移す,TF17,,TH06,,,Title+TopicFamily,Medium
+E078,P2,B013 Checkpoint：未知題材・本文＋表・複数資料判断,TF11,,TH02,TH06,"EV01,EV06,EV04",BlockComposite,Medium
+E079,P2,研究資金の配分：圧縮された学術文を展開して読む,TF12,,TH07,TH02,"EV05,EV04",Title+TopicFamily,High
+E080,P2,古い地図の余白：本文からどこまで推論してよいか,TF15,,TH07,,,Title+TopicFamily,High
+E081,P2,地域イベントの評価：全文をコピーせず要約する,TF14,,TH07,TH02,EV02,ManualContentReview,Medium
+E082,P2,市民講座の申込み：掲示・メール・FAQをまたいで読む,TF05,,TH05,,,Title+TopicFamily,High
+E083,P2,都市配送の共同拠点：高密度文を展開し要約する,TF11,,TH06,TH10,"EV03,EV10",ManualContentReview,Medium
+E084,P2,B014 Checkpoint：推論・圧縮構造・要約・非連続資料,TF12,,TH07,"TH05,TH06","EV05,EV04,EV02",BlockComposite,Medium
+E085,P2,研究予測：断定しすぎない答案へ直す,TF12,,TH07,TH08,,Title+TopicFamily,High
+E086,P2,地域交通の実証実験：本文の論理を別の提案へ転用する,TF11,,TH06,TH07,EV01,Title+TopicFamily,High
+E087,P2,公共空間の夜間利用：短い構想から読み手に届く段落へ,TF14,,TH02,TH09,"EV01,EV06,EV07",ManualContentReview,Medium
+E088,P2,研究結果を参加者へ返す：要約してから別の制度へ転用する,TF01,,TH07,,EV01,Title+TopicFamily,High
+E089,P2,学校の昼休み空間：時間内に初見題材へFree transferする,TF05,,TH06,TH10,"EV02,EV01",ManualContentReview,Medium
+E090,P2,B015 Checkpoint：要約から本文連動英作文へ,TF05,,TH06,"TH07,TH02","EV01,EV06,EV07",BlockComposite,Medium
+E091,P2,空き店舗の再利用：問題に対応する解決策を読む,TF11,,TH10,,EV01,Title+TopicFamily,High
+E092,P2,公共施設のキャンセル対策：問題に合う提案を書く,TF14,,TH06,,,Title+TopicFamily,Medium
+E093,P2,学習支援予算：複数基準で優先順位を決める,TF05,,TH10,TH02,"EV02,EV04",Title+TopicFamily,High
+E094,P2,学校図書館の改善：解決策と優先順位を一つの答案で示す,TF05,,TH10,TH02,,Title+TopicFamily,High
+E095,P2,地域防災情報：掲示とFAQから改善策を選ぶ,TF17,,TH06,,,Title+TopicFamily,Medium
+E096,P2,P2 Final Checkpoint：複数資料・日本語出力・要約・英作文,TF11,,TH10,TH06,"EV01,EV02,EV04",BlockComposite,Medium
+E097,P3,都市の暑熱対策：複数基準で最初の投資先を決める,TF17,,TH06,,,Title+TopicFamily,Medium
+E098,P3,地域交通の実験計画：記事・表・告知を統合する,TF11,,TH07,,EV01,Title+TopicFamily,High
+E099,P3,研究広報：長い説明を短い英語へ再構成する,TF12,,TH10,TH07,,Title+TopicFamily,High
+E100,P3,食品ロス削減：記事・集計表・店頭案内を要約へ統合する,TF08,,TH05,TH06,"EV10,EV03",ManualContentReview,Medium
+E101,P3,博物館の予約制度：複数資料から改善案を時間内に組み立てる,TF15,,TH07,"TH10,TH06","EV01,EV03",Title+TopicFamily,High
+E102,P3,B017 Checkpoint：混合資料から要約・比較・判断を書く,TF05,,TH07,"TH06,TH10","EV01,EV10,EV03",BlockComposite,Medium
+E103,P3,睡眠研究の紹介文：中心情報と限界を別題材で再構成する,TF06,,TH10,TH07,,Title+TopicFamily,High
+E104,P3,科学政策の高密度英文：並列・挿入・名詞化をほどいて和訳する,TF12,,TH09,TH07,,ManualContentReview,Medium
+E105,P3,オンライン授業の設計：二つの立場を比較し、条件付きで判断する,TF05,,TH02,TH06,"EV01,EV02",ManualContentReview,Medium
+E106,P3,公共自転車の試行：本文の評価原理を別の交通施策へ転用する,TF11,,TH07,TH06,"EV01,EV02",ManualContentReview,Medium
+E107,P3,教育研究の一文を読み切る：和訳と英語判断を切り替える,TF05,,TH07,,,Title+TopicFamily,High
+E108,P3,B018 Checkpoint：高密度英文・二本文比較・混合資料を60分で処理する,TF14,,TH07,"TH10,TH09","EV01,EV02",BlockComposite,Medium
+E109,P3,供給網の「余裕」：知らない概念を本文だけで組み立てる,TF13,,TH02,,"EV09,EV03",Title+TopicFamily,Medium
+E110,P3,機械翻訳の注意書き：どこまで強く言うべきか,TF16,,TH08,TH06,"EV02,EV06",ManualContentReview,Medium
+E111,P3,地域スポーツの参加調査：this / they / such が何を受けるか,TF18,,TH07,,EV01,Title+TopicFamily,High
+E112,P3,家族介護の支援：正しい英文を自然な情報の流れへ直す,TF03,,TH03,TH10,"EV05,EV10",ManualContentReview,Medium
+E113,P3,健診案内の届き方：本文・FAQ・表から参加障壁を特定する,TF02,,TH07,,EV01,Title+TopicFamily,High
+E114,P3,B019 Checkpoint：未知概念・指示・断定度・自然さを切り替える,TF10,,TH07,"TH02,TH08","EV09,EV03,EV02",BlockComposite,Medium
+E115,P3,学習支援の公平性：反対要素を認めても主張は変わるのか,TF04,,TH03,,"EV05,EV02",Title+TopicFamily,High
+E116,P3,野生動物保護の事例：一つの成功例から何を一般化できるか,TF08,,TH07,,,Title+TopicFamily,High
+E117,P3,電力需要の変化：原因の連鎖を切らずに説明する,TF09,,TH01,,,Title+TopicFamily,High
+E118,P3,医療AIの導入事例：利点を認めた上で何を一般化できるか,TF06,,TH07,,EV06,Title+TopicFamily,High
+E119,P3,情報ラベルの効果：複数資料から譲歩と中心主張を再構成する,TF07,,TH07,TH10,EV02,Title+TopicFamily,High
+E120,P3,B020 Checkpoint：譲歩・一般化・因果を本番型で統合する,TF01,,TH07,"TH03,TH01","EV05,EV02,EV06",BlockComposite,Medium
+E121,P3,災害支援の配分：原則に例外を加えると主張はどう変わるか,TF13,,TH03,"TH08,TH02","EV05,EV06",Title+TopicFamily,High
+E122,P3,運動習慣の研究：複数段落を英語で要約する,TF18,,TH07,,,Title+TopicFamily,High
+E123,P3,家族介護の支援制度：例外を残したまま英語で要約する,TF03,,TH06,,,Title+TopicFamily,Medium
+E124,P3,多言語の公共案内：情報の優先順位を英語で圧縮する,TF16,,TH10,TH02,EV01,Title+TopicFamily,High
+E125,P3,食品寄付の安全ルール：例外条件を混合資料から判断する,TF10,,TH07,TH06,EV06,Title+TopicFamily,High
+E126,P3,B021 Checkpoint：例外・限定・英語要約を混合資料で統合する,TF04,,TH07,"TH03,TH06","EV05,EV06,EV01",BlockComposite,Medium
+E127,P3,都市の騒音対策：何を問うと原因が見えるか,TF11,,TH06,TH01,,Title+TopicFamily,High
+E128,P3,地域博物館の無料開館日：複数段落を日本語で要約する,TF15,,TH02,TH03,"EV01,EV04",ManualContentReview,Medium
+E129,P3,夜間学習スペース：問いと答えを保って日本語に圧縮する,TF05,,TH06,,"EV01,EV02",ManualContentReview,Medium
+E130,P3,規格外農産物：問いの答えを失わず日本語要約する,TF10,,TH05,TH02,EV10,ManualContentReview,Medium
+E131,P3,避難支援の登録：記事・FAQ・表から原因を日本語で統合する,TF17,,TH07,TH01,,Title+TopicFamily,High
+E132,P3,B022 Checkpoint：問い→答え・日本語要約・日英切替を混合資料で統合する,TF10,,TH06,"TH02,TH05","EV01,EV04,EV02",BlockComposite,Medium
+E133,P3,都市の暑さ対策：文の役割から挿入位置を決める,TF11,,TH06,,,Title+TopicFamily,Medium
+E134,P3,記憶と学習：接続語ではなく論理で空所を埋める,TF05,,TH07,TH04,EV02,ManualContentReview,Medium
+E135,P3,地域交通の案内：照応と既知→新情報で文を挿入する,TF11,,TH06,,EV01,ManualContentReview,Medium
+E136,P3,海岸保全の研究：段落の機能を保って空所を復元する,TF08,,TH07,,EV10,Title+TopicFamily,High
+E137,P3,AI翻訳の二本文：立場をまたいで挿入根拠を説明する,TF16,,TH02,TH10,"EV02,EV03",ManualContentReview,Medium
+E138,P3,B023 Checkpoint：空所・文挿入・段落機能を60分で統合する,TF07,,TH06,"TH07,TH02","EV02,EV01,EV10",BlockComposite,Medium
+E139,P3,地域イベントの成功例：一例からどこまで一般化できるか,TF11,,TH07,,,Title+TopicFamily,High
+E140,P3,高密度な科学説明：長い一文をほどいて日本語で説明する,TF19,,TH07,,,ManualContentReview,Medium
+E141,P3,二つの教育提案：比較して英語で要約し判断する,TF05,,TH02,TH06,"EV02,EV01,EV04",ManualContentReview,Medium
+E142,P3,公共施設の案内：掲示・FAQ・メールから改善点を推論する,TF11,,TH07,,EV01,Title+TopicFamily,High
+E143,P3,地域の食品共有制度：混合資料から提案を書く,TF10,,TH07,TH06,,Title+TopicFamily,High
+E144,P3,B024 Checkpoint：複数形式を切り替えて60分で処理する,TF09,,TH07,TH02,"EV02,EV01,EV04",BlockComposite,Medium
+E145,P3,修理可能性スコア：未知概念を本文だけで組み立てる,TF06,,TH07,TH06,"EV10,EV02",ManualContentReview,Medium
+E146,P3,夜間照明と生態系：高密度科学文と表を統合する,TF08,,TH02,TH06,"EV10,EV06",ManualContentReview,Medium
+E147,P3,柔軟勤務の二制度：比較して英語で要約し評価する,TF12,,TH10,TH02,,Title+TopicFamily,High
+E148,P3,緊急医薬品の備蓄：記事・規則・表を日本語で統合する,TF17,,TH08,TH04,"EV06,EV09,EV04",ManualContentReview,Medium
+E149,P3,公共AIチャット窓口：混合資料から導入条件を提案する,TF06,,TH06,TH07,,Title+TopicFamily,High
+E150,P3,B025 Checkpoint：初見概念・表・要約・提案を60分で統合する,TF09,,TH02,"TH07,TH10","EV10,EV02,EV06",BlockComposite,Medium
+E151,P3,可逆性の価値：今すぐ決めないことを本文だけで理解する,TF14,,TH08,,EV02,Title+TopicFamily,High
+E152,P3,沿岸観測ネットワーク：高密度文と因果連鎖を統合する,TF08,,TH07,TH01,,Title+TopicFamily,High
+E153,P3,図書館デジタル化の二案：比較して要約し評価する,TF05,,TH02,,,Title+TopicFamily,Medium
+E154,P3,外来予約の待ち時間：本文・表・FAQから原因を推論する,TF02,,TH07,TH01,EV01,Title+TopicFamily,High
+E155,P3,共同配送ロッカー：混合資料から改善案を書く,TF11,,TH06,TH07,,Title+TopicFamily,High
+E156,P3,B026 Checkpoint：未知概念・因果・複数資料・作文を60分で統合する,TF09,,TH07,"TH08,TH02","EV02,EV01",BlockComposite,Medium
+E157,P3,自己選択バイアス：満足度調査は誰の声を拾うか,TF02,,TH03,"TH07,TH01","EV05,EV07",Title+TopicFamily,High
+E158,P3,森林回復の指標：高密度文と表から因果を読み分ける,TF08,,TH07,TH01,,Title+TopicFamily,High
+E159,P3,大学の学習支援：一律支援と対象支援を比較して評価する,TF05,,TH02,TH03,"EV02,EV05",Title+TopicFamily,High
+E160,P3,災害時の充電拠点：掲示・FAQ・表を日本語で統合する,TF17,,TH08,,EV06,Title+TopicFamily,High
+E161,P3,地域シェアサイクル：混合資料から改善案を書く,TF11,,TH06,TH07,,Title+TopicFamily,High
+E162,P3,B027 Checkpoint：未知概念・複数資料・要約・提案を本番型で統合する,TF09,,TH02,"TH03,TH07","EV05,EV07,EV02",BlockComposite,Medium
+E163,P3,平均への回帰：改善が介入の効果とは限らない,TF02,,TH07,TH01,EV02,Title+TopicFamily,High
+E164,P3,都市の浸水対策：高密度文と表から容量・頻度・限界を読む,TF09,,TH07,TH06,"EV09,EV04",Title+TopicFamily,High
+E165,P3,授業録画の二制度：全面公開と選択公開を比較して評価する,TF05,,TH10,"TH02,TH09",EV07,Title+TopicFamily,High
+E166,P3,給水制限の案内：掲示・FAQ・表を日本語で統合する,TF17,,TH06,TH08,"EV01,EV04",ManualContentReview,Medium
+E167,P3,公共施設の予約枠：混合資料から改善案を書く,TF11,,TH06,TH07,EV01,Title+TopicFamily,High
+E168,P3,B028 Checkpoint：初見概念・高密度文・複数資料・作文を60分で処理する,TF09,,TH06,"TH07,TH10","EV02,EV09,EV04",BlockComposite,Medium
+E169,P3,基準率の落とし穴：目立つ事例だけで確率を判断しない,TF02,,TH08,,,Title+TopicFamily,High
+E170,P3,都市の熱対策：高密度文と表から平均値・ピーク・公平性を読む,TF09,,TH03,"TH07,TH06",EV05,Title+TopicFamily,High
+E171,P3,研究データ公開の二案：全面公開と段階公開を比較して評価する,TF12,,TH10,"TH07,TH09",,Title+TopicFamily,High
+E172,P3,大雪時の公共交通案内：掲示・FAQ・表を日本語で統合する,TF17,,TH08,TH06,"EV06,EV09,EV01",ManualContentReview,Medium
+E173,P3,地域検診の予約枠：混合資料から受診障壁を減らす提案を書く,TF02,,TH07,TH06,EV01,Title+TopicFamily,High
+E174,P3,B029 Checkpoint：初見概念・高密度文・表・要約・提案を模試型で統合する,TF09,,TH08,"TH03,TH10","EV05,EV06,EV09",BlockComposite,Medium
+E175,P3,可視事例の偏り：見えている例だけで判断しない,TF12,,TH07,,,ManualContentReview,Medium
+E176,P3,河川の渇水対策：高密度文と表から蓄え・流入・需要を読む,TF08,,TH06,TH07,,Title+TopicFamily,High
+E177,P3,学習支援の二制度：自由利用と課題限定利用を比較して評価する,TF05,,TH10,"TH02,TH09","EV01,EV02,EV07",Title+TopicFamily,High
+E178,P3,施設利用情報：掲示・FAQ・表を日本語で統合する,TF11,,TH06,,"EV01,EV03",ManualContentReview,Medium
+E179,P3,再利用品シェア拠点：混合資料から廃棄削減とアクセス改善を提案する,TF10,,TH07,"TH10,TH06",EV01,Title+TopicFamily,High
+E180,P3,B030 Checkpoint：情報鮮度・高密度文・表・要約・提案を総合模試型で統合する,TF05,,TH06,"TH07,TH10","EV01,EV02,EV07",BlockComposite,Medium
+E181,P3,古い記録の語をどう読むか：言い換え・指示語・具体例から意味の射程を追う,,,TH07,,,Title+TopicFamily,High
+E182,P3,測定値の桁数と信頼性：精密そうに見える数字をどう評価するか,,,TH07,"TH08,TH06",EV09,Title+TopicFamily,High
+E183,P3,一度の大規模調査か、小規模な反復観察か：二つの調査設計を比較する,,,TH07,TH02,,Title+TopicFamily,High
+E184,P3,博物館展示をどう読むか：カタログ・学芸員メモ・配置表を日本語で統合する,,,TH06,,,Title+TopicFamily,Medium
+E185,P3,復習間隔と記憶成績：相関から因果説明を作りすぎない,,,TH07,"TH01,TH04",EV02,Title+TopicFamily,High
+E186,P3,B031 Checkpoint：言い換え・指示語・譲歩・複数資料・比較作文を統合する,,,TH07,TH06,"EV09,EV02",BlockComposite,Medium
+E187,P3,専門家の説明はなぜ分かりにくくなるのか：問い・答え・主旨を追う,TF16,,TH01,TH06,EV02,ManualContentReview,Medium
+E188,P3,野外観測の例外をどう読むか：平均傾向と局所条件を分ける,TF08,,TH06,TH07,,Title+TopicFamily,High
+E189,P3,匿名フィードバックと公開フィードバック：二制度を評価する,TF16,,TH09,TH02,EV07,Title+TopicFamily,High
+E190,P3,古いモデルは「誤り」になったのか：旧説から新説への更新を読む,TF03,,TH04,TH07,,Title+TopicFamily,High
+E191,P3,出土品の由来をどう判断するか：記録・ラベル・材料分析を統合する,TF11,,TH06,TH07,,Title+TopicFamily,High
+E192,P3,B032 Checkpoint：主旨・例外・旧説更新・複数資料・評価を総合する,TF05,,TH06,"TH01,TH09","EV02,EV07",BlockComposite,Medium
+E193,P3,チェックリストはなぜ効かなくなるのか：段落機能と文挿入で論理を追う,,,TH05,TH06,"EV02,EV06",ManualContentReview,Medium
+E194,P3,代理指標は目的そのものではない：高密度文から測定の限界を読む,,,TH07,,,Title+TopicFamily,High
+E195,P3,古い建物を残すとはどういうことか：二本文要約から本文連動作文へ,,,TH10,TH02,"EV10,EV02",ManualContentReview,Medium
+E196,P3,再現実験の結果が一致しないとき：手順書・実験メモ・表を統合する,,,TH07,,,Title+TopicFamily,High
+E197,P3,選択肢の初期設定は行動をどう変えるか：本文の考え方を別場面へ転用する,,,TH05,TH06,EV07,Title+TopicFamily,High
+E198,P3,B033 Checkpoint：段落機能・文挿入・高密度文・要約・本文連動作文を統合する,,,TH05,"TH07,TH10","EV02,EV06,EV10",BlockComposite,Medium
+E199,P3,「示している」と「証明している」を分ける：証拠の強さに合わせて主張を調整する,,,TH07,,,Title+TopicFamily,High
+E200,P3,「分かりやすさ」はどこで生まれるか：指示語・段落機能・文挿入を統合する,,,TH01,TH06,EV02,ManualContentReview,Medium
+E201,P3,平均値の改善は誰の改善か：高密度文・表・和訳から分布を読む,,,TH03,TH07,EV05,Title+TopicFamily,High
+E202,P3,速く決めるか、深く検討するか：二本文要約から条件付き評価を書く,,,TH06,,,Title+TopicFamily,Medium
+E203,P3,記録の欠損をどう扱うか：本文・表・注記から「分からない」を正確に残す,,,TH07,,,Title+TopicFamily,High
+E204,P3,P3 Final Gate：初見概念・高密度文・複数資料・要約・記述・英作文を60分で統合する,,,TH07,"TH01,TH03","EV02,EV05",BlockComposite,Medium
+E205,P4,筑波Day1：長文①―30〜60字の日本語説明・空所・見出しを処理する,,,TH07,TH04,EV02,LessonContent,High
+E206,P4,筑波Day2：長文②―40〜80字記述・空所・文挿入を処理する,,,TH07,TH08,,LessonContent,High
+E207,P4,筑波Day3：大問3A―整序3問で「3番目・5番目」を正確に答える,,,TH07,,EV02,LessonContent,High
+E208,P4,筑波Day4：大問3B―約100語で「立場・理由・具体例」を書く,,,TH01,TH03,"EV02,EV06",LessonContent,High
+E209,P4,筑波Day5：30・50・60・90字―日本語記述の論理パッキング,,,TH07,TH01,,LessonContent,High
+E210,P4,筑波B035 Checkpoint：字数記述・空所・文挿入・整序・約100語英作文を60分で切り替える,,,TH05,TH07,EV02,LessonContent,High
+E211,P4,筑波Day7：長文①高速化―字数記述・空所・見出し・順序を60分で完遂,,,TH01,TH06,"EV01,EV02",LessonContent,High
+E212,P4,筑波Day8：大問3統合―整序3問＋約100語英作文を60分で完遂,,,TH10,TH06,EV02,LessonContent,High
+E213,P4,筑波Day9 Semi-full A：長文①＋3A＋3Bを90分でつなぐ,,,TH05,TH10,"EV03,EV07",LessonContent,High
+E214,P4,筑波Day10 Semi-full B：長文②＋3A＋3Bを100分でつなぐ,,,TH07,,EV02,LessonContent,High
+E215,P4,筑波Day11 Semi-full C：長文①＋長文②を110分で切り替える,,,TH03,TH07,EV05,LessonContent,High
+E216,P4,筑波B036 Checkpoint：大問1・2・3A・3Bを120分で一巡する,,,TH05,TH01,EV02,LessonContent,High
+E217,P4,筑波Day13 Semi-full D：長文①＋長文②＋3Aを100分でつなぐ,,,TH01,"TH07,TH04",EV09,LessonContent,High
+E218,P4,筑波Day14 Semi-full E：長文①＋長文②＋3Bを110分でつなぐ,,,TH09,TH03,"EV05,EV02",LessonContent,High
+E219,P4,筑波Day15 Semi-full F：4セクションを120分で初回安定化する,,,TH07,TH08,EV02,LessonContent,High
+E220,P4,筑波Day16 Semi-full G：後半疲労下で3A・3B精度を維持する,,,TH03,"TH09,TH06",EV05,LessonContent,High
+E221,P4,筑波Day17 Semi-full H：時間超過から復旧して120分完遂する,,,TH07,TH03,EV05,LessonContent,High
+E222,P4,筑波B037 Checkpoint：120分で全形式を精度維持して完遂する,,,TH07,TH03,EV05,LessonContent,High
+E223,P4,筑波Day19 Full A：120分フルセットへ移行する,,,TH07,TH08,EV02,LessonContent,High
+E224,P4,筑波Day20 Full B：長文密度を上げても後半精度を維持する,,,TH02,"TH08,TH10","EV03,EV09",LessonContent,High
+E225,P4,筑波Day21 Full C：字数記述の高密度処理と英作文を両立する,,,TH01,TH07,,LessonContent,High
+E226,P4,筑波Day22 Full D：解答順序を選んで120分を最適化する,,,TH02,TH08,"EV03,EV09",LessonContent,High
+E227,P4,筑波Day23 Full E：難問停滞から復旧して全体得点を守る,,,TH08,TH07,EV09,LessonContent,High
+E228,P4,筑波B038 Checkpoint：本番型120分フルセットを完成させる,,,TH07,TH08,,LessonContent,High
+E229,P4,筑波Day25 Full F：120分フルセットの再現性を基準化する,,,TH08,"TH07,TH03","EV06,EV05",LessonContent,High
+E230,P4,筑波Day26 Full G：日本語記述の弱点を補正して完遂する,,,TH01,TH07,,LessonContent,High
+E231,P4,筑波Day27 Full H：後半3A・3Bの失点を補正する,,,TH07,TH06,EV02,LessonContent,High
+E232,P4,筑波Day28 Full I：解答順序と終了時刻を固定する,,,TH09,TH02,"EV08,EV09",LessonContent,High
+E233,P4,筑波Day29 Full J：本番前リハーサルを120分で通す,,,TH07,TH03,"EV10,EV05",LessonContent,High
+E234,P4,筑波P4 Final Gate：30日間の本番処理を120分で再現する,,,TH07,TH03,"EV02,EV05",LessonContent,High
