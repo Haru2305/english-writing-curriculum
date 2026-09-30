@@ -1,0 +1,34 @@
+material_id,idea_id,stage,line1,line2,line3
+E015,IDEA0028,Introduce,思考部品｜IDEA0028 efficiency ≠ resilience,平時の効率化は余裕を減らし、障害時の強さを下げることがある。効率性とresilienceは別の評価軸として見る,自分への問い｜「平時には無駄に見える余裕が、危機時に何を守るか」
+E021,IDEA0028,Recall,思考再会｜IDEA0028 efficiency ≠ resilience,E015の「効率性とresilienceは同じではない」を想起。予備能力は平時の効率を下げても供給停止への耐性を高める,自分への問い｜「削った余裕は、どの故障を吸収していたか」
+E109,IDEA0028,Transfer,思考転用｜IDEA0028 efficiency ≠ resilience,E015・E021で扱った構造を供給網へ転用する。余裕や冗長性は、平時の非効率ではなく変動を吸収する機能を持ち得る,自分への問い｜「最適化しすぎると、どの変動に弱くなるか」
+E224,IDEA0028,Transfer,思考転用｜IDEA0028 efficiency ≠ resilience,E015の構造が本番型長文で再登場。backup capacityの費用と、障害時のresilienceを同じ軸で比較する,自分への問い｜「backupは本当に独立した故障経路を持っているか」
+E023,IDEA0050,Introduce,思考部品｜IDEA0050 known / unknown / action,不確実性を消してから行動するのではなく、分かっていること・分からないこと・今すべき行動を分けて伝える,自分への問い｜「何が確定し、何が未確定で、それでも何をするべきか」
+E024,IDEA0050,Recall,思考再会｜IDEA0050 known / unknown / action,E023の三分法を想起。警報ではcertaintyの強さと、求めるactionを混ぜない,自分への問い｜「unknownを隠さず、actionだけは明確にできているか」
+E025,IDEA0050,Recall,思考再会｜IDEA0050 known / unknown / action,E023と同じく、健康リスクでも不確実性の存在と意思決定の必要性は両立する,自分への問い｜「不確実だから何も言えない、になっていないか」
+E227,IDEA0050,Transfer,思考転用｜IDEA0050 known / unknown / action,E023・E025の考え方を予報へ転用する。単一予測値だけでなく、もっともらしい範囲と判断に影響する不確実性を示す,自分への問い｜「どの不確実性なら結論や行動が変わるか」
+E027,IDEA0057,Introduce,思考部品｜IDEA0057 evidence strength → claim strength,結論の強さは証拠の強さを超えてはいけない。限られた研究から広い断定へ飛ばず、scopeとcertaintyを合わせる,自分への問い｜「この証拠から、本当にそこまで言えるか」
+E030,IDEA0057,Recall,思考再会｜IDEA0057 evidence strength → claim strength,E027の原則を想起。研究結果を説明するときはsignificanceとlimitationを同時に残す,自分への問い｜「強く言いすぎている語はないか」
+E034,IDEA0057,Recall,思考再会｜IDEA0057 evidence strength → claim strength,E027と同じく、研究の限界を認めることは結論を捨てることではない。証拠に合う断定度へ調整する,自分への問い｜「may / suggest / show / proveのどれが証拠に合うか」
+E085,IDEA0057,Transfer,思考転用｜IDEA0057 evidence strength → claim strength,E027の原則を研究予測へ転用する。予測の対象範囲と確信度を、本文のevidence strengthに合わせる,自分への問い｜「主語の範囲と断定の強さを広げすぎていないか」
+E055,IDEA0010,Introduce,思考部品｜IDEA0010 equal treatment ≠ equal opportunity,全員を同じように扱うことと、実際に参加・到達できる機会を公平にすることは同じではない,自分への問い｜「同じルールでも、出発条件や障壁は同じか」
+E060,IDEA0010,Recall,思考再会｜IDEA0010 equal treatment ≠ equal opportunity,E055の区別を想起。一律の扱いが簡単でも、needsやbarriersが異なれば結果として不公平になり得る,自分への問い｜「同じ扱いと公平な機会を混同していないか」
+E159,IDEA0010,Transfer,思考転用｜IDEA0010 equal treatment ≠ equal opportunity,E055の考え方を大学の学習支援へ転用する。一律支援と対象支援を、参加機会と必要性の両面から比較する,自分への問い｜「誰に追加支援が必要で、その基準をどう説明するか」
+E157,IDEA0058,Introduce,思考部品｜IDEA0058 self-selection bias,自分で回答する人と回答しない人が系統的に異なるなら、回答数が多くても母集団全体を代表するとは限らない,自分への問い｜「このデータに入っていない人は誰か」
+E221,IDEA0058,Transfer,思考転用｜IDEA0058 self-selection bias,E157の「回答者≠母集団」と同じ構造。意見募集でも、強い関心や参加しやすさが回答者を選ぶ,自分への問い｜「参加できた人・参加した人は、全体と同じか」
+E170,IDEA0064,Introduce,思考部品｜IDEA0064 average ≠ everyone,全体平均が改善しても、全員が改善したとは限らない。平均とsubgroupの分布を分けて読む,自分への問い｜「平均の裏で、誰が得て誰が取り残されているか」
+E201,IDEA0064,Recall,思考再会｜IDEA0064 average ≠ everyone,E170の「平均≠全員」を想起。平均値は有用だが、分布や個人差を消してしまうことがある,自分への問い｜「averageからindividualまで飛んでいないか」
+E215,IDEA0064,Transfer,思考転用｜IDEA0064 average ≠ everyone,E170・E201の考え方を交通サービスへ転用する。全体の平均待ち時間が下がっても、一部利用者が悪化することはある,自分への問い｜「全体平均と小集団の結果を両方見たか」
+E229,IDEA0064,Transfer,思考転用｜IDEA0064 average ≠ everyone,E170の構造が都市緑化で再登場。citywide averageの改善だけでなく、暑熱曝露の大きい地域へ便益が届くかを見る,自分への問い｜「平均的成功が分配上の成功も意味しているか」
+E175,IDEA0065,Introduce,思考部品｜IDEA0065 visible evidence is selected evidence,目に入る事例・記録・公開データは、全体から何らかの選択過程を経て残ったものかもしれない,自分への問い｜「見えている例は、なぜ見えているのか」
+E222,IDEA0065,Transfer,思考転用｜IDEA0065 visible evidence is selected evidence,E175の考え方をarchivesへ転用する。作成・保存・整理・公開の各段階で、残る記録には偏りが生じ得る,自分への問い｜「記録に残らなかった経験は何か」
+E185,IDEA0063,Introduce,思考部品｜IDEA0063 association ≠ causation,観察研究では比較する群が最初から異なることがある。関連を因果とする前に、共通原因・交絡・代替説明を考える,自分への問い｜「XとYの両方に影響する第三の要因はないか」
+E225,IDEA0063,Transfer,思考転用｜IDEA0063 association ≠ causation,E185の考え方を運動と健康の観察研究へ転用する。diet・income・smokingなどの群差が関連を説明し得る,自分への問い｜「調整していない要因が、両群の差を作っていないか」
+E230,IDEA0063,Transfer,思考転用｜IDEA0063 association ≠ causation,E185の因果推論を政策評価へ転用する。導入前後の変化だけでは、同時期の別変化と政策効果を分けられない,自分への問い｜「政策がなかった場合の変化を、何と比較するか」
+E194,IDEA0062,Introduce,思考部品｜IDEA0062 proxy ≠ outcome,測りやすい指標は、本当に重要な結果を近似するための代理にすぎない。指標が改善しても目的が改善したとは限らない,自分への問い｜「測っている数字と、本当に良くしたいものは同じか」
+E214,IDEA0062,Recall,思考再会｜IDEA0062 proxy ≠ outcome,E194の「代理指標≠目的」を想起。stepsやsleep estimateはhealthそのものではなく、関連するsignalから作った指標である,自分への問い｜「deviceが直接測っているものは何か」
+E223,IDEA0062,Transfer,思考転用｜IDEA0062 proxy ≠ outcome,E194の考え方をbenchmarkへ転用する。scoreは広い実世界能力のproxyであり、固定testへの最適化はgoalそのものの改善とは限らない,自分への問い｜「scoreが上がったのか、能力が上がったのか」
+E234,IDEA0062,Transfer,思考転用｜IDEA0062 proxy ≠ outcome,E194の考え方をsurrogate endpointへ転用する。marker改善が患者に重要なoutcome改善を保証するとは限らない,自分への問い｜「このsurrogateは、患者に重要な結果をどこまで予測するか」
+E197,IDEA0066,Introduce,思考部品｜IDEA0066 intervention changes observation,初期設定・推薦・予測は人の行動へ介入する。その後に観察される選択や継続率は、元の選好だけでなく設計の影響も含む,自分への問い｜「観察した行動を、仕組み自身が変えていないか」
+E210,IDEA0066,Recall,思考再会｜IDEA0066 intervention changes observation,E197の原理を想起。公開した予測が利用者の行動を変えると、最終結果は『予測前の世界』とは別になる,自分への問い｜「予測は説明しているだけか、それとも結果を変えているか」
+E216,IDEA0066,Transfer,思考転用｜IDEA0066 intervention changes observation,E197・E210の考え方を推薦システムへ転用する。推薦で露出が増えると、そのクリックが新しい人気データになり循環が生まれる,自分への問い｜「観察した人気は、推薦前の好みをそのまま表しているか」
