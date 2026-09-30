@@ -113,7 +113,21 @@ The mapping confirms that the later curriculum is especially rich in **TH07 Evid
 
 This is not automatically a defect. P3–P4 deliberately moved toward dense reading, mixed evidence, causal interpretation, measurement limits, and exam transfer. The remapping makes that development visible.
 
-The next content task is selective Post-solve revision. Priority should go to the Core concepts where naming the reusable reasoning materially improves transfer, especially IDEA0058, IDEA0062, IDEA0063, IDEA0064, IDEA0065, IDEA0066, IDEA0057, IDEA0028, IDEA0010, and IDEA0050.
+## Priority A Post-solve revision
+
+- Priority A concepts revised: **10 / 10**
+- Existing materials revised: **33**
+- Published version: **v1.1**
+- Drive readback QA: **33 / 33 pass**
+- New lesson IDs created: **0**
+- Problem text and answer keys changed: **0**
+
+The revision adds only a compact learner-facing `思考の再利用` block after the existing Post-solve / self-evaluation area. Introduce, Recall, and Transfer roles follow `curriculum/learner-facing-concepts.md`.
+
+Source ledger:
+- `management/post-solve-priority-a.csv`
+
+The next content task is **selective Priority B review**, not automatic revision of every remaining Core idea.
 
 ## Source policy
 
