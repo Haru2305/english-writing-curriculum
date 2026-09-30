@@ -1,23 +1,23 @@
 idea_id,learner_label,introduce_material,recall_materials,transfer_materials,path_status,learner_facing_design,post_solve_status
-IDEA0001,地域差は人材だけでなく制度・インフラにも左右される,E001,E004,E113,Full,Introduce: 名前+1文定義 / Recall: 構造要因を再想起 / Transfer: 参加障壁へ無提示転用,
-IDEA0003,技術はアクセスを改善しても対面サービスを完全代替しない,E002,E006,E009,Full,補完 vs 完全代替を明示し、医療→AIへ転用,
+IDEA0001,地域差は人材だけでなく制度・インフラにも左右される,E001,E004,E113,Full,Introduce: 名前+1文定義 / Recall: 構造要因を再想起 / Transfer: 参加障壁へ無提示転用,Done 2026-10-01 / v1.1 (Priority B)
+IDEA0003,技術はアクセスを改善しても対面サービスを完全代替しない,E002,E006,E009,Full,補完 vs 完全代替を明示し、医療→AIへ転用,Reviewed 2026-10-01 / no revision
 IDEA0010,同じ扱いと公平な機会は同じではない,E055,E060,E159,Full,equality と equity を区別し、一律支援→対象支援へ転用,Done 2026-10-01 / v1.1
 IDEA0011,格差には個人要因と構造要因がある,E004,E006,E113,Full,個人責任だけで説明しない型を参加障壁へ転用,
-IDEA0018,高リスク領域ではhuman oversightが重要になる,E009,E012,E149,Full,高リスクほど監督を強める原理を公共AIへ転用,
-IDEA0020,プライバシー保護と利便性には交換関係がある,E008,E012,E070,Full,privacy vs utility を本人確認制度へ転用,
-IDEA0026,初期費用と長期便益を分ける,E010,E012,E217,Full,upfront cost と avoided future burden を予防保守へ転用,
+IDEA0018,高リスク領域ではhuman oversightが重要になる,E009,E012,E149,Full,高リスクほど監督を強める原理を公共AIへ転用,Done 2026-10-01 / v1.1 (Priority B)
+IDEA0020,プライバシー保護と利便性には交換関係がある,E008,E012,E070,Full,privacy vs utility を本人確認制度へ転用,Reviewed 2026-10-01 / no revision
+IDEA0026,初期費用と長期便益を分ける,E010,E012,E217,Full,upfront cost と avoided future burden を予防保守へ転用,Reviewed 2026-10-01 / no revision
 IDEA0028,効率性とresilienceは一致しない,E015,E021,E109,Full,余裕・冗長性を供給網の別題材へ転用。E224でcapstone再会,Done 2026-10-01 / v1.1
 IDEA0031,人口減少下では固定費の高いサービス維持が難しくなる,E014,"E018,E020",,Partial,固定費構造は明示するが、無理なTransfer先は設定しない,
-IDEA0035,労働市場変化では職種よりtaskの変化を見る,E016,"E018,E022",E061,Full,job単位からtask単位へ視点を移し、生成AIと仕事へ転用,
+IDEA0035,労働市場変化では職種よりtaskの変化を見る,E016,"E018,E022",E061,Full,job単位からtask単位へ視点を移し、生成AIと仕事へ転用,Reviewed 2026-10-01 / no revision
 IDEA0037,越境課題は単独国では解きにくい,E013,E019,,Partial,国境を越える原因・影響と協調の必要性を明示。無理な転用はしない,
-IDEA0041,公共予算は機会費用を伴う,E020,E024,E032,Full,予算配分→医療資源配分へ転用,
-IDEA0042,参加と説明責任は制度への信頼に関係する,E039,"E040,E041",E189,Full,参加・理由説明・信頼を匿名/公開feedback制度へ転用,
-IDEA0043,保存と開発は完全な二者択一ではない,E028,E030,E195,Full,preserve vs adapt を後半の古い建物問題で再転用,
+IDEA0041,公共予算は機会費用を伴う,E020,E024,E032,Full,予算配分→医療資源配分へ転用,Reviewed 2026-10-01 / no revision
+IDEA0042,参加と説明責任は制度への信頼に関係する,E039,"E040,E041",E189,Full,参加・理由説明・信頼を匿名/公開feedback制度へ転用,Reviewed 2026-10-01 / no revision
+IDEA0043,保存と開発は完全な二者択一ではない,E028,E030,E195,Full,preserve vs adapt を後半の古い建物問題で再転用,Reviewed 2026-10-01 / no revision
 IDEA0047,機械翻訳は速度と費用を改善しても文脈判断に限界がある,E017,"E018,E023",E110,Full,自動化の便益と文脈限界を警告文判断へ深化,
-IDEA0049,危機前の投資は成果が見えにくい,E011,E013,E217,Full,見えない予防便益をインフラ保守へ転用,
+IDEA0049,危機前の投資は成果が見えにくい,E011,E013,E217,Full,見えない予防便益をインフラ保守へ転用,Done 2026-10-01 / v1.1 (Priority B)
 IDEA0050,不確実性を隠すより範囲を伝える,E023,"E024,E025",E227,Full,known/unknown/action を予測の幅へ転用,Done 2026-10-01 / v1.1
-IDEA0054,公的資金は便益の広がりと代替用途で評価する,E033,E036,E093,Full,スポーツ施設→学習支援予算へ転用,
-IDEA0055,便益とリスクは別々でなく同じ判断枠で比較する,E035,E037,E151,Full,benefit-risk を可逆性・不確実な意思決定へ転用,
+IDEA0054,公的資金は便益の広がりと代替用途で評価する,E033,E036,E093,Full,スポーツ施設→学習支援予算へ転用,Reviewed 2026-10-01 / no revision
+IDEA0055,便益とリスクは別々でなく同じ判断枠で比較する,E035,E037,E151,Full,benefit-risk を可逆性・不確実な意思決定へ転用,Done 2026-10-01 / v1.1 (Priority B)
 IDEA0056,同意は署名ではなく理解と自発性を含む,E029,"E031,E036",,Partial,informed consentは明示保持。似ているだけの権利問題へ無理に転用しない,
 IDEA0057,不確実な証拠では断定度を下げる,E027,"E030,E034",E085,Full,evidence strength→claim strength を研究予測へ転用,Done 2026-10-01 / v1.1
 IDEA0058,自己選択された回答者は母集団をそのまま代表しない,E157,,E221,Full,self-selection biasを明示し、一般の意見募集へ転用,Done 2026-10-01 / v1.1
