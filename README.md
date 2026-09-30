@@ -26,7 +26,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - Material count: **frozen at E234**
-- Current content work: **E001–E234 curriculum-wide remapping / no new lesson IDs**
+- Current content work: **learner-facing concept consolidation / selective Post-solve revision / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -46,6 +46,7 @@ english-writing-curriculum/
 ├── curriculum/
 │   ├── phase-design.md
 │   ├── content-framework.md
+│   ├── learner-facing-concepts.md
 │   └── p4-tsukuba.md
 ├── bundles/
 │   └── README.md
@@ -55,6 +56,7 @@ english-writing-curriculum/
 │   ├── idea-bank.csv
 │   ├── idea-axis-map.csv
 │   ├── material-axis-map.csv
+│   ├── idea-learning-path.csv
 │   └── content-axis-audit.md
 └── specs/
     ├── repository-policy.md
@@ -96,5 +98,9 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
   - canonical mapping of IDEA0001–IDEA0078 onto TH / EV
 - `management/material-axis-map.csv`
   - E001–E234 → Idea / TH / EV
+- `curriculum/learner-facing-concepts.md`
+  - 27 Learner-facing Core concepts and Introduce / Recall / Transfer rules
+- `management/idea-learning-path.csv`
+  - machine-readable learning paths for the 27 Core ideas
 
-The material remap is complete. The current task is selective learner-facing revision and transfer visibility, not E235+.
+The material remap and concept-path design are complete. The current task is selective learner-facing Post-solve revision, not E235+.
