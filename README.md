@@ -22,9 +22,9 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 
 ## Current status
 
-- Published: **B001–B031**
-- Materials: **E001–E186**
-- Current phase: **P3 入試実戦化（B031 completed）**
+- Published: **B001–B032**
+- Materials: **E001–E192**
+- Current phase: **P3 入試実戦化（B032 completed）**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
