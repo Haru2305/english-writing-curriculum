@@ -51,3 +51,18 @@ No revisionは「重要でない」という意味ではない。
 4. 他Coreとの重複が大きい
 
 This review preserves the fixed E001–E234 corpus and minimizes learner-facing conceptual clutter.
+
+
+## Status
+
+**Completed 2026-10-01.**
+
+- Reviewed: 12 / 12
+- Transfer-only revisions published: 4
+- No-revision decisions: 8
+- Drive readback QA: pending only in the publication ledger until final verification
+- New lesson IDs: 0
+
+Selected revision ledger:
+- `management/post-solve-priority-b-selected.csv`
+- `curriculum/post-solve-priority-b.md`
