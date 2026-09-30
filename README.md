@@ -26,7 +26,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - Material count: **frozen at E234**
-- Current content work: **Learner-facing Core review complete (27 / 27) / no new lesson IDs**
+- Current content work: **argument-construction framework added / selective bridge review next / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -46,6 +46,7 @@ english-writing-curriculum/
 ├── curriculum/
 │   ├── phase-design.md
 │   ├── content-framework.md
+│   ├── argument-construction.md
 │   ├── learner-facing-concepts.md
 │   ├── priority-b-review.md
 │   ├── post-solve-priority-b.md
@@ -64,6 +65,8 @@ english-writing-curriculum/
 │   ├── priority-b-review.csv
 │   ├── post-solve-priority-b-selected.csv
 │   ├── priority-c-review.csv
+│   ├── writing-type-argument-map.csv
+│   ├── argument-construction-audit.md
 │   └── content-axis-audit.md
 └── specs/
     ├── repository-policy.md
@@ -109,5 +112,11 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
   - 27 Learner-facing Core concepts and Introduce / Recall / Transfer rules
 - `management/idea-learning-path.csv`
   - machine-readable learning paths for the 27 Core ideas
+- `curriculum/argument-construction.md`
+  - ARG01–ARG06: thought → reason → mechanism → support → qualification → decision
+- `management/writing-type-argument-map.csv`
+  - WF01–WF07 → recommended argument-function routes
+- `management/argument-construction-audit.md`
+  - audit of the bridge from idea generation to written argument
 
-The material remap and concept-path design are complete. All 27 Learner-facing Core concepts have now been selectively reviewed: Priority A = 10 revised concepts, Priority B = 14 reviewed (4 revised / 10 no revision), Priority C = 3 reviewed (0 revised / 3 no revision). No E235+.
+The material remap and concept-path design are complete. All 27 Learner-facing Core concepts have been selectively reviewed. The next layer—argument construction—has now been formalized as ARG01–ARG06 without adding lessons. No E235+.
