@@ -52,7 +52,10 @@ english-writing-curriculum/
 ├── management/
 │   ├── README.md
 │   ├── material-manifest.csv
-│   └── idea-axis-map.csv
+│   ├── idea-bank.csv
+│   ├── idea-axis-map.csv
+│   ├── material-axis-map.csv
+│   └── content-axis-audit.md
 └── specs/
     ├── repository-policy.md
     └── qa-policy.md
@@ -87,7 +90,11 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
   - EV01–EV10: evaluation criteria
   - relationship to Topic family / Idea Bank / WF / WT / WQ
   - tagging and selective revision rules
+- `management/idea-bank.csv`
+  - canonical Idea Bank export, IDEA0001–IDEA0078
 - `management/idea-axis-map.csv`
-  - canonical mapping of IDEA0001–IDEA0057 onto TH / EV
+  - canonical mapping of IDEA0001–IDEA0078 onto TH / EV
+- `management/material-axis-map.csv`
+  - E001–E234 → Idea / TH / EV
 
-The next task is to remap existing lessons, especially P2–P4, rather than create E235+.
+The material remap is complete. The current task is selective learner-facing revision and transfer visibility, not E235+.
