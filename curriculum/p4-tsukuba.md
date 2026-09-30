@@ -95,6 +95,14 @@ B036 Days 7–12:
 11. 110-minute Semi-full C / Q1-style reading + Q2-style reading
 12. 120-minute B036 Checkpoint / Q1 + Q2 + Q3A + Q3B
 
+B037 Days 13–18:
+13. 100-minute Semi-full D / Q1 + Q2 + Q3A; protect designated-position accuracy after reading fatigue
+14. 110-minute Semi-full E / Q1 + Q2 + Q3B; protect about-100-word composition after reading fatigue
+15. 120-minute Semi-full F / first stabilized Q1 + Q2 + Q3A + Q3B run
+16. 120-minute Semi-full G / heavier front half; preserve Q3A/Q3B accuracy
+17. 120-minute Semi-full H / overrun-recovery drill with absolute section stop-times
+18. 120-minute B037 Checkpoint / final semi-full gate with protected review time
+
 
 ## Recent-paper matrix (2023–2026)
 
@@ -148,7 +156,8 @@ The University of Tsukuba does not publish the main English front-exam paper on 
 
 - B035 / E205–E210: Published
 - B036 / E211–E216: Published
-- Coverage: Days 1–12
+- B037 / E217–E222: Published
+- Coverage: Days 1–18
 - Status date: 2026-09-30
-- Next: B037 / Days 13–18
+- Next: B038 / Days 19–24 — 120-minute full sets
 - Revalidation of 2027 detailed official guidelines required before learner use.
