@@ -1,0 +1,40 @@
+# Priority B Selected Post-solve Revisions
+
+Priority B review selected only **4 transfer-only revisions** from 12 candidate concepts.
+
+No new lesson IDs are created. Problem text and answer keys remain unchanged.
+
+## E113 — IDEA0001
+
+思考転用｜IDEA0001 single cause → structural barriers
+
+E001では地域医療のaccessを医師数だけで説明しなかった。ここでも不参加を一つの原因へ縮めず、schedule・理解・到達性など複数のbarrierとして分解する
+
+自分への問い｜「一番目立つ原因だけで、全体を説明していないか」
+
+## E149 — IDEA0018
+
+思考転用｜IDEA0018 risk-proportionate human oversight
+
+E009のhigh-risk human oversightを公共AIへ転用する。routine taskは自動化しても、例外・資格判断・記録変更では人へ確実に移管する
+
+自分への問い｜「誤りのコストが高いtaskほど、人の関与をどこに残すか」
+
+## E217 — IDEA0049
+
+思考転用｜IDEA0049 prevention benefit is often invisible
+
+E011の「成功した予防は見えにくい」が、橋やsoftware maintenanceで再登場する。ここではさらに、介入がなかった場合というcounterfactualを考えて効果を評価する
+
+自分への問い｜「何も起きなかったことを、何と比較して価値づけるか」
+
+## E151 — IDEA0055
+
+思考転用｜IDEA0055 benefit-risk + reversibility
+
+E035のbenefit-risk判断を一段進める。不確実性が大きいときは、便益と害だけでなく「後から変更できるか」と「待つコスト」も同じ判断枠に入れる
+
+自分への問い｜「今決める利益は、将来の選択肢を失うコストより大きいか」
+
+
+The other eight Priority B concepts remain learner-visible through their existing title, aim, passage, questions, or vocabulary and receive no extra Post-solve block.
