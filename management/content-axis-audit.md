@@ -92,17 +92,28 @@ Generated from the fixed E001–E234 corpus after introducing the curriculum-wid
 
 The added layer captures later-emerging transferable reasoning such as self-selection bias, regression to the mean, base rates, measurement reliability, proxy vs outcome, confounding, average vs distribution, evidence-selection bias, feedback loops, counterfactual prevention evaluation, decision thresholds, independent redundancy, queueing under high utilization, relative vs absolute risk, evidence synthesis, benchmark generalization, data minimization, information overload, missing-data discipline, replication, and choice overload.
 
+## Learner-facing concept paths
+
+- Learner-facing Core ideas: **27**
+- Full Introduce → Recall → Transfer paths: **24**
+- Partial paths kept intentionally: **3**
+  - IDEA0031 fixed-cost service maintenance
+  - IDEA0037 cross-border cooperation
+  - IDEA0056 meaningful consent
+- Remaining canonical ideas stay Supporting / Bank-only unless later content review shows a genuine transfer path.
+- Google Sheet management tab: **発想学習経路**
+- Machine-readable source: `management/idea-learning-path.csv`
+- Learner-facing rule set: `curriculum/learner-facing-concepts.md`
+
+Core selection is evidence-based: an idea must already appear in at least two existing E001–E234 materials. Similarity alone is not enough to fabricate a Transfer stage.
+
 ## Interpretation
 
 The mapping confirms that the later curriculum is especially rich in **TH07 Evidence & Measurement** and **TH06 Implementation & Safeguards**, while P1 carries more explicit Idea Bank linkage.
 
 This is not automatically a defect. P3–P4 deliberately moved toward dense reading, mixed evidence, causal interpretation, measurement limits, and exam transfer. The remapping makes that development visible.
 
-The next content audit should ask:
-1. whether TH05 Behavior & Incentives and TH09 Governance, Rights & Responsibility are sufficiently visible to the learner,
-2. whether EV08 Privacy & Data Control is appropriately narrow rather than artificially inflated,
-3. which Medium-confidence mappings deserve lesson-text inspection before learner-facing Post-solve revision,
-4. which remaining Medium-confidence mappings need direct lesson-text review before learner-facing revision.
+The next content task is selective Post-solve revision. Priority should go to the Core concepts where naming the reusable reasoning materially improves transfer, especially IDEA0058, IDEA0062, IDEA0063, IDEA0064, IDEA0065, IDEA0066, IDEA0057, IDEA0028, IDEA0010, and IDEA0050.
 
 ## Source policy
 
