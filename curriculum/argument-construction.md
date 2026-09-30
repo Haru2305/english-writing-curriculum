@@ -434,3 +434,20 @@ Next review should identify only:
 No new lesson IDs.
 No new Idea Bank records solely for paragraph structure.
 No mandatory six-sentence template.
+
+
+---
+
+# 10. Publication status
+
+Selective bridge implementation completed 2026-10-01.
+
+Revised existing materials:
+- E087 — introduce the common ARG01–ARG06 system
+- E117 — recall ARG03 Mechanism
+- E119 — recall ARG05 Qualification
+- E208 — compress to six exam-time questions
+
+All four were published as v1.1 and passed Drive readback QA.
+
+No other writing lessons were mass-edited.
