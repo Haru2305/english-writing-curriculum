@@ -111,6 +111,14 @@ B038 Days 19–24:
 23. 120-minute Full E / difficult-item stop-loss and recovery without dropping later sections
 24. 120-minute B038 Checkpoint / full-set gate with strict timing and protected final review
 
+B039 Days 25–30:
+25. 120-minute Full F / baseline repeatability of the full-set routine
+26. 120-minute Full G / correct strict-character Japanese response weakness
+27. 120-minute Full H / correct late Q3A/Q3B errors under reading fatigue
+28. 120-minute Full I / lock answer order and absolute section stop-times
+29. 120-minute Full J / final rehearsal with no major strategy changes
+30. 120-minute P4 Final Gate / reproduce the complete 30-day exam routine in one sitting
+
 
 ## Recent-paper matrix (2023–2026)
 
@@ -166,7 +174,10 @@ The University of Tsukuba does not publish the main English front-exam paper on 
 - B036 / E211–E216: Published
 - B037 / E217–E222: Published
 - B038 / E223–E228: Published
-- Coverage: Days 1–24
+- B039 / E229–E234: Published
+- Coverage: Days 1–30
 - Status date: 2026-09-30
-- Next: B039 / Days 25–30 — final 120-minute full-set repetition and weak-point correction
+- P4 authoring status: Complete
+- Final Gate: E234 / Day 30
+- Next action before learner use: revalidate the 2027 detailed official admissions guidelines when released
 - Revalidation of 2027 detailed official guidelines required before learner use.
