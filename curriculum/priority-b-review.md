@@ -4,9 +4,9 @@
 
 Priority Bは自動的に全件Post-solveへ出さない。
 
-12概念を実教材で監査した結果:
+14概念を実教材で監査した結果:
 - **Transfer-only revision: 4**
-- **No revision / keep implicit: 8**
+- **No revision / keep implicit: 10**
 - 新規教材: 0
 
 選定基準は「概念が重要か」ではなく、**追加ブロックが既存本文にない転用価値を生むか**。
@@ -15,6 +15,7 @@ Priority Bは自動的に全件Post-solveへ出さない。
 |---|---|---|---|
 | IDEA0001 地域差は人材だけでなく制度・インフラにも左右される | Transfer-only | E113 | E001では複数要因がすでに明示。E113で医療アクセス→健診参加障壁へ構造要因の見方が移るため、転用接続だけ価値が高い |
 | IDEA0003 技術はアクセスを改善しても対面サービスを完全代替しない | No revision | — | E002とE009がタイトル・本文ともreplace/complementを明示しており、追加ブロックは重複 |
+| IDEA0011 格差には個人要因と構造要因がある | No revision | — | E004で個人要因と構造要因を直接教授。E113には同系統のIDEA0001 transfer blockが既にあり、IDEA0011まで重ねると概念ラベルが過密になる |
 | IDEA0018 高リスク領域ではhuman oversightが重要になる | Transfer-only | E149 | E009でhuman oversightは十分明示。E149では医療AI→公共AIへrisk-proportionate oversightが転用されるため接続価値が高い |
 | IDEA0020 プライバシー保護と利便性には交換関係がある | No revision | — | E008の中心テーマそのもの。E070もprivacy/accountabilityの比較を本文内で十分処理している |
 | IDEA0026 初期費用と長期便益を分ける | No revision | — | E010の題名・本文で時間軸が明示。E217はより精密にはcounterfactual prevention evaluationであり、旧ラベルを重ねると概念が粗くなる |
@@ -22,6 +23,7 @@ Priority Bは自動的に全件Post-solveへ出さない。
 | IDEA0041 公共予算は機会費用を伴う | No revision | — | E020でopportunity costを名称つきで直接教授。E032もselection criterionを明示しており追加説明は不要 |
 | IDEA0042 参加と説明責任は制度への信頼に関係する | No revision | — | E039はaccountabilityを直接教授し、E189はcandor/accountability比較が主目的。legitimacyまで同一ラベルで束ねると転用がやや広すぎる |
 | IDEA0043 保存と開発は完全な二者択一ではない | No revision | — | E028でadaptive reuseを明示し、E195も同じ対立軸を本文連動作文へ使うため、概念は既に可視 |
+| IDEA0047 機械翻訳は速度と費用を改善しても文脈判断に限界がある | No revision | — | E017で速度・費用と文脈判断の限界を明示し、E110で高リスク用途ではqualified reviewが必要という形へ自然に転用済み。追加Post-solveは重複 |
 | IDEA0049 危機前の投資は成果が見えにくい | Transfer-only | E217 | E011でinvisible prevention benefitを明示済み。E217ではbridge/software maintenanceへ移り、counterfactualまで発展するため再会接続が有効 |
 | IDEA0054 公的資金は便益の広がりと代替用途で評価する | No revision | — | E033でpublic benefitとopportunity costを明示。E093はcriteria-based prioritizationが主目的で、追加は重複 |
 | IDEA0055 便益とリスクは別々でなく同じ判断枠で比較する | Transfer-only | E151 | E035でbenefit-risk frameは明示済み。E151でuncertaintyにreversibilityとdelay costを足すため、発展的転用として価値が高い |
@@ -57,12 +59,16 @@ This review preserves the fixed E001–E234 corpus and minimizes learner-facing 
 
 **Completed 2026-10-01.**
 
-- Reviewed: 12 / 12
+- Reviewed: 14 / 14
 - Transfer-only revisions published: 4
-- No-revision decisions: 8
+- No-revision decisions: 10
 - Drive readback QA: **4 / 4 pass**
 - New lesson IDs: 0
 
 Selected revision ledger:
 - `management/post-solve-priority-b-selected.csv`
 - `curriculum/post-solve-priority-b.md`
+
+## Classification correction
+
+During final Core reconciliation, IDEA0011 and IDEA0047 were found to have been omitted from the original A/B/C count. Both were audited and assigned to Priority B as no-revision cases. The corrected Core accounting is A10 + B14 + C3 = 27.
