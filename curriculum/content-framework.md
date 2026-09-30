@@ -742,7 +742,7 @@ Therefore the next content task is **remapping and selective revision**, not les
 7. Define learner-facing Core concepts and Introduce / Recall / Transfer paths. **Completed: 27 Core / 24 Full / 3 Partial — `curriculum/learner-facing-concepts.md`, `management/idea-learning-path.csv`**
 8. Revise only lessons whose Post-solve does not make the reusable reasoning visible. **Completed for Core review: Priority A/B/C selective revisions**
 9. Formalize the bridge from thought to paragraph. **Completed: `curriculum/argument-construction.md`, `management/writing-type-argument-map.csv`, `management/argument-construction-audit.md`**
-10. Selectively review only a few bridge lessons where naming ARG materially improves transfer.
+10. Selectively review only a few bridge lessons where naming ARG materially improves transfer. **Completed: E087 / E117 / E119 / E208 at v1.1**
 11. Preserve Published lesson immutability and version revisions according to repository policy.
 
 The final curriculum should allow 234 individual experiences to compress into a small set of reusable intellectual operations.
