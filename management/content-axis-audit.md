@@ -83,6 +83,15 @@ Generated from the fixed E001–E234 corpus after introducing the curriculum-wid
 - TH09: 2
 - TH10: 1
 
+## Idea Bank consolidation
+
+- Canonical Idea Bank: **78 records (IDEA0001–IDEA0078)**
+- New records added from P2–P4: **21 (IDEA0058–IDEA0078)**
+- New Idea links synchronized to **30 existing materials**
+- New lesson IDs created: **0**
+
+The added layer captures later-emerging transferable reasoning such as self-selection bias, regression to the mean, base rates, measurement reliability, proxy vs outcome, confounding, average vs distribution, evidence-selection bias, feedback loops, counterfactual prevention evaluation, decision thresholds, independent redundancy, queueing under high utilization, relative vs absolute risk, evidence synthesis, benchmark generalization, data minimization, information overload, missing-data discipline, replication, and choice overload.
+
 ## Interpretation
 
 The mapping confirms that the later curriculum is especially rich in **TH07 Evidence & Measurement** and **TH06 Implementation & Safeguards**, while P1 carries more explicit Idea Bank linkage.
@@ -93,7 +102,7 @@ The next content audit should ask:
 1. whether TH05 Behavior & Incentives and TH09 Governance, Rights & Responsibility are sufficiently visible to the learner,
 2. whether EV08 Privacy & Data Control is appropriately narrow rather than artificially inflated,
 3. which Medium-confidence mappings deserve lesson-text inspection before learner-facing Post-solve revision,
-4. which P2–P4 lessons contain reusable propositions that should become new canonical Idea Bank records.
+4. which remaining Medium-confidence mappings need direct lesson-text review before learner-facing revision.
 
 ## Source policy
 
