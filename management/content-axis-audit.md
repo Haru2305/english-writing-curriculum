@@ -129,9 +129,9 @@ Source ledger:
 
 ## Priority B selective review
 
-- Priority B concepts reviewed: **12 / 12**
+- Priority B concepts reviewed: **14 / 14**
 - Transfer-only revisions selected: **4**
-- Intentionally no revision: **8**
+- Intentionally no revision: **10**
 - Existing materials revised: **E113, E149, E151, E217**
 - Published version for those four: **v1.1**
 - Drive readback QA: **4 / 4 pass**
@@ -145,7 +145,34 @@ Sources:
 - `management/post-solve-priority-b-selected.csv`
 - `curriculum/priority-b-review.md`
 
-The next content task is **Priority C / residual-core review**, with the default assumption that no revision is needed unless transfer value is clear.
+## Priority C review
+
+- Priority C concepts reviewed: **3 / 3**
+- Revisions selected: **0**
+- Intentionally no revision: **3**
+- New lesson IDs created: **0**
+- Published lesson versions changed: **0**
+
+Existing lessons already make the learning path explicit:
+- IDEA0031: E014 defines fixed cost; E020 explicitly recalls the same issue in public-budget allocation.
+- IDEA0037: E013 develops cross-border coordination; E019 explicitly recalls the cooperation structure.
+- IDEA0056: E029 defines meaningful consent as a process; E031 explicitly recalls `information → understanding → voluntary choice`.
+
+Source:
+- `management/priority-c-review.csv`
+- `curriculum/priority-c-review.md`
+
+## Final Core reconciliation
+
+A final count check found two Core concepts (IDEA0011 and IDEA0047) omitted from the original A/B/C priority list. Both were audited as Priority B no-revision cases.
+
+Corrected accounting:
+- Priority A: **10**
+- Priority B: **14**
+- Priority C: **3**
+- Total: **27 / 27 Learner-facing Core concepts reviewed**
+
+Selective learner-facing review is complete. Further work should focus on evaluating the curriculum as a whole rather than adding more Core labels.
 
 ## Source policy
 
