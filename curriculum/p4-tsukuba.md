@@ -139,7 +139,8 @@ The University of Tsukuba does not publish the main English front-exam paper on 
 ## Current authoring status
 
 - B035 / E205–E210: Published
-- Coverage: Days 1–6
+- B036 / E211–E216: Published
+- Coverage: Days 1–12
 - Status date: 2026-09-30
-- Next: B036 / Days 7–12
+- Next: B037 / Days 13–18
 - Revalidation of 2027 detailed official guidelines required before learner use.
