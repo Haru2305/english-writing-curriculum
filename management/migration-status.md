@@ -14,12 +14,12 @@
 
 ### Lesson bodies
 
-- B030–B034 / E175–E204: present in Markdown
+- B030–B035 / E175–E210: present in Markdown
 - B001–B029 / E001–E174: metadata imported, body backfill pending
 
 ### New authoring
 
-- B031 onward: **GitHub-first**（B031–B034 published / P3 completed）
+- B031 onward: **GitHub-first**（B031–B035 published / P4 started）
 - Draft lesson source should be created in `bundles/B031/` etc.
 - After QA Pass, publish to Drive and update the manifest/index
 
