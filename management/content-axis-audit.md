@@ -134,6 +134,7 @@ Source ledger:
 - Intentionally no revision: **8**
 - Existing materials revised: **E113, E149, E151, E217**
 - Published version for those four: **v1.1**
+- Drive readback QA: **4 / 4 pass**
 - New lesson IDs created: **0**
 - Problem text and answer keys changed: **0**
 
