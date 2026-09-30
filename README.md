@@ -25,6 +25,8 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Published: **B001–B039**
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
+- Material count: **frozen at E234**
+- Current content work: **E001–E234 curriculum-wide remapping / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -43,12 +45,14 @@ english-writing-curriculum/
 ├── README.md
 ├── curriculum/
 │   ├── phase-design.md
+│   ├── content-framework.md
 │   └── p4-tsukuba.md
 ├── bundles/
 │   └── README.md
 ├── management/
 │   ├── README.md
-│   └── material-manifest.csv
+│   ├── material-manifest.csv
+│   └── idea-axis-map.csv
 └── specs/
     ├── repository-policy.md
     └── qa-policy.md
@@ -72,3 +76,18 @@ Bundle本文は順次 `bundles/Bxxx/Exxx.md` へ移行する。
 - `Pass`: QA通過
 - `Valid`: learner-facing indexに載せてよい
 - `Checkpoint`: 累積技能を本番条件で確認する教材
+
+
+## Content architecture
+
+E001–E234 are now treated as a fixed corpus. The curriculum-wide content system is defined in:
+
+- `curriculum/content-framework.md`
+  - TH01–TH10: reusable thinking operations
+  - EV01–EV10: evaluation criteria
+  - relationship to Topic family / Idea Bank / WF / WT / WQ
+  - tagging and selective revision rules
+- `management/idea-axis-map.csv`
+  - canonical mapping of IDEA0001–IDEA0057 onto TH / EV
+
+The next task is to remap existing lessons, especially P2–P4, rather than create E235+.
