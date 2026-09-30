@@ -22,8 +22,8 @@
 - 終盤は「1教材 ≒ 60分模試型」へ寄せる
 
 Current:
-- B022–B030 / E127–E180 completed
-- B031–B034 = final P3 section
+- B022–B031 / E127–E186 completed
+- B032–B034 = remaining P3 final section
 - planned end = E204前後
 - B034 = P3 Final Gate
 
