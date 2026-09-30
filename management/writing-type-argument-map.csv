@@ -1,0 +1,8 @@
+writing_type,existing_label,core_route,required_functions,optional_functions,notes
+WF01,意見・理由,"Answer → Reason → Mechanism → Support → Return","ARG01,ARG02,ARG03,ARG06","ARG04,ARG05","P4ではARG04 concrete exampleを高頻度で要求"
+WF02,比較・trade-off,"Criterion → Compare → Decisive reason → Trade-off → Choice","ARG01,ARG02,ARG05,ARG06","ARG03,ARG04","A/B列挙ではなく共通軸で判断"
+WF03,原因・結果,"Causal claim → Mechanism chain → Boundary → Conclusion","ARG01,ARG03,ARG06","ARG02,ARG04,ARG05","因果を一段飛ばさない"
+WF04,提案・解決策,"Problem → Proposal → Mechanism → Limitation/Mitigation → Test/Decision","ARG01,ARG03,ARG05,ARG06","ARG02,ARG04","proposalだけで終わらない"
+WF05,評価・優先順位,"Criteria → Evaluation → Trade-off → Choice","ARG01,ARG02,ARG06","ARG03,ARG04,ARG05","criteriaをchoiceより先に固定"
+WF06,本文連動・転用,"Source principle → Target answer → Mapping → Support → Scope → Return","ARG01,ARG03,ARG06","ARG02,ARG04,ARG05","本文コピーではなく原理を別対象へ移す"
+WF07,要約連動,"Select → Compress → Preserve relations","ARG01","ARG03,ARG05,ARG06","純粋要約ではargument functionを無理に付けない"
