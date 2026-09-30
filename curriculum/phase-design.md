@@ -23,8 +23,7 @@
 
 Current:
 - B022–B034 / E127–E204 completed
-- P3 completed at B034 / E204. P4 started: B035 / E205–E210 completed
-- planned end = E204前後
+- P3 completed at B034 / E204
 - B034 = P3 Final Gate
 
 P3では原則として major new Focus を増やさず、既習技能の Transfer / Checkpoint を中心にする。
@@ -49,3 +48,28 @@ P3では原則として major new Focus を増やさず、既習技能の Transf
 - 新規知識の導入は最小化
 - 既習技能を本番条件で再現することを優先
 - 2027年度の公式募集要項・試験時間・設問仕様を確認してから最終P4テンプレートを固定する
+
+Current:
+- B035–B039 / E205–E234 Published
+- P4 completed at B039 / E234
+- E234 = P4 Final Gate
+- 2027年度詳細募集要項公開後にP4形式を再検証する
+
+## Curriculum-wide Content Consolidation — E001–E234
+
+P4 completion ends **material expansion**, not curriculum development.
+
+Rules:
+- material count is frozen at E234
+- do not create E235+ for ordinary content development
+- remap existing lessons using `curriculum/content-framework.md`
+- TH01–TH10 describe transferable reasoning operations
+- EV01–EV10 describe criteria used to evaluate claims, policies, and choices
+- retain TF01–TF19 and IDEA0001–IDEA0057; connect them to the new cross-topic axes
+- P2–P4 reasoning content must be recovered into the canonical idea / axis system
+- revise Published lesson content only when the reusable reasoning is not visible enough to the learner, and preserve revision history
+
+Goal:
+- compress 234 lesson experiences into a small, reusable set of intellectual operations
+- make free-writing idea generation transferable across unfamiliar topics
+- preserve the existing WF / WT / WQ writing-output architecture
