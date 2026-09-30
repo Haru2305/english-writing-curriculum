@@ -26,7 +26,7 @@ The curriculum now uses five distinct layers.
 | Topic family | **What is the issue about?** | Existing TF01–TF19 |
 | Thinking axis | **How should I reason about it?** | New TH01–TH10 |
 | Evaluation axis | **By what criterion should I judge it?** | New EV01–EV10 |
-| Idea bank | **What reusable proposition can I retrieve?** | Existing IDEA0001–IDEA0057, to be remapped |
+| Idea bank | **What reusable proposition can I retrieve?** | Existing IDEA0001–IDEA0078, to be remapped |
 | Writing/output system | **How do I express the reasoning?** | Existing WF / WT / WQ / WP |
 
 Existing `TL01–TL06` thinking lenses remain valid, but they have a different role.  
@@ -499,7 +499,7 @@ This cross-topic reuse is the core of transfer.
 
 ## Idea Bank is not the final taxonomy
 
-The existing IDEA0001–IDEA0057 records are valuable concrete propositions.  
+The existing IDEA0001–IDEA0078 records are valuable concrete propositions.  
 They should be retained and mapped onto TH / EV rather than replaced.
 
 Example:
@@ -548,7 +548,7 @@ For each existing material:
 - **Idea links:** retain existing IDEA IDs and add missing links when the lesson clearly instantiates an existing idea
 
 ### Optional
-- add a new Idea Bank record only if the lesson contains a genuinely reusable proposition not represented by IDEA0001–IDEA0057
+- add a new Idea Bank record only if the lesson contains a genuinely reusable proposition not represented by the current canonical Idea Bank
 - do not create a new idea merely to describe the lesson topic
 
 ### Selection rule
@@ -703,10 +703,10 @@ The existing curriculum already contains the substance needed for this framework
 
 Current management data show:
 - 19 Topic families
-- 57 canonical Idea Bank records
+- 78 canonical Idea Bank records
 - E001–E234 complete
-- explicit idea tagging is concentrated mainly in P1
-- P2–P4 contain substantial reasoning content that is not yet represented in the Idea columns
+- the original 57 Idea records were concentrated mainly in P1
+- 21 P2–P4 emergent reasoning patterns have now been canonicalized as IDEA0058–IDEA0078
 - P3–P4 especially developed evidence reasoning: bias, causal inference, base rates, measurement validity, proxies, averages/distributions, replication, uncertainty, and calibration
 
 Therefore the next content task is **remapping and selective revision**, not lesson expansion.
@@ -716,10 +716,10 @@ Therefore the next content task is **remapping and selective revision**, not les
 # 10. Next audit sequence
 
 1. Freeze material count at E234.
-2. Map IDEA0001–IDEA0057 to TH / EV. **Completed: `management/idea-axis-map.csv`**
+2. Map IDEA0001–IDEA0078 to TH / EV. **Completed: `management/idea-axis-map.csv`**
 3. Remap E001–E234 with Primary TH / Secondary TH / EV. **Completed: `management/material-axis-map.csv`**
 4. Audit the resulting distribution. **Completed: `management/content-axis-audit.md`**
-5. Identify reasoning content in P2–P4 that requires new canonical Idea Bank entries.
+5. Identify reasoning content in P2–P4 that requires new canonical Idea Bank entries. **Completed: IDEA0058–IDEA0078 / `management/idea-bank.csv`**
 6. Measure over-concentration and gaps across TH / EV / Topic family.
 7. Revise only lessons whose Post-solve does not make the reusable reasoning visible.
 8. Preserve Published lesson immutability and version revisions according to repository policy.
