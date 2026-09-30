@@ -166,10 +166,30 @@ These are functions, not a six-sentence template.
 
 Do **not** mass-edit 136 writing materials.
 
-Recommended next review:
-1. select one or two P2 bridge lessons where the six functions can be named once,
-2. select one or two P3 lessons where Mechanism / Qualification can explicitly refer back to that framework,
-3. verify that P4 planning can compress to the six short internal questions without increasing time,
-4. leave P1 largely unchanged.
+## Selected bridge revision
 
-The default should be **no revision unless the added bridge materially improves transfer**.
+Completed 2026-10-01.
+
+Only four existing materials were revised:
+
+- **E087** — names ARG01–ARG06 once when explicit planning becomes central
+- **E117** — reconnects causal writing to ARG03 Mechanism
+- **E119** — reconnects concession / scope control to ARG05 Qualification
+- **E208** — compresses the framework into six exam-time questions
+
+All four were published as **v1.1**.
+
+Drive readback QA:
+- E087: pass
+- E117: pass
+- E119: pass
+- E208: pass
+
+Problem text and answer keys changed: **0**  
+New lesson IDs created: **0**
+
+Source:
+- `management/argument-bridge-selected.csv`
+- `curriculum/argument-bridge-revisions.md`
+
+The default remains **no revision unless the added bridge materially improves transfer**.
