@@ -9,8 +9,9 @@ Primary files:
 - `material-axis-map.csv`: E001–E234 → Primary TH / Secondary TH / EV
 - `idea-learning-path.csv`: 27 Learner-facing CoreのIntroduce / Recall / Transfer経路・反映状況
 - `post-solve-priority-a.csv`: Priority A 10概念 / 33教材のPost-solve改訂台帳
-- `priority-b-review.csv`: Priority B 12概念の選別監査
+- `priority-b-review.csv`: Priority B 14概念の選別監査
 - `post-solve-priority-b-selected.csv`: Priority Bで選択した4教材の改訂台帳
+- `priority-c-review.csv`: Priority C 3概念の改訂不要監査
 - `content-axis-audit.md`: E001–E234 content-axis coverage audit
 - 将来追加: `dependencies.csv`
 - 将来追加: `bundle-manifest.csv`
