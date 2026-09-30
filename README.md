@@ -24,7 +24,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 
 - Published: **B001–B035**
 - Materials: **E001–E210**
-- Current phase: **P4 Tsukuba（B035 / Days 1–6 completed）**
+- Current phase: **P4 Tsukuba / B035 completed (Day 1–6)**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
