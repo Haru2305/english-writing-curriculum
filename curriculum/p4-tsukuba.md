@@ -103,6 +103,14 @@ B037 Days 13–18:
 17. 120-minute Semi-full H / overrun-recovery drill with absolute section stop-times
 18. 120-minute B037 Checkpoint / final semi-full gate with protected review time
 
+B038 Days 19–24:
+19. 120-minute Full A / first full-set transition with hard section stop-times
+20. 120-minute Full B / denser Q1 reading while preserving late-section accuracy
+21. 120-minute Full C / high-density strict-character Japanese responses + Q3B
+22. 120-minute Full D / compare stable answer-order routes under fixed budgets
+23. 120-minute Full E / difficult-item stop-loss and recovery without dropping later sections
+24. 120-minute B038 Checkpoint / full-set gate with strict timing and protected final review
+
 
 ## Recent-paper matrix (2023–2026)
 
@@ -157,7 +165,8 @@ The University of Tsukuba does not publish the main English front-exam paper on 
 - B035 / E205–E210: Published
 - B036 / E211–E216: Published
 - B037 / E217–E222: Published
-- Coverage: Days 1–18
+- B038 / E223–E228: Published
+- Coverage: Days 1–24
 - Status date: 2026-09-30
-- Next: B038 / Days 19–24 — 120-minute full sets
+- Next: B039 / Days 25–30 — final 120-minute full-set repetition and weak-point correction
 - Revalidation of 2027 detailed official guidelines required before learner use.
