@@ -7,6 +7,7 @@ Primary files:
 - `idea-bank.csv`: Canonical Idea Bank（IDEA0001–IDEA0078）
 - `idea-axis-map.csv`: IDEA0001–IDEA0078 → TH / EV
 - `material-axis-map.csv`: E001–E234 → Primary TH / Secondary TH / EV
+- `idea-learning-path.csv`: 27 Learner-facing CoreのIntroduce / Recall / Transfer経路
 - `content-axis-audit.md`: E001–E234 content-axis coverage audit
 - 将来追加: `dependencies.csv`
 - 将来追加: `bundle-manifest.csv`
