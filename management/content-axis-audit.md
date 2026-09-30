@@ -127,7 +127,24 @@ The revision adds only a compact learner-facing `思考の再利用` block after
 Source ledger:
 - `management/post-solve-priority-a.csv`
 
-The next content task is **selective Priority B review**, not automatic revision of every remaining Core idea.
+## Priority B selective review
+
+- Priority B concepts reviewed: **12 / 12**
+- Transfer-only revisions selected: **4**
+- Intentionally no revision: **8**
+- Existing materials revised: **E113, E149, E151, E217**
+- Published version for those four: **v1.1**
+- New lesson IDs created: **0**
+- Problem text and answer keys changed: **0**
+
+The review deliberately avoided redundant Post-solve blocks when the title, aim, passage, or vocabulary already made the concept visible. The four selected revisions add cross-topic transfer value rather than repeat definitions.
+
+Sources:
+- `management/priority-b-review.csv`
+- `management/post-solve-priority-b-selected.csv`
+- `curriculum/priority-b-review.md`
+
+The next content task is **Priority C / residual-core review**, with the default assumption that no revision is needed unless transfer value is clear.
 
 ## Source policy
 
