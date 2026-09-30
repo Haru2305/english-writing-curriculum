@@ -4,6 +4,9 @@ GitHubでは、人間・AI双方が監査しやすい軽量な管理データを
 
 Primary files:
 - `material-manifest.csv`: 教材ID / 題名 / Phase / Bundle / Published URL / QA
+- `idea-axis-map.csv`: IDEA0001–IDEA0057 → TH / EV
+- `material-axis-map.csv`: E001–E234 → Primary TH / Secondary TH / EV
+- `content-axis-audit.md`: E001–E234 content-axis coverage audit
 - 将来追加: `dependencies.csv`
 - 将来追加: `bundle-manifest.csv`
 
