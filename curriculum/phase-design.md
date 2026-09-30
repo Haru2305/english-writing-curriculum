@@ -22,8 +22,8 @@
 - 終盤は「1教材 ≒ 60分模試型」へ寄せる
 
 Current:
-- B022–B033 / E127–E198 completed
-- B034 = remaining P3 Final Gate
+- B022–B034 / E127–E204 completed
+- P3 completed at B034 / E204. Next: P4 Tsukuba
 - planned end = E204前後
 - B034 = P3 Final Gate
 
