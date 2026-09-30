@@ -155,35 +155,35 @@ E153,P3,図書館デジタル化の二案：比較して要約し評価する,TF
 E154,P3,外来予約の待ち時間：本文・表・FAQから原因を推論する,TF02,,TH07,TH01,EV01,Title+TopicFamily,High
 E155,P3,共同配送ロッカー：混合資料から改善案を書く,TF11,,TH06,TH07,,Title+TopicFamily,High
 E156,P3,B026 Checkpoint：未知概念・因果・複数資料・作文を60分で統合する,TF09,,TH07,"TH08,TH02","EV02,EV01",BlockComposite,Medium
-E157,P3,自己選択バイアス：満足度調査は誰の声を拾うか,TF02,,TH03,"TH07,TH01","EV05,EV07",Title+TopicFamily,High
+E157,P3,自己選択バイアス：満足度調査は誰の声を拾うか,TF02,IDEA0058,TH03,"TH07,TH01","EV05,EV07",Title+TopicFamily,High
 E158,P3,森林回復の指標：高密度文と表から因果を読み分ける,TF08,,TH07,TH01,,Title+TopicFamily,High
 E159,P3,大学の学習支援：一律支援と対象支援を比較して評価する,TF05,,TH02,TH03,"EV02,EV05",Title+TopicFamily,High
 E160,P3,災害時の充電拠点：掲示・FAQ・表を日本語で統合する,TF17,,TH08,,EV06,Title+TopicFamily,High
 E161,P3,地域シェアサイクル：混合資料から改善案を書く,TF11,,TH06,TH07,,Title+TopicFamily,High
 E162,P3,B027 Checkpoint：未知概念・複数資料・要約・提案を本番型で統合する,TF09,,TH02,"TH03,TH07","EV05,EV07,EV02",BlockComposite,Medium
-E163,P3,平均への回帰：改善が介入の効果とは限らない,TF02,,TH07,TH01,EV02,Title+TopicFamily,High
+E163,P3,平均への回帰：改善が介入の効果とは限らない,TF02,IDEA0059,TH07,TH01,EV02,Title+TopicFamily,High
 E164,P3,都市の浸水対策：高密度文と表から容量・頻度・限界を読む,TF09,,TH07,TH06,"EV09,EV04",Title+TopicFamily,High
 E165,P3,授業録画の二制度：全面公開と選択公開を比較して評価する,TF05,,TH10,"TH02,TH09",EV07,Title+TopicFamily,High
 E166,P3,給水制限の案内：掲示・FAQ・表を日本語で統合する,TF17,,TH06,TH08,"EV01,EV04",ManualContentReview,Medium
 E167,P3,公共施設の予約枠：混合資料から改善案を書く,TF11,,TH06,TH07,EV01,Title+TopicFamily,High
 E168,P3,B028 Checkpoint：初見概念・高密度文・複数資料・作文を60分で処理する,TF09,,TH06,"TH07,TH10","EV02,EV09,EV04",BlockComposite,Medium
-E169,P3,基準率の落とし穴：目立つ事例だけで確率を判断しない,TF02,,TH08,,,Title+TopicFamily,High
-E170,P3,都市の熱対策：高密度文と表から平均値・ピーク・公平性を読む,TF09,,TH03,"TH07,TH06",EV05,Title+TopicFamily,High
+E169,P3,基準率の落とし穴：目立つ事例だけで確率を判断しない,TF02,IDEA0060,TH08,,,Title+TopicFamily,High
+E170,P3,都市の熱対策：高密度文と表から平均値・ピーク・公平性を読む,TF09,IDEA0064,TH03,"TH07,TH06",EV05,Title+TopicFamily,High
 E171,P3,研究データ公開の二案：全面公開と段階公開を比較して評価する,TF12,,TH10,"TH07,TH09",,Title+TopicFamily,High
 E172,P3,大雪時の公共交通案内：掲示・FAQ・表を日本語で統合する,TF17,,TH08,TH06,"EV06,EV09,EV01",ManualContentReview,Medium
 E173,P3,地域検診の予約枠：混合資料から受診障壁を減らす提案を書く,TF02,,TH07,TH06,EV01,Title+TopicFamily,High
 E174,P3,B029 Checkpoint：初見概念・高密度文・表・要約・提案を模試型で統合する,TF09,,TH08,"TH03,TH10","EV05,EV06,EV09",BlockComposite,Medium
-E175,P3,可視事例の偏り：見えている例だけで判断しない,TF12,,TH07,,,ManualContentReview,Medium
+E175,P3,可視事例の偏り：見えている例だけで判断しない,TF12,IDEA0065,TH07,,,ManualContentReview,Medium
 E176,P3,河川の渇水対策：高密度文と表から蓄え・流入・需要を読む,TF08,,TH06,TH07,,Title+TopicFamily,High
 E177,P3,学習支援の二制度：自由利用と課題限定利用を比較して評価する,TF05,,TH10,"TH02,TH09","EV01,EV02,EV07",Title+TopicFamily,High
 E178,P3,施設利用情報：掲示・FAQ・表を日本語で統合する,TF11,,TH06,,"EV01,EV03",ManualContentReview,Medium
 E179,P3,再利用品シェア拠点：混合資料から廃棄削減とアクセス改善を提案する,TF10,,TH07,"TH10,TH06",EV01,Title+TopicFamily,High
 E180,P3,B030 Checkpoint：情報鮮度・高密度文・表・要約・提案を総合模試型で統合する,TF05,,TH06,"TH07,TH10","EV01,EV02,EV07",BlockComposite,Medium
 E181,P3,古い記録の語をどう読むか：言い換え・指示語・具体例から意味の射程を追う,,,TH07,,,Title+TopicFamily,High
-E182,P3,測定値の桁数と信頼性：精密そうに見える数字をどう評価するか,,,TH07,"TH08,TH06",EV09,Title+TopicFamily,High
+E182,P3,測定値の桁数と信頼性：精密そうに見える数字をどう評価するか,,IDEA0061,TH07,"TH08,TH06",EV09,Title+TopicFamily,High
 E183,P3,一度の大規模調査か、小規模な反復観察か：二つの調査設計を比較する,,,TH07,TH02,,Title+TopicFamily,High
 E184,P3,博物館展示をどう読むか：カタログ・学芸員メモ・配置表を日本語で統合する,,,TH06,,,Title+TopicFamily,Medium
-E185,P3,復習間隔と記憶成績：相関から因果説明を作りすぎない,,,TH07,"TH01,TH04",EV02,Title+TopicFamily,High
+E185,P3,復習間隔と記憶成績：相関から因果説明を作りすぎない,,IDEA0063,TH07,"TH01,TH04",EV02,Title+TopicFamily,High
 E186,P3,B031 Checkpoint：言い換え・指示語・譲歩・複数資料・比較作文を統合する,,,TH07,TH06,"EV09,EV02",BlockComposite,Medium
 E187,P3,専門家の説明はなぜ分かりにくくなるのか：問い・答え・主旨を追う,TF16,,TH01,TH06,EV02,ManualContentReview,Medium
 E188,P3,野外観測の例外をどう読むか：平均傾向と局所条件を分ける,TF08,,TH06,TH07,,Title+TopicFamily,High
@@ -192,44 +192,44 @@ E190,P3,古いモデルは「誤り」になったのか：旧説から新説へ
 E191,P3,出土品の由来をどう判断するか：記録・ラベル・材料分析を統合する,TF11,,TH06,TH07,,Title+TopicFamily,High
 E192,P3,B032 Checkpoint：主旨・例外・旧説更新・複数資料・評価を総合する,TF05,,TH06,"TH01,TH09","EV02,EV07",BlockComposite,Medium
 E193,P3,チェックリストはなぜ効かなくなるのか：段落機能と文挿入で論理を追う,,,TH05,TH06,"EV02,EV06",ManualContentReview,Medium
-E194,P3,代理指標は目的そのものではない：高密度文から測定の限界を読む,,,TH07,,,Title+TopicFamily,High
+E194,P3,代理指標は目的そのものではない：高密度文から測定の限界を読む,,IDEA0062,TH07,,,Title+TopicFamily,High
 E195,P3,古い建物を残すとはどういうことか：二本文要約から本文連動作文へ,,,TH10,TH02,"EV10,EV02",ManualContentReview,Medium
-E196,P3,再現実験の結果が一致しないとき：手順書・実験メモ・表を統合する,,,TH07,,,Title+TopicFamily,High
-E197,P3,選択肢の初期設定は行動をどう変えるか：本文の考え方を別場面へ転用する,,,TH05,TH06,EV07,Title+TopicFamily,High
+E196,P3,再現実験の結果が一致しないとき：手順書・実験メモ・表を統合する,,IDEA0077,TH07,,,Title+TopicFamily,High
+E197,P3,選択肢の初期設定は行動をどう変えるか：本文の考え方を別場面へ転用する,,IDEA0066,TH05,TH06,EV07,Title+TopicFamily,High
 E198,P3,B033 Checkpoint：段落機能・文挿入・高密度文・要約・本文連動作文を統合する,,,TH05,"TH07,TH10","EV02,EV06,EV10",BlockComposite,Medium
 E199,P3,「示している」と「証明している」を分ける：証拠の強さに合わせて主張を調整する,,,TH07,,,Title+TopicFamily,High
 E200,P3,「分かりやすさ」はどこで生まれるか：指示語・段落機能・文挿入を統合する,,,TH01,TH06,EV02,ManualContentReview,Medium
-E201,P3,平均値の改善は誰の改善か：高密度文・表・和訳から分布を読む,,,TH03,TH07,EV05,Title+TopicFamily,High
+E201,P3,平均値の改善は誰の改善か：高密度文・表・和訳から分布を読む,,IDEA0064,TH03,TH07,EV05,Title+TopicFamily,High
 E202,P3,速く決めるか、深く検討するか：二本文要約から条件付き評価を書く,,,TH06,,,Title+TopicFamily,Medium
-E203,P3,記録の欠損をどう扱うか：本文・表・注記から「分からない」を正確に残す,,,TH07,,,Title+TopicFamily,High
+E203,P3,記録の欠損をどう扱うか：本文・表・注記から「分からない」を正確に残す,,IDEA0076,TH07,,,Title+TopicFamily,High
 E204,P3,P3 Final Gate：初見概念・高密度文・複数資料・要約・記述・英作文を60分で統合する,,,TH07,"TH01,TH03","EV02,EV05",BlockComposite,Medium
 E205,P4,筑波Day1：長文①―30〜60字の日本語説明・空所・見出しを処理する,,,TH07,TH04,EV02,LessonContent,High
 E206,P4,筑波Day2：長文②―40〜80字記述・空所・文挿入を処理する,,,TH07,TH08,,LessonContent,High
 E207,P4,筑波Day3：大問3A―整序3問で「3番目・5番目」を正確に答える,,,TH07,,EV02,LessonContent,High
 E208,P4,筑波Day4：大問3B―約100語で「立場・理由・具体例」を書く,,,TH01,TH03,"EV02,EV06",LessonContent,High
 E209,P4,筑波Day5：30・50・60・90字―日本語記述の論理パッキング,,,TH07,TH01,,LessonContent,High
-E210,P4,筑波B035 Checkpoint：字数記述・空所・文挿入・整序・約100語英作文を60分で切り替える,,,TH05,TH07,EV02,LessonContent,High
+E210,P4,筑波B035 Checkpoint：字数記述・空所・文挿入・整序・約100語英作文を60分で切り替える,,IDEA0066,TH05,TH07,EV02,LessonContent,High
 E211,P4,筑波Day7：長文①高速化―字数記述・空所・見出し・順序を60分で完遂,,,TH01,TH06,"EV01,EV02",LessonContent,High
 E212,P4,筑波Day8：大問3統合―整序3問＋約100語英作文を60分で完遂,,,TH10,TH06,EV02,LessonContent,High
-E213,P4,筑波Day9 Semi-full A：長文①＋3A＋3Bを90分でつなぐ,,,TH05,TH10,"EV03,EV07",LessonContent,High
-E214,P4,筑波Day10 Semi-full B：長文②＋3A＋3Bを100分でつなぐ,,,TH07,,EV02,LessonContent,High
-E215,P4,筑波Day11 Semi-full C：長文①＋長文②を110分で切り替える,,,TH03,TH07,EV05,LessonContent,High
-E216,P4,筑波B036 Checkpoint：大問1・2・3A・3Bを120分で一巡する,,,TH05,TH01,EV02,LessonContent,High
-E217,P4,筑波Day13 Semi-full D：長文①＋長文②＋3Aを100分でつなぐ,,,TH01,"TH07,TH04",EV09,LessonContent,High
+E213,P4,筑波Day9 Semi-full A：長文①＋3A＋3Bを90分でつなぐ,,IDEA0078,TH05,TH10,"EV03,EV07",LessonContent,High
+E214,P4,筑波Day10 Semi-full B：長文②＋3A＋3Bを100分でつなぐ,,IDEA0062,TH07,,EV02,LessonContent,High
+E215,P4,筑波Day11 Semi-full C：長文①＋長文②を110分で切り替える,,IDEA0064,TH03,TH07,EV05,LessonContent,High
+E216,P4,筑波B036 Checkpoint：大問1・2・3A・3Bを120分で一巡する,,IDEA0066,TH05,TH01,EV02,LessonContent,High
+E217,P4,筑波Day13 Semi-full D：長文①＋長文②＋3Aを100分でつなぐ,,IDEA0067,TH01,"TH07,TH04",EV09,LessonContent,High
 E218,P4,筑波Day14 Semi-full E：長文①＋長文②＋3Bを110分でつなぐ,,,TH09,TH03,"EV05,EV02",LessonContent,High
 E219,P4,筑波Day15 Semi-full F：4セクションを120分で初回安定化する,,,TH07,TH08,EV02,LessonContent,High
 E220,P4,筑波Day16 Semi-full G：後半疲労下で3A・3B精度を維持する,,,TH03,"TH09,TH06",EV05,LessonContent,High
-E221,P4,筑波Day17 Semi-full H：時間超過から復旧して120分完遂する,,,TH07,TH03,EV05,LessonContent,High
-E222,P4,筑波B037 Checkpoint：120分で全形式を精度維持して完遂する,,,TH07,TH03,EV05,LessonContent,High
-E223,P4,筑波Day19 Full A：120分フルセットへ移行する,,,TH07,TH08,EV02,LessonContent,High
-E224,P4,筑波Day20 Full B：長文密度を上げても後半精度を維持する,,,TH02,"TH08,TH10","EV03,EV09",LessonContent,High
-E225,P4,筑波Day21 Full C：字数記述の高密度処理と英作文を両立する,,,TH01,TH07,,LessonContent,High
-E226,P4,筑波Day22 Full D：解答順序を選んで120分を最適化する,,,TH02,TH08,"EV03,EV09",LessonContent,High
+E221,P4,筑波Day17 Semi-full H：時間超過から復旧して120分完遂する,,IDEA0058,TH07,TH03,EV05,LessonContent,High
+E222,P4,筑波B037 Checkpoint：120分で全形式を精度維持して完遂する,,IDEA0065,TH07,TH03,EV05,LessonContent,High
+E223,P4,筑波Day19 Full A：120分フルセットへ移行する,,"IDEA0071,IDEA0073,IDEA0062",TH07,TH08,EV02,LessonContent,High
+E224,P4,筑波Day20 Full B：長文密度を上げても後半精度を維持する,,IDEA0069,TH02,"TH08,TH10","EV03,EV09",LessonContent,High
+E225,P4,筑波Day21 Full C：字数記述の高密度処理と英作文を両立する,,IDEA0063,TH01,TH07,,LessonContent,High
+E226,P4,筑波Day22 Full D：解答順序を選んで120分を最適化する,,IDEA0070,TH02,TH08,"EV03,EV09",LessonContent,High
 E227,P4,筑波Day23 Full E：難問停滞から復旧して全体得点を守る,,,TH08,TH07,EV09,LessonContent,High
-E228,P4,筑波B038 Checkpoint：本番型120分フルセットを完成させる,,,TH07,TH08,,LessonContent,High
-E229,P4,筑波Day25 Full F：120分フルセットの再現性を基準化する,,,TH08,"TH07,TH03","EV06,EV05",LessonContent,High
-E230,P4,筑波Day26 Full G：日本語記述の弱点を補正して完遂する,,,TH01,TH07,,LessonContent,High
-E231,P4,筑波Day27 Full H：後半3A・3Bの失点を補正する,,,TH07,TH06,EV02,LessonContent,High
-E232,P4,筑波Day28 Full I：解答順序と終了時刻を固定する,,,TH09,TH02,"EV08,EV09",LessonContent,High
+E228,P4,筑波B038 Checkpoint：本番型120分フルセットを完成させる,,IDEA0072,TH07,TH08,,LessonContent,High
+E229,P4,筑波Day25 Full F：120分フルセットの再現性を基準化する,,"IDEA0068,IDEA0064",TH08,"TH07,TH03","EV06,EV05",LessonContent,High
+E230,P4,筑波Day26 Full G：日本語記述の弱点を補正して完遂する,,IDEA0063,TH01,TH07,,LessonContent,High
+E231,P4,筑波Day27 Full H：後半3A・3Bの失点を補正する,,IDEA0075,TH07,TH06,EV02,LessonContent,High
+E232,P4,筑波Day28 Full I：解答順序と終了時刻を固定する,,IDEA0074,TH09,TH02,"EV08,EV09",LessonContent,High
 E233,P4,筑波Day29 Full J：本番前リハーサルを120分で通す,,,TH07,TH03,"EV10,EV05",LessonContent,High
-E234,P4,筑波P4 Final Gate：30日間の本番処理を120分で再現する,,,TH07,TH03,"EV02,EV05",LessonContent,High
+E234,P4,筑波P4 Final Gate：30日間の本番処理を120分で再現する,,IDEA0062,TH07,TH03,"EV02,EV05",LessonContent,High
