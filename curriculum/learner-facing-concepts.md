@@ -112,6 +112,7 @@ These concepts are highly transferable and recur in later exam-like materials.
 
 - IDEA0001 structural causes
 - IDEA0003 supplement rather than replace
+- IDEA0011 individual vs structural causes
 - IDEA0018 human oversight in high-risk use
 - IDEA0020 privacy vs utility
 - IDEA0026 upfront cost vs long-term benefit
@@ -119,17 +120,22 @@ These concepts are highly transferable and recur in later exam-like materials.
 - IDEA0041 opportunity cost
 - IDEA0042 participation / accountability / trust
 - IDEA0043 preserve vs adapt
+- IDEA0047 machine translation: speed/cost vs contextual judgment
 - IDEA0049 invisible prevention benefit
 - IDEA0054 public benefit vs alternative use
 - IDEA0055 benefit-risk frame
 
-**Priority B status: completed 2026-10-01.** Twelve concepts were audited against the actual lessons. Four received transfer-only Post-solve revisions (IDEA0001→E113, IDEA0018→E149, IDEA0049→E217, IDEA0055→E151); eight were intentionally left unchanged because the concept was already sufficiently visible or an extra block would dilute the lesson focus. See `curriculum/priority-b-review.md`.
+**Priority B status: completed 2026-10-01.** Fourteen concepts were audited against the actual lessons. Four received transfer-only Post-solve revisions (IDEA0001→E113, IDEA0018→E149, IDEA0049→E217, IDEA0055→E151); ten were intentionally left unchanged because the concept was already sufficiently visible or an extra block would dilute the lesson focus. The count was corrected during final reconciliation to include IDEA0011 and IDEA0047. See `curriculum/priority-b-review.md`.
 
 ### Priority C — keep explicit but do not force extra transfer
 
 - IDEA0031 fixed-cost service maintenance
 - IDEA0037 cross-border cooperation
 - IDEA0056 meaningful consent
+
+**Priority C status: completed 2026-10-01.** All three concepts were reviewed and intentionally left unchanged. E014→E020 already makes the fixed-cost recall explicit, E013→E019 already makes cross-border cooperation recall explicit, and E029→E031 explicitly recalls `information → understanding → voluntary choice`. See `curriculum/priority-c-review.md`.
+
+**Core review status: 27 / 27 complete.** Corrected accounting: Priority A 10 + Priority B 14 + Priority C 3 = 27.
 
 ## Source
 
@@ -138,6 +144,7 @@ Detailed machine-readable paths:
 - `management/post-solve-priority-a.csv`
 - `management/priority-b-review.csv`
 - `management/post-solve-priority-b-selected.csv`
+- `management/priority-c-review.csv`
 
 Canonical framework:
 - `curriculum/content-framework.md`
