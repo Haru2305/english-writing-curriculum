@@ -1,5 +1,6 @@
 ---
 import { toLearnerText as userText } from "../lib/learner-text.js";
+import { reviewPresentation } from "../lib/review-presentation.js";
 
 const { sections = [], answer = false } = Astro.props;
 
@@ -33,8 +34,12 @@ function isAnswerList(title) {
   return ["答えだけ", "解答一覧"].includes(userText(title));
 }
 
-function sectionClass(title) {
-  return isAnswerList(title) ? "answer-key-group" : "";
+function sectionClass(title, answerMode = false) {
+  if (isAnswerList(title)) return "answer-key-group";
+  if (!answerMode) return "";
+
+  const presentation = reviewPresentation(title);
+  return "review-" + presentation.kind + "-group";
 }
 
 function answerListRow(line) {
@@ -64,8 +69,13 @@ function lineClass(line, sectionTitle = "") {
 }
 ---
 
-{sections.map((section) => (
-  <section class={"content-group " + importanceClass(section.title) + " " + sectionClass(section.title) + " " + (answer ? "answer-group" : "")}>
+{sections.map((section) => {
+  const reviewMeta = answer ? reviewPresentation(section.title) : null;
+  return (
+  <section class={"content-group " + importanceClass(section.title) + " " + sectionClass(section.title, answer) + " " + (answer ? "answer-group" : "")}>
+    {answer && reviewMeta?.kind === "learning" && reviewMeta.label && (
+      <span class="review-kind-label">{reviewMeta.label}</span>
+    )}
     {section.title && <h2 class="content-group-title">{userText(section.title)}</h2>}
     <div class="content-group-body">
       {section.units.map((unit) =>
@@ -121,4 +131,5 @@ function lineClass(line, sectionTitle = "") {
       )}
     </div>
   </section>
-))}
+  );
+})}
