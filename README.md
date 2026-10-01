@@ -26,7 +26,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - Material count: **frozen at E234**
-- Current content work: **argument construction + self-assessment + grading calibration complete / no new lesson IDs**
+- Current content work: **transfer-speed stress test added / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -51,6 +51,7 @@ english-writing-curriculum/
 │   ├── self-assessment.md
 │   ├── self-assessment-revisions.md
 │   ├── grading-calibration.md
+│   ├── transfer-speed-protocol.md
 │   ├── learner-facing-concepts.md
 │   ├── priority-b-review.md
 │   ├── post-solve-priority-b.md
@@ -77,6 +78,9 @@ english-writing-curriculum/
 │   ├── self-assessment-audit.md
 │   ├── grading-calibration-audit.md
 │   ├── model-answer-wordcount-fixes.csv
+│   ├── transfer-stress-test.csv
+│   ├── transfer-speed-log-schema.csv
+│   ├── transfer-speed-audit.md
 │   ├── argument-construction-audit.md
 │   └── content-axis-audit.md
 └── specs/
@@ -141,5 +145,11 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
   - phase-wide calibration audit
 - `management/model-answer-wordcount-fixes.csv`
   - 38 corrected model-answer word-count mismatches
+- `curriculum/transfer-speed-protocol.md`
+  - unseen-prompt retrieval / planning compression protocol
+- `management/transfer-stress-test.csv`
+  - 24 unseen prompts across S1–S6
+- `management/transfer-speed-audit.md`
+  - audit and interpretation rules for valid-plan speed
 
-The material remap, Core review, argument-construction layer, self-assessment alignment, and grading calibration are complete. Self-check follows Task → Argument → Meaning/Correctness → Precision → Naturalness. Writing diagnosis (SA) is separated from P4 full-set execution diagnosis (SET). A model-answer audit corrected 38 explicit word-count mismatches and passed 38/38 Drive readback QA. No E235+.
+The material remap, Core review, argument-construction layer, self-assessment alignment, and grading calibration are complete. A separate transfer-speed layer now tests how quickly the learner can turn an unfamiliar prompt into a valid ARG plan. The corpus remains frozen at E234; no E235+.
