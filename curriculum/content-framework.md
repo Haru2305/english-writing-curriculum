@@ -19,7 +19,7 @@ The intended endpoint is:
 
 ## 1. Architecture
 
-The curriculum now uses seven distinct layers.
+The curriculum now uses eight distinct layers.
 
 | Layer | Question | Existing / new system |
 |---|---|---|
@@ -30,6 +30,7 @@ The curriculum now uses seven distinct layers.
 | Argument construction | **How do I turn one useful thought into a coherent argument?** | ARG01–ARG06 |
 | Writing/output system | **How do I express and execute the reasoning?** | Existing WF / WT / WQ / WP |
 | Self-assessment / calibration / revision | **What is wrong, how severe is it, and what should I fix first?** | SA00–SA04 + SA-A/B/C + SET-A/B/C + WQ / WR / AC |
+| Transfer speed | **Can I retrieve and organize the system fast enough on an unseen prompt?** | valid-plan time + S1–S6 stress test |
 
 Existing `TL01–TL06` thinking lenses remain valid, but they have a different role.  
 TL is an optional broad philosophical question. TH is a concrete reasoning operation that should transfer across topics.
@@ -751,6 +752,7 @@ Therefore the next content task is **remapping and selective revision**, not les
 10. Selectively review only a few bridge lessons where naming ARG materially improves transfer. **Completed: E087 / E117 / E119 / E208 at v1.1**
 11. Align self-assessment and revision priority with ARG. **Completed: SA00–SA04, WR01/WR02 repair order, P1 WQ00 42/42, E087/E208 v1.2**
 12. Calibrate phase-specific attainment labels and model answers. **Completed: SA vs SET separation, 38 model-answer word-count corrections, 38/38 Drive QA**
-13. Preserve Published lesson immutability and version revisions according to repository policy.
+13. Test unseen-prompt retrieval speed without adding lessons. **Implemented: 24 prompts / 4 sets / S1–S6 / valid-plan timing**
+14. Preserve Published lesson immutability and version revisions according to repository policy.
 
 The final curriculum should allow 234 individual experiences to compress into a small set of reusable intellectual operations.
