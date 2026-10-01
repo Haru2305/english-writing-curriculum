@@ -271,6 +271,23 @@ const lessonKeys = [
 
 const writeMap = ["Answer", "Reason", "Mechanism", "Support"];
 
+function readingParagraphs(section) {
+  if (!section) return [];
+  return section.units
+    .filter((unit) => unit.type === "block")
+    .map((unit) => unit.lines.join(" "))
+    .filter(Boolean);
+}
+
+const readingReference = readingParagraphs(findSection(problemSections, "Reading"));
+const referenceShortcuts = [
+  { label: "全文", paragraphs: "all" },
+  { label: "Q1", paragraphs: "all" },
+  { label: "Q2", paragraphs: "3" },
+  { label: "Q3", paragraphs: "2,3,4" },
+  { label: "differ in", paragraphs: "4" }
+];
+
 const problemStages = [
   {
     kind: "setup",
@@ -420,51 +437,168 @@ const answerNotice = findSection(answerSections, "まず確認");
         <strong>解答・解説を見る</strong>
       </summary>
 
-      <div class="answer-flow">
-        {answerNotice && (
-          <p class="answer-notice-text">{flatSectionLines(answerNotice).join(" ")}</p>
-        )}
-
-        <details class="answer-stage answer-stage-primary" open>
-          <summary>
-            <strong>答え</strong>
-            <small>正答とモデル答案</small>
-          </summary>
-          <div class="answer-stage-body">
-            <LessonSections sections={answerKeySections} answer />
+      <div class="review-workspace">
+        <aside class="review-reference-pane" aria-label="本文参照">
+          <div class="reference-pane-sticky">
+            <span class="cue-label">REFERENCE</span>
+            <h2>Reading</h2>
+            <div class="reference-reading">
+              {readingReference.map((paragraph, index) => (
+                <p data-reference-paragraph={index + 1}>
+                  <span class="reference-paragraph-number">{index + 1}</span>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
-        </details>
+        </aside>
 
-        <details class="answer-stage answer-stage-secondary">
-          <summary>
-            <strong>考え方</strong>
-            <small>なぜそうなるか・どう考えて書くか</small>
-          </summary>
-          <div class="answer-stage-body">
-            <LessonSections sections={[...whySections, ...writingReasonSections]} answer />
-          </div>
-        </details>
+        <div class="answer-flow">
+          <nav class="reference-dock" aria-label="本文参照ショートカット">
+            <span>本文参照</span>
+            <div>
+              {referenceShortcuts.map((item) => (
+                <button
+                  type="button"
+                  class="reference-button"
+                  data-reference-paragraphs={item.paragraphs}
+                  data-reference-label={item.label}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </nav>
 
-        <details class="answer-stage answer-stage-tertiary">
-          <summary>
-            <strong>持ち帰り</strong>
-            <small>自己修正と次の問題への再利用</small>
-          </summary>
-          <div class="answer-stage-body">
-            <LessonSections sections={reviewCoreSections} answer />
+          {answerNotice && (
+            <p class="answer-notice-text">{flatSectionLines(answerNotice).join(" ")}</p>
+          )}
 
-            {reviewExtraSections.length > 0 && (
-              <details class="support-details review-extra">
-                <summary>自己評価・相談の目安</summary>
-                <div class="support-details-body">
-                  <LessonSections sections={reviewExtraSections} answer />
-                </div>
-              </details>
-            )}
-          </div>
-        </details>
+          <details class="answer-stage answer-stage-primary" open>
+            <summary>
+              <strong>答え</strong>
+              <small>正答とモデル答案</small>
+            </summary>
+            <div class="answer-stage-body">
+              <LessonSections sections={answerKeySections} answer />
+            </div>
+          </details>
+
+          <details class="answer-stage answer-stage-secondary">
+            <summary>
+              <strong>考え方</strong>
+              <small>なぜそうなるか・どう考えて書くか</small>
+            </summary>
+            <div class="answer-stage-body">
+              <LessonSections sections={[...whySections, ...writingReasonSections]} answer />
+            </div>
+          </details>
+
+          <details class="answer-stage answer-stage-tertiary">
+            <summary>
+              <strong>持ち帰り</strong>
+              <small>自己修正と次の問題への再利用</small>
+            </summary>
+            <div class="answer-stage-body">
+              <LessonSections sections={reviewCoreSections} answer />
+
+              {reviewExtraSections.length > 0 && (
+                <details class="support-details review-extra">
+                  <summary>自己評価・相談の目安</summary>
+                  <div class="support-details-body">
+                    <LessonSections sections={reviewExtraSections} answer />
+                  </div>
+                </details>
+              )}
+            </div>
+          </details>
+        </div>
       </div>
     </details>
+
+    <dialog class="reference-dialog" id="reference-dialog" aria-labelledby="reference-dialog-title">
+      <div class="reference-dialog-sheet">
+        <header class="reference-dialog-header">
+          <div>
+            <span class="cue-label">REFERENCE</span>
+            <h2 id="reference-dialog-title">本文</h2>
+          </div>
+          <button type="button" class="reference-dialog-close" data-reference-close aria-label="本文参照を閉じる">閉じる</button>
+        </header>
+        <div class="reference-dialog-reading">
+          {readingReference.map((paragraph, index) => (
+            <p data-dialog-paragraph={index + 1}>
+              <span class="reference-paragraph-number">{index + 1}</span>
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </div>
+    </dialog>
+
+    <script is:inline>
+      const dialog = document.getElementById("reference-dialog");
+      const dialogTitle = document.getElementById("reference-dialog-title");
+      const desktopPane = document.querySelector(".review-reference-pane");
+      const desktopParagraphs = [...document.querySelectorAll("[data-reference-paragraph]")];
+      const dialogParagraphs = [...document.querySelectorAll("[data-dialog-paragraph]")];
+      const desktopQuery = window.matchMedia("(min-width: 960px)");
+
+      function selectedParagraphs(value) {
+        if (value === "all") return [];
+        return value.split(",").map(Number).filter(Boolean);
+      }
+
+      function updateDesktopReference(selected) {
+        desktopParagraphs.forEach((paragraph) => {
+          const number = Number(paragraph.dataset.referenceParagraph);
+          paragraph.classList.toggle("reference-target", selected.includes(number));
+        });
+
+        if (!desktopPane) return;
+
+        const firstTarget = selected.length
+          ? desktopPane.querySelector('[data-reference-paragraph="' + selected[0] + '"]')
+          : desktopPane.querySelector(".reference-reading");
+
+        firstTarget?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+
+      function openMobileReference(selected, label) {
+        if (!dialog) return;
+        dialogTitle.textContent = label === "全文" ? "本文全文" : label + " の本文";
+
+        dialogParagraphs.forEach((paragraph) => {
+          const number = Number(paragraph.dataset.dialogParagraph);
+          const show = selected.length === 0 || selected.includes(number);
+          paragraph.hidden = !show;
+          paragraph.classList.toggle("reference-target", selected.includes(number));
+        });
+
+        if (!dialog.open) dialog.showModal();
+      }
+
+      document.querySelectorAll("[data-reference-paragraphs]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const selected = selectedParagraphs(button.dataset.referenceParagraphs || "all");
+          const label = button.dataset.referenceLabel || "本文";
+
+          if (desktopQuery.matches) {
+            updateDesktopReference(selected);
+          } else {
+            openMobileReference(selected, label);
+          }
+        });
+      });
+
+      document.querySelector("[data-reference-close]")?.addEventListener("click", () => {
+        dialog?.close();
+      });
+
+      dialog?.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    </script>
 
     <nav class="nav-row" aria-label="教材ナビゲーション">
       <a class="nav-link" href="/">一覧へ戻る</a>
