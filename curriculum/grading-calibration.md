@@ -59,3 +59,25 @@ Example:
 or:
 
 > SET-B: all sections were completed, but Q1 exceeded the stop-time and reduced final review. Keep the same route and enforce the Q1 stop-time next attempt.
+
+
+---
+
+# 6. Implementation status
+
+Completed 2026-10-01.
+
+- P1 AC kept as prerequisite / acceptability diagnostics
+- P2 main + P3 A/B/C interpreted as SA-A / SA-B / SA-C
+- P4 full-set A/B/C interpreted as SET-A / SET-B / SET-C
+- E208 remains a writing-level SA diagnosis
+- Google management tab `採点キャリブレーション` added
+- explicit model-answer word-count mismatches corrected: **38**
+  - P2: 9
+  - P3: 29
+  - P4: 0 confirmed after direct recheck
+- Drive readback QA: **38 / 38 pass**
+- GitHub material-body sync: **9 / 9 existing Markdown files**
+- 29 earlier materials remain manifest-managed because their lesson-body Markdown has not yet been migrated into the repository
+
+No task requirements were relaxed. No question text or answer keys were changed.
