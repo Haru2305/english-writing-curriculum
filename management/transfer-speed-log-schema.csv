@@ -1,1 +1,1 @@
-attempt_date,set,test_id,stage_target_sec,recognition_sec,commit_sec,plan_sec,position_ok,reason_ok,mechanism_ok,support_ok,qualification_used,switches,valid_plan,full_write_sec,word_count,sa_result,bottleneck,one_fix,note
+attempt_date,set,test_id,stage_target_sec,recognition_sec,commit_sec,plan_sec,position_ok,reason_ok,mechanism_ok,support_ok,qualification_used,switches,valid_plan,timing_status,full_write_sec,word_count,sa_result,bottleneck,one_fix,note
