@@ -218,6 +218,44 @@ h1 {
   padding: 9px 11px 12px;
 }
 
+
+.collapsible-micro-group {
+  overflow: hidden;
+}
+
+.collapsible-micro-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.collapsible-micro-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.collapsible-micro-group > summary::after {
+  content: "＋";
+  flex: 0 0 auto;
+  color: #77776f;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.collapsible-micro-group[open] > summary::after {
+  content: "−";
+}
+
+.collapsible-micro-group:not([open]) > summary {
+  border-bottom: 0;
+}
+
 .question-block {
   padding: 10px 11px;
   border: 1px solid #dfded7;

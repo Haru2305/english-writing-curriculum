@@ -9,6 +9,10 @@ function userText(text) {
   return cleaned === "弱い考え方との比較" ? "弱い例" : cleaned;
 }
 
+function isCollapsibleSubgroup(title) {
+  return userText(title) === "Pre-solveの整理と本文での使い方";
+}
+
 function importanceClass(title) {
   if (["Reading", "Questions", "Mini Writing", "Reading answers", "モデル答案"].includes(title)) {
     return "importance-primary";
@@ -48,18 +52,35 @@ function lineClass(line) {
     <div class="content-group-body">
       {section.units.map((unit) =>
         unit.type === "subgroup" ? (
-          <section class="micro-group">
-            <h3 class="micro-group-title">{userText(unit.title)}</h3>
-            <div class="micro-group-body">
-              {unit.blocks.map((block) => (
-                <div class={"micro-block " + blockClass(block.lines, section.title)}>
-                  {block.lines.map((line) => (
-                    <p class={"lesson-line " + lineClass(line)}>{userText(line)}</p>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </section>
+          isCollapsibleSubgroup(unit.title) ? (
+            <details class="micro-group collapsible-micro-group">
+              <summary class="micro-group-title collapsible-micro-group-title">
+                {userText(unit.title)}
+              </summary>
+              <div class="micro-group-body">
+                {unit.blocks.map((block) => (
+                  <div class={"micro-block " + blockClass(block.lines, section.title)}>
+                    {block.lines.map((line) => (
+                      <p class={"lesson-line " + lineClass(line)}>{userText(line)}</p>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </details>
+          ) : (
+            <section class="micro-group">
+              <h3 class="micro-group-title">{userText(unit.title)}</h3>
+              <div class="micro-group-body">
+                {unit.blocks.map((block) => (
+                  <div class={"micro-block " + blockClass(block.lines, section.title)}>
+                    {block.lines.map((line) => (
+                      <p class={"lesson-line " + lineClass(line)}>{userText(line)}</p>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )
         ) : (
           <div class={"micro-block " + blockClass(unit.lines, section.title)}>
             {unit.lines.map((line) => (
