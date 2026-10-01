@@ -18,6 +18,8 @@ Primary files:
 - `self-assessment-selected.csv`: E087/E208の自己採点改訂台帳
 - `self-assessment-metadata-fix.csv`: P1作文35教材のWQ00タグ補修台帳
 - `self-assessment-audit.md`: 自己採点・添削体系の監査
+- `grading-calibration-audit.md`: Phase横断のA/B/C・AC・SET校正監査
+- `model-answer-wordcount-fixes.csv`: モデル答案38件の語数校正台帳
 - `argument-construction-audit.md`: 思考部品→論証→英作文の橋渡し監査
 - `content-axis-audit.md`: E001–E234 content-axis coverage audit
 - 将来追加: `dependencies.csv`
