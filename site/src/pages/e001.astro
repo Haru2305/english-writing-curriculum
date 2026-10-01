@@ -1,9 +1,10 @@
 ---
 import fs from "node:fs";
+import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const sourceUrl = new URL("../../../bundles/B001/E001.md", import.meta.url);
-const raw = fs.readFileSync(sourceUrl, "utf8").replace(/\r\n/g, "\n");
+const sourcePath = path.resolve(process.cwd(), "../bundles/B001/E001.md");
+const raw = fs.readFileSync(sourcePath, "utf8").replace(/\r\n/g, "\n");
 
 const marker = "解答・解説・自己修正";
 const markerIndex = raw.indexOf(marker);
