@@ -1423,3 +1423,166 @@ h1 {
   .page-shell { padding-top: 40px; }
   .lesson-line { font-size: 17px; }
 }
+
+
+/* Problem-only printing */
+.print-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin: 14px 0 -6px;
+}
+
+.print-problem-button {
+  appearance: none;
+  padding: 8px 12px;
+  border: 1px solid #c8c7bf;
+  border-radius: 999px;
+  background: #fff;
+  color: #3f3f3b;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.print-problem-button:active {
+  transform: scale(0.98);
+}
+
+@page {
+  size: A4;
+  margin: 14mm 16mm 16mm;
+}
+
+@media print {
+  html,
+  body {
+    min-width: 0;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .site-header,
+  .print-controls,
+  .answer-details,
+  .reference-dialog,
+  .nav-row,
+  .note {
+    display: none !important;
+  }
+
+  .page-shell {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .lesson-header,
+  .lesson-flow {
+    width: 100% !important;
+    margin-inline: 0 !important;
+  }
+
+  .lesson-header {
+    padding-bottom: 10mm;
+    border-bottom: 1px solid #777;
+  }
+
+  .series-mark {
+    margin-bottom: 2mm;
+  }
+
+  .lesson-title {
+    font-size: 19pt;
+    line-height: 1.3;
+  }
+
+  .lesson-meta,
+  .flow-meta {
+    color: #444 !important;
+  }
+
+  .lesson-flow {
+    gap: 8mm;
+    margin-top: 8mm;
+  }
+
+  .flow-stage {
+    padding-top: 4mm;
+    border-color: #444;
+  }
+
+  .flow-stage-setup {
+    padding: 4mm 0 0;
+    background: transparent !important;
+  }
+
+  .flow-stage-header {
+    break-after: avoid-page;
+  }
+
+  .flow-stage-header h2 {
+    font-size: 16pt;
+  }
+
+  .flow-stage-setup .flow-stage-header h2 {
+    font-size: 13pt;
+  }
+
+  .lesson-keys,
+  .write-map,
+  .flow-stage-core .content-group.importance-secondary,
+  .lesson-line.key-definition,
+  .lesson-line.structure-line {
+    background: transparent !important;
+  }
+
+  .lesson-line {
+    font-size: 10.5pt;
+    line-height: 1.65;
+  }
+
+  .reading-block .lesson-line {
+    line-height: 1.7;
+  }
+
+  .content-group-title {
+    break-after: avoid-page;
+  }
+
+  .question-block,
+  .micro-group,
+  .write-map,
+  .lesson-keys {
+    break-inside: avoid-page;
+  }
+
+  .micro-block + .micro-block {
+    break-before: auto;
+  }
+
+  details.support-details {
+    break-inside: avoid-page;
+  }
+
+  details.support-details:not([open]) > :not(summary) {
+    display: block !important;
+  }
+
+  .support-details > summary {
+    list-style: none;
+  }
+
+  .support-details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .support-details > summary::marker {
+    content: "";
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
