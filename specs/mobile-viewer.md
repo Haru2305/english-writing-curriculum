@@ -61,6 +61,22 @@ viewerは教材制作者向けの内部分類を見せるのではなく、解�
   4. answer reveal
   5. explanation
 
+
+## Problem printing
+
+各lesson pageに learner-facing の「問題を印刷」操作を置く。
+
+印刷時:
+- browser / OS標準のprint dialogを使う
+- A4を基本とする
+- lesson identity と問題側（START / CHALLENGE / optional WRITE）だけを出す
+- REVIEW / 解答 / 解説 / REFERENCE UI / navigation / print button は出さない
+- 問題側の折りたたみ補助要素は、画面上の開閉状態に依存せず印刷内容へ含める
+- question blockなど短い意味単位は可能な範囲でpage breakを避ける
+- canonical lesson contentから別PDFを生成・保守しない
+
+この機能は印刷用の第二の教材本文を作るものではなく、同じviewer DOMのprint stylesheetとして実装する。
+
 ## Platform
 
 Initial implementation:
