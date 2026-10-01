@@ -1,0 +1,99 @@
+---
+import fs from "node:fs";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const sourceUrl = new URL("../../../bundles/B001/E001.md", import.meta.url);
+const raw = fs.readFileSync(sourceUrl, "utf8").replace(/\r\n/g, "\n");
+
+const marker = "解答・解説・自己修正";
+const markerIndex = raw.indexOf(marker);
+
+if (markerIndex < 0) {
+  throw new Error("E001 answer marker was not found.");
+}
+
+const beforeMarker = raw.slice(0, markerIndex);
+const afterMarker = raw.slice(markerIndex + marker.length);
+
+const problemText = beforeMarker.replace(/_+\s*$/m, "").trim();
+const answerText = afterMarker.trim();
+
+const problemLines = problemText.split("\n").map((line) => line.trim()).filter(Boolean);
+const answerLines = answerText.split("\n").map((line) => line.trim()).filter(Boolean);
+
+const titleLine = problemLines.shift() ?? "E001";
+const metaLine = problemLines.shift() ?? "";
+const title = titleLine.replace(/^E001｜/, "");
+const pageTitle = "E001｜" + title;
+
+const sectionNames = new Set([
+  "今日の狙い",
+  "時間配分",
+  "Pre-solve Nuance",
+  "Gloss / Reading support",
+  "Reading",
+  "Questions",
+  "Language Focus — 使い分け確認",
+  "Mini Writing",
+  "Self-check",
+  "まず確認",
+  "Reading answers",
+  "本文の骨格",
+  "Why this word?",
+  "Task fulfillment",
+  "自己修正",
+  "自己評価",
+  "任意Escalation"
+]);
+
+function clean(line) {
+  return line.replace(/^#{2,3}\s+/, "").replace(/\*\*/g, "");
+}
+
+function lineClass(line) {
+  if (/^_+$/.test(line)) return "divider";
+  if (line.startsWith("## ")) return "section";
+  if (line.startsWith("### ")) return "subsection";
+  if (sectionNames.has(line)) return "section";
+  if (/^Q\d+[.｜]/.test(line)) return "question";
+  if (/^[A-D][.．]\s/.test(line)) return "choice";
+  return "";
+}
+---
+
+<BaseLayout title={pageTitle} description="E001 スマホ閲覧プロトタイプ">
+  <article>
+    <header class="lesson-header">
+      <p class="lesson-id">E001 · B001</p>
+      <h1 class="lesson-title">{title}</h1>
+      <p class="lesson-meta">{metaLine}</p>
+    </header>
+
+    <section class="lesson-body" aria-label="問題">
+      {problemLines.map((line) =>
+        lineClass(line) === "divider" ? (
+          <div class="lesson-line divider" aria-hidden="true"></div>
+        ) : (
+          <p class={"lesson-line " + lineClass(line)}>{clean(line)}</p>
+        )
+      )}
+    </section>
+
+    <details class="answer-details">
+      <summary>解答・解説を見る</summary>
+      <section class="answer-content" aria-label="解答・解説">
+        {answerLines.map((line) =>
+          lineClass(line) === "divider" ? (
+            <div class="lesson-line divider" aria-hidden="true"></div>
+          ) : (
+            <p class={"lesson-line " + lineClass(line)}>{clean(line)}</p>
+          )
+        )}
+      </section>
+    </details>
+
+    <nav class="nav-row" aria-label="教材ナビゲーション">
+      <a class="nav-link" href="/">一覧へ戻る</a>
+    </nav>
+  </article>
+</BaseLayout>
