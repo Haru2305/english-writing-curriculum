@@ -1236,6 +1236,48 @@ h1 {
 }
 
 
+
+.compact-answer-list {
+  display: grid;
+  gap: 8px;
+}
+
+.compact-answer-list p {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 10px;
+  align-items: baseline;
+  margin: 0;
+  padding: 7px 0;
+  border-bottom: 1px solid #ecebe5;
+}
+
+.compact-answer-list p:last-child {
+  border-bottom: 0;
+}
+
+.compact-answer-list span {
+  color: #77776f;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.compact-answer-list strong {
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.review-task-family + .review-task-family {
+  margin-top: 16px;
+  padding-top: 18px;
+  border-top: 2px solid #cfcec6;
+}
+
+.review-task-family > .cue-label {
+  margin-bottom: 3px;
+}
+
 /* Question-scoped REVIEW */
 .question-review-list {
   gap: 0;

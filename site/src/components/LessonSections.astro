@@ -3,7 +3,7 @@ const { sections = [], answer = false } = Astro.props;
 
 function userText(text) {
   const cleaned = text
-    .replace(/^(?:LEXG|IDEA|ARG|AC|TH|EV|LT|P|G|A|B)\d{1,4}\s*[｜:：]?\s*/i, "")
+    .replace(/^(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|SS|TF|P|G|A|B|D)\d{1,4}\s*[｜:：]?\s*/i, "")
     .trim();
 
   return cleaned === "弱い考え方との比較" ? "弱い例" : cleaned;
