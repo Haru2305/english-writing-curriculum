@@ -147,7 +147,7 @@ const writeMap = ["Failure condition", "Judgment", "Mechanism", "Design principl
 const referenceMap = {
   Q1: { paragraphs: "2", candidate: "no" },
   Q2: { paragraphs: "2,3", candidate: "no" },
-  Q3: { paragraphs: "4,5", candidate: "yes" },
+  Q3: { paragraphs: "3,4,5,6", candidate: "yes" },
   Q4: { paragraphs: "5", candidate: "no" },
   Q5: { paragraphs: "2,6", candidate: "no" },
   WRITE: { paragraphs: "2,3,4,5", candidate: "no" }
@@ -222,19 +222,20 @@ const referenceShortcuts = [
             <h2 class="content-group-title">Reading</h2>
             <div class="content-group-body passage-with-candidate">
               {readingParagraphs.map((paragraph) => (
-                <>
-                  <p class="lesson-passage-paragraph">
-                    <span class="passage-locator">[{paragraph.locator}]</span>
-                    <span>{paragraph.text}</span>
-                  </p>
-                  {paragraph.locator === "4" && (
-                    <aside class="candidate-sentence-card" aria-label="Candidate Sentence">
-                      <span class="cue-label">CANDIDATE SENTENCE</span>
-                      <p>{candidateSentence}</p>
-                    </aside>
-                  )}
-                </>
+                <p class="lesson-passage-paragraph">
+                  <span class="passage-locator">[{paragraph.locator}]</span>
+                  <span>{paragraph.text}</span>
+                </p>
               ))}
+            </div>
+          </section>
+
+          <section class="content-group importance-primary candidate-source-group">
+            <h2 class="content-group-title">Candidate Sentence</h2>
+            <div class="content-group-body">
+              <div class="candidate-sentence-card">
+                <p>{candidateSentence}</p>
+              </div>
             </div>
           </section>
 
@@ -286,22 +287,21 @@ const referenceShortcuts = [
           <div class="reference-pane-sticky">
             <span class="cue-label">REFERENCE</span>
             <h2>Reading</h2>
-            <div class="reference-reading reference-reading-with-candidate">
+            <div class="reference-reading">
               {readingParagraphs.map((paragraph) => (
-                <>
-                  <p data-reference-paragraph={paragraph.locator}>
-                    <span class="reference-paragraph-number">[{paragraph.locator}]</span>
-                    {paragraph.text}
-                  </p>
-                  {paragraph.locator === "4" && (
-                    <aside class="reference-candidate" data-reference-candidate>
-                      <span class="cue-label">CANDIDATE SENTENCE</span>
-                      <p>{candidateSentence}</p>
-                    </aside>
-                  )}
-                </>
+                <p data-reference-paragraph={paragraph.locator}>
+                  <span class="reference-paragraph-number">[{paragraph.locator}]</span>
+                  {paragraph.text}
+                </p>
               ))}
             </div>
+
+            <section class="reference-source reference-candidate-source">
+              <h2>Candidate Sentence</h2>
+              <aside class="reference-candidate" data-reference-candidate>
+                <p>{candidateSentence}</p>
+              </aside>
+            </section>
           </div>
         </aside>
 
@@ -467,21 +467,18 @@ const referenceShortcuts = [
           <button type="button" class="reference-dialog-close" data-reference-close aria-label="本文参照を閉じる">閉じる</button>
         </header>
 
-        <div class="reference-dialog-reading reference-reading-with-candidate">
+        <div class="reference-dialog-reading">
           {readingParagraphs.map((paragraph) => (
-            <>
-              <p data-dialog-paragraph={paragraph.locator}>
-                <span class="reference-paragraph-number">[{paragraph.locator}]</span>
-                {paragraph.text}
-              </p>
-              {paragraph.locator === "4" && (
-                <aside class="reference-candidate" data-dialog-candidate>
-                  <span class="cue-label">CANDIDATE SENTENCE</span>
-                  <p>{candidateSentence}</p>
-                </aside>
-              )}
-            </>
+            <p data-dialog-paragraph={paragraph.locator}>
+              <span class="reference-paragraph-number">[{paragraph.locator}]</span>
+              {paragraph.text}
+            </p>
           ))}
+        </div>
+
+        <div class="reference-dialog-candidate" data-dialog-candidate>
+          <span class="cue-label">CANDIDATE SENTENCE</span>
+          <p>{candidateSentence}</p>
         </div>
       </div>
     </dialog>
