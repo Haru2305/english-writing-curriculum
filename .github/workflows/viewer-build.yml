@@ -1,0 +1,35 @@
+name: Viewer build
+
+on:
+  pull_request:
+    paths:
+      - "site/**"
+      - "bundles/**"
+      - ".github/workflows/viewer-build.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "site/**"
+      - "bundles/**"
+      - ".github/workflows/viewer-build.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: site/.node-version
+          cache: npm
+          cache-dependency-path: site/package.json
+      - name: Install
+        run: npm install
+      - name: Build
+        run: npm run build
