@@ -22,8 +22,8 @@ E001で固めた learner-facing viewer を E002–E234 へ一般化する前に�
 - E049: implemented; optional WRITE and multiple task groups verified
 - E097: implemented; multi-source REFERENCE (Reading + Data Table) and lesson-specific WRITE MAP verified
 - E145: implemented; Questions / Claim Check / Short Output task families and unknown-concept WRITE MAP verified
-- E193: implemented in representative viewer; paragraph locators, Candidate Sentence, sentence-insertion REFERENCE, and Short Output under verification
-- E205: pending implementation
+- E193: implemented; paragraph locators, Candidate Sentence, sentence-insertion REFERENCE, and Short Output verified
+- E205: implemented; P4 no-WRITE flow, numeric task IDs, mixed Japanese-response / choice / ordering tasks, and concise processing REVIEW under verification
 
 ## Representative lessons
 
@@ -237,4 +237,4 @@ P4の試験演習では:
 - KEYS / WRITE MAPがlesson-specificに生成できる
 - source contentをdisplay convenienceのために書き換えていない
 
-このgateを通過してから全教材rendererへ一般化する。
+E205の実装・build QAまで通過したら、代表教材gateは完了とし、全教材rendererへの一般化へ進む。
