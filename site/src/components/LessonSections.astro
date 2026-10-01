@@ -6,7 +6,9 @@ function userText(text) {
     .replace(/^(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|SS|TF|P|G|A|B|D)\d{1,4}\s*[｜:：]?\s*/i, "")
     .trim();
 
-  return cleaned === "弱い考え方との比較" ? "弱い例" : cleaned;
+  if (cleaned === "弱い考え方との比較") return "弱い例";
+  if (cleaned === "次の問題に持っていくもの") return "次へのポイント";
+  return cleaned;
 }
 
 function isCollapsibleSubgroup(title) {
