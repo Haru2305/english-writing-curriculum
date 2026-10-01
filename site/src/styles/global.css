@@ -840,6 +840,96 @@ h1 {
   font-weight: 800;
 }
 
+
+/* Learner orientation cues */
+.lesson-keys {
+  margin: 0 0 16px;
+  padding: 12px 13px 13px;
+  border: 1px solid #d9d8d0;
+  border-radius: 10px;
+  background: #f8f7f3;
+}
+
+.cue-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #74746d;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.lesson-keys-list {
+  display: grid;
+  gap: 7px;
+}
+
+.lesson-key {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 8px;
+  align-items: baseline;
+}
+
+.lesson-key small {
+  color: #77776f;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.lesson-key strong {
+  font-family: var(--textbook-font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.write-map {
+  margin: 0 0 16px;
+  padding: 11px 12px 12px;
+  border-left: 3px solid #6d6c65;
+  background: #f2f1ec;
+}
+
+.write-map-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 7px;
+  align-items: center;
+  font-family: "Times New Roman", serif;
+}
+
+.write-map-item {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.write-map-arrow {
+  color: #8a8982;
+  font-size: 13px;
+}
+
+.lesson-line.key-definition {
+  margin: 5px 0;
+  padding: 7px 9px;
+  border-left: 3px solid #7c7b73;
+  background: #f7f6f1;
+  font-weight: 700;
+}
+
+.lesson-line.structure-line {
+  margin-top: 4px;
+  padding: 5px 8px;
+  border-left: 2px solid #aaa99f;
+  background: #f8f7f3;
+}
+
 @media (min-width: 720px) {
   .page-shell { padding-top: 40px; }
   .lesson-line { font-size: 17px; }
