@@ -26,7 +26,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - Material count: **frozen at E234**
-- Current content work: **explanation / reasoning enrichment across existing E001–E234 / no new lesson IDs**
+- Current content work: **parallel explanation / reasoning enrichment merged across E001–E234; final cross-corpus QA and learner-facing publication sync pending / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
