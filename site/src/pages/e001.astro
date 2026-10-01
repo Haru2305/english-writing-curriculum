@@ -219,24 +219,56 @@ const pageTitle = "E001｜" + title;
 const problemSections = parseSections(problemHeader.bodyLines);
 const answerSections = parseSections(answerLines);
 
+function flatSectionLines(section) {
+  if (!section) return [];
+  const lines = [];
+  for (const unit of section.units) {
+    if (unit.type === "subgroup") {
+      for (const block of unit.blocks) lines.push(...block.lines);
+    } else {
+      lines.push(...unit.lines);
+    }
+  }
+  return lines;
+}
+
+const timeSection = findSection(problemSections, "時間配分");
+const timeText = flatSectionLines(timeSection)[0] ?? "";
+const glossSection = findSection(problemSections, "Gloss / Reading support");
+const selfCheckSection = findSection(problemSections, "Self-check");
+
 const problemStages = [
   {
-    step: "STEP 1",
+    kind: "setup",
+    kicker: "PREP",
     title: "解く前に",
-    sections: pickSections(problemSections, ["今日の狙い", "時間配分", "Pre-solve Nuance"])
+    sections: [
+      withoutTitle(findSection(problemSections, "今日の狙い")),
+      findSection(problemSections, "Pre-solve Nuance")
+    ].filter(Boolean)
   },
-  { step: "STEP 2", title: "本文を読む", sections: pickSections(problemSections, ["Reading"]) },
-  { step: "STEP 3", title: "問題を解く", sections: pickSections(problemSections, ["Questions"]) },
   {
-    step: "STEP 4",
-    title: "Language Focus",
-    sections: pickSections(problemSections, ["Language Focus — 使い分け確認"])
+    kind: "core",
+    kicker: "READ",
+    title: "Reading",
+    sections: [withoutTitle(findSection(problemSections, "Reading"))].filter(Boolean)
   },
-  { step: "STEP 5", title: "Mini Writing", sections: pickSections(problemSections, ["Mini Writing"]) },
-  { step: "STEP 6", title: "解き終わったら", sections: pickSections(problemSections, ["Self-check"]) }
+  {
+    kind: "core",
+    kicker: "SOLVE",
+    title: "Questions",
+    sections: [
+      withoutTitle(findSection(problemSections, "Questions")),
+      findSection(problemSections, "Language Focus — 使い分け確認")
+    ].filter(Boolean)
+  },
+  {
+    kind: "core writing",
+    kicker: "WRITE",
+    title: "Mini Writing",
+    sections: [withoutTitle(findSection(problemSections, "Mini Writing"))].filter(Boolean)
+  }
 ];
-
-const glossSection = findSection(problemSections, "Gloss / Reading support");
 
 const readingSplit = splitReadingAnswers(findSection(answerSections, "Reading answers"));
 const bodyStructure = findSection(answerSections, "本文の骨格");
@@ -263,12 +295,15 @@ const writingReasonSections = [
   supplement.reasoning
 ].filter(Boolean);
 
-const takeawaySections = [
+const reviewCoreSections = [
   findSection(answerSections, "自己修正"),
   findSection(answerSections, "Correct"),
   findSection(answerSections, "Natural"),
   findSection(answerSections, "Precise"),
-  supplement.takeaway,
+  supplement.takeaway
+].filter(Boolean);
+
+const reviewExtraSections = [
   findSection(answerSections, "自己評価"),
   findSection(answerSections, "任意Escalation")
 ].filter(Boolean);
@@ -286,20 +321,30 @@ const answerNotice = findSection(answerSections, "まず確認");
 
     <section class="lesson-flow" aria-label="問題">
       {problemStages.map((stage, index) => (
-        <section class="flow-stage">
+        <section class={"flow-stage flow-stage-" + stage.kind}>
           <header class="flow-stage-header">
-            <span class="flow-step">{stage.step}</span>
+            <span class="flow-kicker">{stage.kicker}</span>
             <h2>{stage.title}</h2>
+            {index === 0 && timeText && <p class="flow-meta">{timeText}</p>}
           </header>
 
-          <div class="flow-stage-body content-stack">
+          <div class="flow-stage-body">
             <LessonSections sections={stage.sections} />
 
             {index === 0 && glossSection && (
               <details class="support-details">
-                <summary>Gloss / Reading support を見る</summary>
+                <summary>語句・Reading support</summary>
                 <div class="support-details-body">
                   <LessonSections sections={[withoutTitle(glossSection)]} />
+                </div>
+              </details>
+            )}
+
+            {stage.kind.includes("writing") && selfCheckSection && (
+              <details class="support-details">
+                <summary>書き終わったら確認</summary>
+                <div class="support-details-body">
+                  <LessonSections sections={[withoutTitle(selfCheckSection)]} />
                 </div>
               </details>
             )}
@@ -313,52 +358,45 @@ const answerNotice = findSection(answerSections, "まず確認");
 
       <div class="answer-flow">
         {answerNotice && (
-          <aside class="answer-notice">
-            <LessonSections sections={[withoutTitle(answerNotice)]} answer />
-          </aside>
+          <p class="answer-notice-text">{flatSectionLines(answerNotice).join(" ")}</p>
         )}
 
-        <details class="answer-stage" open>
+        <details class="answer-stage answer-stage-primary" open>
           <summary>
-            <span>1</span>
-            <strong>まず答え</strong>
-            <small>正答・Language Focus・モデル答案</small>
+            <strong>解答</strong>
+            <small>まず正答とモデル答案を確認</small>
           </summary>
           <div class="answer-stage-body">
             <LessonSections sections={answerKeySections} answer />
           </div>
         </details>
 
-        <details class="answer-stage">
+        <details class="answer-stage answer-stage-secondary">
           <summary>
-            <span>2</span>
-            <strong>なぜそうなるか</strong>
-            <small>Reading・本文構造・語法</small>
+            <strong>解説</strong>
+            <small>なぜそうなるか・どう考えて書くか</small>
           </summary>
           <div class="answer-stage-body">
-            <LessonSections sections={whySections} answer />
+            <LessonSections sections={[...whySections, ...writingReasonSections]} answer />
           </div>
         </details>
 
-        <details class="answer-stage">
+        <details class="answer-stage answer-stage-tertiary">
           <summary>
-            <span>3</span>
-            <strong>自由英作文の考え方</strong>
-            <small>理由 → 機序 → 答案構成</small>
+            <strong>復習</strong>
+            <small>自己修正と次の問題への持ち帰り</small>
           </summary>
           <div class="answer-stage-body">
-            <LessonSections sections={writingReasonSections} answer />
-          </div>
-        </details>
+            <LessonSections sections={reviewCoreSections} answer />
 
-        <details class="answer-stage">
-          <summary>
-            <span>4</span>
-            <strong>持ち帰る</strong>
-            <small>自己修正・次の問題への再利用</small>
-          </summary>
-          <div class="answer-stage-body">
-            <LessonSections sections={takeawaySections} answer />
+            {reviewExtraSections.length > 0 && (
+              <details class="support-details review-extra">
+                <summary>自己評価・相談の目安</summary>
+                <div class="support-details-body">
+                  <LessonSections sections={reviewExtraSections} answer />
+                </div>
+              </details>
+            )}
           </div>
         </details>
       </div>
