@@ -13,7 +13,7 @@ import {
   findSection,
   withoutTitle,
   flatSectionLines,
-  sectionBlocks
+  locatedParagraphs
 } from "../lib/lesson-source.js";
 
 const sourcePath = path.resolve(process.cwd(), "../bundles/B017/E097.md");
@@ -154,14 +154,7 @@ const lessonKeys = [
 
 const writeMap = ["Recommendation", "Criteria", "Comparison", "Trade-off", "Useful evidence"];
 
-const readingParagraphs = sectionBlocks(readingSection).map((lines, index) => {
-  const rawParagraph = lines.join(" ");
-  const match = rawParagraph.match(/^\[(\d+)\]\s*(.*)$/);
-  return {
-    locator: match?.[1] ?? String(index + 1),
-    text: match?.[2] ?? rawParagraph
-  };
-});
+const readingParagraphs = locatedParagraphs(readingSection);
 const referenceTableSection = tableSection ? { ...tableSection, title: "" } : null;
 
 const referenceMap = {
