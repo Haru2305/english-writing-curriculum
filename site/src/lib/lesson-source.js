@@ -122,3 +122,33 @@ export function sectionBlocks(section) {
     .filter((unit) => unit.type === "block")
     .map((unit) => [...unit.lines]);
 }
+
+
+export function locatedParagraphs(section) {
+  const paragraphs = [];
+  let current = null;
+
+  const flush = () => {
+    if (!current) return;
+    paragraphs.push({
+      locator: current.locator ?? String(paragraphs.length + 1),
+      text: current.lines.join(" ").trim()
+    });
+    current = null;
+  };
+
+  for (const line of flatSectionLines(section)) {
+    const match = line.match(/^\[(\d+)\]\s*(.*)$/);
+    if (match) {
+      flush();
+      current = { locator: match[1], lines: [match[2]] };
+      continue;
+    }
+
+    if (!current) current = { locator: null, lines: [] };
+    current.lines.push(line);
+  }
+
+  flush();
+  return paragraphs.filter((item) => item.text);
+}
