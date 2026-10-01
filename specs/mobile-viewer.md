@@ -2,7 +2,7 @@
 
 ## Purpose
 
-弟が**スマートフォンだけで問題セットを見やすく読む**ための learner-facing viewer。
+**解く側がスマートフォンだけで問題セットを見やすく読む**ための learner-facing viewer。
 
 これは答案入力・採点・進捗管理アプリではない。
 
@@ -28,6 +28,12 @@
 viewerはbuild時にこの原稿を読み取る。
 
 サイト表示のために教材本文を別コピーとして保守しない。
+
+## Learner-facing series
+
+共通のシリーズ文法・重要度・表示語彙は `specs/learner-series.md` を正本とする。
+
+viewerは教材制作者向けの内部分類を見せるのではなく、解く側が毎回同じ学習リズムを認識できることを優先する。
 
 ## Learner flow
 
