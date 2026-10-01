@@ -141,5 +141,7 @@ Across E103–E144, the audit specifically checked whether the existing explanat
 - [x] Explanation-policy pass completed
 - [x] Selective enrichment used instead of maximal expansion
 - [x] Worker C report updated on the worker branch
+- [x] Final branch diff verified: 48 assigned material files + this report only
+- [x] Main advanced by 13 unrelated commits during the pass; no path overlaps Worker C scope
 
-Worker C completion conditions are satisfied, subject to the final branch-diff verification below.
+Worker C completion conditions are satisfied. The worker branch is intentionally left for coordinator merge; no rebase or direct merge to `main` was performed.
