@@ -122,3 +122,15 @@ export function sectionBlocks(section) {
     .filter((unit) => unit.type === "block")
     .map((unit) => [...unit.lines]);
 }
+
+
+export function locatedParagraphs(section) {
+  return sectionBlocks(section).map((lines, index) => {
+    const rawParagraph = lines.join(" ");
+    const match = rawParagraph.match(/^\[(\d+)\]\s*(.*)$/);
+    return {
+      locator: match?.[1] ?? String(index + 1),
+      text: match?.[2] ?? rawParagraph
+    };
+  });
+}
