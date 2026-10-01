@@ -19,7 +19,7 @@ The intended endpoint is:
 
 ## 1. Architecture
 
-The curriculum now uses six distinct layers.
+The curriculum now uses seven distinct layers.
 
 | Layer | Question | Existing / new system |
 |---|---|---|
@@ -29,6 +29,7 @@ The curriculum now uses six distinct layers.
 | Idea bank | **What reusable proposition can I retrieve?** | IDEA0001–IDEA0078, mapped to TH / EV |
 | Argument construction | **How do I turn one useful thought into a coherent argument?** | ARG01–ARG06 |
 | Writing/output system | **How do I express and execute the reasoning?** | Existing WF / WT / WQ / WP |
+| Self-assessment / revision | **What is wrong, and what should I fix first?** | SA00–SA04 + WQ / WR / AC |
 
 Existing `TL01–TL06` thinking lenses remain valid, but they have a different role.  
 TL is an optional broad philosophical question. TH is a concrete reasoning operation that should transfer across topics.
@@ -546,9 +547,12 @@ ARG operates between idea formation and final writing execution:
 - ARG selects and develops one line of reasoning
 - WF determines the task shape
 - WP executes plan → draft → revise
-- WQ evaluates the final answer
+- WQ describes answer quality
+- SA orders self-check and repair under time pressure
 
-See `curriculum/argument-construction.md`.
+The exam-mode repair order is **Task → Argument → Meaning/Correctness → Precision → Naturalness**.
+
+See `curriculum/argument-construction.md` and `curriculum/self-assessment.md`.
 
 ---
 
@@ -743,6 +747,7 @@ Therefore the next content task is **remapping and selective revision**, not les
 8. Revise only lessons whose Post-solve does not make the reusable reasoning visible. **Completed for Core review: Priority A/B/C selective revisions**
 9. Formalize the bridge from thought to paragraph. **Completed: `curriculum/argument-construction.md`, `management/writing-type-argument-map.csv`, `management/argument-construction-audit.md`**
 10. Selectively review only a few bridge lessons where naming ARG materially improves transfer. **Completed: E087 / E117 / E119 / E208 at v1.1**
-11. Preserve Published lesson immutability and version revisions according to repository policy.
+11. Align self-assessment and revision priority with ARG. **Completed: SA00–SA04, WR01/WR02 repair order, P1 WQ00 42/42, E087/E208 v1.2**
+12. Preserve Published lesson immutability and version revisions according to repository policy.
 
 The final curriculum should allow 234 individual experiences to compress into a small set of reusable intellectual operations.
