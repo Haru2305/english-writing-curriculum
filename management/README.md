@@ -14,6 +14,10 @@ Primary files:
 - `priority-c-review.csv`: Priority C 3概念の改訂不要監査
 - `writing-type-argument-map.csv`: WF01–WF07 → ARG01–ARG06の推奨route
 - `argument-bridge-selected.csv`: 論証生成の共通回路を見せる4教材の改訂台帳
+- `self-assessment-map.csv`: SA00–SA04自己採点順序と既存WQ/ARG/ACの対応
+- `self-assessment-selected.csv`: E087/E208の自己採点改訂台帳
+- `self-assessment-metadata-fix.csv`: P1作文35教材のWQ00タグ補修台帳
+- `self-assessment-audit.md`: 自己採点・添削体系の監査
 - `argument-construction-audit.md`: 思考部品→論証→英作文の橋渡し監査
 - `content-axis-audit.md`: E001–E234 content-axis coverage audit
 - 将来追加: `dependencies.csv`
