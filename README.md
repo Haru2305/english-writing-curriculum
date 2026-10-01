@@ -85,7 +85,8 @@ english-writing-curriculum/
     ├── repository-policy.md
     ├── qa-policy.md
     ├── explanation-policy.md
-    └── explanation-worker-prompt.md
+    ├── explanation-worker-prompt.md
+    └── mobile-viewer.md
 ```
 
 Bundle本文は順次 `bundles/Bxxx/Exxx.md` へ移行する。
@@ -154,3 +155,16 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
   - five non-overlapping worker ranges covering B001–B039 / E001–E234
 
 The material remap, Core review, argument-construction layer, self-assessment alignment, and grading calibration are complete. Self-check follows Task → Argument → Meaning/Correctness → Precision → Naturalness. Writing diagnosis (SA) is separated from P4 full-set execution diagnosis (SET). A model-answer audit corrected 38 explicit word-count mismatches and passed 38/38 Drive readback QA. No E235+.
+
+
+## Mobile learner viewer
+
+A read-only smartphone viewer prototype lives under `site/`.
+
+Canonical UI constraints are defined in `specs/mobile-viewer.md`:
+- smartphone-first
+- no login / DB / input / progress tracking
+- lesson content remains canonical under `bundles/`
+- answer/explanation is hidden until the learner opens it
+- initial prototype is E001 only
+- intended static host: Cloudflare Pages

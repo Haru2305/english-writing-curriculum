@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+
+const {
+  title = "英語教材",
+  description = "大学受験英語カリキュラム"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f7f5" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">English Curriculum</a>
+      <span class="prototype-badge">prototype</span>
+    </header>
+    <main class="page-shell">
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="英語教材｜スマホビューア">
+  <p class="eyebrow">Mobile lesson viewer</p>
+  <h1>英語教材</h1>
+  <p class="lead">
+    スマホで問題セットを読みやすく見るための試作版です。まずE001だけで表示と操作感を確認します。
+  </p>
+
+  <section class="card-list" aria-label="教材一覧">
+    <a class="lesson-card" href="/e001/">
+      <small>P1 · B001 · 目安60分</small>
+      <strong>E001｜都市・地方で医療アクセスが異なる理由</strong>
+      <span>問題 → 解答・解説をタップで開く</span>
+    </a>
+  </section>
+
+  <p class="note">
+    このサイトは閲覧専用です。答案入力・ログイン・進捗保存はありません。
+  </p>
+</BaseLayout>
