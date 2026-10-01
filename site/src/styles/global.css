@@ -2659,3 +2659,60 @@ h1 {
     display: none !important;
   }
 }
+
+
+/* Compact answer key at the top of generic REVIEW */
+.generic-review-body .content-group.answer-key-group {
+  margin: 0 0 24px;
+  padding: 14px 15px 15px;
+  border: 1px solid #c8c7bf;
+  border-radius: 11px;
+  background: #f5f4ef;
+}
+
+.generic-review-body .answer-key-group .content-group-title {
+  margin: 0 0 8px;
+  padding: 0 0 8px;
+  border: 0;
+  border-bottom: 2px solid #66655e;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.generic-review-body .answer-key-group .content-group-body,
+.generic-review-body .answer-key-group .micro-block {
+  padding: 0;
+}
+
+.answer-key-group .lesson-line {
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid #dfded7;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.answer-key-group .lesson-line:first-child {
+  padding-top: 0;
+}
+
+.answer-key-group .lesson-line:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.answer-key-group .answer-key-question {
+  font-weight: 700;
+}
+
+.answer-key-group .answer-key-task {
+  color: #44443f;
+}
+
+@media print {
+  .generic-review-body .content-group.answer-key-group {
+    background: transparent !important;
+    break-inside: avoid-page;
+  }
+}
