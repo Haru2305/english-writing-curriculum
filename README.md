@@ -26,7 +26,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - Material count: **frozen at E234**
-- Current content work: **argument construction + self-assessment alignment complete / no new lesson IDs**
+- Current content work: **argument construction + self-assessment + grading calibration complete / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -50,6 +50,7 @@ english-writing-curriculum/
 │   ├── argument-bridge-revisions.md
 │   ├── self-assessment.md
 │   ├── self-assessment-revisions.md
+│   ├── grading-calibration.md
 │   ├── learner-facing-concepts.md
 │   ├── priority-b-review.md
 │   ├── post-solve-priority-b.md
@@ -74,6 +75,8 @@ english-writing-curriculum/
 │   ├── self-assessment-selected.csv
 │   ├── self-assessment-metadata-fix.csv
 │   ├── self-assessment-audit.md
+│   ├── grading-calibration-audit.md
+│   ├── model-answer-wordcount-fixes.csv
 │   ├── argument-construction-audit.md
 │   └── content-axis-audit.md
 └── specs/
@@ -132,5 +135,11 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
   - SA00–SA04: Task → Argument → Meaning → Precision → Naturalness
 - `management/self-assessment-audit.md`
   - audit of self-check / WQ / WR / AC alignment
+- `curriculum/grading-calibration.md`
+  - SA-A/B/C vs SET-A/B/C and cross-phase calibration rules
+- `management/grading-calibration-audit.md`
+  - phase-wide calibration audit
+- `management/model-answer-wordcount-fixes.csv`
+  - 38 corrected model-answer word-count mismatches
 
-The material remap, Core review, argument-construction layer, and self-assessment alignment are complete. Self-check now follows Task → Argument → Meaning/Correctness → Precision → Naturalness. P1 WQ00 metadata was repaired to 42/42 writing materials, and only E087/E208 received learner-facing self-assessment revisions at v1.2. No E235+.
+The material remap, Core review, argument-construction layer, self-assessment alignment, and grading calibration are complete. Self-check follows Task → Argument → Meaning/Correctness → Precision → Naturalness. Writing diagnosis (SA) is separated from P4 full-set execution diagnosis (SET). A model-answer audit corrected 38 explicit word-count mismatches and passed 38/38 Drive readback QA. No E235+.
