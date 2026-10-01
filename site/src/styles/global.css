@@ -2470,3 +2470,192 @@ h1 {
     min-height: 18mm;
   }
 }
+
+
+/* Generic E001–E234 renderer */
+.generic-writing-stage .content-group:first-child {
+  margin-top: 0;
+}
+
+.generic-answer-details .generic-review-shell {
+  min-width: 0;
+}
+
+.generic-review-nav {
+  position: sticky;
+  top: 54px;
+  z-index: 6;
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  margin: -18px -18px 8px;
+  padding: 10px 18px 11px;
+  border-bottom: 1px solid #d9d8d0;
+  background: rgba(248, 247, 243, 0.96);
+  backdrop-filter: blur(10px);
+  scrollbar-width: none;
+}
+
+.generic-review-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.generic-review-nav a {
+  flex: 0 0 auto;
+  padding: 6px 9px;
+  border: 1px solid #c7c6be;
+  border-radius: 999px;
+  background: #fff;
+  color: #3f3f3b;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.generic-review-body .content-group {
+  margin-top: 0;
+  border-top: 1px solid #e2e1da;
+}
+
+.generic-review-body .content-group:first-child {
+  border-top: 0;
+}
+
+.generic-lesson .flow-stage-body > .content-group:first-child {
+  margin-top: 0;
+}
+
+.index-section {
+  margin-top: 34px;
+}
+
+.index-section-heading {
+  margin-bottom: 14px;
+}
+
+.index-section-heading h2 {
+  margin: 2px 0 5px;
+  font-family: var(--textbook-font);
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.index-section-heading p:last-child {
+  margin: 0;
+  color: #686861;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.all-lessons-section {
+  margin-top: 42px;
+}
+
+.bundle-list {
+  display: grid;
+  gap: 9px;
+}
+
+.bundle-group {
+  border: 1px solid #d9d8d0;
+  border-radius: 10px;
+  background: #fff;
+  overflow: clip;
+}
+
+.bundle-group > summary {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  padding: 12px 13px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.bundle-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.bundle-group > summary strong {
+  font-size: 13px;
+}
+
+.bundle-group > summary span {
+  color: #66665f;
+  font-size: 12px;
+}
+
+.bundle-group > summary small {
+  color: #85857d;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.bundle-group[open] > summary {
+  border-bottom: 1px solid #e5e4dd;
+  background: #f7f6f1;
+}
+
+.bundle-lessons {
+  display: grid;
+}
+
+.bundle-lesson {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+  padding: 10px 12px;
+  border-bottom: 1px solid #edebe5;
+  color: #282824;
+  text-decoration: none;
+}
+
+.bundle-lesson:last-child {
+  border-bottom: 0;
+}
+
+.bundle-lesson > span {
+  color: #74746d;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.bundle-lesson > strong {
+  font-family: var(--textbook-font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.bundle-lesson > small {
+  padding: 2px 5px;
+  border: 1px solid #cbc9c1;
+  border-radius: 999px;
+  color: #62625c;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.bundle-lesson.representative {
+  background: #faf9f5;
+}
+
+@media (min-width: 720px) {
+  .bundle-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+@media print {
+  .generic-review-nav {
+    display: none !important;
+  }
+
+  .bundle-list,
+  .index-section {
+    display: none !important;
+  }
+}
