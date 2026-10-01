@@ -125,12 +125,30 @@ export function sectionBlocks(section) {
 
 
 export function locatedParagraphs(section) {
-  return sectionBlocks(section).map((lines, index) => {
-    const rawParagraph = lines.join(" ");
-    const match = rawParagraph.match(/^\[(\d+)\]\s*(.*)$/);
-    return {
-      locator: match?.[1] ?? String(index + 1),
-      text: match?.[2] ?? rawParagraph
-    };
-  });
+  const paragraphs = [];
+  let current = null;
+
+  const flush = () => {
+    if (!current) return;
+    paragraphs.push({
+      locator: current.locator ?? String(paragraphs.length + 1),
+      text: current.lines.join(" ").trim()
+    });
+    current = null;
+  };
+
+  for (const line of flatSectionLines(section)) {
+    const match = line.match(/^\[(\d+)\]\s*(.*)$/);
+    if (match) {
+      flush();
+      current = { locator: match[1], lines: [match[2]] };
+      continue;
+    }
+
+    if (!current) current = { locator: null, lines: [] };
+    current.lines.push(line);
+  }
+
+  flush();
+  return paragraphs.filter((item) => item.text);
 }
