@@ -175,7 +175,89 @@ h1 {
 }
 
 .content-group-body {
-  padding: 10px 14px 14px;
+  padding: 12px 14px 16px;
+}
+
+.micro-block {
+  padding: 2px 0;
+}
+
+.micro-block + .micro-block {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #ecebe5;
+}
+
+.micro-group {
+  margin: 4px 0;
+  border-left: 3px solid #8b8a83;
+  background: #fbfaf7;
+}
+
+.micro-group + .micro-group {
+  margin-top: 18px;
+}
+
+.micro-group-title {
+  margin: 0;
+  padding: 9px 11px 8px;
+  border-bottom: 1px solid #e4e3dc;
+  background: #f0efe9;
+  font-family: var(--textbook-font);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.micro-group-body {
+  padding: 9px 11px 12px;
+}
+
+.question-block {
+  padding: 10px 11px;
+  border: 1px solid #dfded7;
+  border-radius: 7px;
+  background: #faf9f5;
+}
+
+.question-block + .question-block {
+  margin-top: 12px;
+  border-top: 1px solid #dfded7;
+}
+
+.reading-block {
+  padding: 3px 1px;
+}
+
+.reading-block + .reading-block {
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 0;
+}
+
+.reading-block .lesson-line {
+  line-height: 2;
+}
+
+.list-block .lesson-line {
+  position: relative;
+  padding-left: 1.25em;
+}
+
+.list-block .lesson-line::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+
+.lesson-line.numbered-item {
+  padding-left: 0.25em;
+}
+
+.lesson-line.flow-line {
+  padding-left: 1em;
+  color: #45453f;
 }
 
 .answer-group .content-group-title {
@@ -184,18 +266,14 @@ h1 {
 
 .lesson-line {
   margin: 0;
-  padding: 5px 0;
+  padding: 4px 0;
   font-size: 16px;
   line-height: 1.9;
   overflow-wrap: anywhere;
 }
 
-.lesson-line.subsection {
-  margin-top: 18px;
-  padding: 0 0 4px;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 1.5;
+.lesson-line + .lesson-line {
+  margin-top: 2px;
 }
 
 .lesson-line.question {
