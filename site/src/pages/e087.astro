@@ -114,7 +114,14 @@ function parseReadingReviews(section, tasks) {
 }
 
 function splitSentences(text) {
-  return text.match(/[^.!?]+[.!?]+(?:["”])?/g)?.map((s) => s.trim()).filter(Boolean) ?? [text];
+  const protectedText = text
+    .replaceAll("a.m.", "a§m§")
+    .replaceAll("p.m.", "p§m§")
+    .replaceAll("e.g.", "e§g§");
+  const sentences = protectedText.match(/[^.!?]+[.!?]+(?:["”])?/g)
+    ?.map((s) => s.replaceAll("a§m§", "a.m.").replaceAll("p§m§", "p.m.").replaceAll("e§g§", "e.g.").trim())
+    .filter(Boolean);
+  return sentences ?? [text];
 }
 
 const questionTasks = parseQuestionTasks(questionsSection);
