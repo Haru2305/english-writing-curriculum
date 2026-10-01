@@ -1,0 +1,49 @@
+---
+const { sections = [], answer = false } = Astro.props;
+
+function blockClass(lines, sectionTitle) {
+  const first = lines[0] ?? "";
+  if (/^Q\d+[.｜]/.test(first)) return "question-block";
+  if (sectionTitle === "Reading") return "reading-block";
+  if (["今日の狙い", "Self-check", "自己評価"].includes(sectionTitle)) return "list-block";
+  if (/^\d+[.．]\s/.test(first)) return "numbered-block";
+  return "";
+}
+
+function lineClass(line) {
+  if (/^Q\d+[.｜]/.test(line)) return "question";
+  if (/^[A-D][.．]\s/.test(line)) return "choice";
+  if (/^[-→]/.test(line)) return "flow-line";
+  return "";
+}
+---
+
+{sections.map((section) => (
+  <section class={"content-group " + (answer ? "answer-group" : "")}>
+    {section.title && <h2 class="content-group-title">{section.title}</h2>}
+    <div class="content-group-body">
+      {section.units.map((unit) =>
+        unit.type === "subgroup" ? (
+          <section class="micro-group">
+            <h3 class="micro-group-title">{unit.title}</h3>
+            <div class="micro-group-body">
+              {unit.blocks.map((block) => (
+                <div class={"micro-block " + blockClass(block.lines, section.title)}>
+                  {block.lines.map((line) => (
+                    <p class={"lesson-line " + lineClass(line)}>{line}</p>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : (
+          <div class={"micro-block " + blockClass(unit.lines, section.title)}>
+            {unit.lines.map((line) => (
+              <p class={"lesson-line " + lineClass(line)}>{line}</p>
+            ))}
+          </div>
+        )
+      )}
+    </div>
+  </section>
+))}
