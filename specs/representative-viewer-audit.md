@@ -16,6 +16,13 @@ E001で固めた learner-facing viewer を E002–E234 へ一般化する前に�
 
 教材固有の課題形式は残す。
 
+## Implementation status
+
+- E001: interaction baseline
+- E049: implemented; optional WRITE and multiple task groups verified
+- E097: implemented in representative viewer; multi-source REFERENCE (Reading + Data Table) and lesson-specific WRITE MAP under verification
+- E145 / E193 / E205: pending implementation
+
 ## Representative lessons
 
 ### E049 / P2 / context vocabulary
