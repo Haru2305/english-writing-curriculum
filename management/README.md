@@ -24,6 +24,7 @@ Primary files:
 - `content-axis-audit.md`: E001–E234 content-axis coverage audit
 - `explanation-work-queue.csv`: 解説充実の並列作業担当表（A–E）
 - `explanation-worker-a.md` – `explanation-worker-e.md`: 各workerの進捗・QA・commit報告
+- `explanation-coordinator-audit.md`: 5 worker統合後の横断QA・merge記録
 - 将来追加: `dependencies.csv`
 - 将来追加: `bundle-manifest.csv`
 
