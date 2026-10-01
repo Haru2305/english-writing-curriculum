@@ -20,18 +20,18 @@ E001で固めた learner-facing viewer を E002–E234 へ一般化する前に�
 
 - E001: interaction baseline
 - E049: implemented; optional WRITE and multiple task groups verified
-- E087: implemented; Plan → Draft → Revise free-writing flow and sentence-role MODEL REVIEW under verification
+- E087: implemented; Plan → Draft → Revise free-writing flow and sentence-role MODEL REVIEW verified
 - E097: implemented; multi-source REFERENCE (Reading + Data Table) and lesson-specific WRITE MAP verified
 - E145: implemented; Questions / Claim Check / Short Output task families and unknown-concept WRITE MAP verified
 - E193: implemented; paragraph locators, Candidate Sentence, sentence-insertion REFERENCE, and Short Output verified
 - E205: implemented; P4 no-WRITE flow, numeric task IDs, mixed Japanese-response / choice / ordering tasks, and concise processing REVIEW verified
-- E208: implemented; prompt-only P4 free composition, planning, about-100-word model, and exam-time compressed reasoning under verification
+- E208: implemented; prompt-only P4 free composition, planning, about-100-word model, and exam-time compressed reasoning verified
 
 ## Gate status
 
 **Core format gate: Passed.** 代表教材5種で optional WRITE、複数source、未知概念、文挿入、P4実戦型まで確認した。
 
-**Free-writing gate: Under verification.** E087で「構想→90–110語→推敲」、E208で「prompt→約100語→本番用圧縮」を確認してから、全教材rendererへ一般化する。
+**Free-writing gate: Passed.** E087で「構想→90–110語→推敲」、E208で「prompt→約100語→本番用圧縮」を確認した。これで自由英作文を主要task familyとして含めた代表検証が完了し、全教材rendererへの一般化へ進める。
 
 ## Representative lessons
 
