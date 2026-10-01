@@ -20,14 +20,18 @@ E001で固めた learner-facing viewer を E002–E234 へ一般化する前に�
 
 - E001: interaction baseline
 - E049: implemented; optional WRITE and multiple task groups verified
+- E087: implemented; Plan → Draft → Revise free-writing flow and sentence-role MODEL REVIEW verified
 - E097: implemented; multi-source REFERENCE (Reading + Data Table) and lesson-specific WRITE MAP verified
 - E145: implemented; Questions / Claim Check / Short Output task families and unknown-concept WRITE MAP verified
 - E193: implemented; paragraph locators, Candidate Sentence, sentence-insertion REFERENCE, and Short Output verified
 - E205: implemented; P4 no-WRITE flow, numeric task IDs, mixed Japanese-response / choice / ordering tasks, and concise processing REVIEW verified
+- E208: implemented; prompt-only P4 free composition, planning, about-100-word model, and exam-time compressed reasoning verified
 
 ## Gate status
 
-**Passed.** 代表教材5種で optional WRITE、複数source、未知概念、文挿入、P4実戦型まで確認した。以後はこの差異を吸収する共通rendererを作り、E002–E234へ展開する。
+**Core format gate: Passed.** 代表教材5種で optional WRITE、複数source、未知概念、文挿入、P4実戦型まで確認した。
+
+**Free-writing gate: Passed.** E087で「構想→90–110語→推敲」、E208で「prompt→約100語→本番用圧縮」を確認した。これで自由英作文を主要task familyとして含めた代表検証が完了し、全教材rendererへの一般化へ進める。
 
 ## Representative lessons
 
@@ -51,6 +55,30 @@ Viewer mapping:
 
 必要なREFERENCE:
 - passage全文だけでなく、Context Checkでは該当文を短く参照できること
+
+### E087 / P2 / guided free writing
+
+Source: `bundles/B015/E087.md`
+
+特徴:
+- Reading + Questions
+- 3-line Plan
+- 90–110 word Writing Task
+- Plan → Draft → Revise
+- claim / reason / qualification / action
+- model answerを文の役割で読み直す
+
+Viewer mapping:
+- START: 今日の狙い + thinking tools + Plan / Draft / Revise
+- CHALLENGE: Reading + Questions
+- WRITE: Prompt + 3-line Plan + requirements
+- REVIEW: Reading確認 + sentence-role model answer + argument circuit
+
+確認事項:
+- WRITEをReadingの付属物にしない
+- Planを入力フォーム化しない
+- model answerを丸ごと提示するだけでなく、各文の役割を見せる
+- WQ / WP等の内部コードをlearner-facingへ出さない
 
 ### E097 / P3 / passage + data table + writing
 
@@ -141,6 +169,29 @@ Viewer mapping:
 - 問題IDは必ずしも Q1 形式ではない
 - 日本語記述もtaskとして扱える必要がある
 - P4へE001の6-part explanationを強制しない
+
+### E208 / P4 / about-100-word free composition
+
+Source: `bundles/B035/E208.md`
+
+特徴:
+- source passageなし
+- Promptがそのまま主課題
+- 約100語
+- choice / reason / mechanism / concrete example / qualification-conclusion
+- P4では長いlabelを頭の中で回さず、短い問いへ圧縮する
+
+Viewer mapping:
+- START: 今日の狙い + free-writing thinking tools
+- CHALLENGE: Prompt
+- WRITE: Planning + about 100 words + Revision Check
+- REVIEW: sentence-role model answer + 本番用6問 + self-correction
+
+確認事項:
+- source-less writingでもCHALLENGE → WRITEが成立する
+- REFERENCEは本文ではなくPromptをすぐ再表示する
+- P4でscaffoldingを増やしすぎない
+- concrete exampleを理由から独立した飾りにしない
 
 ## Generalization requirements
 

@@ -140,6 +140,55 @@ export const thinkingToolGroups = [
     ]
   },
   {
+    id: "argument-writing",
+    title: "自由英作文を組み立てる",
+    description: "理由を増やすより、問いへの答えから一つの理由を最後まで発展させる。",
+    tools: [
+      {
+        id: "direct-answer",
+        label: "問いに答える",
+        english: "direct answer",
+        question: "最初の一文だけで、設問への自分の答えが分かるか。",
+        exampleLesson: "E087"
+      },
+      {
+        id: "strongest-reason",
+        label: "理由を1つ選ぶ",
+        english: "strongest reason",
+        question: "理由を増やす前に、一番強い理由を一つ選べているか。",
+        exampleLesson: "E087"
+      },
+      {
+        id: "reason-mechanism",
+        label: "なぜ成り立つか",
+        english: "mechanism",
+        question: "その理由が結論につながる途中の『なぜ』を説明できるか。",
+        exampleLesson: "E208"
+      },
+      {
+        id: "concrete-support",
+        label: "具体例",
+        english: "concrete example",
+        question: "その理由が実際に起きる場面を、一つ具体的に示せるか。",
+        exampleLesson: "E208"
+      },
+      {
+        id: "useful-qualification",
+        label: "必要な限定",
+        english: "qualification",
+        question: "主張を正確にするために、条件・限界を一つ置く必要があるか。",
+        exampleLesson: "E087"
+      },
+      {
+        id: "return-to-answer",
+        label: "問いへ戻る",
+        english: "return",
+        question: "最後に、理由や限定を踏まえた結論へ戻れているか。",
+        exampleLesson: "E087"
+      }
+    ]
+  },
+  {
     id: "exam-response",
     title: "字数制限で説明する",
     description: "訳してから削るのではなく、設問が要求する論理要素を先に決めて圧縮する。",
@@ -221,7 +270,9 @@ export const lessonThinkingToolIds = {
   E097: ["goal", "mandatory-concern", "trade-off", "decision"],
   E145: ["definition", "components", "nearby-concepts", "limitation"],
   E193: ["paragraph-function", "connector-reference", "insertion-fit"],
-  E205: ["required-elements", "logic-compression", "paragraph-function"]
+  E205: ["required-elements", "logic-compression", "paragraph-function"],
+  E087: ["direct-answer", "strongest-reason", "useful-qualification", "return-to-answer"],
+  E208: ["direct-answer", "strongest-reason", "reason-mechanism", "concrete-support"]
 };
 
 export function toolsForLesson(lessonId) {
