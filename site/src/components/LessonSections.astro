@@ -33,6 +33,8 @@ function lineClass(line) {
   if (/^Q\d+[.｜]/.test(line)) return "question";
   if (/^[A-D][.．]\s/.test(line)) return "choice";
   if (/^\d+[.．]\s/.test(line)) return "numbered-item";
+  if (/^differ (from|in) \+/.test(line)) return "key-definition";
+  if (/^-\s*(Answer|Reason|Mechanism|Support|Qualification|Return)\s*:/.test(line)) return "structure-line";
   if (/^[-→]/.test(line)) return "flow-line";
   return "";
 }
