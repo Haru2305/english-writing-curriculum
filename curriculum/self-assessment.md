@@ -409,3 +409,15 @@ Learner-facing revisions:
 Both were published as **v1.2** and passed Drive readback QA.
 
 No problem text, question, answer key, or lesson count changed.
+
+
+## Relationship to grading calibration
+
+SA00–SA04 defines the order of self-check.
+
+`curriculum/grading-calibration.md` defines how the result is summarized:
+- SA-A / Ready
+- SA-B / Repairable
+- SA-C / Rebuild
+
+For P4 full-set execution, use the separate SET-A/B/C axis rather than treating timing completion as a writing-quality score.
