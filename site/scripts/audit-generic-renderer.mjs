@@ -207,7 +207,7 @@ for (const [title, expectedKind, expectedLabel] of [
   ["Q4. B", "question", "設問解説"],
   ["本文の因果骨格", "learning", "本文整理"],
   ["LEXG003｜Pre-solveの整理と本文での因果の強さ", "learning", "表現整理"],
-  ["本文でのWhy this word? — Pre-solve知識の適用", "learning", "表現整理"],
+  ["LEXG195 Review", "learning", "表現整理"],
   ["解説補強｜考え方を再利用する", "learning", "思考・転用"]
 ]) {
   const actual = e002ReviewKinds.get(title);
