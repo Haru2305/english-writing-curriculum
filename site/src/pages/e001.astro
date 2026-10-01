@@ -144,25 +144,49 @@ function splitReadingAnswers(section) {
   const keyUnits = [];
   const detailUnits = [];
 
+  function splitQuestionChunks(lines) {
+    const chunks = [];
+    let current = [];
+
+    for (const line of lines) {
+      if (/^Q\d+[.｜]/.test(line) && current.length) {
+        chunks.push(current);
+        current = [];
+      }
+      current.push(line);
+    }
+
+    if (current.length) chunks.push(current);
+    return chunks;
+  }
+
   for (const unit of section.units) {
     if (unit.type !== "block") {
       detailUnits.push(unit);
       continue;
     }
 
-    const lines = unit.lines;
-    const first = lines[0] ?? "";
+    const chunks = splitQuestionChunks(unit.lines);
 
-    if (!/^Q\d+[.｜]/.test(first)) {
-      detailUnits.push(unit);
-      continue;
+    for (const lines of chunks) {
+      const first = lines[0] ?? "";
+
+      if (!/^Q\d+[.｜]/.test(first)) {
+        detailUnits.push({ type: "block", lines });
+        continue;
+      }
+
+      const keyLineCount = /^Q3[.｜]/.test(first) && lines.length > 1 ? 2 : 1;
+      keyUnits.push({ type: "block", lines: lines.slice(0, keyLineCount) });
+
+      const rest = lines.slice(keyLineCount);
+      if (rest.length) {
+        detailUnits.push({
+          type: "block",
+          lines: [first, ...rest]
+        });
+      }
     }
-
-    const keyLineCount = /^Q3[.｜]/.test(first) && lines.length > 1 ? 2 : 1;
-    keyUnits.push({ type: "block", lines: lines.slice(0, keyLineCount) });
-
-    const rest = lines.slice(keyLineCount);
-    if (rest.length) detailUnits.push({ type: "block", lines: rest });
   }
 
   return {
