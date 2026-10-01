@@ -3,6 +3,7 @@ const { sections = [], answer = false } = Astro.props;
 
 function userText(text) {
   const cleaned = text
+    .replace(/^(Q\d+)[｜:：]\s*(?:RQ|RF|WF|SS|TF)\d+\s*$/i, "$1")
     .replace(/^(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|SS|TF|P|G|A|B|D)\d{1,4}\s*[｜:：]?\s*/i, "")
     .trim();
 
@@ -16,11 +17,11 @@ function isCollapsibleSubgroup(title) {
 }
 
 function importanceClass(title) {
-  if (["Reading", "Questions", "Mini Writing", "Reading answers", "モデル答案"].includes(title)) {
+  if (["Reading", "Questions", "Mini Writing", "Writing Task", "Data Table", "Reading answers", "モデル答案", "Model answer"].includes(title)) {
     return "importance-primary";
   }
   if (
-    ["Pre-solve Nuance", "Language Focus — 使い分け確認", "本文の骨格", "Why this word?", "Task fulfillment", "別解"].includes(title)
+    ["Pre-solve Nuance", "P3 Strategy", "Language Focus — 使い分け確認", "本文の骨格", "Why this word?", "Task fulfillment", "別解"].includes(title)
     || /^解説補強｜/.test(title)
   ) {
     return "importance-secondary";
