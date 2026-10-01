@@ -132,7 +132,7 @@ for (const entry of generic) {
   });
 }
 
-const samples = ["E002", "E042", "E086", "E120", "E204", "E210", "E216", "E234"];
+const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 for (const id of samples) {
   console.log(`[generic-audit] ${id} ${JSON.stringify(summaries.get(id) ?? null)}`);
