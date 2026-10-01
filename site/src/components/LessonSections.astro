@@ -17,11 +17,11 @@ function isCollapsibleSubgroup(title) {
 }
 
 function importanceClass(title) {
-  if (["Reading", "Questions", "Mini Writing", "Writing Task", "Data Table", "Reading answers", "モデル答案", "Model answer"].includes(title)) {
+  if (["Reading", "Questions", "Claim Check", "Short Output", "Mini Writing", "Writing Task", "Data Table", "Reading answers", "モデル答案", "Model answer", "Model output"].includes(title)) {
     return "importance-primary";
   }
   if (
-    ["Pre-solve Nuance", "P3 Strategy", "Language Focus — 使い分け確認", "本文の骨格", "Why this word?", "Task fulfillment", "別解"].includes(title)
+    ["Pre-solve Nuance", "P3 Strategy", "Unknown-concept strategy", "Language Focus — 使い分け確認", "本文の骨格", "Why this word?", "Task fulfillment", "別解"].includes(title)
     || /^解説補強｜/.test(title)
   ) {
     return "importance-secondary";
