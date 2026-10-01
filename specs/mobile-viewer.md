@@ -78,21 +78,27 @@ Cloudflare Workers Builds configuration:
 
 Static asset directory is defined in `site/wrangler.jsonc` as `./dist`.
 
-## Prototype gate
+## Prototype and representative gate
 
-First implement E001 only.
+E001 is the primary interaction prototype.
 
-Do not expand automatically to E001–E234 until the E001 smartphone presentation has been reviewed for:
+After E001 approval, do not jump directly to all E001–E234. First validate the renderer against the representative set defined in `specs/representative-viewer-audit.md`:
 
-- readability
-- heading hierarchy
-- passage density
-- question visibility
-- answer reveal behavior
-- explanation density
-- navigation
+- E049
+- E097
+- E145
+- E193
+- E205
 
-After UI approval, generalize the renderer and generate all existing lessons from the canonical `bundles/` tree.
+The representative gate checks variation in:
+- optional WRITE
+- multiple task groups
+- tables and other source material
+- sentence insertion / paragraph locators
+- Japanese descriptive answers
+- P4 exam-style lessons
+
+Only after that gate passes should the renderer be generalized to all canonical lessons under `bundles/`.
 
 ## Content freeze
 
