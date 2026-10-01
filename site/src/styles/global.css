@@ -1706,3 +1706,36 @@ h1 {
     break-inside: avoid-page;
   }
 }
+
+
+/* Mobile REVIEW width: keep question identity compact, give explanations full width */
+@media (max-width: 959px) {
+  .answer-flow {
+    padding-inline: 12px;
+  }
+
+  .reference-dock {
+    margin-inline: -12px;
+    padding-inline: 12px;
+  }
+
+  .question-review-header {
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 9px;
+  }
+
+  .inline-reference-button {
+    margin-left: 0;
+  }
+
+  .question-review-explanation {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .question-review-explanation > p {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+}
