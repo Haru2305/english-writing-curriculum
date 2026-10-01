@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import LessonSections from "../components/LessonSections.astro";
 
 const sourcePath = path.resolve(process.cwd(), "../bundles/B001/E001.md");
 const raw = fs.readFileSync(sourcePath, "utf8").replace(/\r\n/g, "\n");
@@ -15,17 +16,6 @@ if (markerIndex < 0) {
 
 const beforeMarker = raw.slice(0, markerIndex);
 const afterMarker = raw.slice(markerIndex + marker.length);
-
-const problemText = beforeMarker.replace(/_+\s*$/m, "").trim();
-const answerText = afterMarker.trim();
-
-const problemLines = problemText.split("\n").map((line) => line.trim()).filter(Boolean);
-const answerLines = answerText.split("\n").map((line) => line.trim()).filter(Boolean);
-
-const titleLine = problemLines.shift() ?? "E001";
-const metaLine = problemLines.shift() ?? "";
-const title = titleLine.replace(/^E001｜/, "");
-const pageTitle = "E001｜" + title;
 
 const sectionNames = new Set([
   "今日の狙い",
@@ -56,49 +46,93 @@ function clean(line) {
   return line.replace(/^#{2,3}\s+/, "").replace(/\*\*/g, "");
 }
 
-function isGroupHeading(line) {
+function isSectionHeading(line) {
   return line.startsWith("## ")
     || sectionNames.has(line)
     || /^解説補強｜/.test(line);
 }
 
-function lineClass(line) {
-  if (line.startsWith("### ")) return "subsection";
-  if (/^(LEXG\d+｜|G\d+｜|A\d+｜)/.test(line)) return "subsection";
-  if (/^Q\d+[.｜]/.test(line)) return "question";
-  if (/^[A-D][.．]\s/.test(line)) return "choice";
-  return "";
+function isSubheading(line) {
+  return line.startsWith("### ")
+    || /^(LEXG\d+｜|G\d+｜|A\d+｜)/.test(line);
 }
 
-function groupLines(lines) {
-  const groups = [];
-  let current = { title: "", lines: [] };
+function takeHeader(text) {
+  const lines = text.split("\n");
+  const nonEmpty = lines
+    .map((line, index) => ({ line: line.trim(), index }))
+    .filter((item) => item.line);
 
-  for (const line of lines) {
-    if (/^_+$/.test(line)) {
+  const titleItem = nonEmpty[0] ?? { line: "E001", index: 0 };
+  const metaItem = nonEmpty[1] ?? { line: "", index: titleItem.index };
+  return {
+    titleLine: titleItem.line,
+    metaLine: metaItem.line,
+    bodyLines: lines.slice(metaItem.index + 1)
+  };
+}
+
+function parseSections(lines) {
+  const sections = [];
+  let section = { title: "", units: [] };
+  let subgroup = null;
+  let block = [];
+
+  const flushBlock = () => {
+    if (!block.length) return;
+    const unit = { type: "block", lines: block.map(clean) };
+    if (subgroup) subgroup.blocks.push(unit);
+    else section.units.push(unit);
+    block = [];
+  };
+
+  const flushSubgroup = () => {
+    flushBlock();
+    if (!subgroup) return;
+    section.units.push(subgroup);
+    subgroup = null;
+  };
+
+  const flushSection = () => {
+    flushSubgroup();
+    if (section.title || section.units.length) sections.push(section);
+    section = { title: "", units: [] };
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+
+    if (!line || /^_+$/.test(line)) {
+      flushBlock();
       continue;
     }
 
-    if (isGroupHeading(line)) {
-      if (current.title || current.lines.length) {
-        groups.push(current);
-      }
-      current = { title: clean(line), lines: [] };
+    if (isSectionHeading(line)) {
+      flushSection();
+      section.title = clean(line);
       continue;
     }
 
-    current.lines.push(line);
+    if (isSubheading(line)) {
+      flushSubgroup();
+      subgroup = { type: "subgroup", title: clean(line), blocks: [] };
+      continue;
+    }
+
+    block.push(line);
   }
 
-  if (current.title || current.lines.length) {
-    groups.push(current);
-  }
-
-  return groups;
+  flushSection();
+  return sections;
 }
 
-const problemGroups = groupLines(problemLines);
-const answerGroups = groupLines(answerLines);
+const problemHeader = takeHeader(beforeMarker.replace(/_+\s*$/m, "").trimEnd());
+const answerLines = afterMarker.trim().split("\n");
+
+const title = problemHeader.titleLine.replace(/^E001｜/, "");
+const pageTitle = "E001｜" + title;
+const problemSections = parseSections(problemHeader.bodyLines);
+const answerSections = parseSections(answerLines);
 ---
 
 <BaseLayout title={pageTitle} description="E001 スマホ閲覧プロトタイプ">
@@ -106,35 +140,17 @@ const answerGroups = groupLines(answerLines);
     <header class="lesson-header">
       <p class="lesson-id">E001 · B001</p>
       <h1 class="lesson-title">{title}</h1>
-      <p class="lesson-meta">{metaLine}</p>
+      <p class="lesson-meta">{problemHeader.metaLine}</p>
     </header>
 
     <section class="lesson-body content-stack" aria-label="問題">
-      {problemGroups.map((group) => (
-        <section class="content-group">
-          {group.title && <h2 class="content-group-title">{group.title}</h2>}
-          <div class="content-group-body">
-            {group.lines.map((line) => (
-              <p class={"lesson-line " + lineClass(line)}>{clean(line)}</p>
-            ))}
-          </div>
-        </section>
-      ))}
+      <LessonSections sections={problemSections} />
     </section>
 
     <details class="answer-details">
       <summary>解答・解説を見る</summary>
       <section class="answer-content content-stack" aria-label="解答・解説">
-        {answerGroups.map((group) => (
-          <section class="content-group answer-group">
-            {group.title && <h2 class="content-group-title">{group.title}</h2>}
-            <div class="content-group-body">
-              {group.lines.map((line) => (
-                <p class={"lesson-line " + lineClass(line)}>{clean(line)}</p>
-              ))}
-            </div>
-          </section>
-        ))}
+        <LessonSections sections={answerSections} answer />
       </section>
     </details>
 
