@@ -1,6 +1,19 @@
 ---
 const { sections = [], answer = false } = Astro.props;
 
+function importanceClass(title) {
+  if (["Reading", "Questions", "Mini Writing", "Reading answers", "モデル答案"].includes(title)) {
+    return "importance-primary";
+  }
+  if (
+    ["Pre-solve Nuance", "Language Focus — 使い分け確認", "本文の骨格", "Why this word?", "Task fulfillment", "別解"].includes(title)
+    || /^解説補強｜/.test(title)
+  ) {
+    return "importance-secondary";
+  }
+  return "importance-tertiary";
+}
+
 function blockClass(lines, sectionTitle) {
   const first = lines[0] ?? "";
   if (/^Q\d+[.｜]/.test(first)) return "question-block";
@@ -20,7 +33,7 @@ function lineClass(line) {
 ---
 
 {sections.map((section) => (
-  <section class={"content-group " + (answer ? "answer-group" : "")}>
+  <section class={"content-group " + importanceClass(section.title) + " " + (answer ? "answer-group" : "")}>
     {section.title && <h2 class="content-group-title">{section.title}</h2>}
     <div class="content-group-body">
       {section.units.map((unit) =>

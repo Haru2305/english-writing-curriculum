@@ -502,6 +502,286 @@ h1 {
   line-height: 1.7;
 }
 
+
+/* Visual hierarchy: core task > supporting explanation > utility notes */
+.lesson-flow {
+  gap: 38px;
+  margin-top: 28px;
+}
+
+.flow-stage {
+  padding-top: 14px;
+  border-top: 2px solid #292927;
+}
+
+.flow-stage-setup {
+  padding: 15px 15px 14px;
+  border-top: 0;
+  border-radius: 11px;
+  background: #f0efe9;
+}
+
+.flow-stage-header {
+  display: block;
+  margin-bottom: 12px;
+  padding: 0;
+}
+
+.flow-kicker {
+  display: block;
+  margin-bottom: 2px;
+  color: #77776f;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.flow-stage-header h2 {
+  margin: 0;
+  font-family: var(--textbook-font);
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.flow-stage-setup .flow-stage-header h2 {
+  font-size: 18px;
+}
+
+.flow-meta {
+  margin: 5px 0 0;
+  color: #686861;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.flow-stage-body {
+  display: block;
+}
+
+.flow-stage-body .content-group {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.flow-stage-body .content-group + .content-group {
+  margin-top: 20px;
+}
+
+.flow-stage-body .content-group-body {
+  padding: 0;
+}
+
+.flow-stage-body .content-group-title {
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.flow-stage-core .content-group-title {
+  font-size: 18px;
+}
+
+.flow-stage-core .content-group.importance-secondary {
+  margin-top: 24px;
+  padding: 12px 13px 13px;
+  border-left: 3px solid #aaa99f;
+  background: #f6f5f0;
+}
+
+.flow-stage-core .content-group.importance-secondary .content-group-title {
+  margin-bottom: 6px;
+  color: #3f3f3b;
+  font-size: 15px;
+}
+
+.flow-stage-setup .content-group.importance-tertiary {
+  color: #44443f;
+}
+
+.flow-stage-setup .content-group.importance-secondary {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid #d8d7cf;
+}
+
+.flow-stage-setup .content-group.importance-secondary .content-group-title {
+  color: #55554f;
+  font-size: 14px;
+}
+
+.flow-stage-setup .lesson-line {
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.writing {
+  border-top-width: 3px;
+}
+
+.writing .flow-stage-header h2 {
+  font-size: 27px;
+}
+
+.support-details {
+  margin-top: 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.support-details > summary {
+  padding: 7px 0;
+  border-top: 1px dashed #c9c8c0;
+  color: #73736c;
+  font-size: 12px;
+}
+
+.support-details-body {
+  padding: 7px 0 0;
+}
+
+.support-details-body .content-group {
+  color: #5f5f59;
+}
+
+.support-details-body .lesson-line {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.answer-flow {
+  gap: 22px;
+  padding: 18px;
+  background: #f8f7f3;
+}
+
+.answer-notice-text {
+  margin: 0;
+  color: #77776f;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.answer-stage {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.answer-stage > summary {
+  display: block;
+  padding: 0 0 9px;
+  border-bottom: 1px solid #cfcec6;
+}
+
+.answer-stage > summary strong {
+  display: block;
+  font-family: var(--textbook-font);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.answer-stage > summary small {
+  display: block;
+  margin-top: 3px;
+  color: #77776f;
+  font-size: 11px;
+}
+
+.answer-stage-primary > summary {
+  border-bottom: 3px solid #292927;
+}
+
+.answer-stage-primary > summary strong {
+  font-size: 23px;
+}
+
+.answer-stage-secondary > summary strong {
+  font-size: 19px;
+}
+
+.answer-stage-tertiary > summary {
+  border-bottom-style: dashed;
+}
+
+.answer-stage-tertiary > summary strong {
+  color: #5e5e57;
+  font-size: 16px;
+}
+
+.answer-stage[open] > summary {
+  background: transparent;
+}
+
+.answer-stage-body {
+  gap: 18px;
+  padding: 14px 0 0;
+}
+
+.answer-stage-body .content-group {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.answer-stage-body .content-group + .content-group {
+  margin-top: 18px;
+}
+
+.answer-stage-body .content-group-body {
+  padding: 0;
+}
+
+.answer-stage-body .content-group-title {
+  margin: 0 0 7px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.answer-stage-body .importance-primary .content-group-title {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #d4d3cc;
+  font-size: 17px;
+}
+
+.answer-stage-body .importance-secondary {
+  padding: 10px 12px 11px;
+  border-left: 3px solid #b4b3aa;
+  background: #f1f0eb;
+}
+
+.answer-stage-body .importance-secondary .content-group-title {
+  color: #4d4d47;
+  font-size: 14px;
+}
+
+.answer-stage-body .importance-tertiary .content-group-title {
+  color: #66665f;
+  font-size: 13px;
+}
+
+.answer-stage-tertiary .lesson-line {
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.review-extra {
+  margin-top: 18px;
+}
+
 @media (min-width: 720px) {
   .page-shell { padding-top: 40px; }
   .lesson-line { font-size: 17px; }
