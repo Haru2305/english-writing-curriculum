@@ -72,3 +72,44 @@ Full-set diagnosis:
 - SET-C / Incomplete / route breakdown
 
 Do not convert these labels into predicted university scores.
+
+
+## Implementation result
+
+Completed 2026-10-01.
+
+### Word-count correction
+
+Confirmed defects:
+- P2: 9
+- P3: 29
+- P4: 0 after direct paragraph recheck
+
+Total corrected: **38**.
+
+Drive readback:
+- **38 / 38 inside the explicit target range**
+
+GitHub lesson bodies:
+- existing Markdown among the 38 corrected materials: **9**
+- synchronized: **9 / 9**
+- remaining 29 are represented by manifest + Drive because their lesson-body Markdown has not yet been migrated
+
+### False-positive check
+
+E226 was initially flagged by a parser that accidentally included text beyond the model paragraph. Direct paragraph inspection showed the original model answer was **102 words** and already valid. The temporary edit and version bump were fully reverted.
+
+### Management surfaces
+
+- `採点キャリブレーション` tab added to the management spreadsheet
+- `management/model-answer-wordcount-fixes.csv` is the correction ledger
+- `curriculum/grading-calibration.md` is the normative interpretation
+
+### Final calibration state
+
+- P1 AC: local prerequisite / acceptability band
+- P2/P3 SA: writing-quality / transfer diagnosis
+- P4 SET: full-set execution diagnosis
+- Model answer: worked example that must satisfy the task itself
+
+No official admissions-score prediction is implied.
