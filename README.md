@@ -167,4 +167,4 @@ Canonical UI constraints are defined in `specs/mobile-viewer.md`:
 - lesson content remains canonical under `bundles/`
 - answer/explanation is hidden until the learner opens it
 - initial prototype is E001 only
-- intended static host: Cloudflare Pages
+- intended static host: Cloudflare Workers Static Assets
