@@ -240,6 +240,8 @@ const answerLines = afterMarker.trim().split("\n");
 
 const title = problemHeader.titleLine.replace(/^E001｜/, "");
 const pageTitle = "E001｜" + title;
+const timeMatch = problemHeader.metaLine.match(/目安\s*[^｜]+/);
+const learnerMeta = timeMatch?.[0]?.trim() ?? "";
 const problemSections = parseSections(problemHeader.bodyLines);
 const answerSections = parseSections(answerLines);
 
@@ -338,9 +340,9 @@ const answerNotice = findSection(answerSections, "まず確認");
 <BaseLayout title={pageTitle} description="E001 スマホ閲覧プロトタイプ">
   <article>
     <header class="lesson-header">
-      <p class="lesson-id">E001 · B001</p>
+      <p class="lesson-id">E001</p>
       <h1 class="lesson-title">{title}</h1>
-      <p class="lesson-meta">{problemHeader.metaLine}</p>
+      {learnerMeta && <p class="lesson-meta">{learnerMeta}</p>}
     </header>
 
     <section class="lesson-flow" aria-label="問題">
