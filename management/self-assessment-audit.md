@@ -84,3 +84,62 @@ A response can contain AC04-quality English but still fail SA01 if:
 6. do not mass-edit other lessons whose local Self-check already matches the task.
 
 No new lesson IDs.
+
+
+## Implementation result
+
+Completed 2026-10-01.
+
+### Management design
+
+- SA00–SA04 defined
+- `自己採点設計` tab added
+- WR01 updated
+- WR02 updated
+
+### WQ00 metadata repair
+
+Before:
+- P1: 7 / 42 writing materials tagged WQ00
+
+After:
+- P1: **42 / 42**
+- P2: **14 / 14**
+- P3: **57 / 57**
+- P4: **23 / 23**
+
+Repair ledger:
+- `management/self-assessment-metadata-fix.csv`
+
+### Learner-facing revisions
+
+Only two materials were changed:
+- E087 — common self-assessment order
+- E208 — exam-time final check
+
+Both are **v1.2**.
+
+Drive readback QA:
+- E087: pass
+- E208: pass
+
+Source:
+- `management/self-assessment-selected.csv`
+- `curriculum/self-assessment-revisions.md`
+
+### Additional sync repair
+
+E208 GitHub frontmatter contained a stale Drive document reference. It was corrected to the current Published document:
+- `1hTNeb3W47oUYdqx8c0Nf6cUWf6v7sHBRdDjNxE5APqc`
+
+## Final conclusion
+
+The curriculum's self-assessment system is now aligned with its argument-construction system.
+
+The learner should repair in this order:
+
+> **問い → 論理 → 意味 → 範囲 → 自然さ**
+
+AC01–AC05 remain sentence-level acceptability bands and are not treated as whole-answer grades.
+
+No mass lesson rewrite is needed.
