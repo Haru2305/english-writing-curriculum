@@ -15,7 +15,7 @@ const answerMarkers = [
   "Answers and Explanations"
 ];
 
-const writingCue = /^(?:Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|Prompt|Planning|Plan→Draft→Revise|Part\s+(?:\d+|[A-Z])\s*[｜:：].*(?:Q3B|Writing|Composition))/im;
+const writingCue = /^(?:Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Prompt|Planning|Plan→Draft→Revise|Part\s+(?:\d+|[A-Z])\s*[｜:：].*(?:Q3B|Writing|Composition))/im;
 const supportCue = /^(?:Self-check|Revision Check|P4 Final Gate Check)/im;
 const answerItem = /^(?:Q\d+|\d+)\s*(?:[｜:：.]\s*|\s+)(?:解答例|解答|完成|[A-D](?:\b|\s)|[A-D]\s+.+)/i;
 
@@ -96,6 +96,17 @@ for (const entry of generic) {
   const expectsSupport = supportCue.test(split.problem);
   if (expectsSupport && !lesson.groups.support.length) {
     failures.push(`${entry.id}: support cue exists but support was not classified`);
+  }
+
+  for (const section of [
+    ...lesson.groups.setup,
+    ...lesson.groups.challenge,
+    ...lesson.groups.writing,
+    ...lesson.groups.support
+  ]) {
+    if (/\d+\s*分/.test(section.title) && (/\s\/\s/.test(section.title) || /＝\s*Core/i.test(section.title))) {
+      failures.push(`${entry.id}: time-allocation content misclassified as heading: ${section.title}`);
+    }
   }
 
   const expectedAnswerKeys = answerKeys(split.answer);
