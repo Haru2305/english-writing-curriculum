@@ -77,12 +77,15 @@ english-writing-curriculum/
 │   ├── self-assessment-audit.md
 │   ├── grading-calibration-audit.md
 │   ├── model-answer-wordcount-fixes.csv
+│   ├── explanation-work-queue.csv
+│   ├── explanation-worker-a.md ... explanation-worker-e.md
 │   ├── argument-construction-audit.md
 │   └── content-axis-audit.md
 └── specs/
     ├── repository-policy.md
     ├── qa-policy.md
-    └── explanation-policy.md
+    ├── explanation-policy.md
+    └── explanation-worker-prompt.md
 ```
 
 Bundle本文は順次 `bundles/Bxxx/Exxx.md` へ移行する。
@@ -145,5 +148,9 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
 - `specs/explanation-policy.md`
   - canonical six-part explanation / reasoning framework for selective E001–E234 enrichment
   - emphasizes problem core → reasoning path → weak-vs-strong comparison → ARG build → model-answer reading → transfer
+- `specs/explanation-worker-prompt.md`
+  - reproducible instructions for parallel worker chats
+- `management/explanation-work-queue.csv`
+  - five non-overlapping worker ranges covering B001–B039 / E001–E234
 
 The material remap, Core review, argument-construction layer, self-assessment alignment, and grading calibration are complete. Self-check follows Task → Argument → Meaning/Correctness → Precision → Naturalness. Writing diagnosis (SA) is separated from P4 full-set execution diagnosis (SET). A model-answer audit corrected 38 explicit word-count mismatches and passed 38/38 Drive readback QA. No E235+.
