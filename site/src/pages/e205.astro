@@ -428,7 +428,7 @@ const answerOverview = questionReviews.map((item) => ({
           );
         });
 
-        desktopGap?.classList.toggle("reference-target", showGap);
+        desktopGap?.classList.toggle("reference-target", showGap && selection !== "all");
 
         if (!desktopPane) return;
         const target = selection === "all"
@@ -452,7 +452,7 @@ const answerOverview = questionReviews.map((item) => ({
 
         if (dialogGap) {
           dialogGap.hidden = !showGap;
-          dialogGap.classList.toggle("reference-target", showGap);
+          dialogGap.classList.toggle("reference-target", showGap && selection !== "all");
         }
 
         dialogTitle.textContent = label + (showGap ? " の本文・空所" : " の本文");
