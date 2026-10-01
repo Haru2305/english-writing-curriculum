@@ -26,7 +26,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - Material count: **frozen at E234**
-- Current content work: **argument construction + self-assessment + grading calibration complete / no new lesson IDs**
+- Current content work: **explanation / reasoning enrichment across existing E001–E234 / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -81,7 +81,8 @@ english-writing-curriculum/
 │   └── content-axis-audit.md
 └── specs/
     ├── repository-policy.md
-    └── qa-policy.md
+    ├── qa-policy.md
+    └── explanation-policy.md
 ```
 
 Bundle本文は順次 `bundles/Bxxx/Exxx.md` へ移行する。
@@ -141,5 +142,8 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
   - phase-wide calibration audit
 - `management/model-answer-wordcount-fixes.csv`
   - 38 corrected model-answer word-count mismatches
+- `specs/explanation-policy.md`
+  - canonical six-part explanation / reasoning framework for selective E001–E234 enrichment
+  - emphasizes problem core → reasoning path → weak-vs-strong comparison → ARG build → model-answer reading → transfer
 
 The material remap, Core review, argument-construction layer, self-assessment alignment, and grading calibration are complete. Self-check follows Task → Argument → Meaning/Correctness → Precision → Naturalness. Writing diagnosis (SA) is separated from P4 full-set execution diagnosis (SET). A model-answer audit corrected 38 explicit word-count mismatches and passed 38/38 Drive readback QA. No E235+.
