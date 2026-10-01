@@ -385,3 +385,27 @@ Recommended implementation:
 - add the common self-assessment order at one P2 bridge lesson,
 - add the compressed final-check order at one P4 lesson,
 - leave existing local Self-check items intact where they already diagnose the relevant WF route.
+
+
+---
+
+# 11. Publication status
+
+Implemented 2026-10-01.
+
+Management changes:
+- WR01 rewritten to use Task → Argument → Meaning/Correctness → Precision → Naturalness
+- WR02 now distinguishes learning-mode ladder from exam-mode repair order
+- P1 writing metadata repaired: WQ00 now **42 / 42**
+- P2: 14 / 14
+- P3: 57 / 57
+- P4: 23 / 23
+- Google management tab `自己採点設計` added
+
+Learner-facing revisions:
+- E087 — introduce common self-assessment order
+- E208 — compress to final exam check
+
+Both were published as **v1.2** and passed Drive readback QA.
+
+No problem text, question, answer key, or lesson count changed.
