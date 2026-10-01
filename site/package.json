@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "audit:generic": "node scripts/audit-generic-renderer.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "deploy": "wrangler deploy"
