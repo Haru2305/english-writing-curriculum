@@ -1,6 +1,12 @@
 ---
 const { sections = [], answer = false } = Astro.props;
 
+function userText(text) {
+  return text
+    .replace(/^(?:LEXG|IDEA|ARG|AC|TH|EV|LT|P|G|A|B)\d{1,4}\s*[｜:：]?\s*/i, "")
+    .trim();
+}
+
 function importanceClass(title) {
   if (["Reading", "Questions", "Mini Writing", "Reading answers", "モデル答案"].includes(title)) {
     return "importance-primary";
@@ -34,17 +40,17 @@ function lineClass(line) {
 
 {sections.map((section) => (
   <section class={"content-group " + importanceClass(section.title) + " " + (answer ? "answer-group" : "")}>
-    {section.title && <h2 class="content-group-title">{section.title}</h2>}
+    {section.title && <h2 class="content-group-title">{userText(section.title)}</h2>}
     <div class="content-group-body">
       {section.units.map((unit) =>
         unit.type === "subgroup" ? (
           <section class="micro-group">
-            <h3 class="micro-group-title">{unit.title}</h3>
+            <h3 class="micro-group-title">{userText(unit.title)}</h3>
             <div class="micro-group-body">
               {unit.blocks.map((block) => (
                 <div class={"micro-block " + blockClass(block.lines, section.title)}>
                   {block.lines.map((line) => (
-                    <p class={"lesson-line " + lineClass(line)}>{line}</p>
+                    <p class={"lesson-line " + lineClass(line)}>{userText(line)}</p>
                   ))}
                 </div>
               ))}
