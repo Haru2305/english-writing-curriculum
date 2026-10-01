@@ -33,17 +33,18 @@ npm run build
 
 生成物は `site/dist/`。
 
-## Cloudflare Pages
+## Cloudflare Workers Static Assets
 
 Git連携時:
 
 - Production branch: `main`
 - Root directory: `site`
-- Framework preset: Astro
 - Build command: `npm run build`
-- Build output directory: `dist`
+- Deploy command: `npx wrangler deploy`
 
-静的サイトなのでCloudflare adapterやPages Functionsは不要。
+`site/wrangler.jsonc` の `assets.directory` が `./dist` を配信対象として指定する。
+
+静的サイトなのでWorkerコードやDBは不要。
 
 ## Expansion
 
