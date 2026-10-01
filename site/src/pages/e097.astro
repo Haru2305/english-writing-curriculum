@@ -154,7 +154,14 @@ const lessonKeys = [
 
 const writeMap = ["Recommendation", "Criteria", "Comparison", "Trade-off", "Useful evidence"];
 
-const readingParagraphs = sectionBlocks(readingSection).map((lines) => lines.join(" "));
+const readingParagraphs = sectionBlocks(readingSection).map((lines, index) => {
+  const rawParagraph = lines.join(" ");
+  const match = rawParagraph.match(/^\[(\d+)\]\s*(.*)$/);
+  return {
+    locator: match?.[1] ?? String(index + 1),
+    text: match?.[2] ?? rawParagraph
+  };
+});
 const referenceTableSection = tableSection ? { ...tableSection, title: "" } : null;
 
 const referenceMap = {
@@ -279,10 +286,10 @@ const referenceShortcuts = [
             <section class="reference-source" data-reference-source="reading">
               <h2>Reading</h2>
               <div class="reference-reading">
-                {readingParagraphs.map((paragraph, index) => (
-                  <p data-reference-paragraph={index + 1}>
-                    <span class="reference-paragraph-number">{index + 1}</span>
-                    {paragraph}
+                {readingParagraphs.map((paragraph) => (
+                  <p data-reference-paragraph={paragraph.locator}>
+                    <span class="reference-paragraph-number">[{paragraph.locator}]</span>
+                    {paragraph.text}
                   </p>
                 ))}
               </div>
@@ -439,10 +446,10 @@ const referenceShortcuts = [
         </header>
 
         <div class="reference-dialog-reading" data-dialog-source="reading">
-          {readingParagraphs.map((paragraph, index) => (
-            <p data-dialog-paragraph={index + 1}>
-              <span class="reference-paragraph-number">{index + 1}</span>
-              {paragraph}
+          {readingParagraphs.map((paragraph) => (
+            <p data-dialog-paragraph={paragraph.locator}>
+              <span class="reference-paragraph-number">[{paragraph.locator}]</span>
+              {paragraph.text}
             </p>
           ))}
         </div>
