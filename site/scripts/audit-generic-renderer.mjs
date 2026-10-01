@@ -5,7 +5,7 @@ import {
 } from "../src/lib/lesson-catalog.js";
 import { parseGenericLesson } from "../src/lib/generic-lesson.js";
 import {
-  startsWithInternalCode,
+  containsInternalCode,
   toLearnerText
 } from "../src/lib/learner-text.js";
 
@@ -72,7 +72,6 @@ function allParsedText(lesson) {
 const catalog = getLessonCatalog();
 const generic = getGenericLessonCatalog();
 const failures = [];
-const warnings = [];
 const summaries = new Map();
 
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
@@ -113,12 +112,13 @@ for (const entry of generic) {
   const actualAnswerKeys = parsedAnswerKeys(lesson.groups.review);
   const missingAnswerKeys = expectedAnswerKeys.filter((key) => !actualAnswerKeys.includes(key));
   if (missingAnswerKeys.length) {
-    warnings.push(`${entry.id}: compact answer headings not split for ${[...new Set(missingAnswerKeys)].join(", ")}`);
+    failures.push(`${entry.id}: compact answer headings not split for ${[...new Set(missingAnswerKeys)].join(", ")}`);
   }
 
-  for (const text of allParsedText(lesson)) {
-    if (startsWithInternalCode(text) && startsWithInternalCode(toLearnerText(text))) {
-      failures.push(`${entry.id}: internal code survives learner sanitizer: ${text}`);
+  for (const text of [lesson.title, ...allParsedText(lesson)]) {
+    const rendered = toLearnerText(text);
+    if (containsInternalCode(rendered)) {
+      failures.push(`${entry.id}: internal code survives learner sanitizer: ${rendered}`);
       break;
     }
   }
@@ -132,15 +132,52 @@ for (const entry of generic) {
   });
 }
 
+
+const sentinels = {
+  E002: {
+    review: ["Q1. B", "Q3. C"]
+  },
+  E210: {
+    challenge: ["Part A｜Reading", "Part B｜Word Order"],
+    writing: ["Part C｜Writing"],
+    review: ["4 完成"]
+  },
+  E216: {
+    challenge: ["Part 1｜Reading A", "Part 2｜Reading B", "Part 3｜Q3A Word Order"],
+    writing: ["Part 4｜Q3B Writing"],
+    review: ["9 完成", "10 完成", "11 完成"]
+  },
+  E234: {
+    challenge: ["Part 1｜Reading A", "Part 2｜Reading B", "Part 3｜Q3A Word Order"],
+    writing: ["Part 4｜Q3B Writing"],
+    review: ["10 完成", "11 完成", "12 完成"]
+  }
+};
+
+for (const [id, roles] of Object.entries(sentinels)) {
+  const entry = generic.find((item) => item.id === id);
+  if (!entry) {
+    failures.push(`${id}: sentinel lesson missing from generic catalog`);
+    continue;
+  }
+
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const lesson = parseGenericLesson(raw, entry.id);
+
+  for (const [role, expectedTitles] of Object.entries(roles)) {
+    const actualTitles = lesson.groups[role].map((section) => section.title);
+    for (const title of expectedTitles) {
+      if (!actualTitles.includes(title)) {
+        failures.push(`${id}: sentinel ${role} heading not split/classified: ${title}`);
+      }
+    }
+  }
+}
+
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 for (const id of samples) {
   console.log(`[generic-audit] ${id} ${JSON.stringify(summaries.get(id) ?? null)}`);
-}
-
-if (warnings.length) {
-  console.log(`[generic-audit] warnings=${warnings.length}`);
-  for (const warning of warnings.slice(0, 80)) console.log(`[generic-audit][warn] ${warning}`);
 }
 
 if (failures.length) {
