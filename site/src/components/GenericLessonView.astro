@@ -1,0 +1,114 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LessonSections from "./LessonSections.astro";
+import PrintButton from "./PrintButton.astro";
+
+const {
+  lesson,
+  previous = null,
+  next = null
+} = Astro.props;
+
+const { id, title, minutes, groups, hasWriting, hasReview } = lesson;
+
+const supportTarget = hasWriting ? "write-support" : "challenge-support";
+---
+
+<BaseLayout title={id + "｜" + title} description={id + " 英語教材"}>
+  <article class="generic-lesson">
+    <header class="lesson-header">
+      <div class="series-mark" aria-label="シリーズと教材番号">
+        <span>自由英作文</span>
+        <span aria-hidden="true">/</span>
+        <strong>{id}</strong>
+      </div>
+      <h1 class="lesson-title">{title}</h1>
+      {minutes && <p class="lesson-meta">目安{minutes}分</p>}
+    </header>
+
+    <PrintButton />
+
+    <section class="lesson-flow" aria-label="問題">
+      {groups.setup.length > 0 && (
+        <section class="flow-stage flow-stage-setup" id="start">
+          <header class="flow-stage-header">
+            <span class="flow-kicker">START</span>
+            <h2>解く前に</h2>
+          </header>
+          <div class="flow-stage-body">
+            <LessonSections sections={groups.setup} />
+          </div>
+        </section>
+      )}
+
+      {groups.challenge.length > 0 && (
+        <section class="flow-stage flow-stage-core challenge flow-stage-challenge" id="challenge">
+          <header class="flow-stage-header">
+            <span class="flow-kicker">CHALLENGE</span>
+            <h2>問題</h2>
+          </header>
+          <div class="flow-stage-body">
+            <LessonSections sections={groups.challenge} />
+            {!hasWriting && groups.support.length > 0 && (
+              <details class="support-details" id={supportTarget}>
+                <summary>解き終わったら確認</summary>
+                <div class="support-details-body">
+                  <LessonSections sections={groups.support} />
+                </div>
+              </details>
+            )}
+          </div>
+        </section>
+      )}
+
+      {hasWriting && (
+        <section class="flow-stage flow-stage-core writing generic-writing-stage" id="write">
+          <header class="flow-stage-header">
+            <span class="flow-kicker">WRITE</span>
+            <h2>書く</h2>
+          </header>
+          <div class="flow-stage-body">
+            <LessonSections sections={groups.writing} />
+            {groups.support.length > 0 && (
+              <details class="support-details" id={supportTarget}>
+                <summary>書き終わったら確認</summary>
+                <div class="support-details-body">
+                  <LessonSections sections={groups.support} />
+                </div>
+              </details>
+            )}
+          </div>
+        </section>
+      )}
+    </section>
+
+    {hasReview && (
+      <details class="answer-details generic-answer-details">
+        <summary class="review-trigger">
+          <span>REVIEW</span>
+          <strong>答え・解説を見る</strong>
+        </summary>
+
+        <div class="generic-review-shell">
+          <nav class="generic-review-nav" aria-label="問題へ戻る">
+            {groups.setup.length > 0 && <a href="#start">START</a>}
+            {groups.challenge.length > 0 && <a href="#challenge">CHALLENGE</a>}
+            {hasWriting && <a href="#write">WRITE</a>}
+          </nav>
+
+          <div class="generic-review-body">
+            <LessonSections sections={groups.review} answer />
+          </div>
+        </div>
+      </details>
+    )}
+
+    <nav class="nav-row" aria-label="教材ナビゲーション">
+      {previous
+        ? <a class="nav-link" href={"/" + previous.slug + "/"}>← {previous.id}</a>
+        : <a class="nav-link" href="/">一覧へ</a>}
+      <a class="nav-link" href="/">一覧へ</a>
+      {next && <a class="nav-link" href={"/" + next.slug + "/"}>{next.id} →</a>}
+    </nav>
+  </article>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import fs from "node:fs";
+import GenericLessonView from "../components/GenericLessonView.astro";
+import { getLessonCatalog, getGenericLessonCatalog } from "../lib/lesson-catalog.js";
+import { parseGenericLesson } from "../lib/generic-lesson.js";
+
+export function getStaticPaths() {
+  const all = getLessonCatalog();
+  return getGenericLessonCatalog().map((entry) => {
+    const index = all.findIndex((item) => item.id === entry.id);
+    return {
+      params: { lesson: entry.slug },
+      props: {
+        entry,
+        previous: index > 0 ? all[index - 1] : null,
+        next: index >= 0 && index < all.length - 1 ? all[index + 1] : null
+      }
+    };
+  });
+}
+
+const { entry, previous, next } = Astro.props;
+const raw = fs.readFileSync(entry.filePath, "utf8");
+const lesson = parseGenericLesson(raw, entry.id);
+---
+
+<GenericLessonView lesson={lesson} previous={previous} next={next} />
