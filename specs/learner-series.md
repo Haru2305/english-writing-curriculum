@@ -237,13 +237,18 @@ REVIEWの解説は、問題単位の境界を明確にする。
 - 「仕様上存在する項目」をそのまま全部 learner-facing に露出しない
 - 内容を削らずに、順番・階層・折りたたみで密度を制御する
 
-## E001 prototype gate
+## Generalization gate
 
-E001で以下を確認してから全教材へ一般化する。
+E001でシリーズの基本UIを固めた後、全教材へ一気に広げない。
 
-- START / CHALLENGE / WRITE / REVIEW の流れが自然か
-- CHALLENGEが視覚的な主役になっているか
-- 補助情報がノイズになっていないか
-- 内部コードが露出していないか
-- REVIEWで「答え → 考え方 → 持ち帰り」が追いやすいか
-- 同じシリーズを続けて解きたいと感じる統一感があるか
+`specs/representative-viewer-audit.md` の E049 / E097 / E145 / E193 / E205 で、異なる教材形式にも同じ learner-facing rhythm が成立するか確認する。
+
+共通化するのは START / CHALLENGE / optional WRITE / REVIEW という学習リズムであり、教材固有の task type をE001型へ無理に変換しない。
+
+特に確認する:
+- WRITEが不要な教材では省略できるか
+- Q形式以外のtask groupも問題単位でREVIEWできるか
+- Reading以外の表・Candidate Sentence・資料もREFERENCEできるか
+- lesson-specificなKEYS / WRITE MAPを扱えるか
+- internal codeが露出しないか
+- canonical contentを表示都合で改変していないか
