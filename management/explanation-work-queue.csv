@@ -1,6 +1,6 @@
 worker,branch,bundles,e_start,e_end,material_count,status,scope_rule,report_path
-A,explanation/worker-a,B001-B008,E001,E048,48,IN_PROGRESS,"Only assigned E001-E048; do not edit other materials","management/explanation-worker-a.md"
-B,explanation/worker-b,B009-B016,E049,E096,48,READY,"Only assigned E049-E096; do not edit other materials","management/explanation-worker-b.md"
-C,explanation/worker-c,B017-B024,E097,E144,48,READY,"Only assigned E097-E144; do not edit other materials","management/explanation-worker-c.md"
-D,explanation/worker-d,B025-B032,E145,E192,48,READY,"Only assigned E145-E192; do not edit other materials","management/explanation-worker-d.md"
+A,explanation/worker-a,B001-B008,E001,E048,48,MERGED,"Only assigned E001-E048; do not edit other materials","management/explanation-worker-a.md"
+B,explanation/worker-b,B009-B016,E049,E096,48,MERGED,"Only assigned E049-E096; do not edit other materials","management/explanation-worker-b.md"
+C,explanation/worker-c,B017-B024,E097,E144,48,MERGED,"Only assigned E097-E144; do not edit other materials","management/explanation-worker-c.md"
+D,explanation/worker-d,B025-B032,E145,E192,48,MERGED,"Only assigned E145-E192; do not edit other materials","management/explanation-worker-d.md"
 E,explanation/worker-e,B033-B039,E193,E234,42,MERGED,"Only assigned E193-E234; do not edit other materials","management/explanation-worker-e.md"
