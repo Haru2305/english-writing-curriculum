@@ -782,6 +782,64 @@ h1 {
   margin-top: 18px;
 }
 
+
+/* Learner-facing series identity */
+.series-mark {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 8px;
+  color: #707068;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.series-mark strong {
+  color: #3f3f3b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.flow-stage-challenge {
+  padding-top: 16px;
+  border-top-width: 3px;
+}
+
+.flow-stage-challenge .flow-stage-header h2 {
+  font-size: 28px;
+}
+
+.flow-stage-challenge .importance-primary + .importance-primary {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #d5d4cd;
+}
+
+.flow-stage-challenge .importance-primary .content-group-title {
+  margin-bottom: 10px;
+  font-size: 19px;
+}
+
+.review-trigger {
+  display: grid;
+  gap: 2px;
+}
+
+.review-trigger span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.review-trigger strong {
+  font-size: 16px;
+  font-weight: 800;
+}
+
 @media (min-width: 720px) {
   .page-shell { padding-top: 40px; }
   .lesson-line { font-size: 17px; }

@@ -266,7 +266,7 @@ const selfCheckSection = findSection(problemSections, "Self-check");
 const problemStages = [
   {
     kind: "setup",
-    kicker: "PREP",
+    kicker: "START",
     title: "解く前に",
     sections: [
       withoutTitle(findSection(problemSections, "今日の狙い")),
@@ -274,17 +274,12 @@ const problemStages = [
     ].filter(Boolean)
   },
   {
-    kind: "core",
-    kicker: "READ",
-    title: "Reading",
-    sections: [withoutTitle(findSection(problemSections, "Reading"))].filter(Boolean)
-  },
-  {
-    kind: "core",
-    kicker: "SOLVE",
-    title: "Questions",
+    kind: "core challenge",
+    kicker: "CHALLENGE",
+    title: "Reading & Questions",
     sections: [
-      withoutTitle(findSection(problemSections, "Questions")),
+      findSection(problemSections, "Reading"),
+      findSection(problemSections, "Questions"),
       findSection(problemSections, "Language Focus — 使い分け確認")
     ].filter(Boolean)
   },
@@ -340,7 +335,11 @@ const answerNotice = findSection(answerSections, "まず確認");
 <BaseLayout title={pageTitle} description="E001 スマホ閲覧プロトタイプ">
   <article>
     <header class="lesson-header">
-      <p class="lesson-id">E001</p>
+      <div class="series-mark" aria-label="シリーズと教材番号">
+        <span>自由英作文</span>
+        <span aria-hidden="true">/</span>
+        <strong>E001</strong>
+      </div>
       <h1 class="lesson-title">{title}</h1>
       {learnerMeta && <p class="lesson-meta">{learnerMeta}</p>}
     </header>
@@ -380,7 +379,10 @@ const answerNotice = findSection(answerSections, "まず確認");
     </section>
 
     <details class="answer-details">
-      <summary>解答・解説を見る</summary>
+      <summary class="review-trigger">
+        <span>REVIEW</span>
+        <strong>解答・解説を見る</strong>
+      </summary>
 
       <div class="answer-flow">
         {answerNotice && (
@@ -389,8 +391,8 @@ const answerNotice = findSection(answerSections, "まず確認");
 
         <details class="answer-stage answer-stage-primary" open>
           <summary>
-            <strong>解答</strong>
-            <small>まず正答とモデル答案を確認</small>
+            <strong>答え</strong>
+            <small>正答とモデル答案</small>
           </summary>
           <div class="answer-stage-body">
             <LessonSections sections={answerKeySections} answer />
@@ -399,7 +401,7 @@ const answerNotice = findSection(answerSections, "まず確認");
 
         <details class="answer-stage answer-stage-secondary">
           <summary>
-            <strong>解説</strong>
+            <strong>考え方</strong>
             <small>なぜそうなるか・どう考えて書くか</small>
           </summary>
           <div class="answer-stage-body">
@@ -409,8 +411,8 @@ const answerNotice = findSection(answerSections, "まず確認");
 
         <details class="answer-stage answer-stage-tertiary">
           <summary>
-            <strong>復習</strong>
-            <small>自己修正と次の問題への持ち帰り</small>
+            <strong>持ち帰り</strong>
+            <small>自己修正と次の問題への再利用</small>
           </summary>
           <div class="answer-stage-body">
             <LessonSections sections={reviewCoreSections} answer />
