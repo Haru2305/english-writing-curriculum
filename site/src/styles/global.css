@@ -951,16 +951,23 @@ h1 {
   backdrop-filter: blur(10px);
 }
 
-.reference-dock > span {
-  display: block;
+
+.reference-dock-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   margin-bottom: 6px;
+}
+
+.reference-dock-head > span {
   color: #77776f;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.1em;
 }
 
-.reference-dock > div {
+.reference-shortcuts {
   display: flex;
   gap: 7px;
   overflow-x: auto;
@@ -968,8 +975,26 @@ h1 {
   scrollbar-width: none;
 }
 
-.reference-dock > div::-webkit-scrollbar {
+.reference-shortcuts::-webkit-scrollbar {
   display: none;
+}
+
+.review-close-button {
+  appearance: none;
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border: 1px solid #b9b8b0;
+  border-radius: 999px;
+  background: #202124;
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.review-close-button:active {
+  transform: scale(0.98);
 }
 
 .reference-button {
