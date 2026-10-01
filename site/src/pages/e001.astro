@@ -126,6 +126,91 @@ function parseSections(lines) {
   return sections;
 }
 
+function findSection(sections, title) {
+  return sections.find((section) => section.title === title);
+}
+
+function pickSections(sections, titles) {
+  return titles.map((title) => findSection(sections, title)).filter(Boolean);
+}
+
+function withoutTitle(section) {
+  return section ? { ...section, title: "" } : null;
+}
+
+function splitReadingAnswers(section) {
+  if (!section) return { key: null, detail: null };
+
+  const keyUnits = [];
+  const detailUnits = [];
+
+  for (const unit of section.units) {
+    if (unit.type !== "block") {
+      detailUnits.push(unit);
+      continue;
+    }
+
+    const lines = unit.lines;
+    const first = lines[0] ?? "";
+
+    if (!/^Q\d+[.｜]/.test(first)) {
+      detailUnits.push(unit);
+      continue;
+    }
+
+    const keyLineCount = /^Q3[.｜]/.test(first) && lines.length > 1 ? 2 : 1;
+    keyUnits.push({ type: "block", lines: lines.slice(0, keyLineCount) });
+
+    const rest = lines.slice(keyLineCount);
+    if (rest.length) detailUnits.push({ type: "block", lines: rest });
+  }
+
+  return {
+    key: { title: "Reading answers", units: keyUnits },
+    detail: { title: "Reading answers｜解説", units: detailUnits }
+  };
+}
+
+function languageAnswerKey(section) {
+  if (!section) return null;
+  const lines = [];
+
+  for (const unit of section.units) {
+    if (unit.type !== "subgroup" || !/^LEXG\d+｜/.test(unit.title)) continue;
+    for (const block of unit.blocks) {
+      for (const line of block.lines) {
+        if (/^[1-4][.．]\s+(from|in)$/.test(line)) lines.push(line);
+      }
+    }
+  }
+
+  return lines.length
+    ? { title: "Language Focus｜答え", units: [{ type: "block", lines }] }
+    : null;
+}
+
+function splitSupplement(section) {
+  if (!section) return { reasoning: null, takeaway: null };
+
+  const reasoningUnits = [];
+  const takeawayUnits = [];
+
+  for (const unit of section.units) {
+    if (unit.type === "subgroup" && unit.title === "次の問題に持っていくもの") {
+      takeawayUnits.push(unit);
+    } else {
+      reasoningUnits.push(unit);
+    }
+  }
+
+  return {
+    reasoning: reasoningUnits.length ? { ...section, units: reasoningUnits } : null,
+    takeaway: takeawayUnits.length
+      ? { title: "次の問題に持っていくもの", units: takeawayUnits }
+      : null
+  };
+}
+
 const problemHeader = takeHeader(beforeMarker.replace(/_+\s*$/m, "").trimEnd());
 const answerLines = afterMarker.trim().split("\n");
 
@@ -133,6 +218,62 @@ const title = problemHeader.titleLine.replace(/^E001｜/, "");
 const pageTitle = "E001｜" + title;
 const problemSections = parseSections(problemHeader.bodyLines);
 const answerSections = parseSections(answerLines);
+
+const problemStages = [
+  {
+    step: "STEP 1",
+    title: "解く前に",
+    sections: pickSections(problemSections, ["今日の狙い", "時間配分", "Pre-solve Nuance"])
+  },
+  { step: "STEP 2", title: "本文を読む", sections: pickSections(problemSections, ["Reading"]) },
+  { step: "STEP 3", title: "問題を解く", sections: pickSections(problemSections, ["Questions"]) },
+  {
+    step: "STEP 4",
+    title: "Language Focus",
+    sections: pickSections(problemSections, ["Language Focus — 使い分け確認"])
+  },
+  { step: "STEP 5", title: "Mini Writing", sections: pickSections(problemSections, ["Mini Writing"]) },
+  { step: "STEP 6", title: "解き終わったら", sections: pickSections(problemSections, ["Self-check"]) }
+];
+
+const glossSection = findSection(problemSections, "Gloss / Reading support");
+
+const readingSplit = splitReadingAnswers(findSection(answerSections, "Reading answers"));
+const bodyStructure = findSection(answerSections, "本文の骨格");
+const languageKey = languageAnswerKey(bodyStructure);
+const supplement = splitSupplement(
+  answerSections.find((section) => /^解説補強｜/.test(section.title))
+);
+
+const answerKeySections = [
+  readingSplit.key,
+  languageKey,
+  findSection(answerSections, "モデル答案"),
+  findSection(answerSections, "別解")
+].filter(Boolean);
+
+const whySections = [
+  readingSplit.detail,
+  bodyStructure,
+  findSection(answerSections, "Why this word?")
+].filter((section) => section && section.units.length);
+
+const writingReasonSections = [
+  findSection(answerSections, "Task fulfillment"),
+  supplement.reasoning
+].filter(Boolean);
+
+const takeawaySections = [
+  findSection(answerSections, "自己修正"),
+  findSection(answerSections, "Correct"),
+  findSection(answerSections, "Natural"),
+  findSection(answerSections, "Precise"),
+  supplement.takeaway,
+  findSection(answerSections, "自己評価"),
+  findSection(answerSections, "任意Escalation")
+].filter(Boolean);
+
+const answerNotice = findSection(answerSections, "まず確認");
 ---
 
 <BaseLayout title={pageTitle} description="E001 スマホ閲覧プロトタイプ">
@@ -143,15 +284,84 @@ const answerSections = parseSections(answerLines);
       <p class="lesson-meta">{problemHeader.metaLine}</p>
     </header>
 
-    <section class="lesson-body content-stack" aria-label="問題">
-      <LessonSections sections={problemSections} />
+    <section class="lesson-flow" aria-label="問題">
+      {problemStages.map((stage, index) => (
+        <section class="flow-stage">
+          <header class="flow-stage-header">
+            <span class="flow-step">{stage.step}</span>
+            <h2>{stage.title}</h2>
+          </header>
+
+          <div class="flow-stage-body content-stack">
+            <LessonSections sections={stage.sections} />
+
+            {index === 0 && glossSection && (
+              <details class="support-details">
+                <summary>Gloss / Reading support を見る</summary>
+                <div class="support-details-body">
+                  <LessonSections sections={[withoutTitle(glossSection)]} />
+                </div>
+              </details>
+            )}
+          </div>
+        </section>
+      ))}
     </section>
 
     <details class="answer-details">
       <summary>解答・解説を見る</summary>
-      <section class="answer-content content-stack" aria-label="解答・解説">
-        <LessonSections sections={answerSections} answer />
-      </section>
+
+      <div class="answer-flow">
+        {answerNotice && (
+          <aside class="answer-notice">
+            <LessonSections sections={[withoutTitle(answerNotice)]} answer />
+          </aside>
+        )}
+
+        <details class="answer-stage" open>
+          <summary>
+            <span>1</span>
+            <strong>まず答え</strong>
+            <small>正答・Language Focus・モデル答案</small>
+          </summary>
+          <div class="answer-stage-body">
+            <LessonSections sections={answerKeySections} answer />
+          </div>
+        </details>
+
+        <details class="answer-stage">
+          <summary>
+            <span>2</span>
+            <strong>なぜそうなるか</strong>
+            <small>Reading・本文構造・語法</small>
+          </summary>
+          <div class="answer-stage-body">
+            <LessonSections sections={whySections} answer />
+          </div>
+        </details>
+
+        <details class="answer-stage">
+          <summary>
+            <span>3</span>
+            <strong>自由英作文の考え方</strong>
+            <small>理由 → 機序 → 答案構成</small>
+          </summary>
+          <div class="answer-stage-body">
+            <LessonSections sections={writingReasonSections} answer />
+          </div>
+        </details>
+
+        <details class="answer-stage">
+          <summary>
+            <span>4</span>
+            <strong>持ち帰る</strong>
+            <small>自己修正・次の問題への再利用</small>
+          </summary>
+          <div class="answer-stage-body">
+            <LessonSections sections={takeawaySections} answer />
+          </div>
+        </details>
+      </div>
     </details>
 
     <nav class="nav-row" aria-label="教材ナビゲーション">
