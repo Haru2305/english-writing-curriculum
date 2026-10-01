@@ -140,6 +140,27 @@ export const thinkingToolGroups = [
     ]
   },
   {
+    id: "exam-response",
+    title: "字数制限で説明する",
+    description: "訳してから削るのではなく、設問が要求する論理要素を先に決めて圧縮する。",
+    tools: [
+      {
+        id: "required-elements",
+        label: "要求要素",
+        english: "required elements",
+        question: "この設問で、字数内に必ず入れるべき要素は何か。",
+        exampleLesson: "E205"
+      },
+      {
+        id: "logic-compression",
+        label: "論理を圧縮",
+        english: "logic compression",
+        question: "原因・結果・対比のどの関係を残せば、短くしても意味が崩れないか。",
+        exampleLesson: "E205"
+      }
+    ]
+  },
+  {
     id: "paragraph-logic",
     title: "段落どうしの論理を追う",
     description: "段落の役割と、接続語・指示語が作る前後関係を追う。",
@@ -199,7 +220,8 @@ export const lessonThinkingToolIds = {
   E049: ["word-role", "context-clues", "logic-fit"],
   E097: ["goal", "mandatory-concern", "trade-off", "decision"],
   E145: ["definition", "components", "nearby-concepts", "limitation"],
-  E193: ["paragraph-function", "connector-reference", "insertion-fit"]
+  E193: ["paragraph-function", "connector-reference", "insertion-fit"],
+  E205: ["required-elements", "logic-compression", "paragraph-function"]
 };
 
 export function toolsForLesson(lessonId) {

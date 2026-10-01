@@ -2090,3 +2090,135 @@ h1 {
   border-color: #77766e;
   background: #eeede6;
 }
+
+
+/* P4 exam-style reading */
+.exam-passage {
+  display: grid;
+  gap: 0;
+}
+
+.passage-gap-marker,
+.reference-gap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  padding: 8px 14px;
+  border-block: 1px dashed #c9c8c0;
+  background: #f5f4ee;
+  color: #5f5f59;
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.reference-gap {
+  margin: 9px 0;
+  border: 1px dashed #c9c8c0;
+  border-radius: 7px;
+}
+
+.reference-gap.reference-target {
+  border-style: solid;
+  border-color: #77766e;
+  background: #eeede6;
+  box-shadow: inset 3px 0 0 #77766e;
+}
+
+.reference-dialog-gap[hidden] {
+  display: none;
+}
+
+.exam-question-list {
+  display: grid;
+  gap: 0;
+}
+
+.exam-question-card {
+  padding: 15px 14px 17px;
+  border-bottom: 1px solid #e5e4dd;
+}
+
+.exam-question-card:last-child {
+  border-bottom: 0;
+}
+
+.exam-question-card > header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.exam-question-number {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #66655e;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.exam-task-type {
+  color: #6f6f68;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.exam-question-body {
+  font-family: var(--textbook-font);
+}
+
+.exam-question-line,
+.exam-choice {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.exam-question-line + .exam-question-line,
+.exam-question-line + .exam-choice,
+.exam-choice + .exam-choice {
+  margin-top: 5px;
+}
+
+.exam-choice {
+  padding-left: 8px;
+}
+
+.exam-review-type {
+  margin: 0 0 4px;
+  color: #85857d;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.exam-answer-list strong {
+  overflow-wrap: anywhere;
+}
+
+@media print {
+  .passage-gap-marker {
+    background: transparent !important;
+    break-inside: avoid-page;
+  }
+
+  .exam-question-card {
+    break-inside: avoid-page;
+    padding-inline: 0;
+  }
+
+  .exam-question-number {
+    border: 1px solid #555;
+    background: transparent !important;
+    color: #000 !important;
+  }
+}
