@@ -262,7 +262,7 @@ const answerOverview = questionReviews.map((item) => ({
                     {part.text}
                   </p>
                 ) : (
-                  <div class="reference-gap" data-reference-gap>
+                  <div class="reference-gap" data-reference-gap-marker>
                     <span>[ A ]</span>
                   </div>
                 )
@@ -408,7 +408,7 @@ const answerOverview = questionReviews.map((item) => ({
       const desktopPane = document.querySelector(".review-reference-pane");
       const desktopParagraphs = [...document.querySelectorAll("[data-reference-paragraph]")];
       const dialogParagraphs = [...document.querySelectorAll("[data-dialog-paragraph]")];
-      const desktopGap = document.querySelector("[data-reference-gap]");
+      const desktopGap = document.querySelector("[data-reference-gap-marker]");
       const dialogGap = document.querySelector("[data-dialog-gap]");
       const desktopQuery = window.matchMedia("(min-width: 960px)");
       const reviewDetails = document.querySelector(".answer-details");
