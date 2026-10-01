@@ -1,0 +1,23 @@
+---
+import { toolsForLesson } from "../data/thinking-tools.js";
+
+const { lessonId } = Astro.props;
+const tools = toolsForLesson(lessonId);
+---
+
+{tools.length > 0 && (
+  <aside class="thinking-tool-cue" aria-label="今回使う思考ツール">
+    <div class="thinking-tool-cue-head">
+      <span class="cue-label">思考ツール</span>
+      <a href="/thinking-tools/">一覧</a>
+    </div>
+    <div class="thinking-tool-cue-list">
+      {tools.map((tool) => (
+        <a class="thinking-tool-chip" href={"/thinking-tools/#" + tool.id}>
+          <strong>{tool.label}</strong>
+          <small>{tool.english}</small>
+        </a>
+      ))}
+    </div>
+  </aside>
+)}

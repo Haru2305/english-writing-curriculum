@@ -1739,3 +1739,228 @@ h1 {
     line-height: 1.85;
   }
 }
+
+
+/* Shared thinking tools */
+.site-tool-link {
+  margin-left: auto;
+  color: #55554f;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.thinking-tools-entry {
+  display: block;
+  margin-top: 24px;
+  padding: 17px 18px;
+  border: 1px solid #cfcfc8;
+  border-radius: 14px;
+  background: #efeee8;
+  text-decoration: none;
+}
+
+.thinking-tools-entry small {
+  color: #77776f;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.thinking-tools-entry strong {
+  display: block;
+  margin-top: 5px;
+  font-family: var(--textbook-font);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.thinking-tools-entry span {
+  display: block;
+  margin-top: 5px;
+  color: #5f5f59;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.thinking-tool-cue {
+  margin: 14px 0 18px;
+  padding: 12px 13px;
+  border: 1px solid #d8d7cf;
+  border-radius: 10px;
+  background: #f7f6f1;
+}
+
+.thinking-tool-cue-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.thinking-tool-cue-head a {
+  color: #66665f;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.thinking-tool-cue-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.thinking-tool-chip {
+  display: inline-flex;
+  gap: 5px;
+  align-items: baseline;
+  padding: 6px 8px;
+  border: 1px solid #d3d2ca;
+  border-radius: 999px;
+  background: #fff;
+  text-decoration: none;
+}
+
+.thinking-tool-chip strong {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.thinking-tool-chip small {
+  color: #77776f;
+  font-size: 10px;
+}
+
+.thinking-tools-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #deded8;
+}
+
+.thinking-tools-note {
+  display: grid;
+  gap: 4px;
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-left: 3px solid #77766e;
+  background: #efeee8;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.thinking-tools-note span {
+  color: #62625c;
+}
+
+.thinking-tools-index {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  margin: 18px -16px 0;
+  padding: 0 16px 7px;
+  scrollbar-width: thin;
+}
+
+.thinking-tools-index a {
+  flex: 0 0 auto;
+  padding: 7px 9px;
+  border: 1px solid #d1d0c8;
+  border-radius: 999px;
+  background: #fff;
+  color: #55554f;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.thinking-tool-groups {
+  display: grid;
+  gap: 30px;
+  margin-top: 28px;
+}
+
+.thinking-tool-group {
+  scroll-margin-top: 76px;
+}
+
+.thinking-tool-group > header h2 {
+  margin: 0;
+  font-family: var(--textbook-font);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.thinking-tool-group > header p {
+  margin: 6px 0 0;
+  color: #66665f;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.thinking-tool-list {
+  display: grid;
+  gap: 9px;
+  margin-top: 13px;
+}
+
+.thinking-tool-card {
+  scroll-margin-top: 76px;
+  padding: 13px 14px;
+  border: 1px solid #d9d8d0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.thinking-tool-card:target {
+  outline: 2px solid #77766e;
+  outline-offset: 2px;
+}
+
+.thinking-tool-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.thinking-tool-card-head h3 {
+  margin: 0;
+  font-family: var(--textbook-font);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.thinking-tool-card-head span {
+  display: block;
+  margin-top: 2px;
+  color: #77776f;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.thinking-tool-card-head > small {
+  flex: 0 0 auto;
+  color: #85857d;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.thinking-tool-card > p {
+  margin: 9px 0 0;
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+@media print {
+  .thinking-tool-cue {
+    border-color: #aaa;
+    background: transparent !important;
+  }
+
+  .thinking-tool-chip {
+    background: transparent !important;
+  }
+}

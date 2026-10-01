@@ -5,6 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import LessonDataTable from "../components/LessonDataTable.astro";
 import PrintButton from "../components/PrintButton.astro";
+import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 import {
   stripFrontMatter,
   splitAtMarker,
@@ -214,6 +215,8 @@ const referenceShortcuts = [
               ))}
             </div>
           </section>
+
+          <ThinkingToolsCue lessonId="E097" />
 
           <LessonSections sections={[withoutTitle(goalSection), strategySection].filter(Boolean)} />
         </div>

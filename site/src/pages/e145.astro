@@ -4,6 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
+import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 import {
   stripFrontMatter,
   splitAtMarker,
@@ -265,6 +266,8 @@ const referenceShortcuts = [
               ))}
             </div>
           </section>
+
+          <ThinkingToolsCue lessonId="E145" />
 
           <LessonSections sections={[withoutTitle(goalSection)].filter(Boolean)} />
         </div>

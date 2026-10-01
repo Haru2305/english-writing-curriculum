@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { thinkingToolGroups } from "../data/thinking-tools.js";
+---
+
+<BaseLayout
+  title="思考ツール｜自由英作文"
+  description="問題を見たときに何を考えるかを整理した共通ツール集"
+>
+  <article class="thinking-tools-page">
+    <header class="thinking-tools-header">
+      <p class="eyebrow">Thinking tools</p>
+      <h1>思考ツール</h1>
+      <p class="lead">
+        問題を見たとき、何を考えればいいか迷ったらここを見る。
+        各Eで実際に使った考え方を、別の問題でも使える形にしてためていくページです。
+      </p>
+    </header>
+
+    <aside class="thinking-tools-note">
+      <strong>全部を毎回使う必要はありません。</strong>
+      <span>個別EのSTARTでは、その回で使うものだけを示します。</span>
+    </aside>
+
+    <nav class="thinking-tools-index" aria-label="思考ツールの分類">
+      {thinkingToolGroups.map((group) => (
+        <a href={"#" + group.id}>{group.title}</a>
+      ))}
+    </nav>
+
+    <div class="thinking-tool-groups">
+      {thinkingToolGroups.map((group) => (
+        <section class="thinking-tool-group" id={group.id}>
+          <header>
+            <h2>{group.title}</h2>
+            <p>{group.description}</p>
+          </header>
+
+          <div class="thinking-tool-list">
+            {group.tools.map((tool) => (
+              <article class="thinking-tool-card" id={tool.id}>
+                <div class="thinking-tool-card-head">
+                  <div>
+                    <h3>{tool.label}</h3>
+                    <span>{tool.english}</span>
+                  </div>
+                  <small>使用例 {tool.exampleLesson}</small>
+                </div>
+                <p>{tool.question}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <nav class="nav-row" aria-label="ナビゲーション">
+      <a class="nav-link" href="/">教材一覧へ</a>
+    </nav>
+  </article>
+</BaseLayout>

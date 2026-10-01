@@ -4,6 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
+import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 
 const sourcePath = path.resolve(process.cwd(), "../bundles/B001/E001.md");
 const raw = fs.readFileSync(sourcePath, "utf8").replace(/\r\n/g, "\n");
@@ -479,6 +480,8 @@ const answerNotice = findSection(answerSections, "まず確認");
                 </div>
               </section>
             )}
+
+            {index === 0 && <ThinkingToolsCue lessonId="E001" />}
 
             <LessonSections sections={stage.sections} />
 
