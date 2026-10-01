@@ -20,9 +20,6 @@ Primary files:
 - `self-assessment-audit.md`: 自己採点・添削体系の監査
 - `grading-calibration-audit.md`: Phase横断のA/B/C・AC・SET校正監査
 - `model-answer-wordcount-fixes.csv`: モデル答案38件の語数校正台帳
-- `transfer-stress-test.csv`: 未知題材24問のS1–S6ストレステスト
-- `transfer-speed-log-schema.csv`: 速度・転移記録の項目定義
-- `transfer-speed-audit.md`: valid-plan timeの監査・解釈ルール
 - `argument-construction-audit.md`: 思考部品→論証→英作文の橋渡し監査
 - `content-axis-audit.md`: E001–E234 content-axis coverage audit
 - 将来追加: `dependencies.csv`
