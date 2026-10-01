@@ -213,6 +213,70 @@ function languageAnswerKey(section) {
     : null;
 }
 
+
+function questionReviewGroups(section) {
+  if (!section) return [];
+
+  const chunks = [];
+  let current = [];
+
+  const flush = () => {
+    if (!current.length) return;
+    chunks.push(current);
+    current = [];
+  };
+
+  for (const unit of section.units) {
+    if (unit.type !== "block") continue;
+    for (const line of unit.lines) {
+      if (/^Q\d+[.｜]/.test(line)) flush();
+      current.push(line);
+    }
+  }
+  flush();
+
+  return chunks
+    .filter((lines) => /^Q\d+[.｜]/.test(lines[0] ?? ""))
+    .map((lines) => {
+      const first = lines[0];
+      const match = first.match(/^(Q\d+)[.｜]\s*(.*)$/);
+      const id = match?.[1] ?? "";
+      const firstAnswer = match?.[2] ?? "";
+      const answerLineCount = id === "Q3" && lines.length > 1 ? 2 : 1;
+      return {
+        id,
+        answer: id === "Q3" ? lines.slice(0, answerLineCount).join(" ") : firstAnswer,
+        detail: lines.slice(answerLineCount),
+        paragraphs:
+          id === "Q1" ? "all" :
+          id === "Q2" ? "3" :
+          id === "Q3" ? "2,3,4" :
+          "all"
+      };
+    });
+}
+
+function splitBodyStructure(section) {
+  if (!section) return { reading: null, language: null };
+
+  const readingUnits = [];
+  const languageUnits = [];
+
+  for (const unit of section.units) {
+    if (unit.type === "subgroup" && /^(LEXG\d+｜|G\d+｜)/.test(unit.title)) {
+      languageUnits.push(unit);
+    } else {
+      readingUnits.push(unit);
+    }
+  }
+
+  return {
+    reading: readingUnits.length ? { title: "本文の骨格", units: readingUnits } : null,
+    language: languageUnits.length ? { title: "Language Focus", units: languageUnits } : null
+  };
+}
+
+
 function splitSupplement(section) {
   if (!section) return { reasoning: null, takeaway: null };
 
@@ -316,8 +380,11 @@ const problemStages = [
   }
 ];
 
-const readingSplit = splitReadingAnswers(findSection(answerSections, "Reading answers"));
+const readingAnswersSection = findSection(answerSections, "Reading answers");
+const readingSplit = splitReadingAnswers(readingAnswersSection);
+const questionReviews = questionReviewGroups(readingAnswersSection);
 const bodyStructure = findSection(answerSections, "本文の骨格");
+const bodyStructureSplit = splitBodyStructure(bodyStructure);
 const languageKey = languageAnswerKey(bodyStructure);
 const supplement = splitSupplement(
   answerSections.find((section) => /^解説補強｜/.test(section.title))
@@ -330,15 +397,18 @@ const answerKeySections = [
   findSection(answerSections, "別解")
 ].filter(Boolean);
 
-const whySections = [
-  readingSplit.detail,
-  bodyStructure,
+const languageReviewSections = [
+  bodyStructureSplit.language,
   findSection(answerSections, "Why this word?")
-].filter((section) => section && section.units.length);
+].filter(Boolean);
 
 const writingReasonSections = [
   findSection(answerSections, "Task fulfillment"),
   supplement.reasoning
+].filter(Boolean);
+
+const readingMapSections = [
+  bodyStructureSplit.reading
 ].filter(Boolean);
 
 const reviewCoreSections = [
@@ -479,21 +549,93 @@ const answerNotice = findSection(answerSections, "まず確認");
 
           <details class="answer-stage answer-stage-primary" open>
             <summary>
-              <strong>答え</strong>
-              <small>正答とモデル答案</small>
+              <strong>答え一覧</strong>
+              <small>まず正答を確認</small>
             </summary>
             <div class="answer-stage-body">
               <LessonSections sections={answerKeySections} answer />
             </div>
           </details>
 
-          <details class="answer-stage answer-stage-secondary">
+          <details class="answer-stage answer-stage-secondary" open>
             <summary>
-              <strong>考え方</strong>
-              <small>なぜそうなるか・どう考えて書くか</small>
+              <strong>問題別解説</strong>
+              <small>Q1から順に、答え・根拠・ポイントを確認</small>
             </summary>
-            <div class="answer-stage-body">
-              <LessonSections sections={[...whySections, ...writingReasonSections]} answer />
+            <div class="answer-stage-body question-review-list">
+              {questionReviews.map((review) => (
+                <section class="question-review" aria-labelledby={"review-" + review.id}>
+                  <header class="question-review-header">
+                    <span class="question-review-badge">{review.id}</span>
+                    <div>
+                      <h3 id={"review-" + review.id}>
+                        {review.id === "Q1" ? "本文の主旨" : review.id === "Q2" ? "語彙：retain" : "本文から2要因"}
+                      </h3>
+                      <p class="question-review-answer">
+                        <span>答え</span>
+                        <strong>{review.answer}</strong>
+                      </p>
+                    </div>
+                  </header>
+                  <button
+                    type="button"
+                    class="inline-reference-button"
+                    data-reference-paragraphs={review.paragraphs}
+                    data-reference-label={review.id}
+                  >
+                    本文を見る
+                  </button>
+                  <div class="question-review-explanation">
+                    {review.detail.map((line) => <p>{line}</p>)}
+                    {review.id === "Q1" && readingMapSections.length > 0 && (
+                      <details class="question-review-extra">
+                        <summary>本文全体の骨格</summary>
+                        <LessonSections sections={readingMapSections} answer />
+                      </details>
+                    )}
+                  </div>
+                </section>
+              ))}
+
+              <section class="question-review question-review-language" aria-labelledby="review-language">
+                <header class="question-review-header">
+                  <span class="question-review-badge">LANG</span>
+                  <div>
+                    <h3 id="review-language">Language Focus</h3>
+                    <p class="question-review-answer">
+                      <span>見る点</span>
+                      <strong>differ from / differ in</strong>
+                    </p>
+                  </div>
+                </header>
+                <button
+                  type="button"
+                  class="inline-reference-button"
+                  data-reference-paragraphs="4"
+                  data-reference-label="differ in"
+                >
+                  本文を見る
+                </button>
+                <div class="question-review-explanation">
+                  <LessonSections sections={languageReviewSections} answer />
+                </div>
+              </section>
+
+              <section class="question-review question-review-writing" aria-labelledby="review-writing">
+                <header class="question-review-header">
+                  <span class="question-review-badge">WRITE</span>
+                  <div>
+                    <h3 id="review-writing">Mini Writing</h3>
+                    <p class="question-review-answer">
+                      <span>構成</span>
+                      <strong>Answer → Reason → Mechanism → Support</strong>
+                    </p>
+                  </div>
+                </header>
+                <div class="question-review-explanation">
+                  <LessonSections sections={writingReasonSections} answer />
+                </div>
+              </section>
             </div>
           </details>
 

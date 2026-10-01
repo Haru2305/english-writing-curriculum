@@ -1197,6 +1197,148 @@ h1 {
   }
 }
 
+
+/* Question-scoped REVIEW */
+.question-review-list {
+  gap: 0;
+}
+
+.question-review {
+  position: relative;
+  padding: 18px 0 20px;
+  border-top: 1px solid #d9d8d0;
+}
+
+.question-review:first-child {
+  padding-top: 4px;
+  border-top: 0;
+}
+
+.question-review + .question-review {
+  margin-top: 2px;
+}
+
+.question-review-header {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.question-review-badge {
+  display: grid;
+  place-items: center;
+  min-height: 34px;
+  padding: 6px 7px;
+  border-radius: 7px;
+  background: #262624;
+  color: #fff;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.question-review-header h3 {
+  margin: 0;
+  font-family: var(--textbook-font);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.question-review-answer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  align-items: baseline;
+  margin: 4px 0 0;
+  color: #4f4f49;
+}
+
+.question-review-answer span {
+  color: #77776f;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+}
+
+.question-review-answer strong {
+  font-family: var(--textbook-font);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.inline-reference-button {
+  appearance: none;
+  margin: 9px 0 2px 62px;
+  padding: 5px 9px;
+  border: 1px solid #c8c7bf;
+  border-radius: 999px;
+  background: #fff;
+  color: #55554f;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.question-review-explanation {
+  margin: 10px 0 0 62px;
+  padding-left: 12px;
+  border-left: 2px solid #d4d3cc;
+}
+
+.question-review-explanation > p {
+  margin: 0;
+  padding: 3px 0;
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.question-review-explanation > p + p {
+  margin-top: 3px;
+}
+
+.question-review-extra {
+  margin-top: 10px;
+}
+
+.question-review-extra > summary {
+  cursor: pointer;
+  color: #62625c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.question-review-explanation .content-group {
+  margin-top: 8px;
+}
+
+.question-review-language .question-review-badge,
+.question-review-writing .question-review-badge {
+  background: #66655e;
+}
+
+@media (max-width: 420px) {
+  .question-review-header {
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 9px;
+  }
+
+  .inline-reference-button,
+  .question-review-explanation {
+    margin-left: 55px;
+  }
+}
+
 @media (min-width: 720px) {
   .page-shell { padding-top: 40px; }
   .lesson-line { font-size: 17px; }
