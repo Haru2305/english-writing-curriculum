@@ -56,15 +56,49 @@ function clean(line) {
   return line.replace(/^#{2,3}\s+/, "").replace(/\*\*/g, "");
 }
 
+function isGroupHeading(line) {
+  return line.startsWith("## ")
+    || sectionNames.has(line)
+    || /^解説補強｜/.test(line);
+}
+
 function lineClass(line) {
-  if (/^_+$/.test(line)) return "divider";
-  if (line.startsWith("## ")) return "section";
   if (line.startsWith("### ")) return "subsection";
-  if (sectionNames.has(line)) return "section";
+  if (/^(LEXG\d+｜|G\d+｜|A\d+｜)/.test(line)) return "subsection";
   if (/^Q\d+[.｜]/.test(line)) return "question";
   if (/^[A-D][.．]\s/.test(line)) return "choice";
   return "";
 }
+
+function groupLines(lines) {
+  const groups = [];
+  let current = { title: "", lines: [] };
+
+  for (const line of lines) {
+    if (/^_+$/.test(line)) {
+      continue;
+    }
+
+    if (isGroupHeading(line)) {
+      if (current.title || current.lines.length) {
+        groups.push(current);
+      }
+      current = { title: clean(line), lines: [] };
+      continue;
+    }
+
+    current.lines.push(line);
+  }
+
+  if (current.title || current.lines.length) {
+    groups.push(current);
+  }
+
+  return groups;
+}
+
+const problemGroups = groupLines(problemLines);
+const answerGroups = groupLines(answerLines);
 ---
 
 <BaseLayout title={pageTitle} description="E001 スマホ閲覧プロトタイプ">
@@ -75,26 +109,32 @@ function lineClass(line) {
       <p class="lesson-meta">{metaLine}</p>
     </header>
 
-    <section class="lesson-body" aria-label="問題">
-      {problemLines.map((line) =>
-        lineClass(line) === "divider" ? (
-          <div class="lesson-line divider" aria-hidden="true"></div>
-        ) : (
-          <p class={"lesson-line " + lineClass(line)}>{clean(line)}</p>
-        )
-      )}
+    <section class="lesson-body content-stack" aria-label="問題">
+      {problemGroups.map((group) => (
+        <section class="content-group">
+          {group.title && <h2 class="content-group-title">{group.title}</h2>}
+          <div class="content-group-body">
+            {group.lines.map((line) => (
+              <p class={"lesson-line " + lineClass(line)}>{clean(line)}</p>
+            ))}
+          </div>
+        </section>
+      ))}
     </section>
 
     <details class="answer-details">
       <summary>解答・解説を見る</summary>
-      <section class="answer-content" aria-label="解答・解説">
-        {answerLines.map((line) =>
-          lineClass(line) === "divider" ? (
-            <div class="lesson-line divider" aria-hidden="true"></div>
-          ) : (
-            <p class={"lesson-line " + lineClass(line)}>{clean(line)}</p>
-          )
-        )}
+      <section class="answer-content content-stack" aria-label="解答・解説">
+        {answerGroups.map((group) => (
+          <section class="content-group answer-group">
+            {group.title && <h2 class="content-group-title">{group.title}</h2>}
+            <div class="content-group-body">
+              {group.lines.map((line) => (
+                <p class={"lesson-line " + lineClass(line)}>{clean(line)}</p>
+              ))}
+            </div>
+          </section>
+        ))}
       </section>
     </details>
 
