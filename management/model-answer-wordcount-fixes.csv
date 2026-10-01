@@ -1,0 +1,40 @@
+material_id,phase,target_range,old_words,new_words,edit_type,edit
+E086,P2,80-100,75,86,append,This would also show whether demand varies across ordinary school weeks.
+E087,P2,90-110,80,92,append,This approach would preserve access while keeping the trial easy to reverse.
+E088,P2,80-100,75,85,append,That would make the report useful for future public decisions.
+E089,P2,90-110,84,94,append,The center could then adjust the schedule using those results.
+E090,P2,90-110,83,94,append,This would test access barriers more directly than longer hours alone.
+E092,P2,90-110,82,92,append,This would also show whether reminders reduce accidental reservation waste.
+E093,P2,90-110,84,94,append,That makes the pilot both targeted and easy to evaluate.
+E094,P2,100-120,88,100,append,This would let the school compare academic benefit with lost collaborative space.
+E096,P2,90-110,85,94,append,This would make the final funding choice more evidence-based.
+E097,P3,100-120,94,103,append,Those results could guide a larger investment next year.
+E101,P3,100-120,98,101,append,That balance matters.
+E102,P3,100-120,92,103,append,That comparison would show whether earlier contact improves actual support use.
+E105,P3,100-120,97,106,append,This approach avoids treating format as an ideological choice.
+E106,P3,100-120,96,106,append,That distinction would make the pilot more informative for policy.
+E107,P3,70-90,67,73,append,That is the central methodological distinction.
+E110,P3,80-100,78,85,append,That review should focus on consequential ambiguity.
+E113,P3,80-100,76,86,append,This would help separate scheduling effects from broader access barriers.
+E119,P3,90-110,89,94,append,That distinction should guide expansion.
+E126,P3,90-110,87,95,append,This keeps the exception narrow and administratively reviewable.
+E143,P3,100-120,94,105,append,The town could then compare pickup reliability before and after implementation.
+E149,P3,100-120,89,102,append,The city should also publish correction logs so recurring failure patterns remain visible.
+E150,P3,90-110,88,95,append,That evidence would support a fairer decision.
+E155,P3,100-120,92,102,append,This would separate capacity limits from location or timing problems.
+E156,P3,90-110,87,95,append,That comparison would make resilience costs more transparent.
+E161,P3,100-120,99,109,append,"This would clarify whether operations, not supply, are limiting service."
+E167,P3,100-120,95,105,append,This would show whether earlier releases actually improve room reuse.
+E168,P3,90-110,89,98,append,That test should include both normal and disrupted days.
+E173,P3,100-120,91,103,append,That separation would show whether one intervention is solving the correct barrier.
+E174,P3,90-110,87,96,append,A short pilot could test both performance and cost.
+E179,P3,100-120,86,101,append,That comparison would show whether longer hours improve access enough to justify the staffing cost.
+E180,P3,90-110,86,95,append,That would prevent unnecessary updates from consuming staff capacity.
+E183,P3,90-110,86,96,append,This mixed design would balance timing information with broader coverage.
+E185,P3,100-120,93,103,append,That design would better isolate the effect of spacing itself.
+E186,P3,90-110,88,94,append,That verification step should remain mandatory.
+E197,P3,100-120,93,103,append,The policy should also state how complaints will be reviewed.
+E198,P3,90-110,88,94,append,That separation keeps each map usable.
+E202,P3,100-120,85,101,append,This stopping rule would preserve careful judgment without turning analysis itself into the source of delay.
+E204,P3,100-120,89,95,append,That would justify adoption more confidently.
+E226,P4,90-110,113,110,shorten,Remove non-essential modifiers: genuinely / general / repeatedly.
