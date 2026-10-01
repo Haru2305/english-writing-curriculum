@@ -121,6 +121,9 @@ h1 {
 .lesson-header {
   padding-bottom: 22px;
   border-bottom: 1px solid #deded8;
+  font-family:
+    "Times New Roman", "Yu Mincho", YuMincho, "Hiragino Mincho ProN",
+    "Hiragino Mincho Pro", "Noto Serif JP", serif;
 }
 
 .lesson-id {
@@ -139,13 +142,18 @@ h1 {
   font-size: 13px;
 }
 
-.lesson-body { padding-top: 12px; }
+.lesson-body {
+  padding-top: 12px;
+  font-family:
+    "Times New Roman", "Yu Mincho", YuMincho, "Hiragino Mincho ProN",
+    "Hiragino Mincho Pro", "Noto Serif JP", serif;
+}
 
 .lesson-line {
   margin: 0;
   padding: 5px 0;
   font-size: 16px;
-  line-height: 1.86;
+  line-height: 1.9;
   overflow-wrap: anywhere;
 }
 
@@ -208,7 +216,12 @@ h1 {
   color: #202124;
 }
 
-.answer-content { padding: 6px 18px 22px; }
+.answer-content {
+  padding: 6px 18px 22px;
+  font-family:
+    "Times New Roman", "Yu Mincho", YuMincho, "Hiragino Mincho ProN",
+    "Hiragino Mincho Pro", "Noto Serif JP", serif;
+}
 
 .nav-row {
   display: flex;
