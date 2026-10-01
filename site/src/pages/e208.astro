@@ -48,7 +48,14 @@ const argumentCircuit = findSection(answerSections, "論証の共通回路");
 const selfScoring = findSection(answerSections, "自己採点");
 
 function splitSentences(text) {
-  return text.match(/[^.!?]+[.!?]+(?:["”])?/g)?.map((s) => s.trim()).filter(Boolean) ?? [text];
+  const protectedText = text
+    .replaceAll("a.m.", "a§m§")
+    .replaceAll("p.m.", "p§m§")
+    .replaceAll("e.g.", "e§g§");
+  const sentences = protectedText.match(/[^.!?]+[.!?]+(?:["”])?/g)
+    ?.map((s) => s.replaceAll("a§m§", "a.m.").replaceAll("p§m§", "p.m.").replaceAll("e§g§", "e.g.").trim())
+    .filter(Boolean);
+  return sentences ?? [text];
 }
 
 const promptLines = flatSectionLines(promptSection);
@@ -301,10 +308,16 @@ const writeMap = ["Choice", "Reason", "Mechanism", "Concrete example", "Qualific
       const reviewDetails = document.querySelector(".answer-details");
       const reviewSummary = reviewDetails?.querySelector(":scope > summary");
       const desktopQuery = window.matchMedia("(min-width: 960px)");
+      const desktopPrompt = document.querySelector(".reference-writing-prompt");
 
       document.querySelectorAll("[data-prompt-open]").forEach((button) => {
         button.addEventListener("click", () => {
-          if (!desktopQuery.matches && dialog && !dialog.open) dialog.showModal();
+          if (desktopQuery.matches) {
+            desktopPrompt?.classList.add("reference-target");
+            desktopPrompt?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          } else if (dialog && !dialog.open) {
+            dialog.showModal();
+          }
         });
       });
 
