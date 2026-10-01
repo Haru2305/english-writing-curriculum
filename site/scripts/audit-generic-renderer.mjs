@@ -174,6 +174,27 @@ for (const [id, roles] of Object.entries(sentinels)) {
   }
 }
 
+
+const e002Entry = generic.find((item) => item.id === "E002");
+if (e002Entry) {
+  const e002Lesson = parseGenericLesson(fs.readFileSync(e002Entry.filePath, "utf8"), "E002");
+  const answerKey = e002Lesson.groups.review.find((section) => section.title === "答えだけ");
+  const answerKeyLines = answerKey?.units.flatMap((unit) => unit.lines ?? []) ?? [];
+
+  if (e002Lesson.groups.review[0]?.title !== "答えだけ") {
+    failures.push("E002: answer-only section is not first in REVIEW");
+  }
+  if (!answerKey || !answerKeyLines.length) {
+    failures.push("E002: answer-only section is empty");
+  }
+
+  for (const prefix of ["Q1：B", "Q2：", "Q3：C", "Q4：B", "Nuance Check：", "Guided Writing："]) {
+    if (!answerKeyLines.some((line) => line.startsWith(prefix))) {
+      failures.push(`E002: answer-only section missing ${prefix}`);
+    }
+  }
+}
+
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 for (const id of samples) {
