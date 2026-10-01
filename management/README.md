@@ -22,6 +22,8 @@ Primary files:
 - `model-answer-wordcount-fixes.csv`: モデル答案38件の語数校正台帳
 - `argument-construction-audit.md`: 思考部品→論証→英作文の橋渡し監査
 - `content-axis-audit.md`: E001–E234 content-axis coverage audit
+- `explanation-work-queue.csv`: 解説充実の並列作業担当表（A–E）
+- `explanation-worker-a.md` – `explanation-worker-e.md`: 各workerの進捗・QA・commit報告
 - 将来追加: `dependencies.csv`
 - 将来追加: `bundle-manifest.csv`
 
