@@ -59,7 +59,7 @@ function lineClass(line) {
         ) : (
           <div class={"micro-block " + blockClass(unit.lines, section.title)}>
             {unit.lines.map((line) => (
-              <p class={"lesson-line " + lineClass(line)}>{line}</p>
+              <p class={"lesson-line " + lineClass(line)}>{userText(line)}</p>
             ))}
           </div>
         )
