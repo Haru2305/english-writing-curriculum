@@ -178,19 +178,19 @@ for (const [id, roles] of Object.entries(sentinels)) {
 const e002Entry = generic.find((item) => item.id === "E002");
 if (e002Entry) {
   const e002Lesson = parseGenericLesson(fs.readFileSync(e002Entry.filePath, "utf8"), "E002");
-  const answerKey = e002Lesson.groups.review.find((section) => section.title === "答えだけ");
+  const answerKey = e002Lesson.groups.review.find((section) => section.title === "解答一覧");
   const answerKeyLines = answerKey?.units.flatMap((unit) => unit.lines ?? []) ?? [];
 
-  if (e002Lesson.groups.review[0]?.title !== "答えだけ") {
-    failures.push("E002: answer-only section is not first in REVIEW");
+  if (e002Lesson.groups.review[0]?.title !== "解答一覧") {
+    failures.push("E002: answer list is not first in REVIEW");
   }
   if (!answerKey || !answerKeyLines.length) {
-    failures.push("E002: answer-only section is empty");
+    failures.push("E002: answer list is empty");
   }
 
-  for (const prefix of ["Q1：B", "Q2：", "Q3：C", "Q4：B", "Nuance Check：", "Guided Writing："]) {
+  for (const prefix of ["Q1｜B", "Q2｜", "Q3｜C", "Q4｜B", "Nuance 1｜from", "Nuance 2｜in", "Nuance 3｜contribute to", "Guided Writing｜"]) {
     if (!answerKeyLines.some((line) => line.startsWith(prefix))) {
-      failures.push(`E002: answer-only section missing ${prefix}`);
+      failures.push(`E002: answer list missing ${prefix}`);
     }
   }
 }

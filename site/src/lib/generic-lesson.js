@@ -93,8 +93,8 @@ function parseSectionLines(bodyLines, side = "problem") {
     const text = cleanLine(line);
     const staysInAnswerKey =
       side === "answer"
-      && cleanLine(section.title) === "答えだけ"
-      && /^(?:Q\d+\s*[｜:：.]|Nuance Check\s*[｜:：]|Guided Writing\s*[｜:：])/i.test(text);
+      && ["答えだけ", "解答一覧"].includes(cleanLine(section.title))
+      && /^(?:Q\d+|Nuance\s+\d+|Guided Writing)\s*[｜:：]/i.test(text);
 
     if (!staysInAnswerKey && isHeading(line, side)) {
       flushSection();

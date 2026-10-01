@@ -2661,58 +2661,103 @@ h1 {
 }
 
 
-/* Compact answer key at the top of generic REVIEW */
+/* Compact answer list at the top of generic REVIEW */
 .generic-review-body .content-group.answer-key-group {
-  margin: 0 0 24px;
-  padding: 14px 15px 15px;
+  margin: 0 0 26px;
+  padding: 0;
   border: 1px solid #c8c7bf;
   border-radius: 11px;
-  background: #f5f4ef;
+  background: #fff;
+  overflow: hidden;
 }
 
 .generic-review-body .answer-key-group .content-group-title {
-  margin: 0 0 8px;
-  padding: 0 0 8px;
+  margin: 0;
+  padding: 11px 13px;
   border: 0;
   border-bottom: 2px solid #66655e;
-  background: transparent;
+  background: #efeee8;
   font-size: 18px;
   font-weight: 700;
 }
 
-.generic-review-body .answer-key-group .content-group-body,
-.generic-review-body .answer-key-group .micro-block {
+.generic-review-body .answer-key-group .content-group-body {
   padding: 0;
 }
 
-.answer-key-group .lesson-line {
-  margin: 0;
-  padding: 8px 0;
-  border-bottom: 1px solid #dfded7;
-  font-size: 15px;
-  line-height: 1.7;
+.answer-list {
+  display: grid;
 }
 
-.answer-key-group .lesson-line:first-child {
-  padding-top: 0;
+.answer-list-row {
+  display: grid;
+  grid-template-columns: 108px minmax(0, 1fr);
+  border-bottom: 1px solid #e2e1da;
 }
 
-.answer-key-group .lesson-line:last-child {
-  padding-bottom: 0;
+.answer-list-row:last-child {
   border-bottom: 0;
 }
 
-.answer-key-group .answer-key-question {
+.answer-list-label,
+.answer-list-value {
+  min-width: 0;
+  padding: 9px 11px;
+  line-height: 1.65;
+}
+
+.answer-list-label {
+  border-right: 1px solid #e2e1da;
+  background: #f7f6f1;
+  color: #55554f;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.answer-list-value {
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.answer-list-value-short {
+  font-size: 17px;
   font-weight: 700;
 }
 
-.answer-key-group .answer-key-task {
-  color: #44443f;
+@media (max-width: 420px) {
+  .answer-list-row {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+
+  .answer-list-label,
+  .answer-list-value {
+    padding: 8px 9px;
+  }
+
+  .answer-list-label {
+    font-size: 11px;
+  }
+
+  .answer-list-value {
+    font-size: 14px;
+  }
+
+  .answer-list-value-short {
+    font-size: 16px;
+  }
 }
 
 @media print {
   .generic-review-body .content-group.answer-key-group {
     background: transparent !important;
     break-inside: avoid-page;
+  }
+
+  .answer-list-label {
+    background: transparent !important;
   }
 }

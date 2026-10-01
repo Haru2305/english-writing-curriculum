@@ -8,7 +8,7 @@ function isCollapsibleSubgroup(title) {
 }
 
 function importanceClass(title) {
-  if (["Reading", "Questions", "Claim Check", "Short Output", "Mini Writing", "Writing Task", "Data Table", "Reading answers", "答えだけ", "モデル答案", "Model answer", "Model output", "Model short output"].includes(title)) {
+  if (["Reading", "Questions", "Claim Check", "Short Output", "Mini Writing", "Writing Task", "Data Table", "Reading answers", "答えだけ", "解答一覧", "モデル答案", "Model answer", "Model output", "Model short output"].includes(title)) {
     return "importance-primary";
   }
   if (
@@ -29,12 +29,27 @@ function blockClass(lines, sectionTitle) {
   return "";
 }
 
+function isAnswerList(title) {
+  return ["答えだけ", "解答一覧"].includes(userText(title));
+}
+
 function sectionClass(title) {
-  return userText(title) === "答えだけ" ? "answer-key-group" : "";
+  return isAnswerList(title) ? "answer-key-group" : "";
+}
+
+function answerListRow(line) {
+  const text = userText(line);
+  const match = text.match(/^(.+?)\s*[｜]\s*(.+)$/);
+  if (!match) return { label: "", answer: text };
+  return { label: match[1].trim(), answer: match[2].trim() };
+}
+
+function answerValueClass(answer) {
+  return "answer-list-value" + (answer.length <= 24 ? " answer-list-value-short" : "");
 }
 
 function lineClass(line, sectionTitle = "") {
-  if (userText(sectionTitle) === "答えだけ") {
+  if (isAnswerList(sectionTitle)) {
     if (/^Q\d+[.｜:：]/.test(line)) return "answer-key-line answer-key-question";
     if (/^(?:Nuance Check|Guided Writing)\s*[｜:：]/i.test(line)) return "answer-key-line answer-key-task";
     return "answer-key-line";
@@ -84,6 +99,18 @@ function lineClass(line, sectionTitle = "") {
               </div>
             </section>
           )
+        ) : isAnswerList(section.title) ? (
+          <div class="answer-list" role="list" aria-label="解答一覧">
+            {unit.lines.map((line) => {
+              const row = answerListRow(line);
+              return (
+                <div class="answer-list-row" role="listitem">
+                  <span class="answer-list-label">{row.label}</span>
+                  <span class={answerValueClass(row.answer)}>{row.answer}</span>
+                </div>
+              );
+            })}
+          </div>
         ) : (
           <div class={"micro-block " + blockClass(unit.lines, section.title)}>
             {unit.lines.map((line) => (
