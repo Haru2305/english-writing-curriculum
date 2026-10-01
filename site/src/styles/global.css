@@ -1586,3 +1586,123 @@ h1 {
     text-decoration: none;
   }
 }
+
+
+/* Multi-source lesson data tables */
+.data-table-group {
+  margin-top: 24px;
+}
+
+.data-table-group .content-group-title {
+  margin-bottom: 9px;
+}
+
+.data-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  border: 1px solid #d8d7cf;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.lesson-data-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  font-family: var(--textbook-font);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.lesson-data-table th,
+.lesson-data-table td {
+  padding: 9px 10px;
+  border-right: 1px solid #e1e0d9;
+  border-bottom: 1px solid #e1e0d9;
+  text-align: left;
+  vertical-align: top;
+}
+
+.lesson-data-table thead th {
+  background: #efeee8;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.lesson-data-table tbody th {
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.lesson-data-table th:last-child,
+.lesson-data-table td:last-child {
+  border-right: 0;
+}
+
+.lesson-data-table tbody tr:last-child th,
+.lesson-data-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.reference-source + .reference-source {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #dfded7;
+}
+
+.reference-table-source .data-table-group,
+.reference-dialog-table .data-table-group {
+  margin-top: 0;
+}
+
+.reference-table-source .data-table-scroll,
+.reference-dialog-table .data-table-scroll {
+  border-radius: 7px;
+}
+
+.reference-table-source .lesson-data-table,
+.reference-dialog-table .lesson-data-table {
+  min-width: 560px;
+  font-size: 12px;
+}
+
+.lesson-data-table tr.reference-target > * {
+  background: #f0efe9;
+  box-shadow: inset 0 2px 0 #77766e, inset 0 -2px 0 #77766e;
+}
+
+.reference-dialog-table {
+  padding: 10px 17px 22px;
+}
+
+@media print {
+  .data-table-scroll {
+    overflow: visible;
+    border-color: #999;
+    border-radius: 0;
+  }
+
+  .lesson-data-table {
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 8.5pt;
+  }
+
+  .lesson-data-table th,
+  .lesson-data-table td {
+    padding: 5px 6px;
+  }
+
+  .lesson-data-table thead th {
+    background: transparent !important;
+    font-size: 8pt;
+  }
+
+  .data-table-group {
+    break-inside: avoid-page;
+  }
+}
