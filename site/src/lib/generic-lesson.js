@@ -90,9 +90,15 @@ function parseSectionLines(bodyLines, side = "problem") {
       continue;
     }
 
-    if (isHeading(line, side)) {
+    const text = cleanLine(line);
+    const staysInAnswerKey =
+      side === "answer"
+      && cleanLine(section.title) === "答えだけ"
+      && /^(?:Q\d+\s*[｜:：.]|Nuance Check\s*[｜:：]|Guided Writing\s*[｜:：])/i.test(text);
+
+    if (!staysInAnswerKey && isHeading(line, side)) {
       flushSection();
-      section.title = cleanLine(line);
+      section.title = text;
       section.role = sectionRole(line, side);
       continue;
     }

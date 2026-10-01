@@ -29,8 +29,17 @@ function blockClass(lines, sectionTitle) {
   return "";
 }
 
-function lineClass(line) {
-  if (/^Q\d+[.｜]/.test(line)) return "question";
+function sectionClass(title) {
+  return userText(title) === "答えだけ" ? "answer-key-group" : "";
+}
+
+function lineClass(line, sectionTitle = "") {
+  if (userText(sectionTitle) === "答えだけ") {
+    if (/^Q\d+[.｜:：]/.test(line)) return "answer-key-line answer-key-question";
+    if (/^(?:Nuance Check|Guided Writing)\s*[｜:：]/i.test(line)) return "answer-key-line answer-key-task";
+    return "answer-key-line";
+  }
+  if (/^Q\d+[.｜:：]/.test(line)) return "question";
   if (/^[A-D][.．]\s/.test(line)) return "choice";
   if (/^\d+[.．]\s/.test(line)) return "numbered-item";
   if (/^differ (from|in) \+/.test(line)) return "key-definition";
@@ -41,7 +50,7 @@ function lineClass(line) {
 ---
 
 {sections.map((section) => (
-  <section class={"content-group " + importanceClass(section.title) + " " + (answer ? "answer-group" : "")}>
+  <section class={"content-group " + importanceClass(section.title) + " " + sectionClass(section.title) + " " + (answer ? "answer-group" : "")}>
     {section.title && <h2 class="content-group-title">{userText(section.title)}</h2>}
     <div class="content-group-body">
       {section.units.map((unit) =>
@@ -55,7 +64,7 @@ function lineClass(line) {
                 {unit.blocks.map((block) => (
                   <div class={"micro-block " + blockClass(block.lines, section.title)}>
                     {block.lines.map((line) => (
-                      <p class={"lesson-line " + lineClass(line)}>{userText(line)}</p>
+                      <p class={"lesson-line " + lineClass(line, section.title)}>{userText(line)}</p>
                     ))}
                   </div>
                 ))}
@@ -68,7 +77,7 @@ function lineClass(line) {
                 {unit.blocks.map((block) => (
                   <div class={"micro-block " + blockClass(block.lines, section.title)}>
                     {block.lines.map((line) => (
-                      <p class={"lesson-line " + lineClass(line)}>{userText(line)}</p>
+                      <p class={"lesson-line " + lineClass(line, section.title)}>{userText(line)}</p>
                     ))}
                   </div>
                 ))}
@@ -78,7 +87,7 @@ function lineClass(line) {
         ) : (
           <div class={"micro-block " + blockClass(unit.lines, section.title)}>
             {unit.lines.map((line) => (
-              <p class={"lesson-line " + lineClass(line)}>{userText(line)}</p>
+              <p class={"lesson-line " + lineClass(line, section.title)}>{userText(line)}</p>
             ))}
           </div>
         )
