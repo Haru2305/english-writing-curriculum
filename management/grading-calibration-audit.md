@@ -44,7 +44,9 @@ A real calibration defect was found.
 Where an explicit writing range and a detected model answer could be directly compared:
 - P2 main: 9 model answers below the stated lower bound
 - P3: 29 model answers below the stated lower bound
-- P4: E226 was 113 words against the working 90–110 range
+- P4: no confirmed word-count defect after direct paragraph recheck
+
+Confirmed corrections: **38 model answers**.
 
 The task requirements are not relaxed. Model answers are corrected instead.
 
