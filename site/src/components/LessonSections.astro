@@ -1,17 +1,7 @@
 ---
+import { toLearnerText as userText } from "../lib/learner-text.js";
+
 const { sections = [], answer = false } = Astro.props;
-
-function userText(text) {
-  const cleaned = text
-    .replace(/^(Q\d+)[｜:：]\s*(?:RQ|RF|WF|SS|TF)\d+\s*$/i, "$1")
-    .replace(/^(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}(?:\s*[｜:：]\s*|\s+)/i, "")
-    .replace(/^(?:P|G|A|B|D)\d{2,4}\s*[｜:：]\s*/i, "")
-    .trim();
-
-  if (cleaned === "弱い考え方との比較") return "弱い例";
-  if (cleaned === "次の問題に持っていくもの") return "次へのポイント";
-  return cleaned;
-}
 
 function isCollapsibleSubgroup(title) {
   return userText(title) === "Pre-solveの整理と本文での使い方";
