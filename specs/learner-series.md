@@ -171,6 +171,33 @@ E001–E234を、管理上の教材群ではなく**解く側から見て一つ�
 
  learner-facing で教材識別に使うのは原則 **Exxx** のみ。
 
+
+## REVIEW reference behavior
+
+REVIEWは、解く側に「本文まで長くスクロールして戻る」往復を要求しない。
+
+### Mobile
+
+- REVIEW内に小さい「本文参照」ショートカットを置く
+- タップすると本文を下から開く reference sheet を表示する
+- 解説側のスクロール位置は維持する
+- Q1 / Q2 / Q3 など、可能なら関連段落へ直接絞る
+- reference sheet を閉じると同じ解説位置へ戻る
+
+### Tablet / desktop
+
+- REVIEWを本文と解説の2ペインにする
+- 本文を左、解説を右に置く
+- 本文側はstickyにして、解説を読み進めても参照できる
+- 設問ショートカットから関連段落を強調できるようにする
+
+### Duplication rule
+
+- 短い根拠文だけで十分な場合は解説内へ短く再掲してよい
+- 文脈が必要な場合はREFERENCEを使う
+- 本文全体を各解説のたびに複製しない
+- canonical lesson contentは変更せず、viewer側で参照関係を持つ
+
 ## Series identity
 
 各教材の冒頭では、同じ形式で:
