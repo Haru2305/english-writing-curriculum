@@ -2761,3 +2761,105 @@ h1 {
     background: transparent !important;
   }
 }
+
+
+/* REVIEW hierarchy: direct question explanations vs reusable learning notes */
+.generic-review-body .review-intro-group {
+  margin: 20px 0 14px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #f7f6f1;
+  color: #5f5f59;
+}
+
+.generic-review-body .review-intro-group .content-group-title {
+  margin: 0 0 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #55554f;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.generic-review-body .review-intro-group .content-group-body {
+  padding: 0;
+}
+
+.generic-review-body .review-question-group {
+  margin: 0;
+  padding: 13px 0 15px;
+  border: 0;
+  border-top: 1px solid #dfded7;
+  border-radius: 0;
+  background: transparent;
+}
+
+.generic-review-body .review-question-group .content-group-title {
+  margin: 0 0 5px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #292927;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.generic-review-body .review-question-group .content-group-body {
+  padding: 0;
+}
+
+.generic-review-body .review-learning-group {
+  position: relative;
+  margin: 22px 0;
+  padding: 13px 14px 14px;
+  border: 1px solid #d8d6cd;
+  border-left: 4px solid #8c8a7f;
+  border-radius: 9px;
+  background: #f3f1e9;
+}
+
+.generic-review-body .review-learning-group + .review-learning-group {
+  margin-top: 12px;
+}
+
+.generic-review-body .review-learning-group .review-kind-label {
+  display: inline-block;
+  margin: 0 0 5px;
+  color: #716f66;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.generic-review-body .review-learning-group .content-group-title {
+  margin: 0 0 7px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #34342f;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.generic-review-body .review-learning-group .content-group-body {
+  padding: 0;
+}
+
+.generic-review-body .review-learning-group .lesson-line {
+  color: #45453f;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+@media print {
+  .generic-review-body .review-intro-group,
+  .generic-review-body .review-learning-group {
+    background: transparent !important;
+    break-inside: avoid-page;
+  }
+}
