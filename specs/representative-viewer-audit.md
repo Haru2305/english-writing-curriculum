@@ -21,8 +21,9 @@ E001で固めた learner-facing viewer を E002–E234 へ一般化する前に�
 - E001: interaction baseline
 - E049: implemented; optional WRITE and multiple task groups verified
 - E097: implemented; multi-source REFERENCE (Reading + Data Table) and lesson-specific WRITE MAP verified
-- E145: implemented in representative viewer; Questions / Claim Check / Short Output task families and unknown-concept WRITE MAP under verification
-- E193 / E205: pending implementation
+- E145: implemented; Questions / Claim Check / Short Output task families and unknown-concept WRITE MAP verified
+- E193: implemented in representative viewer; paragraph locators, Candidate Sentence, sentence-insertion REFERENCE, and Short Output under verification
+- E205: pending implementation
 
 ## Representative lessons
 
