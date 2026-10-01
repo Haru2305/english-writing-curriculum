@@ -1,0 +1,38 @@
+---
+const { section, caption = "" } = Astro.props;
+
+const blocks = section?.units?.filter((unit) => unit.type === "block") ?? [];
+const lines = blocks.flatMap((unit) => unit.lines);
+const tableLines = lines.filter((line) => line.includes("|"));
+const introLines = lines.filter((line) => !line.includes("|"));
+const rows = tableLines.map((line) => line.split("|").map((cell) => cell.trim()));
+const head = rows[0] ?? [];
+const body = rows.slice(1);
+---
+
+<section class="content-group importance-primary data-table-group">
+  {section?.title && <h2 class="content-group-title">{section.title}</h2>}
+  {introLines.map((line) => <p class="lesson-line">{line}</p>)}
+  {rows.length > 0 && (
+    <div class="data-table-scroll" role="region" aria-label={caption || section?.title || "Data table"} tabindex="0">
+      <table class="lesson-data-table">
+        <thead>
+          <tr>
+            {head.map((cell) => <th scope="col">{cell}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {body.map((row) => (
+            <tr data-table-option={(row[0] ?? "").split(":")[0].trim()}>
+              {row.map((cell, index) =>
+                index === 0
+                  ? <th scope="row">{cell}</th>
+                  : <td>{cell}</td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</section>
