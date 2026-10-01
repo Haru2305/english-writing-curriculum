@@ -1,0 +1,6 @@
+self_assessment_id,label,core_question,primary_systems,repair_priority
+SA00,Task Gate,Did I answer exactly what was asked?,"WQ00;ARG01",1
+SA01,Argument Integrity,Can the reader trace why my answer follows?,"WQ04;ARG01-ARG06;WF01-WF07",2
+SA02,Meaning & Correctness,Is any sentence hard to understand because grammar or meaning breaks?,"WQ01;AC01",3
+SA03,Precision,Is my claim stronger or broader than justified?,"WQ03;ARG05;TH07;TH08",4
+SA04,Naturalness,Can I safely remove awkward wording without changing the argument?,"WQ02;AC03-AC05",5
