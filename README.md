@@ -26,7 +26,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Materials: **E001–E234**
 - Current phase: **P4 Tsukuba / B039 completed (Day 1–30 / P4 complete)**
 - Material count: **frozen at E234**
-- Current content work: **argument-construction framework + selected bridge revision complete / no new lesson IDs**
+- Current content work: **argument construction + self-assessment alignment complete / no new lesson IDs**
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -48,6 +48,8 @@ english-writing-curriculum/
 │   ├── content-framework.md
 │   ├── argument-construction.md
 │   ├── argument-bridge-revisions.md
+│   ├── self-assessment.md
+│   ├── self-assessment-revisions.md
 │   ├── learner-facing-concepts.md
 │   ├── priority-b-review.md
 │   ├── post-solve-priority-b.md
@@ -68,6 +70,10 @@ english-writing-curriculum/
 │   ├── priority-c-review.csv
 │   ├── writing-type-argument-map.csv
 │   ├── argument-bridge-selected.csv
+│   ├── self-assessment-map.csv
+│   ├── self-assessment-selected.csv
+│   ├── self-assessment-metadata-fix.csv
+│   ├── self-assessment-audit.md
 │   ├── argument-construction-audit.md
 │   └── content-axis-audit.md
 └── specs/
@@ -122,5 +128,9 @@ E001–E234 are now treated as a fixed corpus. The curriculum-wide content syste
   - audit of the bridge from idea generation to written argument
 - `management/argument-bridge-selected.csv`
   - four selected bridge revisions: E087 / E117 / E119 / E208
+- `curriculum/self-assessment.md`
+  - SA00–SA04: Task → Argument → Meaning → Precision → Naturalness
+- `management/self-assessment-audit.md`
+  - audit of self-check / WQ / WR / AC alignment
 
-The material remap, Core review, and argument-construction layer are complete. ARG01–ARG06 was added without new lessons, and only four existing materials (E087, E117, E119, E208) received selected bridge revisions at v1.1. No E235+.
+The material remap, Core review, argument-construction layer, and self-assessment alignment are complete. Self-check now follows Task → Argument → Meaning/Correctness → Precision → Naturalness. P1 WQ00 metadata was repaired to 42/42 writing materials, and only E087/E208 received learner-facing self-assessment revisions at v1.2. No E235+.
