@@ -8,6 +8,7 @@ import {
   containsInternalCode,
   toLearnerText
 } from "../src/lib/learner-text.js";
+import { reviewPresentation } from "../src/lib/review-presentation.js";
 
 const answerMarkers = [
   "解答・解説・自己修正",
@@ -192,6 +193,26 @@ if (e002Entry) {
     if (!answerKeyLines.some((line) => line.startsWith(prefix))) {
       failures.push(`E002: answer list missing ${prefix}`);
     }
+  }
+}
+
+
+const e002ReviewKinds = new Map(
+  parseGenericLesson(fs.readFileSync(e002Entry.filePath, "utf8"), "E002").groups.review
+    .map((section) => [section.title, reviewPresentation(section.title)])
+);
+
+for (const [title, expectedKind, expectedLabel] of [
+  ["Q1. B", "question", "設問解説"],
+  ["Q4. B", "question", "設問解説"],
+  ["本文の因果骨格", "learning", "本文整理"],
+  ["LEXG003｜Pre-solveの整理と本文での因果の強さ", "learning", "表現整理"],
+  ["本文でのWhy this word? — Pre-solve知識の適用", "learning", "表現整理"],
+  ["解説補強｜考え方を再利用する", "learning", "思考・転用"]
+]) {
+  const actual = e002ReviewKinds.get(title);
+  if (!actual || actual.kind !== expectedKind || actual.label !== expectedLabel) {
+    failures.push(`E002: review presentation mismatch for ${title}: ${JSON.stringify(actual)}`);
   }
 }
 
