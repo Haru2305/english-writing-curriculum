@@ -29,7 +29,7 @@ The curriculum now uses seven distinct layers.
 | Idea bank | **What reusable proposition can I retrieve?** | IDEA0001–IDEA0078, mapped to TH / EV |
 | Argument construction | **How do I turn one useful thought into a coherent argument?** | ARG01–ARG06 |
 | Writing/output system | **How do I express and execute the reasoning?** | Existing WF / WT / WQ / WP |
-| Self-assessment / revision | **What is wrong, and what should I fix first?** | SA00–SA04 + WQ / WR / AC |
+| Self-assessment / calibration / revision | **What is wrong, how severe is it, and what should I fix first?** | SA00–SA04 + SA-A/B/C + SET-A/B/C + WQ / WR / AC |
 
 Existing `TL01–TL06` thinking lenses remain valid, but they have a different role.  
 TL is an optional broad philosophical question. TH is a concrete reasoning operation that should transfer across topics.
@@ -552,7 +552,9 @@ ARG operates between idea formation and final writing execution:
 
 The exam-mode repair order is **Task → Argument → Meaning/Correctness → Precision → Naturalness**.
 
-See `curriculum/argument-construction.md` and `curriculum/self-assessment.md`.
+Writing diagnosis uses SA-A/B/C. P4 full-set execution uses a separate SET-A/B/C axis. These are not one numerical scale.
+
+See `curriculum/argument-construction.md`, `curriculum/self-assessment.md`, and `curriculum/grading-calibration.md`.
 
 ---
 
@@ -748,6 +750,7 @@ Therefore the next content task is **remapping and selective revision**, not les
 9. Formalize the bridge from thought to paragraph. **Completed: `curriculum/argument-construction.md`, `management/writing-type-argument-map.csv`, `management/argument-construction-audit.md`**
 10. Selectively review only a few bridge lessons where naming ARG materially improves transfer. **Completed: E087 / E117 / E119 / E208 at v1.1**
 11. Align self-assessment and revision priority with ARG. **Completed: SA00–SA04, WR01/WR02 repair order, P1 WQ00 42/42, E087/E208 v1.2**
-12. Preserve Published lesson immutability and version revisions according to repository policy.
+12. Calibrate phase-specific attainment labels and model answers. **Completed: SA vs SET separation, 38 model-answer word-count corrections, 38/38 Drive QA**
+13. Preserve Published lesson immutability and version revisions according to repository policy.
 
 The final curriculum should allow 234 individual experiences to compress into a small set of reusable intellectual operations.
