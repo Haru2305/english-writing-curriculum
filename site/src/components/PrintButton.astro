@@ -1,0 +1,11 @@
+<div class="print-controls">
+  <button type="button" class="print-problem-button" data-print-problem>
+    問題を印刷
+  </button>
+</div>
+
+<script is:inline>
+  document.querySelector("[data-print-problem]")?.addEventListener("click", () => {
+    window.print();
+  });
+</script>
