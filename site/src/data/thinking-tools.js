@@ -170,7 +170,7 @@ export const lessonThinkingToolIds = {
   E001: ["remaining-failure", "necessary-condition"],
   E049: ["word-role", "context-clues", "logic-fit"],
   E097: ["goal", "mandatory-concern", "trade-off", "decision"],
-  E145: ["definition", "components", "nearby-concepts", "scope-limit", "limitation"]
+  E145: ["definition", "components", "nearby-concepts", "limitation"]
 };
 
 export function toolsForLesson(lessonId) {
