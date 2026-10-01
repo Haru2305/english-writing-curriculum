@@ -2048,3 +2048,45 @@ h1 {
     line-height: 1.65;
   }
 }
+
+
+.candidate-source-group .candidate-sentence-card {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #f6f5ef;
+}
+
+.reference-candidate-source {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #dfded7;
+}
+
+.reference-candidate-source h2 {
+  margin: 0 0 7px;
+  font-family: var(--textbook-font);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.reference-dialog-candidate {
+  margin: 0 17px 20px;
+  padding: 11px 12px;
+  border: 1px dashed #aaa99f;
+  border-radius: 7px;
+  background: #f6f5ef;
+}
+
+.reference-dialog-candidate p {
+  margin: 6px 0 0;
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.reference-dialog-candidate.reference-target {
+  border-style: solid;
+  border-color: #77766e;
+  background: #eeede6;
+}
