@@ -1964,3 +1964,129 @@ h1 {
     background: transparent !important;
   }
 }
+
+
+/* Paragraph-function and insertion lessons */
+.passage-with-candidate {
+  display: grid;
+  gap: 0;
+}
+
+.lesson-passage-paragraph {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 4px;
+  margin: 0;
+  padding: 13px 14px;
+  border-bottom: 1px solid #ecebe5;
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.lesson-passage-paragraph:last-child {
+  border-bottom: 0;
+}
+
+.passage-locator {
+  color: #85857d;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  padding-top: 4px;
+}
+
+.candidate-sentence-card {
+  margin: 12px 14px;
+  padding: 12px 13px;
+  border: 1px dashed #aaa99f;
+  border-radius: 9px;
+  background: #f6f5ef;
+}
+
+.candidate-sentence-card p,
+.reference-candidate p {
+  margin: 6px 0 0;
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.reference-candidate {
+  margin: 10px 4px;
+  padding: 10px 11px;
+  border: 1px dashed #aaa99f;
+  border-radius: 7px;
+  background: #f6f5ef;
+}
+
+.reference-candidate.reference-target {
+  border-style: solid;
+  border-color: #77766e;
+  background: #eeede6;
+  box-shadow: inset 3px 0 0 #77766e;
+}
+
+.reference-dialog-reading .reference-candidate[hidden] {
+  display: none;
+}
+
+@media print {
+  .candidate-sentence-card {
+    margin-inline: 0;
+    background: transparent !important;
+    break-inside: avoid-page;
+  }
+
+  .lesson-passage-paragraph {
+    grid-template-columns: 25px minmax(0, 1fr);
+    padding: 4px 0;
+    font-size: 10.5pt;
+    line-height: 1.65;
+  }
+}
+
+
+.candidate-source-group .candidate-sentence-card {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #f6f5ef;
+}
+
+.reference-candidate-source {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #dfded7;
+}
+
+.reference-candidate-source h2 {
+  margin: 0 0 7px;
+  font-family: var(--textbook-font);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.reference-dialog-candidate {
+  margin: 0 17px 20px;
+  padding: 11px 12px;
+  border: 1px dashed #aaa99f;
+  border-radius: 7px;
+  background: #f6f5ef;
+}
+
+.reference-dialog-candidate p {
+  margin: 6px 0 0;
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.reference-dialog-candidate.reference-target {
+  border-style: solid;
+  border-color: #77766e;
+  background: #eeede6;
+}

@@ -140,6 +140,34 @@ export const thinkingToolGroups = [
     ]
   },
   {
+    id: "paragraph-logic",
+    title: "段落どうしの論理を追う",
+    description: "段落の役割と、接続語・指示語が作る前後関係を追う。",
+    tools: [
+      {
+        id: "paragraph-function",
+        label: "段落の役割",
+        english: "paragraph function",
+        question: "この段落は、主張・理由・例・限定のうち何の仕事をしているか。",
+        exampleLesson: "E193"
+      },
+      {
+        id: "connector-reference",
+        label: "接続語・指示語",
+        english: "logic & reference",
+        question: "接続語や指示語は、直前のどの内容を受けているか。",
+        exampleLesson: "E193"
+      },
+      {
+        id: "insertion-fit",
+        label: "前後につながるか",
+        english: "insertion fit",
+        question: "その文は前の内容を受け、次の展開へ自然につながる位置にあるか。",
+        exampleLesson: "E193"
+      }
+    ]
+  },
+  {
     id: "failure",
     title: "一つ改善しても何が残るか",
     description: "完成した分類を暗記せず、残る失敗から必要条件を逆算する。",
@@ -170,7 +198,8 @@ export const lessonThinkingToolIds = {
   E001: ["remaining-failure", "necessary-condition"],
   E049: ["word-role", "context-clues", "logic-fit"],
   E097: ["goal", "mandatory-concern", "trade-off", "decision"],
-  E145: ["definition", "components", "nearby-concepts", "limitation"]
+  E145: ["definition", "components", "nearby-concepts", "limitation"],
+  E193: ["paragraph-function", "connector-reference", "insertion-fit"]
 };
 
 export function toolsForLesson(lessonId) {
