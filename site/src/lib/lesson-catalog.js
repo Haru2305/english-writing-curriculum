@@ -79,9 +79,22 @@ function summaryFromFile(filePath) {
 }
 
 export function getLessonCatalog() {
-  return lessonFiles()
+  const lessons = lessonFiles()
     .map(summaryFromFile)
     .sort((a, b) => Number(a.id.slice(1)) - Number(b.id.slice(1)));
+
+  const ids = lessons.map((lesson) => lesson.id);
+  if (lessons.length !== 234) {
+    throw new Error(`Expected frozen corpus E001–E234 (234 lessons), found ${lessons.length}.`);
+  }
+  if (new Set(ids).size !== ids.length) {
+    throw new Error("Duplicate lesson IDs found in bundles.");
+  }
+  if (ids[0] !== "E001" || ids[ids.length - 1] !== "E234") {
+    throw new Error("Lesson corpus boundaries must remain E001–E234.");
+  }
+
+  return lessons;
 }
 
 export function getGenericLessonCatalog() {
