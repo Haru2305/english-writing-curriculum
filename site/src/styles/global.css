@@ -930,6 +930,248 @@ h1 {
   background: #f8f7f3;
 }
 
+
+/* REVIEW reference: mobile bottom sheet, desktop split view */
+.review-workspace {
+  min-width: 0;
+}
+
+.review-reference-pane {
+  display: none;
+}
+
+.reference-dock {
+  position: sticky;
+  top: 54px;
+  z-index: 6;
+  margin: -18px -18px 4px;
+  padding: 10px 18px 11px;
+  border-bottom: 1px solid #d9d8d0;
+  background: rgba(248, 247, 243, 0.96);
+  backdrop-filter: blur(10px);
+}
+
+.reference-dock > span {
+  display: block;
+  margin-bottom: 6px;
+  color: #77776f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.reference-dock > div {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding-bottom: 1px;
+  scrollbar-width: none;
+}
+
+.reference-dock > div::-webkit-scrollbar {
+  display: none;
+}
+
+.reference-button {
+  flex: 0 0 auto;
+  appearance: none;
+  padding: 6px 9px;
+  border: 1px solid #c7c6be;
+  border-radius: 999px;
+  background: #fff;
+  color: #3f3f3b;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reference-button:active {
+  transform: scale(0.98);
+}
+
+.reference-dialog {
+  position: fixed;
+  inset: auto 0 0 0;
+  width: 100%;
+  max-width: none;
+  max-height: 82dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 18px 18px 0 0;
+  background: #fbfaf6;
+  color: #202124;
+  overflow: hidden;
+}
+
+.reference-dialog::backdrop {
+  background: rgba(20, 20, 18, 0.38);
+}
+
+.reference-dialog-sheet {
+  max-height: 82dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.reference-dialog-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 11px;
+  border-bottom: 1px solid #d8d7cf;
+  background: rgba(251, 250, 246, 0.97);
+  backdrop-filter: blur(10px);
+}
+
+.reference-dialog-header .cue-label {
+  margin-bottom: 2px;
+}
+
+.reference-dialog-header h2 {
+  margin: 0;
+  font-family: var(--textbook-font);
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.reference-dialog-close {
+  appearance: none;
+  padding: 7px 10px;
+  border: 1px solid #c7c6be;
+  border-radius: 999px;
+  background: #fff;
+  color: #4b4b45;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reference-dialog-reading,
+.reference-reading {
+  font-family: var(--textbook-font);
+}
+
+.reference-dialog-reading {
+  padding: 4px 17px 20px;
+}
+
+.reference-dialog-reading p,
+.reference-reading p {
+  position: relative;
+  margin: 0;
+  padding: 14px 2px 14px 28px;
+  border-bottom: 1px solid #ecebe5;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.reference-paragraph-number {
+  position: absolute;
+  left: 2px;
+  top: 17px;
+  color: #8a8982;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.reference-dialog-reading p.reference-target,
+.reference-reading p.reference-target {
+  margin-inline: -8px;
+  padding-inline: 36px 8px;
+  border-left: 3px solid #66655e;
+  background: #f0efe9;
+}
+
+.reference-dialog-reading p[hidden] {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .page-shell {
+    width: min(100%, 1120px);
+  }
+
+  .lesson-header,
+  .lesson-flow,
+  .nav-row {
+    width: min(100%, 760px);
+    margin-inline: auto;
+  }
+
+  .answer-details {
+    width: min(100%, 760px);
+    margin-inline: auto;
+  }
+
+  .answer-details[open] {
+    width: 100%;
+  }
+
+  .review-workspace {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.25fr);
+    align-items: start;
+    background: #f8f7f3;
+  }
+
+  .review-reference-pane {
+    display: block;
+    min-width: 0;
+    padding: 18px 18px 24px;
+    border-right: 1px solid #d4d3cc;
+    background: #fff;
+  }
+
+  .reference-pane-sticky {
+    position: sticky;
+    top: 72px;
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 4px;
+  }
+
+  .reference-pane-sticky h2 {
+    margin: 0 0 7px;
+    font-family: var(--textbook-font);
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  .reference-reading p {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .answer-flow {
+    min-width: 0;
+    padding: 18px 22px 26px;
+  }
+
+  .reference-dock {
+    position: static;
+    margin: -2px 0 2px;
+    padding: 0 0 11px;
+    border-bottom: 1px solid #dfded7;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .reference-dialog {
+    display: none;
+  }
+}
+
 @media (min-width: 720px) {
   .page-shell { padding-top: 40px; }
   .lesson-line { font-size: 17px; }
