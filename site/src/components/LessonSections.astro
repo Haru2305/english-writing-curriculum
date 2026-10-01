@@ -13,6 +13,7 @@ function blockClass(lines, sectionTitle) {
 function lineClass(line) {
   if (/^Q\d+[.｜]/.test(line)) return "question";
   if (/^[A-D][.．]\s/.test(line)) return "choice";
+  if (/^\d+[.．]\s/.test(line)) return "numbered-item";
   if (/^[-→]/.test(line)) return "flow-line";
   return "";
 }
