@@ -4,7 +4,8 @@ const { sections = [], answer = false } = Astro.props;
 function userText(text) {
   const cleaned = text
     .replace(/^(Q\d+)[｜:：]\s*(?:RQ|RF|WF|SS|TF)\d+\s*$/i, "$1")
-    .replace(/^(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|SS|TF|P|G|A|B|D)\d{1,4}\s*[｜:：]?\s*/i, "")
+    .replace(/^(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}(?:\s*[｜:：]\s*|\s+)/i, "")
+    .replace(/^(?:P|G|A|B|D)\d{2,4}\s*[｜:：]\s*/i, "")
     .trim();
 
   if (cleaned === "弱い考え方との比較") return "弱い例";
