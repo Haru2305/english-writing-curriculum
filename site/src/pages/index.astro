@@ -1,12 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getLessonCatalog } from "../lib/lesson-catalog.js";
+
+const lessons = getLessonCatalog();
+const representatives = lessons.filter((lesson) => lesson.representative);
+const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle) => ({
+  bundle,
+  lessons: lessons.filter((lesson) => lesson.bundle === bundle)
+}));
 ---
 
 <BaseLayout title="英語教材｜スマホビューア">
   <p class="eyebrow">Mobile lesson viewer</p>
   <h1>英語教材</h1>
   <p class="lead">
-    スマホで問題セットを読みやすく見るための閲覧専用ビューアです。現在は代表教材で表示設計を検証しています。
+    E001〜E234をスマホで読みやすく見るための閲覧専用ビューアです。問題・英作文・解答解説はGitHub上のcanonical教材から表示します。
   </p>
 
   <a class="thinking-tools-entry" href="/thinking-tools/">
@@ -15,54 +23,51 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <span>問題を見たとき、何を考えるか迷ったらここを見る</span>
   </a>
 
-  <section class="card-list" aria-label="教材一覧">
-    <a class="lesson-card" href="/e001/">
-      <small>目安60分</small>
-      <strong>E001｜都市・地方で医療アクセスが異なる理由</strong>
-      <span>Reading・Language Focus・Mini Writing</span>
-    </a>
+  <section class="index-section" aria-labelledby="representative-heading">
+    <div class="index-section-heading">
+      <p class="eyebrow">Representative lessons</p>
+      <h2 id="representative-heading">代表教材</h2>
+      <p>形式ごとの表示を細かく調整した教材です。</p>
+    </div>
 
-    <a class="lesson-card" href="/e049/">
-      <small>目安60分</small>
-      <strong>E049｜誤情報：文脈から語の意味を決める</strong>
-      <span>Reading・Context Check・Questions</span>
-    </a>
+    <div class="card-list">
+      {representatives.map((lesson) => (
+        <a class="lesson-card" href={"/" + lesson.slug + "/"}>
+          <small>{lesson.minutes ? "目安" + lesson.minutes + "分" : lesson.phase}</small>
+          <strong>{lesson.id}｜{lesson.title}</strong>
+          <span>{lesson.phase} / {lesson.bundle}</span>
+        </a>
+      ))}
+    </div>
+  </section>
 
-    <a class="lesson-card" href="/e087/">
-      <small>目安60分</small>
-      <strong>E087｜公共空間の夜間利用：短い構想から読み手に届く段落へ</strong>
-      <span>Reading・3-line Plan・90–110 word Free Writing・Revision</span>
-    </a>
+  <section class="index-section all-lessons-section" aria-labelledby="all-lessons-heading">
+    <div class="index-section-heading">
+      <p class="eyebrow">E001–E234</p>
+      <h2 id="all-lessons-heading">全教材</h2>
+      <p>全234教材。bundleを開くと、その中の教材へ移動できます。</p>
+    </div>
 
-    <a class="lesson-card" href="/e097/">
-      <small>目安60分</small>
-      <strong>E097｜都市の暑熱対策：複数基準で最初の投資先を決める</strong>
-      <span>Reading・Data Table・Questions・Writing</span>
-    </a>
-
-    <a class="lesson-card" href="/e145/">
-      <small>目安60分</small>
-      <strong>E145｜修理可能性スコア：未知概念を本文だけで組み立てる</strong>
-      <span>Reading・Questions・Claim Check・Short Output</span>
-    </a>
-
-    <a class="lesson-card" href="/e193/">
-      <small>目安60分</small>
-      <strong>E193｜チェックリストはなぜ効かなくなるのか：段落機能と文挿入で論理を追う</strong>
-      <span>Reading・Candidate Sentence・Questions・Short Output</span>
-    </a>
-
-    <a class="lesson-card" href="/e205/">
-      <small>目安60分</small>
-      <strong>E205｜筑波Day1：長文①―30〜60字の日本語説明・空所・見出しを処理する</strong>
-      <span>Passage・日本語記述・見出し・空所・順序</span>
-    </a>
-
-    <a class="lesson-card" href="/e208/">
-      <small>目安60分</small>
-      <strong>E208｜筑波Day4：大問3B―約100語で「立場・理由・具体例」を書く</strong>
-      <span>Prompt・Planning・about-100-word Free Composition・Revision</span>
-    </a>
+    <div class="bundle-list">
+      {bundles.map((group, index) => (
+        <details class="bundle-group" open={index === 0}>
+          <summary>
+            <strong>{group.bundle}</strong>
+            <span>{group.lessons[0]?.id}–{group.lessons[group.lessons.length - 1]?.id}</span>
+            <small>{group.lessons[0]?.phase}</small>
+          </summary>
+          <div class="bundle-lessons">
+            {group.lessons.map((lesson) => (
+              <a href={"/" + lesson.slug + "/"} class={lesson.representative ? "bundle-lesson representative" : "bundle-lesson"}>
+                <span>{lesson.id}</span>
+                <strong>{lesson.title}</strong>
+                {lesson.representative && <small>代表</small>}
+              </a>
+            ))}
+          </div>
+        </details>
+      ))}
+    </div>
   </section>
 
   <p class="note">
