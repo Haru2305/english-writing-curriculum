@@ -53,20 +53,7 @@ function sectionRole(title, side = "problem") {
   return "challenge";
 }
 
-function parseBody(text, side = "problem") {
-  const lines = text.split("\n");
-  const nonEmpty = lines
-    .map((line, index) => ({ line: line.trim(), index }))
-    .filter((item) => item.line && item.line !== "---" && !/^_+$/.test(item.line));
-
-  if (!nonEmpty.length) {
-    return { titleLine: "", metaLine: "", sections: [] };
-  }
-
-  const titleItem = nonEmpty[0];
-  const metaItem = nonEmpty[1] ?? { line: "", index: titleItem.index };
-  const bodyLines = lines.slice(metaItem.index + 1);
-
+function parseSectionLines(bodyLines, side = "problem") {
   const sections = [];
   let section = { title: "", role: side === "answer" ? "review" : "challenge", units: [] };
   let block = [];
@@ -102,11 +89,25 @@ function parseBody(text, side = "problem") {
   }
 
   flushSection();
+  return sections;
+}
 
+function parseProblemBody(text) {
+  const lines = text.split("\n");
+  const nonEmpty = lines
+    .map((line, index) => ({ line: line.trim(), index }))
+    .filter((item) => item.line && item.line !== "---" && !/^_+$/.test(item.line));
+
+  if (!nonEmpty.length) {
+    return { titleLine: "", metaLine: "", sections: [] };
+  }
+
+  const titleItem = nonEmpty[0];
+  const metaItem = nonEmpty[1] ?? { line: "", index: titleItem.index };
   return {
     titleLine: titleItem.line,
     metaLine: metaItem.line,
-    sections
+    sections: parseSectionLines(lines.slice(metaItem.index + 1), "problem")
   };
 }
 
@@ -123,8 +124,10 @@ function inferTime(metaLine, sections) {
 export function parseGenericLesson(raw, fallbackId = "Lesson") {
   const body = stripFrontMatter(normalize(raw));
   const split = splitAnswer(body);
-  const problem = parseBody(split.problem.trim(), "problem");
-  const answer = split.answer.trim() ? parseBody("\n" + fallbackId + "\n" + split.answer.trim(), "answer") : { sections: [] };
+  const problem = parseProblemBody(split.problem.trim());
+  const answerSections = split.answer.trim()
+    ? parseSectionLines(split.answer.trim().split("\n"), "answer")
+    : [];
 
   const id = problem.titleLine.match(/^(E\d{3})/)?.[1] ?? fallbackId;
   const title = problem.titleLine.replace(new RegExp("^" + id + "｜?"), "").trim() || id;
@@ -134,7 +137,7 @@ export function parseGenericLesson(raw, fallbackId = "Lesson") {
     challenge: problem.sections.filter((section) => section.role === "challenge"),
     writing: problem.sections.filter((section) => section.role === "writing"),
     support: problem.sections.filter((section) => section.role === "support"),
-    review: answer.sections
+    review: answerSections
   };
 
   return {
