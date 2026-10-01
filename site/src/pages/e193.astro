@@ -1,0 +1,579 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LessonSections from "../components/LessonSections.astro";
+import PrintButton from "../components/PrintButton.astro";
+import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
+import {
+  stripFrontMatter,
+  splitAtMarker,
+  takeHeader,
+  parseSections,
+  findSection,
+  withoutTitle,
+  flatSectionLines,
+  locatedParagraphs
+} from "../lib/lesson-source.js";
+
+const sourcePath = path.resolve(process.cwd(), "../bundles/B033/E193.md");
+const raw = stripFrontMatter(fs.readFileSync(sourcePath, "utf8").replace(/\r\n/g, "\n"));
+const split = splitAtMarker(raw, "解答・解説・自己修正");
+
+const candidateMatch = split.problem.match(/\nCandidate Sentence\s*\n+([^\n]+)\n+/);
+if (!candidateMatch) throw new Error("E193 Candidate Sentence not found");
+const candidateSentence = candidateMatch[1].trim();
+
+const problemWithoutCandidate = split.problem
+  .replace(candidateMatch[0], "\n\n")
+  .replace(/\n---\s*$/, "")
+  .trimEnd();
+
+const problemHeader = takeHeader(problemWithoutCandidate, "E193");
+const problemSections = parseSections(problemHeader.bodyLines, {
+  sectionNames: [
+    "今日の狙い",
+    "時間配分",
+    "Reading",
+    "Questions",
+    "Short Output",
+    "Self-check"
+  ]
+});
+
+const answerSections = parseSections(split.answer.trim().split("\n"), {
+  sectionNames: [
+    "Model short output",
+    "Self-correction",
+    "到達目安",
+    "解説の使い方"
+  ],
+  sectionMatcher: (line) => /^Q\d+｜解答(?:例)?$/.test(line)
+});
+
+const title = problemHeader.titleLine.replace(/^E193｜/, "");
+const pageTitle = "E193｜" + title;
+const timeText = flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "";
+const coreTime = timeText.match(/Core\s*(\d+)分/i)?.[1];
+const learnerMeta = coreTime ? `目安${coreTime}分` : "";
+
+const goalSection = findSection(problemSections, "今日の狙い");
+const readingSection = findSection(problemSections, "Reading");
+const questionsSection = findSection(problemSections, "Questions");
+const shortOutputSection = findSection(problemSections, "Short Output");
+const selfCheckSection = findSection(problemSections, "Self-check");
+const readingParagraphs = locatedParagraphs(readingSection);
+
+function parseQuestionTasks(section) {
+  const lines = flatSectionLines(section);
+  const tasks = [];
+  let current = null;
+
+  for (const line of lines) {
+    const match = line.match(/^(Q\d+)｜(?:RQ|RF|WF|SS|TF|D)\d+\s*$/);
+    if (match) {
+      if (current) tasks.push(current);
+      current = { id: match[1], prompt: [] };
+      continue;
+    }
+    if (current) current.prompt.push(line);
+  }
+
+  if (current) tasks.push(current);
+  return tasks;
+}
+
+function questionsForDisplay(tasks) {
+  return {
+    title: "Questions",
+    units: tasks.map((task) => ({
+      type: "block",
+      lines: [`${task.id}. ${task.prompt.join(" ")}`]
+    }))
+  };
+}
+
+function parseQuestionReviews(sections, tasks) {
+  return tasks.map((task) => {
+    const section = sections.find((item) =>
+      item.title === `${task.id}｜解答例` || item.title === `${task.id}｜解答`
+    );
+    const lines = flatSectionLines(section);
+    return {
+      id: task.id,
+      title: task.prompt.join(" "),
+      answer: lines[0] ?? "",
+      detail: lines.slice(1)
+    };
+  });
+}
+
+function findSubgroup(section, title) {
+  return section?.units?.find((unit) => unit.type === "subgroup" && unit.title === title) ?? null;
+}
+
+function sectionFromSubgroups(section, titles) {
+  const units = section?.units?.filter(
+    (unit) => unit.type === "subgroup" && titles.includes(unit.title)
+  ) ?? [];
+  return units.length ? { title: "", units } : null;
+}
+
+const questionTasks = parseQuestionTasks(questionsSection);
+const displayQuestions = questionsForDisplay(questionTasks);
+const questionReviews = parseQuestionReviews(answerSections, questionTasks);
+
+const deepSection = findSection(answerSections, "解説の使い方");
+const deepReasoning = sectionFromSubgroups(
+  deepSection,
+  ["この問題で考えること", "考え方", "弱い考え方との比較"]
+);
+const modelReading = sectionFromSubgroups(deepSection, ["模範解答の読み方"]);
+const takeawayGroup = findSubgroup(deepSection, "次の問題に持っていくもの");
+const takeawaySection = takeawayGroup ? { title: "", units: takeawayGroup.blocks } : null;
+
+const modelOutput = findSection(answerSections, "Model short output");
+const selfCorrection = findSection(answerSections, "Self-correction");
+const attainment = findSection(answerSections, "到達目安");
+
+const lessonKeys = [
+  { label: "段落", value: "topicではなくfunctionを見る" },
+  { label: "文挿入", value: "接続語・指示語で前を特定する" },
+  { label: "位置", value: "次段落へのつながりまで確認する" }
+];
+
+const writeMap = ["Failure condition", "Judgment", "Mechanism", "Design principle"];
+
+const referenceMap = {
+  Q1: { paragraphs: "2", candidate: "no" },
+  Q2: { paragraphs: "2,3", candidate: "no" },
+  Q3: { paragraphs: "4,5", candidate: "yes" },
+  Q4: { paragraphs: "5", candidate: "no" },
+  Q5: { paragraphs: "2,6", candidate: "no" },
+  WRITE: { paragraphs: "2,3,4,5", candidate: "no" }
+};
+
+const answerOverview = [
+  { id: "Q1", answer: "第2段落＝最初の失敗理由" },
+  { id: "Q2", answer: "第3段落＝第2段落の具体化" },
+  { id: "Q3", answer: "第4段落の後" },
+  { id: "Q4", answer: "重要な判断から注意をそらし得る" },
+  { id: "Q5", answer: "taskへの適合がeffectivenessを決める" }
+];
+
+const referenceShortcuts = [
+  { label: "全文", paragraphs: "all", candidate: "yes" },
+  ...questionReviews.map((item) => ({
+    label: item.id,
+    ...(referenceMap[item.id] ?? { paragraphs: "all", candidate: "no" })
+  })),
+  { label: "WRITE", ...referenceMap.WRITE }
+];
+---
+
+<BaseLayout title={pageTitle} description="E193 段落機能＋文挿入代表教材">
+  <article>
+    <header class="lesson-header">
+      <div class="series-mark" aria-label="シリーズと教材番号">
+        <span>自由英作文</span>
+        <span aria-hidden="true">/</span>
+        <strong>E193</strong>
+      </div>
+      <h1 class="lesson-title">{title}</h1>
+      {learnerMeta && <p class="lesson-meta">{learnerMeta}</p>}
+    </header>
+
+    <PrintButton />
+
+    <section class="lesson-flow" aria-label="問題">
+      <section class="flow-stage flow-stage-setup">
+        <header class="flow-stage-header">
+          <span class="flow-kicker">START</span>
+          <h2>解く前に</h2>
+          {timeText && <p class="flow-meta">{timeText}</p>}
+        </header>
+
+        <div class="flow-stage-body">
+          <section class="lesson-keys" aria-label="今回の重要ポイント">
+            <span class="cue-label">KEYS</span>
+            <div class="lesson-keys-list">
+              {lessonKeys.map((item) => (
+                <div class="lesson-key">
+                  <small>{item.label}</small>
+                  <strong>{item.value}</strong>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <ThinkingToolsCue lessonId="E193" />
+          <LessonSections sections={[withoutTitle(goalSection)].filter(Boolean)} />
+        </div>
+      </section>
+
+      <section class="flow-stage flow-stage-core challenge flow-stage-challenge">
+        <header class="flow-stage-header">
+          <span class="flow-kicker">CHALLENGE</span>
+          <h2>Reading, Insertion & Questions</h2>
+        </header>
+
+        <div class="flow-stage-body">
+          <section class="content-group importance-primary">
+            <h2 class="content-group-title">Reading</h2>
+            <div class="content-group-body passage-with-candidate">
+              {readingParagraphs.map((paragraph) => (
+                <>
+                  <p class="lesson-passage-paragraph">
+                    <span class="passage-locator">[{paragraph.locator}]</span>
+                    <span>{paragraph.text}</span>
+                  </p>
+                  {paragraph.locator === "4" && (
+                    <aside class="candidate-sentence-card" aria-label="Candidate Sentence">
+                      <span class="cue-label">CANDIDATE SENTENCE</span>
+                      <p>{candidateSentence}</p>
+                    </aside>
+                  )}
+                </>
+              ))}
+            </div>
+          </section>
+
+          <LessonSections sections={[displayQuestions]} />
+        </div>
+      </section>
+
+      <section class="flow-stage flow-stage-core writing">
+        <header class="flow-stage-header">
+          <span class="flow-kicker">WRITE</span>
+          <h2>Short Output</h2>
+        </header>
+
+        <div class="flow-stage-body">
+          <section class="write-map" aria-label="答案の構成">
+            <span class="cue-label">WRITE MAP</span>
+            <div class="write-map-flow">
+              {writeMap.map((item, index) => (
+                <>
+                  <span class="write-map-item">{item}</span>
+                  {index < writeMap.length - 1 && <span class="write-map-arrow" aria-hidden="true">→</span>}
+                </>
+              ))}
+            </div>
+          </section>
+
+          <LessonSections sections={[withoutTitle(shortOutputSection)].filter(Boolean)} />
+
+          {selfCheckSection && (
+            <details class="support-details">
+              <summary>書き終わったら確認</summary>
+              <div class="support-details-body">
+                <LessonSections sections={[withoutTitle(selfCheckSection)]} />
+              </div>
+            </details>
+          )}
+        </div>
+      </section>
+    </section>
+
+    <details class="answer-details">
+      <summary class="review-trigger">
+        <span>REVIEW</span>
+        <strong>解答・解説を見る</strong>
+      </summary>
+
+      <div class="review-workspace">
+        <aside class="review-reference-pane" aria-label="本文とCandidate Sentence参照">
+          <div class="reference-pane-sticky">
+            <span class="cue-label">REFERENCE</span>
+            <h2>Reading</h2>
+            <div class="reference-reading reference-reading-with-candidate">
+              {readingParagraphs.map((paragraph) => (
+                <>
+                  <p data-reference-paragraph={paragraph.locator}>
+                    <span class="reference-paragraph-number">[{paragraph.locator}]</span>
+                    {paragraph.text}
+                  </p>
+                  {paragraph.locator === "4" && (
+                    <aside class="reference-candidate" data-reference-candidate>
+                      <span class="cue-label">CANDIDATE SENTENCE</span>
+                      <p>{candidateSentence}</p>
+                    </aside>
+                  )}
+                </>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <div class="answer-flow">
+          <nav class="reference-dock" aria-label="本文参照ショートカット">
+            <div class="reference-dock-head">
+              <span>本文参照</span>
+              <button type="button" class="review-close-button" data-review-close>解答・解説を閉じる</button>
+            </div>
+            <div class="reference-shortcuts">
+              {referenceShortcuts.map((item) => (
+                <button
+                  type="button"
+                  class="reference-button"
+                  data-reference-paragraphs={item.paragraphs}
+                  data-reference-candidate={item.candidate}
+                  data-reference-label={item.label}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </nav>
+
+          <details class="answer-stage answer-stage-primary" open>
+            <summary>
+              <strong>答え一覧</strong>
+              <small>まず役割・挿入位置・主張を確認</small>
+            </summary>
+            <div class="answer-stage-body">
+              <div class="compact-answer-list">
+                {answerOverview.map((item) => (
+                  <p><span>{item.id}</span><strong>{item.answer}</strong></p>
+                ))}
+              </div>
+            </div>
+          </details>
+
+          <details class="answer-stage answer-stage-secondary" open>
+            <summary>
+              <strong>問題別解説</strong>
+              <small>段落の役割と前後の論理を対応させる</small>
+            </summary>
+
+            <div class="answer-stage-body question-review-list">
+              <section class="review-task-family" aria-label="Questions">
+                <span class="cue-label">QUESTIONS</span>
+
+                {questionReviews.map((review) => (
+                  <section class="question-review" aria-labelledby={"review-" + review.id}>
+                    <header class="question-review-header">
+                      <span class="question-review-badge">{review.id}</span>
+                      <div>
+                        <h3 id={"review-" + review.id}>{review.title}</h3>
+                        <p class="question-review-answer">
+                          <span>答え</span>
+                          <strong>{review.answer}</strong>
+                        </p>
+                      </div>
+                    </header>
+
+                    <button
+                      type="button"
+                      class="inline-reference-button"
+                      data-reference-paragraphs={referenceMap[review.id]?.paragraphs ?? "all"}
+                      data-reference-candidate={referenceMap[review.id]?.candidate ?? "no"}
+                      data-reference-label={review.id}
+                    >
+                      {review.id === "Q3" ? "本文・候補文を見る" : "本文を見る"}
+                    </button>
+
+                    {review.detail.length > 0 && (
+                      <div class="question-review-explanation">
+                        {review.detail.map((line) => <p>{line}</p>)}
+                      </div>
+                    )}
+                  </section>
+                ))}
+              </section>
+
+              <section class="review-task-family" aria-label="Short Output">
+                <span class="cue-label">SHORT OUTPUT</span>
+                <section class="question-review question-review-writing" aria-labelledby="review-write">
+                  <header class="question-review-header">
+                    <span class="question-review-badge">WRITE</span>
+                    <div>
+                      <h3 id="review-write">正しい項目でもchecklistが失敗する条件を説明する</h3>
+                      <p class="question-review-answer">
+                        <span>構成</span>
+                        <strong>{writeMap.join(" → ")}</strong>
+                      </p>
+                    </div>
+                  </header>
+
+                  <button
+                    type="button"
+                    class="inline-reference-button"
+                    data-reference-paragraphs={referenceMap.WRITE.paragraphs}
+                    data-reference-candidate="no"
+                    data-reference-label="WRITE"
+                  >
+                    本文を見る
+                  </button>
+
+                  <div class="question-review-explanation">
+                    <LessonSections sections={[modelOutput, modelReading].filter(Boolean)} answer />
+                  </div>
+                </section>
+              </section>
+            </div>
+          </details>
+
+          {deepReasoning && (
+            <details class="answer-stage answer-stage-secondary">
+              <summary>
+                <strong>考え方</strong>
+                <small>topicではなくfunctionとmechanismを取る</small>
+              </summary>
+              <div class="answer-stage-body">
+                <LessonSections sections={[deepReasoning]} answer />
+              </div>
+            </details>
+          )}
+
+          <details class="answer-stage answer-stage-tertiary">
+            <summary>
+              <strong>次へのポイント</strong>
+              <small>別の手順書・安全確認にも使う</small>
+            </summary>
+            <div class="answer-stage-body">
+              <LessonSections sections={[takeawaySection].filter(Boolean)} answer />
+
+              {selfCorrection && (
+                <details class="support-details review-extra">
+                  <summary>自己修正</summary>
+                  <div class="support-details-body">
+                    <LessonSections sections={[withoutTitle(selfCorrection)]} answer />
+                  </div>
+                </details>
+              )}
+
+              {attainment && (
+                <details class="support-details review-extra">
+                  <summary>到達目安</summary>
+                  <div class="support-details-body">
+                    <LessonSections sections={[withoutTitle(attainment)]} answer />
+                  </div>
+                </details>
+              )}
+            </div>
+          </details>
+        </div>
+      </div>
+    </details>
+
+    <dialog class="reference-dialog" id="reference-dialog" aria-labelledby="reference-dialog-title">
+      <div class="reference-dialog-sheet">
+        <header class="reference-dialog-header">
+          <div>
+            <span class="cue-label">REFERENCE</span>
+            <h2 id="reference-dialog-title">本文</h2>
+          </div>
+          <button type="button" class="reference-dialog-close" data-reference-close aria-label="本文参照を閉じる">閉じる</button>
+        </header>
+
+        <div class="reference-dialog-reading reference-reading-with-candidate">
+          {readingParagraphs.map((paragraph) => (
+            <>
+              <p data-dialog-paragraph={paragraph.locator}>
+                <span class="reference-paragraph-number">[{paragraph.locator}]</span>
+                {paragraph.text}
+              </p>
+              {paragraph.locator === "4" && (
+                <aside class="reference-candidate" data-dialog-candidate>
+                  <span class="cue-label">CANDIDATE SENTENCE</span>
+                  <p>{candidateSentence}</p>
+                </aside>
+              )}
+            </>
+          ))}
+        </div>
+      </div>
+    </dialog>
+
+    <script is:inline>
+      const dialog = document.getElementById("reference-dialog");
+      const dialogTitle = document.getElementById("reference-dialog-title");
+      const desktopPane = document.querySelector(".review-reference-pane");
+      const desktopParagraphs = [...document.querySelectorAll("[data-reference-paragraph]")];
+      const dialogParagraphs = [...document.querySelectorAll("[data-dialog-paragraph]")];
+      const desktopCandidate = document.querySelector("[data-reference-candidate]");
+      const dialogCandidate = document.querySelector("[data-dialog-candidate]");
+      const desktopQuery = window.matchMedia("(min-width: 960px)");
+      const reviewDetails = document.querySelector(".answer-details");
+      const reviewSummary = reviewDetails?.querySelector(":scope > summary");
+
+      function parseParagraphs(value) {
+        if (!value || value === "all") return "all";
+        return value.split(",").map((item) => item.trim()).filter(Boolean);
+      }
+
+      function updateDesktopReference(selection, showCandidate) {
+        desktopParagraphs.forEach((paragraph) => {
+          const number = String(paragraph.dataset.referenceParagraph);
+          paragraph.classList.toggle(
+            "reference-target",
+            selection !== "all" && selection.includes(number)
+          );
+        });
+
+        desktopCandidate?.classList.toggle("reference-target", showCandidate);
+
+        if (!desktopPane) return;
+        const target = selection === "all"
+          ? desktopParagraphs[0]
+          : desktopPane.querySelector('[data-reference-paragraph="' + selection[0] + '"]');
+        target?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+
+      function openMobileReference(selection, showCandidate, label) {
+        if (!dialog) return;
+
+        dialogParagraphs.forEach((paragraph) => {
+          const number = String(paragraph.dataset.dialogParagraph);
+          const show = selection === "all" || selection.includes(number);
+          paragraph.hidden = !show;
+          paragraph.classList.toggle(
+            "reference-target",
+            selection !== "all" && selection.includes(number)
+          );
+        });
+
+        if (dialogCandidate) {
+          dialogCandidate.hidden = !showCandidate;
+          dialogCandidate.classList.toggle("reference-target", showCandidate);
+        }
+
+        dialogTitle.textContent = label + (showCandidate ? " の本文・候補文" : " の本文");
+        if (!dialog.open) dialog.showModal();
+      }
+
+      document.querySelectorAll("[data-reference-paragraphs]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const selection = parseParagraphs(button.dataset.referenceParagraphs);
+          const showCandidate = button.dataset.referenceCandidate === "yes";
+          const label = button.dataset.referenceLabel || "本文";
+          if (desktopQuery.matches) updateDesktopReference(selection, showCandidate);
+          else openMobileReference(selection, showCandidate, label);
+        });
+      });
+
+      document.querySelector("[data-reference-close]")?.addEventListener("click", () => dialog?.close());
+
+      document.querySelectorAll("[data-review-close]").forEach((button) => {
+        button.addEventListener("click", () => {
+          dialog?.close();
+          if (!reviewDetails) return;
+          reviewDetails.open = false;
+          requestAnimationFrame(() => {
+            reviewSummary?.scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        });
+      });
+
+      dialog?.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    </script>
+
+    <nav class="nav-row" aria-label="教材ナビゲーション">
+      <a class="nav-link" href="/e145/">E145へ</a>
+      <a class="nav-link" href="/">一覧へ</a>
+    </nav>
+  </article>
+</BaseLayout>
