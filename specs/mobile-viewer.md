@@ -60,16 +60,17 @@ viewerはbuild時にこの原稿を読み取る。
 Initial implementation:
 
 - Astro static build
-- Cloudflare Pages
-- no Cloudflare Functions required
+- Cloudflare Workers Static Assets
+- no Worker application code required
 
-Cloudflare Pages configuration:
+Cloudflare Workers Builds configuration:
 
 - Production branch: `main`
 - Root directory: `site`
-- Framework preset: `Astro`
 - Build command: `npm run build`
-- Build output directory: `dist`
+- Deploy command: `npx wrangler deploy`
+
+Static asset directory is defined in `site/wrangler.jsonc` as `./dist`.
 
 ## Prototype gate
 
