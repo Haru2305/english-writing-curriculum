@@ -1,0 +1,25 @@
+# Selected Self-assessment Revisions
+
+Only two existing lessons are revised.
+
+## E087 — Introduce
+
+自己採点の共通順序
+
+問い→論理→意味→範囲→自然さ
+
+模範解答と同じ文にするのではなく、まずTaskとARGの役割が通っているかを見る。最後に直すのは一番目立つミスではなく、答案全体へのimpactが最も大きいミス。
+
+自分への問い｜「今1か所だけ直せるなら、どこが答案全体を最も良くするか」
+
+## E208 — Transfer
+
+本番最終チェック
+
+問い→論理→意味→範囲→自然さ
+
+残り時間ではこの順に見る。具体例の言い換えや難語への置換より、問いずれ・理由の飛躍・意味を壊す文を先に直す。
+
+自分への問い｜「最後の1分で、最もimpactの大きい修正はどこか」
+
+No problem text, question, answer key, or lesson ID is changed.
