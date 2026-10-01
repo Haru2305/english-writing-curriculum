@@ -29,7 +29,7 @@ function isHeading(line) {
   if (/^#{2,3}\s+/.test(line)) return true;
   if (text.length > 110) return false;
 
-  return /^(?:(?:Q\d+|\d+)\s*[｜:：.]\s*(?:解答例|解答|完成)|今日の狙い|この回のルール|時間配分|まず確認|Reference(?: card)?|Pre-solve|Gloss(?:\s*\/|\b)|Transfer Guide|P\d Strategy|Strategy|Unknown-concept strategy|Reading(?:\s|$)|Passage(?:\s|$)|Text\s+[A-Z](?:\s*[｜:])|Part\s+(?:\d+|[A-Z])(?:\s*[｜:])|Questions?(?:\s|$)|Mixed Questions|Context Check|Claim Check|Nuance Check|Language Focus|Candidate Sentence|Data Table|Prompt|Planning|Plan→Draft→Revise|Revision Check|Self-check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|Model answer|Model output|Model short output|Model writing|Reading answers|Self-correction|自己修正|到達目安|構成|論証の共通回路|自己採点|思考の再利用|解説補強|本文の|Bundle\s*\d+|P4 Final Gate Check|B\d{3} Checkpoint)/i.test(text);
+  return /^(?:(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}(?:\s*[｜:：]|\s+)|(?:Q\d+|\d+)\s*[｜:：.]\s*(?:解答例|解答|完成)|今日の狙い|この回のルール|時間配分|まず確認|Reference(?: card)?|Pre-solve|Gloss(?:\s*\/|\b)|Transfer Guide|P\d Strategy|Strategy|Unknown-concept strategy|Reading(?:\s|$)|Passage(?:\s|$)|Text\s+[A-Z](?:\s*[｜:])|Part\s+(?:\d+|[A-Z])(?:\s*[｜:])|Questions?(?:\s|$)|Mixed Questions|Context Check|Claim Check|Nuance Check|Language Focus|Candidate Sentence|Data Table|Prompt|Planning|Plan→Draft→Revise|Revision Check|Self-check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|Model answer|Model output|Model short output|Model writing|Reading answers|Self-correction|自己修正|到達目安|構成|論証の共通回路|自己採点|思考の再利用|解説補強|本文の|Bundle\s*\d+(?:で確認したこと)?|P4 Final Gate Check|B\d{3} Checkpoint)/i.test(text);
 }
 
 function sectionRole(title, side = "problem") {
