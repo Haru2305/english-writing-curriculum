@@ -297,6 +297,156 @@ h1 {
   border-top: 1px solid #deded8;
 }
 
+
+.lesson-flow {
+  display: grid;
+  gap: 22px;
+  margin-top: 22px;
+  font-family: var(--textbook-font);
+}
+
+.flow-stage {
+  scroll-margin-top: 72px;
+}
+
+.flow-stage-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 0 2px;
+}
+
+.flow-stage-header h2 {
+  margin: 0;
+  font-family: var(--textbook-font);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.flow-step {
+  flex: 0 0 auto;
+  color: #74746d;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.flow-stage-body {
+  gap: 10px;
+}
+
+.support-details {
+  border: 1px dashed #cfcec6;
+  border-radius: 9px;
+  background: #faf9f5;
+  overflow: hidden;
+}
+
+.support-details > summary {
+  cursor: pointer;
+  padding: 11px 13px;
+  color: #55554f;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.support-details-body {
+  padding: 0 10px 10px;
+}
+
+.answer-flow {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  background: #f2f1ec;
+  font-family: var(--textbook-font);
+}
+
+.answer-notice .content-group {
+  border-style: dashed;
+  background: #f8f7f2;
+}
+
+.answer-stage {
+  border: 1px solid #d8d7cf;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.answer-stage > summary {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  column-gap: 9px;
+  row-gap: 1px;
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 13px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.answer-stage > summary::-webkit-details-marker {
+  display: none;
+}
+
+.answer-stage > summary span {
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #bdbcb4;
+  border-radius: 50%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.answer-stage > summary strong {
+  align-self: end;
+  font-family: var(--textbook-font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.answer-stage > summary small {
+  color: #6c6c65;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.answer-stage[open] > summary {
+  border-bottom: 1px solid #dfded7;
+  background: #ecebe5;
+}
+
+.answer-stage-body {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+}
+
+.answer-stage-body .content-stack,
+.answer-stage-body > * {
+  min-width: 0;
+}
+
+
 .answer-details {
   margin-top: 28px;
   border: 1px solid #d5d5ce;
@@ -322,12 +472,6 @@ h1 {
 .answer-details[open] > summary {
   background: #ecece7;
   color: #202124;
-}
-
-.answer-content {
-  padding: 16px;
-  background: #f2f1ec;
-  font-family: var(--textbook-font);
 }
 
 .nav-row {
