@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&display=swap");
+
 :root {
   --textbook-font:
-    "YuKyokasho", "Yu Kyokasho", "UD Digi Kyokasho NP-R",
-    "UD Digi Kyokasho N-R", "BIZ UDPMincho", "Hiragino Mincho ProN",
-    "Hiragino Mincho Pro", serif;
+    "BIZ UDPMincho", "YuKyokasho", "Yu Kyokasho",
+    "UD Digi Kyokasho NP-R", "UD Digi Kyokasho N-R",
+    "Hiragino Mincho ProN", "Hiragino Mincho Pro", serif;
 
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
@@ -137,7 +139,10 @@ h1 {
   letter-spacing: 0.05em;
 }
 
-.lesson-title { font-size: clamp(23px, 6.5vw, 32px); }
+.lesson-title {
+  font-size: clamp(23px, 6.5vw, 32px);
+  font-weight: 400;
+}
 
 .lesson-meta {
   margin: 12px 0 0;
@@ -169,7 +174,7 @@ h1 {
   background: #efeee8;
   font-family: var(--textbook-font);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.55;
   letter-spacing: 0.01em;
 }
@@ -205,7 +210,7 @@ h1 {
   background: #f0efe9;
   font-family: var(--textbook-font);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.5;
 }
 
