@@ -9,21 +9,21 @@ export const thinkingToolGroups = [
         label: "目的",
         english: "goal",
         question: "この問題では、何を達成したいのか。",
-        firstLesson: "E097"
+        exampleLesson: "E097"
       },
       {
         id: "mandatory-concern",
         label: "外せない条件",
         english: "mandatory concern",
         question: "結論を出すとき、必ず満たすべき条件は何か。",
-        firstLesson: "E097"
+        exampleLesson: "E097"
       },
       {
         id: "decision",
         label: "最後の判断",
         english: "decision",
         question: "最終的に、何を選ぶ・勧める・説明する問題なのか。",
-        firstLesson: "E097"
+        exampleLesson: "E097"
       }
     ]
   },
@@ -37,28 +37,28 @@ export const thinkingToolGroups = [
         label: "判断基準",
         english: "criteria",
         question: "目的に照らすと、何を基準に比べるべきか。",
-        firstLesson: "E097"
+        exampleLesson: "E097"
       },
       {
         id: "same-axis",
         label: "同じ軸で比較",
         english: "same axes",
         question: "候補ごとに都合のいい基準へ途中で変えていないか。",
-        firstLesson: "E097"
+        exampleLesson: "E097"
       },
       {
         id: "trade-off",
         label: "トレードオフ",
         english: "trade-off",
         question: "この案で得るものと、弱くなるものは何か。",
-        firstLesson: "E097"
+        exampleLesson: "E097"
       },
       {
         id: "measurability",
         label: "確かめられるか",
         english: "measurability",
         question: "効果が出たかどうかを、何で確認できるか。",
-        firstLesson: "E097"
+        exampleLesson: "E097"
       }
     ]
   },
@@ -72,21 +72,21 @@ export const thinkingToolGroups = [
         label: "射程",
         english: "scope",
         question: "この情報が直接示しているのは、どこまでか。",
-        firstLesson: "E145"
+        exampleLesson: "E145"
       },
       {
         id: "nearby-concepts",
         label: "近い概念と分ける",
         english: "contrast",
         question: "似ているが別物の概念は何か。",
-        firstLesson: "E145"
+        exampleLesson: "E145"
       },
       {
         id: "limitation",
         label: "限界",
         english: "limitation",
         question: "この指標・データだけでは分からないことは何か。",
-        firstLesson: "E145"
+        exampleLesson: "E145"
       }
     ]
   },
@@ -100,14 +100,14 @@ export const thinkingToolGroups = [
         label: "定義",
         english: "definition",
         question: "本文では、その概念を何として扱っているか。",
-        firstLesson: "E145"
+        exampleLesson: "E145"
       },
       {
         id: "components",
         label: "構成要素",
         english: "components",
         question: "その概念は、どんな要素からできているか。",
-        firstLesson: "E145"
+        exampleLesson: "E145"
       }
     ]
   },
@@ -121,21 +121,21 @@ export const thinkingToolGroups = [
         label: "文中の役割",
         english: "role",
         question: "その語は、この文の中で何の仕事をしているか。",
-        firstLesson: "E049"
+        exampleLesson: "E049"
       },
       {
         id: "context-clues",
         label: "周囲の手掛かり",
         english: "context clues",
         question: "対比・具体例・定義・結果の手掛かりはないか。",
-        firstLesson: "E049"
+        exampleLesson: "E049"
       },
       {
         id: "logic-fit",
         label: "論理に合うか",
         english: "logic fit",
         question: "その意味を入れたとき、段落全体の流れが自然につながるか。",
-        firstLesson: "E049"
+        exampleLesson: "E049"
       }
     ]
   },
@@ -149,14 +149,14 @@ export const thinkingToolGroups = [
         label: "残る失敗",
         english: "remaining failure",
         question: "この対策をしても、まだ失敗するとしたらどんな場合か。",
-        firstLesson: "E001"
+        exampleLesson: "E001"
       },
       {
         id: "necessary-condition",
         label: "必要条件",
         english: "necessary condition",
         question: "その失敗を防ぐには、何が成立している必要があるか。",
-        firstLesson: "E001"
+        exampleLesson: "E001"
       }
     ]
   }
