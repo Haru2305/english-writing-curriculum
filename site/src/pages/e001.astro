@@ -455,8 +455,11 @@ const answerNotice = findSection(answerSections, "まず確認");
 
         <div class="answer-flow">
           <nav class="reference-dock" aria-label="本文参照ショートカット">
-            <span>本文参照</span>
-            <div>
+            <div class="reference-dock-head">
+              <span>本文参照</span>
+              <button type="button" class="review-close-button" data-review-close>解答・解説を閉じる</button>
+            </div>
+            <div class="reference-shortcuts">
               {referenceShortcuts.map((item) => (
                 <button
                   type="button"
@@ -543,6 +546,8 @@ const answerNotice = findSection(answerSections, "まず確認");
       const desktopParagraphs = [...document.querySelectorAll("[data-reference-paragraph]")];
       const dialogParagraphs = [...document.querySelectorAll("[data-dialog-paragraph]")];
       const desktopQuery = window.matchMedia("(min-width: 960px)");
+      const reviewDetails = document.querySelector(".answer-details");
+      const reviewSummary = reviewDetails?.querySelector(":scope > summary");
 
       function selectedParagraphs(value) {
         if (value === "all") return [];
@@ -593,6 +598,17 @@ const answerNotice = findSection(answerSections, "まず確認");
 
       document.querySelector("[data-reference-close]")?.addEventListener("click", () => {
         dialog?.close();
+      });
+
+      document.querySelectorAll("[data-review-close]").forEach((button) => {
+        button.addEventListener("click", () => {
+          dialog?.close();
+          if (!reviewDetails) return;
+          reviewDetails.open = false;
+          requestAnimationFrame(() => {
+            reviewSummary?.scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        });
       });
 
       dialog?.addEventListener("click", (event) => {
