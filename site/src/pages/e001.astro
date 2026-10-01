@@ -263,6 +263,14 @@ const timeText = flatSectionLines(timeSection)[0] ?? "";
 const glossSection = findSection(problemSections, "Gloss / Reading support");
 const selfCheckSection = findSection(problemSections, "Self-check");
 
+const lessonKeys = [
+  { label: "表現", value: "differ from / differ in" },
+  { label: "見るポイント", value: "比較対象か、相違点か" },
+  { label: "考え方", value: "医療アクセスを複数要因で見る" }
+];
+
+const writeMap = ["Answer", "Reason", "Mechanism", "Support"];
+
 const problemStages = [
   {
     kind: "setup",
@@ -354,6 +362,34 @@ const answerNotice = findSection(answerSections, "まず確認");
           </header>
 
           <div class="flow-stage-body">
+            {index === 0 && (
+              <section class="lesson-keys" aria-label="今回の重要ポイント">
+                <span class="cue-label">KEYS</span>
+                <div class="lesson-keys-list">
+                  {lessonKeys.map((item) => (
+                    <div class="lesson-key">
+                      <small>{item.label}</small>
+                      <strong>{item.value}</strong>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {stage.kind.includes("writing") && (
+              <section class="write-map" aria-label="答案の構成">
+                <span class="cue-label">WRITE MAP</span>
+                <div class="write-map-flow">
+                  {writeMap.map((item, itemIndex) => (
+                    <>
+                      <span class="write-map-item">{item}</span>
+                      {itemIndex < writeMap.length - 1 && <span class="write-map-arrow" aria-hidden="true">→</span>}
+                    </>
+                  ))}
+                </div>
+              </section>
+            )}
+
             <LessonSections sections={stage.sections} />
 
             {index === 0 && glossSection && (
