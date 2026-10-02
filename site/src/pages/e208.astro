@@ -4,7 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
-import { toLearnerText } from "../lib/learner-text.js";
+import { toLearnerText, toLearnerLabel } from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 import {
   stripFrontMatter,
@@ -31,7 +31,7 @@ const answerSections = parseSections(split.answer.trim().split("\n"), {
   sectionMatcher: (line) => /^Model answer \(\d+ words\)$/.test(line)
 });
 
-const title = toLearnerText(problemHeader.titleLine.replace(/^E208｜/, ""));
+const title = toLearnerLabel(problemHeader.titleLine.replace(/^E208｜/, ""));
 const pageTitle = "E208｜" + title;
 const timeText = flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "";
 const coreTime = timeText.match(/Core\s*(\d+)分/i)?.[1];
