@@ -575,6 +575,83 @@ function writingBody(section) {
   ].filter(Boolean).join(" ");
 }
 
+function reviewBody(section) {
+  return (section?.units ?? [])
+    .flatMap((unit) => [
+      unit.title ?? "",
+      ...(unit.lines ?? []),
+      ...(unit.blocks ?? []).flatMap((block) => block.lines ?? [])
+    ])
+    .filter(Boolean)
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function englishWordCount(text) {
+  return text.split(/\s+/).filter(Boolean).length;
+}
+
+function sentenceCount(text) {
+  return (text.match(/[.!?](?=\s|$)/g) ?? []).length;
+}
+
+function reviewSection(id, titles) {
+  const wanted = Array.isArray(titles) ? titles : [titles];
+  return parsedLesson(id).groups.review.find((section) => wanted.includes(section.title));
+}
+
+// P1 should stay compact after the October route compression: complete arguments,
+// but not P2/P3-length model essays.
+for (const id of P1_ACCELERATED_IDS) {
+  const model = reviewSection(id, ["モデル答案", "モデル"]);
+  const text = reviewBody(model);
+  const words = englishWordCount(text);
+  if (!model) {
+    failures.push(`${id}: accelerated P1 lesson has no model answer section`);
+  } else if (words < 20 || words > 65) {
+    failures.push(`${id}: P1 model answer length ${words} is outside compact 20–65-word range`);
+  }
+}
+
+// Representative staircase from paragraph writing to entrance-exam-length writing.
+{
+  const e053 = reviewSection("E053", "モデル");
+  const text = reviewBody(e053);
+  const words = englishWordCount(text);
+  const sentences = sentenceCount(text);
+  if (!e053 || words < 45 || words > 80 || sentences !== 4) {
+    failures.push(`E053: expected a four-sentence transitional model (words=${words}, sentences=${sentences})`);
+  }
+}
+
+for (const [id, title, minWords, maxWords] of [
+  ["E085", "Model answer", 60, 80],
+  ["E086", "Model answer", 80, 100],
+  ["E087", "Model answer", 90, 110],
+  ["E097", "Model answer", 100, 120]
+]) {
+  const model = reviewSection(id, title);
+  const words = englishWordCount(reviewBody(model));
+  if (!model || words < minWords || words > maxWords) {
+    failures.push(`${id}: model-gradient milestone ${words} words, expected ${minWords}–${maxWords}`);
+  }
+}
+
+{
+  const e096Titles = parsedLesson("E096").groups.review.map((section) => section.title);
+  if (!e096Titles.includes("Japanese Output｜解答例")) {
+    failures.push("E096: Japanese Output is still merged into Model summary");
+  }
+}
+
+for (const title of ["モデル答案", "モデル", "Model English summary", "Model judgment", "Model evaluation"]) {
+  const presentation = reviewPresentation(title);
+  if (presentation.kind !== "question" || presentation.label !== "設問解説") {
+    failures.push(`review presentation mismatch for model heading ${title}: ${JSON.stringify(presentation)}`);
+  }
+}
+
 for (const [id, title, requiredText] of [
   ["E001", "Mini Writing", "2〜3文"],
   ["E053", "Short Writing", "4-sentence paragraph"],
@@ -623,6 +700,32 @@ for (const [id, secondTitle] of Object.entries(advancedWritingPairs)) {
   }
 }
 
+// Late P3 should visibly model two different output operations:
+// compress the source, then make a judgment/proposal/evaluation.
+for (const [id, secondTask] of Object.entries(advancedWritingPairs)) {
+  const lesson = parsedLesson(id);
+  const summary = lesson.groups.review.find((section) =>
+    ["Model English summary", "Model summary"].includes(section.title)
+  );
+  const expectedSecondTitle =
+    secondTask === "Judgment Writing"
+      ? "Model judgment"
+      : secondTask === "Evaluation Writing"
+        ? "Model evaluation"
+        : "Model writing";
+  const second = lesson.groups.review.find((section) => section.title === expectedSecondTitle);
+  const summaryWords = englishWordCount(reviewBody(summary));
+  const secondWords = englishWordCount(reviewBody(second));
+
+  if (!summary || summaryWords < 50 || summaryWords > 85) {
+    failures.push(`${id}: late-P3 model summary not independently calibrated (words=${summaryWords})`);
+  }
+  if (!second || secondWords < 70 || secondWords > 110) {
+    failures.push(`${id}: late-P3 second model not independently calibrated: ${expectedSecondTitle} / ${secondWords} words`);
+  }
+}
+
+
 const p4PlanningLessons = ["E208", "E212", "E218"];
 for (const id of p4PlanningLessons) {
   const titles = parsedLesson(id).groups.writing.map((section) => section.title);
@@ -637,6 +740,7 @@ for (const id of ["E219", "E222", "E228", "E234"]) {
     failures.push(`${id}: late P4 should not regain explicit Planning scaffold`);
   }
 }
+
 
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);

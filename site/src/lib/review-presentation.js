@@ -1,7 +1,7 @@
 import { toLearnerText } from "./learner-text.js";
 
 const QUESTION_HEADING = /^(?:Q\d+|\d+)\s*(?:[｜:：.]|\s+)/i;
-const WRITING_REVIEW = /^(?:Nuance Check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Model answer|Model output|Model short output|Model writing|Model summary|モデル答案|別解)/i;
+const WRITING_REVIEW = /^(?:Nuance Check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Model answer|Model output|Model short output|Model writing|Model summary|Model English summary|Model judgment|Model evaluation|モデル答案|モデル$|別解|Japanese Output)/i;
 
 export function reviewPresentation(title = "") {
   const raw = String(title).trim();
