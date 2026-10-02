@@ -86,12 +86,19 @@ export function toLearnerText(text = "") {
 
 export function toLearnerLabel(text = "") {
   const normalized = String(text)
+    .replace(/^筑波B\d{3}\s+Checkpoint$/i, "筑波 チェック回")
     .replace(/^筑波B\d{3}\s+Checkpoint\s*[：:｜]\s*/i, "筑波 チェック回｜")
+    .replace(/^筑波P4\s+Final Gate$/i, "筑波 最終チェック")
     .replace(/^筑波P4\s+Final Gate\s*[：:｜]\s*/i, "筑波 最終チェック｜")
+    .replace(/^P\d+\s+Bridge\s+\d+\s+Checkpoint$/i, "チェック回")
     .replace(/^P\d+\s+Bridge\s+\d+\s+Checkpoint\s*[：:｜]\s*/i, "チェック回｜")
+    .replace(/^P\d+\s+Final Checkpoint$/i, "最終チェック")
     .replace(/^P\d+\s+Final Checkpoint\s*[：:｜]\s*/i, "最終チェック｜")
+    .replace(/^P\d+\s+Final Gate$/i, "最終チェック")
     .replace(/^P\d+\s+Final Gate\s*[：:｜]\s*/i, "最終チェック｜")
+    .replace(/^B\d{3}\s+Checkpoint$/i, "チェック回")
     .replace(/^B\d{3}\s+Checkpoint\s*[：:｜]\s*/i, "チェック回｜")
+    .replace(/^Bundle\s+\d+\s+Checkpoint$/i, "チェック回")
     .replace(/^Bundle\s+\d+\s+Checkpoint\s*[：:｜]\s*/i, "チェック回｜")
     .replace(/^Bundle\s+\d+で確認したこと$/i, "ここまでで確認したこと")
     .replace(/^P3 Strategy$/i, "実戦の進め方")
@@ -100,7 +107,9 @@ export function toLearnerLabel(text = "") {
     .replace(/^Final Gate[｜:：]\s*/i, "最終チェック｜")
     .replace(/^Final Gate 解説$/i, "最終チェック解説")
     .replace(/^Checkpoint 解説ルート$/i, "チェック回の解説ルート")
-    .replace(/^Checkpoint$/i, "チェック回");
+    .replace(/^Checkpoint$/i, "チェック回")
+    .replace(/Bridge\s+\d+/gi, "確認回")
+    .replace(/^P\d+\s+最終確認$/i, "最終チェック");
 
   return toLearnerText(normalized)
     .replace(/^筑波\s*確認回\s*[：:｜]\s*/i, "筑波 チェック回｜")
