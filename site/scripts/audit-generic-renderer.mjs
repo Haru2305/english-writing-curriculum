@@ -1105,6 +1105,77 @@ for (const id of ["E219", "E222", "E228", "E234"]) {
 }
 
 
+
+const p4CompactAnswerJapanese = /[ぁ-んァ-ヶ一-龯]/;
+for (const id of p4PresentationIds) {
+  const entry = catalog.find((item) => item.id === id);
+  const lesson = parseGenericLesson(fs.readFileSync(entry.filePath, "utf8"), id);
+  const answerList = lesson.groups.review[0];
+  const answerListLines = answerList?.units.flatMap((unit) => unit.lines ?? []) ?? [];
+
+  for (const line of answerListLines) {
+    const match = line.match(/^(\d+)｜(.+)$/);
+    if (!match) continue;
+    const value = match[2].trim();
+    if (
+      p4CompactAnswerJapanese.test(value)
+      && value.length > 34
+      && !/設問解説参照/.test(value)
+    ) {
+      failures.push(`${id}: P4 compact answer list contains a long Japanese response instead of a pointer: ${line}`);
+    }
+  }
+}
+
+const dedicatedNavigation = {
+  e001: ["/", "/e002/"],
+  e049: ["/e048/", "/", "/e050/"],
+  e087: ["/e086/", "/", "/e088/"],
+  e097: ["/e096/", "/", "/e098/"],
+  e145: ["/e144/", "/", "/e146/"],
+  e193: ["/e192/", "/", "/e194/"],
+  e205: ["/e204/", "/", "/e206/"],
+  e208: ["/e207/", "/", "/e209/"]
+};
+
+for (const [page, expectedHrefs] of Object.entries(dedicatedNavigation)) {
+  const pageText = fs.readFileSync(
+    new URL(`../src/pages/${page}.astro`, import.meta.url),
+    "utf8"
+  );
+  const nav = pageText.match(/<nav class="nav-row" aria-label="教材ナビゲーション">([\s\S]*?)<\/nav>/)?.[1] ?? "";
+  const hrefs = [...nav.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
+
+  if (JSON.stringify(hrefs) !== JSON.stringify(expectedHrefs)) {
+    failures.push(`${page}: dedicated navigation should be adjacent lessons: ${hrefs.join(" | ")}`);
+  }
+}
+
+const genericViewText = fs.readFileSync(
+  new URL("../src/components/GenericLessonView.astro", import.meta.url),
+  "utf8"
+);
+for (const required of [
+  "review-cluster-question",
+  "review-cluster-writing",
+  "review-cluster-learning"
+]) {
+  if (!genericViewText.includes(required)) {
+    failures.push(`generic viewer progressive REVIEW disclosure missing ${required}`);
+  }
+}
+if (genericViewText.includes("<LessonSections sections={groups.review} answer />")) {
+  failures.push("generic viewer reverted to fully expanded REVIEW");
+}
+
+const globalCssText = fs.readFileSync(
+  new URL("../src/styles/global.css", import.meta.url),
+  "utf8"
+);
+if (!globalCssText.includes('"BIZ UDPMincho", sans-serif')) {
+  failures.push("UI font stack lost Japanese webfont fallback");
+}
+
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optional=${p1OptionalIds.length}`);
@@ -1116,6 +1187,7 @@ console.log(`[generic-audit] p1CoreReviewTailChars=${p1CoreReviewTailChars}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}, crossSectionDeps=${p4CrossSectionWritingDependencyCount}`);
 console.log("[generic-audit] p4 full-set review floor=PASS");
 console.log("[generic-audit] p4 presentation hierarchy=PASS");
+console.log("[generic-audit] viewer UX guardrails=PASS");
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
 for (const id of samples) {
   console.log(`[generic-audit] ${id} ${JSON.stringify(summaries.get(id) ?? null)}`);
