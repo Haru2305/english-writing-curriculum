@@ -297,6 +297,73 @@ for (const entry of catalog.filter((item) => {
   }
 }
 
+
+let p4ModelAnswerCount = 0;
+let p4ModelIThinkCount = 0;
+const p4Models = new Map();
+
+for (const entry of catalog.filter((item) => {
+  const n = Number(item.id.slice(1));
+  return n >= 205 && n <= 234;
+})) {
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const matches = [...split.answer.matchAll(
+    /Model (?:answer|writing) \((\d+) words\)\s*\n+([\s\S]*?)(?=\n\n(?:B\d{3}|P4|自己修正|到達目安|---|構成|Planning|Route|3A補正|本番|Final Gate|30日間|解説補強))/
+  )];
+
+  for (const match of matches) {
+    p4ModelAnswerCount += 1;
+    const declared = Number(match[1]);
+    const model = match[2].trim();
+    const actual = model.split(/\s+/).filter(Boolean).length;
+    p4Models.set(entry.id, model);
+
+    if (/^I think\b/i.test(model)) p4ModelIThinkCount += 1;
+    if (declared !== actual) {
+      failures.push(`${entry.id}: model word-count label ${declared} does not match actual ${actual}`);
+    }
+    if (actual < 90 || actual > 110) {
+      failures.push(`${entry.id}: model answer length ${actual} is outside 90–110 words`);
+    }
+  }
+}
+
+if (p4ModelAnswerCount !== 23) {
+  failures.push(`P4 model answer count changed: ${p4ModelAnswerCount} (expected 23)`);
+}
+if (p4ModelIThinkCount > 1) {
+  failures.push(`P4 model answers reverted toward I-think openings: ${p4ModelIThinkCount}`);
+}
+
+for (const [id, required] of Object.entries({
+  E208: ["Long commuting time", "lack of sleep"],
+  E210: ["ranges", "change behavior", "conditional"],
+  E212: ["Design B", "original notice", "omit"],
+  E216: ["common exam", "practical assignment", "different forms of evidence"],
+  E218: ["System B", "system A", "system C"],
+  E225: ["acceptable", "Submitting AI-generated paragraphs", "disclose"],
+  E231: ["What caused your most important error", "what will you change", "credit"],
+  E234: ["educational purpose", "alternatives or exemptions", "health survey"]
+})) {
+  const model = p4Models.get(id) ?? "";
+  for (const phrase of required) {
+    if (!model.toLowerCase().includes(phrase.toLowerCase())) {
+      failures.push(`${id}: revised model answer missing required feature: ${phrase}`);
+    }
+  }
+}
+
+for (const id of ["E210", "E216", "E234"]) {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const model = p4Models.get(id) ?? "";
+  if (!model || !split.answer.includes(`Writing｜${model}`)) {
+    failures.push(`${id}: answer-list Writing is not synchronized with model answer`);
+  }
+}
+
 if (p4WritingPromptCount !== 23) {
   failures.push(`P4 writing prompt count changed: ${p4WritingPromptCount} (expected 23)`);
 }
@@ -462,6 +529,7 @@ for (const [id, checks] of Object.entries(p4PresentationChecks)) {
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
+console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
 for (const id of samples) {
   console.log(`[generic-audit] ${id} ${JSON.stringify(summaries.get(id) ?? null)}`);
 }
