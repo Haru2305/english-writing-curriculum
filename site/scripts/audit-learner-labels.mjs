@@ -21,6 +21,7 @@ const bodyPatterns = [
   ["bundle-word", /\bBundle\s*\d*\b/i],
   ["checkpoint", /\bCheckpoint\b/i],
   ["final-gate", /\bFinal\s+Gate\b/i],
+  ["bridge-authoring", /(?:\bBridge\s+\d+\b|次のBridge|\bBridge complete\b)/i],
   ["internal-family", /\b(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}\b/i]
 ];
 
