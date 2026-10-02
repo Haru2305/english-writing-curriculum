@@ -821,10 +821,63 @@ for (const [id, expectedPrefixes] of Object.entries({
   }
 }
 
+
+const p4PresentationIds = Array.from({ length: 30 }, (_, index) =>
+  `E${String(index + 205).padStart(3, "0")}`
+);
+
+for (const id of p4PresentationIds) {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const lesson = parseGenericLesson(raw, id);
+  const answerList = lesson.groups.review[0];
+  const answerListLines = answerList?.units.flatMap((unit) => unit.lines ?? []) ?? [];
+
+  if (answerList?.title !== "解答一覧") {
+    failures.push(`${id}: P4 answer list is not first in REVIEW`);
+    continue;
+  }
+
+  const completedItems = [...split.answer.matchAll(
+    /(?:^|\n)(\d+)\s*完成\s*\n(?:\s*\n)*[^\n]+\n(?:\s*\n)*3番目[:：]\s*([^\n]+)\n(?:\s*\n)*5番目[:：]\s*([^\n]+)/g
+  )];
+
+  for (const match of completedItems) {
+    const expected = `${match[1]}｜3番目 ${match[2].trim()} / 5番目 ${match[3].trim()}`;
+    if (!answerListLines.includes(expected)) {
+      failures.push(`${id}: answer-list word-order key is not synchronized: ${expected}`);
+    }
+  }
+
+  const modelSections = lesson.groups.review.filter((section) =>
+    /^(?:Model answer|Model writing|Model output|モデル答案|モデル$)/i.test(section.title)
+  );
+
+  if (modelSections.length && !answerListLines.includes("Writing｜モデル答案はWriting解説参照")) {
+    failures.push(`${id}: P4 answer list is missing Writing explanation pointer`);
+  }
+
+  for (const model of modelSections) {
+    const presentation = reviewPresentation(model.title);
+    if (presentation.kind !== "writing" || presentation.label !== "Writing解説") {
+      failures.push(`${id}: model writing presentation mismatch: ${JSON.stringify(presentation)}`);
+    }
+  }
+}
+
+const e208PageText = fs.readFileSync(
+  new URL("../src/pages/e208.astro", import.meta.url),
+  "utf8"
+);
+if (e208PageText.includes('Model answer (95 words)')) {
+  failures.push("E208 dedicated viewer hard-codes a stale 95-word model-answer heading");
+}
+
 const p4PresentationChecks = {
   E210: [
     ["1｜解答例", "question", "設問解説"],
-    ["Model writing (103 words)", "question", "設問解説"],
+    ["Model writing (103 words)", "writing", "Writing解説"],
     ["B035 Checkpoint", "learning", "実戦チェック"],
     ["自己修正", "learning", "振り返り"],
     ["到達目安", "learning", "到達判定"],
@@ -832,7 +885,7 @@ const p4PresentationChecks = {
   ],
   E216: [
     ["9 完成", "question", "設問解説"],
-    ["Model answer (104 words)", "question", "設問解説"],
+    ["Model answer (104 words)", "writing", "Writing解説"],
     ["B036 Checkpoint", "learning", "実戦チェック"],
     ["自己修正", "learning", "振り返り"],
     ["到達目安", "learning", "到達判定"],
@@ -840,7 +893,7 @@ const p4PresentationChecks = {
   ],
   E234: [
     ["10 完成", "question", "設問解説"],
-    ["Model answer (101 words)", "question", "設問解説"],
+    ["Model answer (101 words)", "writing", "Writing解説"],
     ["P4 Final Gate 判定", "learning", "到達判定"],
     ["30日間の最終固定", "learning", "本番手順"],
     ["自己修正", "learning", "振り返り"],
@@ -1061,6 +1114,7 @@ console.log("[generic-audit] core99 workload guardrails=PASS");
 console.log(`[generic-audit] p1CoreReviewTailChars=${p1CoreReviewTailChars}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}, crossSectionDeps=${p4CrossSectionWritingDependencyCount}`);
 console.log("[generic-audit] p4 full-set review floor=PASS");
+console.log("[generic-audit] p4 presentation hierarchy=PASS");
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
 for (const id of samples) {
   console.log(`[generic-audit] ${id} ${JSON.stringify(summaries.get(id) ?? null)}`);
