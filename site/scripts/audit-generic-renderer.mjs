@@ -1120,7 +1120,7 @@ for (const id of p4PresentationIds) {
     if (
       p4CompactAnswerJapanese.test(value)
       && value.length > 34
-      && !/^3番目\b/.test(value)
+      && !/^3番目(?:\s|$)/.test(value)
       && !/設問解説参照/.test(value)
     ) {
       failures.push(`${id}: P4 compact answer list contains a long Japanese response instead of a pointer: ${line}`);
