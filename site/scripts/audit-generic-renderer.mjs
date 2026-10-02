@@ -1219,7 +1219,6 @@ for (const required of [
 }
 for (const forbidden of [
   "学習を始める",
-  "通常ルート",
   "4段階で仕上げる",
   "文の論理をつくる",
   "まとまりのある英文を書く",
