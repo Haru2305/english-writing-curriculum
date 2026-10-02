@@ -2632,7 +2632,9 @@ h1 {
 
 .index-section-heading h2 {
   margin: 2px 0 5px;
-  font-family: var(--textbook-font);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
   font-size: 25px;
   font-weight: 400;
 }
@@ -2679,7 +2681,9 @@ h1 {
 
 .route-stage-card h3 {
   margin: 0;
-  font-family: var(--textbook-font);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 1.4;
@@ -2796,7 +2800,9 @@ h1 {
 
 .core-route-summary-main strong {
   display: block;
-  font-family: var(--textbook-font);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
   font-size: 17px;
   font-weight: 400;
   line-height: 1.45;
@@ -2856,7 +2862,9 @@ h1 {
 
 .repair-catalog > summary span:first-child strong {
   display: block;
-  font-family: var(--textbook-font);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
   font-size: 19px;
   font-weight: 400;
 }
