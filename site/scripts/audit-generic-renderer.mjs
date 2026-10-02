@@ -306,6 +306,11 @@ const summaryOutputCount = core99Output.filter((item) => item.hasSummaryTask || 
 
 console.log(`[core99][ALL] core=${core99Ids.length}, codes=${core99Codes.size}/${allP1P3Codes.size}, missingCodes=${core99MissingCodes.join(",") || "none"}, substantialWriting=${substantialCount}, summaryOutput=${summaryOutputCount}`);
 
+for (const code of core99MissingCodes) {
+  const lessons = allP1P3Ids.filter((id) => metaCodesFor(id).has(code));
+  console.log(`[core99][MISSING] ${code} -> ${lessons.join(",")}`);
+}
+
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
 
