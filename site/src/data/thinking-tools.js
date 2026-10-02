@@ -264,6 +264,73 @@ export const thinkingTools = thinkingToolGroups.flatMap((group) =>
   group.tools.map((tool) => ({ ...tool, groupId: group.id, groupTitle: group.title }))
 );
 
+export const thinkingRoutine = [
+  {
+    step: 1,
+    title: "何を答えるか決める",
+    prompt: "設問を一文で言い換える。何を答えれば、この問題に答えたことになるか。"
+  },
+  {
+    step: 2,
+    title: "使う根拠を選ぶ",
+    prompt: "本文・図表・自分の知識から、答えに本当に必要なものだけを拾う。"
+  },
+  {
+    step: 3,
+    title: "理由を一本つなぐ",
+    prompt: "なぜそう言える？ どうしてその結果になる？ 具体例は？ を順につなぐ。"
+  },
+  {
+    step: 4,
+    title: "条件・限界を確かめる",
+    prompt: "いつでも成り立つのか。例外・反対要素・言いすぎがないかを見る。"
+  },
+  {
+    step: 5,
+    title: "答案の形にする",
+    prompt: "字数・語数・設問形式に合わせて、必要な要素だけを残して書く。"
+  }
+];
+
+export const thinkingQuickRoutes = [
+  {
+    id: "writing-stuck",
+    title: "自由英作文で、何を書けばいいか分からない",
+    lead: "理由を増やす前に、答えを決めて一つの理由を最後まで伸ばす。",
+    toolIds: [
+      "direct-answer",
+      "strongest-reason",
+      "reason-mechanism",
+      "concrete-support",
+      "useful-qualification"
+    ]
+  },
+  {
+    id: "response-stuck",
+    title: "本文は読めたのに、記述・要約の答えが作れない",
+    lead: "設問が要求する要素と、本文が直接言っている範囲を先に固定する。",
+    toolIds: ["required-elements", "scope-limit", "logic-compression"]
+  },
+  {
+    id: "decision-stuck",
+    title: "比較・評価・提案で、何を基準に決めればいいか分からない",
+    lead: "目的を決め、同じ基準で比べ、得るものと失うものを確認する。",
+    toolIds: ["goal", "criteria", "trade-off", "mandatory-concern", "decision"]
+  },
+  {
+    id: "unknown-stuck",
+    title: "知らない語・概念が出ると止まる",
+    lead: "訳語や背景知識を当てにせず、本文の定義・役割・周囲の手掛かりから作る。",
+    toolIds: ["context-clues", "definition", "components", "nearby-concepts"]
+  },
+  {
+    id: "structure-stuck",
+    title: "文挿入・段落の流れが分からない",
+    lead: "一文だけで見ず、段落の役割と前後の接続を追う。",
+    toolIds: ["paragraph-function", "connector-reference", "insertion-fit"]
+  }
+];
+
 export const lessonThinkingToolIds = {
   E001: ["remaining-failure", "necessary-condition"],
   E049: ["word-role", "context-clues", "logic-fit"],
