@@ -1,7 +1,8 @@
 import { toLearnerText } from "./learner-text.js";
 
 const QUESTION_HEADING = /^(?:Q\d+|\d+)\s*(?:[｜:：.]|\s+)/i;
-const WRITING_REVIEW = /^(?:Nuance Check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Model answer|Model output|Model short output|Model writing|Model summary|Model English summary|Model judgment|Model evaluation|モデル答案|モデル$|別解|Japanese Output)/i;
+const MODEL_WRITING_REVIEW = /^(?:Model answer|Model output|Model short output|Model writing|Model summary|Model English summary|Model judgment|Model evaluation|モデル答案|モデル$)/i;
+const WRITING_REVIEW = /^(?:Nuance Check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|別解|Japanese Output)/i;
 
 export function reviewPresentation(title = "") {
   const raw = String(title).trim();
@@ -37,6 +38,10 @@ export function reviewPresentation(title = "") {
 
   if (/^Final Gate｜Q3Bの読み方/i.test(text)) {
     return { kind: "question", label: "設問解説" };
+  }
+
+  if (MODEL_WRITING_REVIEW.test(text)) {
+    return { kind: "writing", label: "Writing解説" };
   }
 
   if (QUESTION_HEADING.test(text) || WRITING_REVIEW.test(text)) {

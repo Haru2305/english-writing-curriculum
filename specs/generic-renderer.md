@@ -52,6 +52,12 @@ canonicalの見出しを完全一致のtemplateへ押し込まず、learner-faci
 - Self-check / Revision Check → support
 - answer marker以降 → review
 
+REVIEW内のlearner-facing hierarchy:
+- `解答一覧` → compact answer key
+- individual answer sections → 設問解説
+- model answer / model writing → Writing解説
+- reasoning / self-correction / attainment / exam routine → reusable learning blocks
+
 未知見出しは消さず、challengeまたはreviewのfallbackとして保持する。
 
 ### 3. Generic route

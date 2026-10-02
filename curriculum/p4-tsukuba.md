@@ -190,6 +190,7 @@ The University of Tsukuba does not publish the main English front-exam paper on 
 - Coverage: Days 1–30
 - Status date: 2026-10-02
 - P4 authoring status: Complete
+- P4 learner-facing presentation audit: `curriculum/p4-presentation-final-audit.md`
 - Final Gate: E234 / Day 30
 - Next action before learner use: revalidate the 2027 detailed official admissions guidelines when released
 - Revalidation of 2027 detailed official guidelines required before learner use.

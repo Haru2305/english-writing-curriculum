@@ -2860,6 +2860,48 @@ h1 {
   padding: 0;
 }
 
+.generic-review-body .review-writing-group {
+  position: relative;
+  margin: 18px 0 22px;
+  padding: 15px 16px 16px;
+  border: 1px solid #c8d4cc;
+  border-left: 4px solid #5e7768;
+  border-radius: 9px;
+  background: #f3f7f4;
+}
+
+.generic-review-body .review-writing-group .review-kind-label {
+  display: inline-block;
+  margin: 0 0 5px;
+  color: #52675a;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.generic-review-body .review-writing-group .content-group-title {
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #27372e;
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.generic-review-body .review-writing-group .content-group-body {
+  padding: 0;
+}
+
+.generic-review-body .review-writing-group .lesson-line {
+  color: #33443a;
+  font-size: 15px;
+  line-height: 1.85;
+}
+
 .generic-review-body .review-learning-group {
   position: relative;
   margin: 22px 0;
@@ -2908,6 +2950,7 @@ h1 {
 
 @media print {
   .generic-review-body .review-intro-group,
+  .generic-review-body .review-writing-group,
   .generic-review-body .review-learning-group {
     background: transparent !important;
     break-inside: avoid-page;

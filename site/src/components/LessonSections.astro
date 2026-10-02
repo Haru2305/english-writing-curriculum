@@ -73,7 +73,7 @@ function lineClass(line, sectionTitle = "") {
   const reviewMeta = answer ? reviewPresentation(section.title) : null;
   return (
   <section class={"content-group " + importanceClass(section.title) + " " + sectionClass(section.title, answer) + " " + (answer ? "answer-group" : "")}>
-    {answer && reviewMeta?.kind === "learning" && reviewMeta.label && (
+    {answer && ["learning", "writing"].includes(reviewMeta?.kind) && reviewMeta?.label && (
       <span class="review-kind-label">{reviewMeta.label}</span>
     )}
     {section.title && <h2 class="content-group-title">{userText(section.title)}</h2>}

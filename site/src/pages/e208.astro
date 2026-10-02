@@ -26,7 +26,8 @@ const problemSections = parseSections(problemHeader.bodyLines, {
 });
 
 const answerSections = parseSections(split.answer.trim().split("\n"), {
-  sectionNames: ["Model answer (95 words)", "構成", "自己修正", "到達目安", "論証の共通回路", "自己採点"]
+  sectionNames: ["構成", "自己修正", "到達目安", "論証の共通回路", "自己採点"],
+  sectionMatcher: (line) => /^Model answer \(\d+ words\)$/.test(line)
 });
 
 const title = problemHeader.titleLine.replace(/^E208｜/, "");
@@ -40,7 +41,8 @@ const promptSection = findSection(problemSections, "Prompt");
 const planningSection = findSection(problemSections, "Planning");
 const revisionSection = findSection(problemSections, "Revision Check");
 
-const modelAnswerSection = findSection(answerSections, "Model answer (95 words)");
+const modelAnswerSection = answerSections.find((section) => /^Model answer \(\d+ words\)$/.test(section.title));
+const modelWordLabel = modelAnswerSection?.title.match(/\((\d+ words)\)/)?.[1] ?? "about 100 words";
 const structureSection = findSection(answerSections, "構成");
 const selfCorrection = findSection(answerSections, "自己修正");
 const attainment = findSection(answerSections, "到達目安");
@@ -229,7 +231,7 @@ const writeMap = ["Choice", "Reason", "Mechanism", "Concrete example", "Qualific
           <details class="answer-stage answer-stage-primary" open>
             <summary>
               <strong>模範解答</strong>
-              <small>95 words・文の役割で読む</small>
+              <small>{modelWordLabel}・文の役割で読む</small>
             </summary>
             <div class="answer-stage-body">
               <button type="button" class="inline-reference-button writing-reference-button" data-prompt-open>
