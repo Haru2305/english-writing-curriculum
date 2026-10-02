@@ -36,8 +36,11 @@ Checkpointは複数Text・6〜8問・Short Writingを含むため、60分枠と�
 E002のanswer / explanation sideを **3,368 → 2,537 chars** に圧縮した。
 設問解説、因果骨格、LEXG003、LEXG195、モデル答案、別解、Core recapは残した。
 
-P1全体を45分へ一律短縮する変更はしない。
-15回へのルート圧縮と解説軽量化がすでに効いており、Checkpointを含めて1回60分以内で完結する方が運用が単純なため。
+この監査では当初、P1全体を一律短縮しないとしていた。
+ただし2026-10-03の **independent timing audit** で、既存の時間割を使わず問題量から再推定した結果、P1は現行平均49.5分に対して中央推定31.1分となった。
+
+したがって「60分以内で完結すればよい」という運用上の単純さは、時間設定の根拠としては採用しない。
+詳細は `curriculum/core99-independent-time-audit.md` を正とする。
 
 ### P2
 
@@ -52,7 +55,8 @@ P1全体を45分へ一律短縮する変更はしない。
 後半はWriting語数が増える一方、problem-side説明が短くなっており、
 E085 60–80 words → E086 80–100 → E087 90–110 の負荷移行は妥当。
 
-P2は一律削減しない。
+P2も一律削減ではなく **lesson function別に再設定**する。
+independent timing auditでは、現行平均54.9分に対して中央推定37.1分。regular lessonには余白が大きい一方、複数出力Checkpointは55〜60分が妥当なため、同じ時間規格を使わない。
 
 ### P3
 
@@ -71,6 +75,7 @@ English Summary + Evaluation / Proposal / Trade-off / linked Writing
 へ処理負荷が移っている。
 
 したがってP3も一律削減しない。
+ただしindependent timing auditでは、regular lessonとCheckpointの差が大きいことが確認された。現行平均56.4分に対して中央推定45.9分で、複数出力Checkpointはほぼ現行維持、単一技能regularは短縮候補となった。
 
 ## Final rule
 
@@ -78,15 +83,20 @@ English Summary + Evaluation / Proposal / Trade-off / linked Writing
 
 時間表示は **「問題を解く時間」と「答え・解説を読む時間」を分ける**。
 
-- P1 Core：演習 **約45〜50分**
-- P2 Core：演習 **約50〜55分** を中心にし、後半Writing / Checkpointは最大約57分
-- P3 Core：演習 **約55〜60分**
-- 答え・解説・Post-solve：**タイマー終了後に確認**し、演習時間へ含めない
-- P4：60分 / 90〜120分 / 120分を**本番演習時間**として扱い、答え・解説は終了後に確認する
+ただし、2026-10-03 independent timing auditにより、phaseごとの一律レンジも粗すぎることが分かった。
 
-旧表示では多くの教材が「Core 60分」と見えていたが、これはPost-solveまで含む教材枠であり、学習者から見ると「毎回60分の演習」に見えていた。今後は、P1→P2→P3で timed load が上がる勾配をそのまま見せる。
+今後の原則:
+- regular lesson：技能導入・単一技能なら短く鋭く設定
+- Checkpoint / Final Gate：複数技能統合のため50〜60分を許容
+- 答え・解説・Post-solve：タイマー終了後
+- P4：60分 / 90〜120分 / 120分の本番演習時間を維持
 
-P4だけは本番条件が目的なので、60分・120分の枠を崩さない。従来Post-solveへ割り当てていた1〜2分は learner-facing では予備時間として扱い、解説確認は試験時間外に置く。
+provisional target平均:
+- P1：37.3分
+- P2：41.7分
+- P3：48.5分
+
+これは「phase全体を同じ分数にする」という意味ではない。個々のtargetは `management/core99-independent-time-audit.csv` を参照する。
 
 ### Workload rule
 
@@ -118,10 +128,13 @@ P4だけは本番条件が目的なので、60分・120分の枠を崩さない�
 
 ## Conclusion
 
-Core 99は、現時点では全体をさらに短くする必要はない。
+文字量監査だけでは、時間設定が妥当かは判断できなかった。
 
-調整すべきなのは「重い回を一律に削る」ことではなく、
-**通常回の異常なbloatだけを見つけて削ること**。
+2026-10-03 independent timing auditの結論:
+- **P1/P2のregular lessonは現行時間がかなりgenerous**
+- P3はregularとCheckpointで分ける必要がある
+- mixed-source + Summary + Writing型Checkpointは55〜60分を維持
+- 単一技能regular lessonを同じ55〜60分枠へ入れる必要はない
+- E204 Final Gateは60分capのstretch testとして維持し、時間を延ばさない
 
-今回の実修正はE002のみ。
-P2/P3の最大値はCheckpoint / Final Gateに集中しており、意図された実戦負荷として維持する。
+今後は「phaseごとの一律時間」ではなく、**lesson function + 実問題量**で設定する。
