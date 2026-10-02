@@ -520,7 +520,7 @@ for (const [title, expectedKind, expectedLabel] of [
   ["本文の因果骨格", "learning", "本文整理"],
   ["LEXG003｜Pre-solveの整理と本文での因果の強さ", "learning", "表現整理"],
   ["LEXG195 Review", "learning", "表現整理"],
-  ["解説補強｜考え方を再利用する", "learning", "思考・転用"]
+  ["解説補強｜Core recap", "learning", "思考・転用"]
 ]) {
   const actual = e002ReviewKinds.get(title);
   if (!actual || actual.kind !== expectedKind || actual.label !== expectedLabel) {
