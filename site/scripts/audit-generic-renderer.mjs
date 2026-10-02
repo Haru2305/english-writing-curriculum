@@ -485,7 +485,7 @@ for (const [id, expectedPrefixes] of Object.entries({
 const p4PresentationChecks = {
   E210: [
     ["1｜解答例", "question", "設問解説"],
-    ["Model writing (98 words)", "question", "設問解説"],
+    ["Model writing (103 words)", "question", "設問解説"],
     ["B035 Checkpoint", "learning", "実戦チェック"],
     ["自己修正", "learning", "振り返り"],
     ["到達目安", "learning", "到達判定"],
@@ -493,7 +493,7 @@ const p4PresentationChecks = {
   ],
   E216: [
     ["9 完成", "question", "設問解説"],
-    ["Model answer (105 words)", "question", "設問解説"],
+    ["Model answer (104 words)", "question", "設問解説"],
     ["B036 Checkpoint", "learning", "実戦チェック"],
     ["自己修正", "learning", "振り返り"],
     ["到達目安", "learning", "到達判定"],
@@ -501,7 +501,7 @@ const p4PresentationChecks = {
   ],
   E234: [
     ["10 完成", "question", "設問解説"],
-    ["Model answer (100 words)", "question", "設問解説"],
+    ["Model answer (101 words)", "question", "設問解説"],
     ["P4 Final Gate 判定", "learning", "到達判定"],
     ["30日間の最終固定", "learning", "本番手順"],
     ["自己修正", "learning", "振り返り"],
