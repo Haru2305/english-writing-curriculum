@@ -1,68 +1,94 @@
 import fs from "node:fs";
 import { getLessonCatalog, REPRESENTATIVE_IDS } from "../src/lib/lesson-catalog.js";
 import { parseGenericLesson } from "../src/lib/generic-lesson.js";
-import { stripFrontMatter, cleanLine } from "../src/lib/lesson-source.js";
+import { toLearnerLabel, toLearnerText } from "../src/lib/learner-text.js";
 
 const catalog = getLessonCatalog();
 
-const patterns = [
+const labelPatterns = [
   ["bundle-code", /\bB\d{3}\b/i],
-  ["phase-code", /\bP[1-4]\b/i],
+  ["phase-authoring", /\bP[1-4]\b/i],
   ["bundle-word", /\bBundle\b/i],
   ["checkpoint", /\bCheckpoint\b/i],
   ["final-gate", /\bFinal\s+Gate\b/i],
   ["bridge", /\bBridge\b/i],
-  ["internal-prefix", /\b(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}\b/i]
+  ["internal-family", /\b(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}\b/i]
 ];
 
-function hits(text = "") {
-  return patterns.filter(([, re]) => re.test(text)).map(([name]) => name);
+const bodyPatterns = [
+  ["bundle-code", /\bB\d{3}\b/i],
+  ["phase-authoring", /\bP[1-4](?=\s+(?:Final|Bridge|Strategy|Repair)|(?:で|では|へ|の|以降|完了|序盤|本体|最初|移行))/i],
+  ["bundle-word", /\bBundle\s*\d*\b/i],
+  ["checkpoint", /\bCheckpoint\b/i],
+  ["final-gate", /\bFinal\s+Gate\b/i],
+  ["internal-family", /\b(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}\b/i]
+];
+
+function matches(patterns, text = "") {
+  return patterns.filter(([, re]) => re.test(String(text))).map(([name]) => name);
 }
 
-const findings = [];
-const zoneCounts = new Map();
+const failures = [];
 
-function record(id, zone, text) {
-  const matched = hits(text);
-  if (!matched.length) return;
-  findings.push({ id, zone, matched, text });
-  zoneCounts.set(zone, (zoneCounts.get(zone) ?? 0) + 1);
+function check(id, zone, text, patterns) {
+  const hit = matches(patterns, text);
+  if (!hit.length) return;
+  failures.push({ id, zone, hit, text });
 }
 
 for (const entry of catalog) {
   const raw = fs.readFileSync(entry.filePath, "utf8").replace(/\r\n/g, "\n");
   const lesson = parseGenericLesson(raw, entry.id);
-  const body = stripFrontMatter(raw);
-  const nonEmpty = body.split("\n").map((x) => x.trim()).filter(Boolean);
 
-  record(entry.id, "title", lesson.title);
-  record(entry.id, "meta-source", lesson.metaLine);
+  check(entry.id, "title", toLearnerLabel(lesson.title), labelPatterns);
 
   for (const [groupName, sections] of Object.entries(lesson.groups)) {
     for (const section of sections) {
-      record(entry.id, `heading:${groupName}`, section.title);
+      check(entry.id, `heading:${groupName}`, toLearnerLabel(section.title), labelPatterns);
+
       for (const unit of section.units ?? []) {
         if (unit.type === "subgroup") {
-          record(entry.id, `subheading:${groupName}`, unit.title);
+          check(entry.id, `subheading:${groupName}`, toLearnerLabel(unit.title), labelPatterns);
+          for (const block of unit.blocks ?? []) {
+            for (const line of block.lines ?? []) {
+              check(entry.id, `line:${groupName}`, toLearnerText(line), bodyPatterns);
+            }
+          }
+        } else {
+          for (const line of unit.lines ?? []) {
+            check(entry.id, `line:${groupName}`, toLearnerText(line), bodyPatterns);
+          }
         }
       }
     }
   }
+}
 
-  // Raw markdown headings can reveal headings the generic parser may not classify.
-  for (const line of nonEmpty) {
-    if (/^#{2,3}\s+/.test(line)) {
-      record(entry.id, "raw-heading", cleanLine(line));
-    }
+// Dedicated pages must use the same learner-facing title sanitizer.
+for (const id of REPRESENTATIVE_IDS) {
+  const path = new URL(`../src/pages/${id.toLowerCase()}.astro`, import.meta.url);
+  const source = fs.readFileSync(path, "utf8");
+  if (!source.includes("toLearnerLabel") || !/const title\s*=\s*toLearnerLabel\(/.test(source)) {
+    failures.push({
+      id,
+      zone: "dedicated-renderer",
+      hit: ["missing-title-sanitizer"],
+      text: "Dedicated page does not sanitize its learner-facing title."
+    });
   }
 }
 
 console.log(`[learner-label-audit] corpus=${catalog.length} dedicated=${REPRESENTATIVE_IDS.size}`);
-for (const [zone, count] of [...zoneCounts.entries()].sort()) {
-  console.log(`[learner-label-audit] zone=${zone} findings=${count}`);
-}
-console.log(`[learner-label-audit] total-findings=${findings.length}`);
 
-for (const item of findings) {
-  console.log(`[learner-label-audit][hit] ${item.id} | ${item.zone} | ${item.matched.join(",")} | ${item.text}`);
+if (failures.length) {
+  console.error(`[learner-label-audit] failures=${failures.length}`);
+  for (const item of failures) {
+    console.error(
+      `[learner-label-audit][fail] ${item.id} | ${item.zone} | ${item.hit.join(",")} | ${item.text}`
+    );
+  }
+  process.exit(1);
 }
+
+console.log("[learner-label-audit] learner-facing authoring labels=0");
+console.log("[learner-label-audit] PASS");
