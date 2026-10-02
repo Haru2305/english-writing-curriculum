@@ -13,6 +13,10 @@ import {
   P1_ACCELERATED_IDS,
   P1_OPTIONAL_BY_BUNDLE
 } from "../src/data/p1-accelerated-route.js";
+import {
+  P2_ACCELERATED_IDS,
+  P2_OPTIONAL_BY_BUNDLE
+} from "../src/data/p2-accelerated-route.js";
 
 const answerMarkers = [
   "解答・解説・自己修正",
@@ -142,6 +146,38 @@ for (const id of P1_ACCELERATED_IDS) {
 
 if (p1CoreReviewTailChars > 6500) {
   failures.push(`P1 Core review tails have grown too large in aggregate: ${p1CoreReviewTailChars} chars`);
+}
+
+
+const p2AllIds = Array.from({ length: 54 }, (_, index) =>
+  `E${String(index + 43).padStart(3, "0")}`
+);
+const p2OptionalIds = Object.values(P2_OPTIONAL_BY_BUNDLE).flat();
+const p2RouteSet = new Set(P2_ACCELERATED_IDS);
+const p2OptionalSet = new Set(p2OptionalIds);
+const p2Combined = new Set([...P2_ACCELERATED_IDS, ...p2OptionalIds]);
+const p2CheckpointIds = ["E048", "E054", "E060", "E066", "E072", "E078", "E084", "E090", "E096"];
+
+if (P2_ACCELERATED_IDS.length !== 30 || p2RouteSet.size !== 30) {
+  failures.push(`P2 accelerated route must contain 30 unique lessons: ${P2_ACCELERATED_IDS.join(", ")}`);
+}
+if (p2OptionalIds.length !== 24 || p2OptionalSet.size !== 24) {
+  failures.push(`P2 targeted review must contain 24 unique lessons: count=${p2OptionalIds.length}`);
+}
+if (P2_ACCELERATED_IDS.some((id) => p2OptionalSet.has(id))) {
+  failures.push("P2 accelerated and optional routes overlap");
+}
+if (p2Combined.size !== 54 || p2AllIds.some((id) => !p2Combined.has(id))) {
+  failures.push("P2 accelerated + optional routes do not partition E043–E096");
+}
+for (const id of p2CheckpointIds) {
+  if (!p2RouteSet.has(id)) failures.push(`P2 accelerated route missing checkpoint ${id}`);
+}
+for (const id of ["E043", "E053", "E061", "E068", "E073", "E074", "E079", "E080", "E081", "E085", "E086", "E087", "E091", "E092", "E093", "E096"]) {
+  if (!p2RouteSet.has(id)) failures.push(`P2 accelerated route missing milestone ${id}`);
+}
+if (P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length !== 45) {
+  failures.push("P1+P2 accelerated route should reach P3 in 45 Core lessons");
 }
 
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
@@ -784,6 +820,7 @@ for (const id of ["E219", "E222", "E228", "E234"]) {
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optional=${p1OptionalIds.length}`);
+console.log(`[generic-audit] p2Accelerated=${P2_ACCELERATED_IDS.length}, p2Optional=${p2OptionalIds.length}, p1p2Core=${P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length}`);
 console.log(`[generic-audit] p1CoreReviewTailChars=${p1CoreReviewTailChars}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
