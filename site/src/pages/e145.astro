@@ -4,7 +4,12 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
-import { toLearnerText, toLearnerLabel, toLearnerLessonNumber } from "../lib/learner-text.js";
+import {
+  toLearnerText,
+  toLearnerLabel,
+  toLearnerLessonNumber,
+  learnerTimingMeta
+} from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 import {
   stripFrontMatter,
@@ -51,7 +56,7 @@ const lessonLabel = toLearnerLessonNumber("E145");
 const pageTitle = lessonLabel + "｜" + title;
 const timeText = flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "";
 const coreTime = timeText.match(/Core\s*(\d+)分/i)?.[1];
-const learnerMeta = coreTime ? `目安${coreTime}分` : "";
+const learnerMeta = learnerTimingMeta(timeText, "E145", coreTime);
 
 const goalSection = findSection(problemSections, "今日の狙い");
 const readingSection = findSection(problemSections, "Reading");
