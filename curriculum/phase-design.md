@@ -20,6 +20,11 @@
 
 P1の完走自体を目的化せず、比較・因果・claim strength・trade-off・priority・qualification・proposalをP2以降で使える状態にすることを優先する。
 
+時間運用:
+- learner-facingの演習時間は原則 **約45〜50分**
+- 答え・解説・Post-solve確認はタイマー終了後
+- 「1教材60分」を固定目標にしない
+
 ## P2 — 処理速度・論理
 
 目的:
@@ -39,6 +44,11 @@ P1の完走自体を目的化せず、比較・因果・claim strength・trade-o
 - 詳細：`curriculum/p2-accelerated-route.md`
 
 P2では、構文処理・段落機能・複数本文・資料統合・推論・要約・60→80→90語Writingの階段をCoreに残し、Transfer反復を主にOptionalへ回す。
+
+時間運用:
+- learner-facingの演習時間は **約50〜55分** を中心にする
+- 後半Writing / Checkpointは最大約57分まで許容
+- 答え・解説・Post-solve確認はタイマー終了後
 
 ## P3 — 入試実戦化
 
@@ -68,6 +78,11 @@ P3では原則として major new Focus を増やさず、既習技能の Transf
 
 P3では、未知概念・高密度文・因果・要約・文挿入・複数資料・二制度比較・条件付き評価・本文連動WritingをCoreに残し、題材違いのTransfer反復をOptionalへ回す。
 
+時間運用:
+- learner-facingの演習時間は **約55〜60分**
+- Checkpoint / Final Gateは60分に近づける
+- 答え・解説・Post-solve確認はタイマー終了後
+
 P1 15回＋P2 30回＋P3 54回で、P4前の標準Coreは99回。
 
 ## P4 — 筑波大学医学類 志望校適応・本番統合
@@ -83,6 +98,8 @@ P1 15回＋P2 30回＋P3 54回で、P4前の標準Coreは99回。
 - Day 1–8: 60分 — 筑波型パーツ演習
 - Day 9–18: 90–120分 — 準フルセット
 - Day 19–30: 120分 — フルセット中心
+- 上記はすべて**本番演習時間**。答え・解説・Post-solve確認はタイマー終了後
+- 旧Post-solve 1〜2分枠はlearner-facingでは予備時間として扱う
 
 原則:
 - P3のCore 60分規格はP4後半には適用しない
