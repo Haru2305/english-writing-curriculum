@@ -1009,7 +1009,7 @@ for (const [id, title, minWords, maxWords] of [
 
 for (const title of ["モデル答案", "モデル", "Model English summary", "Model judgment", "Model evaluation"]) {
   const presentation = reviewPresentation(title);
-  if (presentation.kind !== "question" || presentation.label !== "設問解説") {
+  if (presentation.kind !== "writing" || presentation.label !== "Writing解説") {
     failures.push(`review presentation mismatch for model heading ${title}: ${JSON.stringify(presentation)}`);
   }
 }
