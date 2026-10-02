@@ -70,10 +70,20 @@ function questionCount(problem = "") {
 function explicitTimedMinutes(problem = "") {
   const lines = problem.split("\n").map((line) => line.trim());
   const allocationLine = lines.find((line) => /Post-solve\s*\d+\s*分/i.test(line)) ?? "";
+  const directExercise = Number(allocationLine.match(/[＝=]\s*演習\s*(\d+)\s*分/i)?.[1] ?? 0) || null;
   const coreTotal = Number(allocationLine.match(/Core\s*(\d+)\s*分/i)?.[1] ?? 0) || null;
   const metaTotal = Number(problem.match(/目安\s*(\d+)\s*分/i)?.[1] ?? 0) || null;
-  const total = coreTotal ?? metaTotal;
   const post = Number(allocationLine.match(/Post-solve\s*(\d+)\s*分/i)?.[1] ?? 0);
+
+  if (directExercise != null) {
+    return {
+      total: directExercise,
+      post,
+      exercise: directExercise
+    };
+  }
+
+  const total = coreTotal ?? metaTotal;
   return {
     total,
     post,
@@ -357,6 +367,25 @@ function estimateLesson(id) {
   };
 }
 const rows = coreIds.map(estimateLesson);
+
+const timingPlanPath = new URL("../../management/core99-independent-time-audit.csv", import.meta.url);
+const timingPlan = new Map();
+for (const line of fs.readFileSync(timingPlanPath, "utf8").split(/\r?\n/)) {
+  const id = line.match(/^(E\d{3}),/)?.[1];
+  const target = line.match(/,(\d+),-?\d+,(?:shorten|shorten-slightly|keep-or-minor-adjust|review-overload)$/)?.[1];
+  if (id && target) timingPlan.set(id, Number(target));
+}
+if (timingPlan.size !== 99) {
+  throw new Error(`Expected 99 retiming targets, found ${timingPlan.size}`);
+}
+
+const timingMismatches = rows.filter((row) => row.allocated !== timingPlan.get(row.id));
+if (timingMismatches.length) {
+  throw new Error(
+    "Core 99 timing does not match the approved retiming plan: "
+    + timingMismatches.map((row) => `${row.id}=${row.allocated} expected ${timingPlan.get(row.id)}`).join(", ")
+  );
+}
 
 function round(value) {
   return value == null ? null : Math.round(value * 10) / 10;
