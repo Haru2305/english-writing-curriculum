@@ -311,6 +311,22 @@ for (const code of core99MissingCodes) {
   console.log(`[core99][MISSING] ${code} -> ${lessons.join(",")}`);
 }
 
+function rawCodesFor(id) {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  return new Set(split.problem.match(/\b(?:A|RQ|RF|WF|WT|WQ|D|SS)\d{2}\b/g) ?? []);
+}
+
+const allRawCodes = new Set(allP1P3Ids.flatMap((id) => [...rawCodesFor(id)]));
+const core99RawCodes = new Set(core99Ids.flatMap((id) => [...rawCodesFor(id)]));
+const core99RawMissing = [...allRawCodes].filter((code) => !core99RawCodes.has(code)).sort();
+console.log(`[core99][RAW] codes=${core99RawCodes.size}/${allRawCodes.size}, missingCodes=${core99RawMissing.join(",") || "none"}`);
+for (const code of core99RawMissing) {
+  const lessons = allP1P3Ids.filter((id) => rawCodesFor(id).has(code));
+  console.log(`[core99][RAW-MISSING] ${code} -> ${lessons.join(",")}`);
+}
+
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
 
