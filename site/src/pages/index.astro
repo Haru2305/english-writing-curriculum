@@ -2,11 +2,17 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getLessonCatalog } from "../lib/lesson-catalog.js";
 import { P1_ACCELERATED_ROUTE } from "../data/p1-accelerated-route.js";
+import { P2_ACCELERATED_ROUTE } from "../data/p2-accelerated-route.js";
 
 const lessons = getLessonCatalog();
 const representatives = lessons.filter((lesson) => lesson.representative);
 const lessonById = new Map(lessons.map((lesson) => [lesson.id, lesson]));
 const acceleratedP1 = P1_ACCELERATED_ROUTE.map((item, index) => ({
+  ...item,
+  step: index + 1,
+  lesson: lessonById.get(item.id)
+})).filter((item) => item.lesson);
+const acceleratedP2 = P2_ACCELERATED_ROUTE.map((item, index) => ({
   ...item,
   step: index + 1,
   lesson: lessonById.get(item.id)
@@ -41,6 +47,28 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
 
     <div class="accelerated-route-list">
       {acceleratedP1.map((item) => (
+        <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
+          <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
+          <span class="accelerated-route-main">
+            <strong>{item.lesson.id}｜{item.lesson.title}</strong>
+            <small>{item.focus}</small>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="index-section accelerated-p1-section" aria-labelledby="accelerated-p2-heading">
+    <div class="index-section-heading">
+      <p class="eyebrow">October accelerated route</p>
+      <h2 id="accelerated-p2-heading">P2短縮ルート｜30回</h2>
+      <p>
+        P2の全54回を順番に消化せず、この30回で構文・段落・複数資料・要約・60→80→90語Writingを通します。Checkpointで弱点が出た技能だけ補修回へ戻ります。
+      </p>
+    </div>
+
+    <div class="accelerated-route-list">
+      {acceleratedP2.map((item) => (
         <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
           <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
           <span class="accelerated-route-main">

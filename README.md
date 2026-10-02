@@ -28,6 +28,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - Material count: **frozen at E234**
 - Current content work: **curriculum compression and cross-corpus QA / no new lesson IDs**
 - P1 default route (2026-10 onward): **15 Core lessons + 27 Targeted Review lessons**; full E001–E042 corpus remains available
+- P2 default route (2026-10 onward): **30 Core lessons + 24 Targeted Review lessons**; full E043–E096 corpus remains available
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -47,6 +48,7 @@ english-writing-curriculum/
 ├── curriculum/
 │   ├── phase-design.md
 │   ├── p1-accelerated-route.md
+│   ├── p2-accelerated-route.md
 │   ├── content-framework.md
 │   ├── argument-construction.md
 │   ├── argument-bridge-revisions.md
