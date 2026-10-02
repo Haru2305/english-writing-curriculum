@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getLessonCatalog } from "../lib/lesson-catalog.js";
 import { P1_ACCELERATED_ROUTE } from "../data/p1-accelerated-route.js";
 import { P2_ACCELERATED_ROUTE } from "../data/p2-accelerated-route.js";
+import { P3_ACCELERATED_ROUTE } from "../data/p3-accelerated-route.js";
 
 const lessons = getLessonCatalog();
 const representatives = lessons.filter((lesson) => lesson.representative);
@@ -13,6 +14,11 @@ const acceleratedP1 = P1_ACCELERATED_ROUTE.map((item, index) => ({
   lesson: lessonById.get(item.id)
 })).filter((item) => item.lesson);
 const acceleratedP2 = P2_ACCELERATED_ROUTE.map((item, index) => ({
+  ...item,
+  step: index + 1,
+  lesson: lessonById.get(item.id)
+})).filter((item) => item.lesson);
+const acceleratedP3 = P3_ACCELERATED_ROUTE.map((item, index) => ({
   ...item,
   step: index + 1,
   lesson: lessonById.get(item.id)
@@ -76,6 +82,34 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
         </a>
       ))}
     </div>
+  </section>
+
+  <section class="index-section accelerated-p1-section" aria-labelledby="accelerated-p3-heading">
+    <div class="index-section-heading">
+      <h2 id="accelerated-p3-heading">P3短縮ルート｜54回</h2>
+      <p>
+        P3は各Bundleを「重要な実戦技能2回＋Checkpoint 1回」に圧縮します。残り54回は、Checkpointで弱点が出た技能だけ補修します。
+      </p>
+    </div>
+
+    <details class="bundle-group">
+      <summary>
+        <strong>54回のCore Routeを見る</strong>
+        <span>E097–E204</span>
+        <small>P3</small>
+      </summary>
+      <div class="accelerated-route-list">
+        {acceleratedP3.map((item) => (
+          <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
+            <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
+            <span class="accelerated-route-main">
+              <strong>{item.lesson.id}｜{item.lesson.title}</strong>
+              <small>{item.focus}</small>
+            </span>
+          </a>
+        ))}
+      </div>
+    </details>
   </section>
 
   <section class="index-section" aria-labelledby="representative-heading">
