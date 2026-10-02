@@ -7,6 +7,19 @@
 - 正確性を優先する
 - 日本語支援を十分に使う
 
+### Current operating rule — Accelerated P1
+
+2026年10月以降は、P1の全42教材を標準必修にしない。
+
+- 標準ルート：15回
+- Core：E001 / E002 / E006 / E008 / E012 / E015 / E018 / E020 / E024 / E027 / E030 / E034 / E036 / E038 / E042
+- 残り27回：Checkpointで弱点が出た技能だけ戻る Targeted Review
+- E001–E042は削除せず、Published corpusとして維持
+- E042終了後はP2へ進む
+- 詳細：`curriculum/p1-accelerated-route.md`
+
+P1の完走自体を目的化せず、比較・因果・claim strength・trade-off・priority・qualification・proposalをP2以降で使える状態にすることを優先する。
+
 ## P2 — 処理速度・論理
 
 目的:

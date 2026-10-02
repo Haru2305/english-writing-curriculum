@@ -1,9 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getLessonCatalog } from "../lib/lesson-catalog.js";
+import { P1_ACCELERATED_ROUTE } from "../data/p1-accelerated-route.js";
 
 const lessons = getLessonCatalog();
 const representatives = lessons.filter((lesson) => lesson.representative);
+const lessonById = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+const acceleratedP1 = P1_ACCELERATED_ROUTE.map((item, index) => ({
+  ...item,
+  step: index + 1,
+  lesson: lessonById.get(item.id)
+})).filter((item) => item.lesson);
 const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle) => ({
   bundle,
   lessons: lessons.filter((lesson) => lesson.bundle === bundle)
@@ -22,6 +29,28 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
     <strong>思考ツール</strong>
     <span>問題を見たとき、何を考えるか迷ったらここを見る</span>
   </a>
+
+  <section class="index-section accelerated-p1-section" aria-labelledby="accelerated-p1-heading">
+    <div class="index-section-heading">
+      <p class="eyebrow">October accelerated route</p>
+      <h2 id="accelerated-p1-heading">P1短縮ルート｜15回</h2>
+      <p>
+        P1の全42回を順番に消化せず、まずこの15回を進めます。Checkpointで詰まった技能だけ、全教材一覧から同Bundleの補修回へ戻ります。
+      </p>
+    </div>
+
+    <div class="accelerated-route-list">
+      {acceleratedP1.map((item) => (
+        <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
+          <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
+          <span class="accelerated-route-main">
+            <strong>{item.lesson.id}｜{item.lesson.title}</strong>
+            <small>{item.focus}</small>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
 
   <section class="index-section" aria-labelledby="representative-heading">
     <div class="index-section-heading">

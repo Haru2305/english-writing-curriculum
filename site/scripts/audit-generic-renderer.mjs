@@ -9,6 +9,10 @@ import {
   toLearnerText
 } from "../src/lib/learner-text.js";
 import { reviewPresentation } from "../src/lib/review-presentation.js";
+import {
+  P1_ACCELERATED_IDS,
+  P1_OPTIONAL_BY_BUNDLE
+} from "../src/data/p1-accelerated-route.js";
 
 const answerMarkers = [
   "解答・解説・自己修正",
@@ -74,6 +78,32 @@ const catalog = getLessonCatalog();
 const generic = getGenericLessonCatalog();
 const failures = [];
 const summaries = new Map();
+
+
+const p1AllIds = Array.from({ length: 42 }, (_, index) =>
+  `E${String(index + 1).padStart(3, "0")}`
+);
+const p1OptionalIds = Object.values(P1_OPTIONAL_BY_BUNDLE).flat();
+const p1RouteSet = new Set(P1_ACCELERATED_IDS);
+const p1OptionalSet = new Set(p1OptionalIds);
+const p1Combined = new Set([...P1_ACCELERATED_IDS, ...p1OptionalIds]);
+const p1CheckpointIds = ["E006", "E012", "E018", "E024", "E030", "E036", "E042"];
+
+if (P1_ACCELERATED_IDS.length !== 15 || p1RouteSet.size !== 15) {
+  failures.push(`P1 accelerated route must contain 15 unique lessons: ${P1_ACCELERATED_IDS.join(", ")}`);
+}
+if (p1OptionalIds.length !== 27 || p1OptionalSet.size !== 27) {
+  failures.push(`P1 targeted review must contain 27 unique lessons: count=${p1OptionalIds.length}`);
+}
+if (P1_ACCELERATED_IDS.some((id) => p1OptionalSet.has(id))) {
+  failures.push("P1 accelerated and optional routes overlap");
+}
+if (p1Combined.size !== 42 || p1AllIds.some((id) => !p1Combined.has(id))) {
+  failures.push("P1 accelerated + optional routes do not partition E001–E042");
+}
+for (const id of p1CheckpointIds) {
+  if (!p1RouteSet.has(id)) failures.push(`P1 accelerated route missing checkpoint ${id}`);
+}
 
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
@@ -610,6 +640,7 @@ for (const id of ["E219", "E222", "E228", "E234"]) {
 
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
+console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optional=${p1OptionalIds.length}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
 for (const id of samples) {
