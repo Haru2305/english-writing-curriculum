@@ -41,7 +41,7 @@ function isHeading(line, side = "problem") {
     return true;
   }
 
-  return /^(?:(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}(?:\s*[｜:：]|\s+)|今日の狙い|この回のルール|時間配分|まず確認|Reference(?: card)?|Pre-solve|Gloss(?:\s*\/|\b)|Transfer Guide|P\d Strategy|Strategy|Unknown-concept strategy|Reading(?:\s|$)|Passage(?:\s|$)|Context(?:\s|$)|Ordering(?:\s|$)|解答方法|Syntax Audit|Text\s+[A-Z](?:\s*[｜:])|Part\s+(?:\d+|[A-Z])(?:\s*[｜:])|Questions?(?:\s|$)|Mixed Questions|Context Check|Claim Check|Nuance Check|Language Focus|Candidate Sentence|Data Table|Table$|Internal Memo|Dense Sentence|Prompt|Planning|Plan→Draft→Revise|Revision Check|Self-check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Model answer|Model output|Model short output|Model writing|Model summary|Reading answers|Self-correction|自己修正|到達目安|構成|論証の共通回路|自己採点|思考の再利用|解説補強|Bundle\s*\d+(?:で確認したこと)?|P4 Final Gate Check|B\d{3} Checkpoint)/i.test(text);
+  return /^(?:(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}(?:\s*[｜:：]|\s+)|今日の狙い|この回のルール|時間配分|まず確認|Reference(?: card)?|Pre-solve|Gloss(?:\s*\/|\b)|Transfer Guide|P\d Strategy|Strategy|Unknown-concept strategy|Reading(?:\s|$)|Passage(?:\s|$)|Context(?:\s|$)|Ordering(?:\s|$)|解答方法|Syntax Audit|Text\s+[A-Z](?:\s*[｜:])|Part\s+(?:\d+|[A-Z])(?:\s*[｜:])|Questions?(?:\s|$)|Mixed Questions|Context Check|Claim Check|Nuance Check|Language Focus|Candidate Sentence|Data Table|Table$|Internal Memo|Dense Sentence|Prompt|Planning|Plan→Draft→Revise|Revision Check|Self-check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Judgment Writing|Evaluation Writing|Proposal Writing|Trade-off Writing|Summary-linked Writing|Text-linked Writing|Model answer|Model output|Model short output|Model writing|Model summary|Reading answers|Self-correction|自己修正|到達目安|構成|論証の共通回路|自己採点|思考の再利用|解説補強|Bundle\s*\d+(?:で確認したこと)?|P4 Final Gate Check|B\d{3} Checkpoint)/i.test(text);
 }
 
 function sectionRole(title, side = "problem") {
@@ -53,7 +53,7 @@ function sectionRole(title, side = "problem") {
     return "setup";
   }
 
-  if (/^(?:Prompt|Planning|Plan→Draft→Revise|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing)/i.test(text)
+  if (/^(?:Prompt|Planning|Plan→Draft→Revise|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Judgment Writing|Evaluation Writing|Proposal Writing|Trade-off Writing|Summary-linked Writing|Text-linked Writing)/i.test(text)
       || /(?:Q3B|Writing|Composition)/i.test(text) && /^Part\s+/i.test(text)) {
     return "writing";
   }
