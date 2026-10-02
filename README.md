@@ -1,6 +1,6 @@
 # English Writing Curriculum
 
-東京科学大学医学部の学習支援プロジェクトとして設計している、大学受験英語の長期カリキュラム管理リポジトリです。
+大学受験英語の長期カリキュラム管理リポジトリです。
 
 ## Canonical source policy
 
