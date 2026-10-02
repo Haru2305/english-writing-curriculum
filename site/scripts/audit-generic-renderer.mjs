@@ -225,6 +225,54 @@ if (P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length + P3_ACCELERATED_IDS.l
   failures.push("P1+P2+P3 accelerated route should contain 99 Core lessons before P4");
 }
 
+
+function coreRouteDiagnostics(label, ids, allIds) {
+  const coreRecords = ids.map((id) => {
+    const entry = catalog.find((item) => item.id === id);
+    const raw = fs.readFileSync(entry.filePath, "utf8");
+    const lesson = parseGenericLesson(raw, id);
+    const meta = raw.split("\n").find((line) => /^P[123]\b/.test(line.trim())) ?? "";
+    const codes = [...new Set(meta.match(/\b(?:A|RQ|RF|WF|WT|WQ|D|SS)\d{2}\b/g) ?? [])];
+    return {
+      id,
+      title: lesson.title,
+      writing: lesson.groups.writing.map((section) => section.title),
+      codes
+    };
+  });
+
+  const allCodes = new Set();
+  const coreCodes = new Set();
+  for (const id of allIds) {
+    const entry = catalog.find((item) => item.id === id);
+    const raw = fs.readFileSync(entry.filePath, "utf8");
+    const meta = raw.split("\n").find((line) => /^P[123]\b/.test(line.trim())) ?? "";
+    for (const code of meta.match(/\b(?:A|RQ|RF|WF|WT|WQ|D|SS)\d{2}\b/g) ?? []) allCodes.add(code);
+  }
+  for (const record of coreRecords) for (const code of record.codes) coreCodes.add(code);
+
+  const missingCodes = [...allCodes].filter((code) => !coreCodes.has(code)).sort();
+  const writingRecords = coreRecords.filter((record) => record.writing.length);
+  let maxNoWritingGap = 0;
+  let currentGap = 0;
+  for (const record of coreRecords) {
+    if (record.writing.length) currentGap = 0;
+    else {
+      currentGap += 1;
+      maxNoWritingGap = Math.max(maxNoWritingGap, currentGap);
+    }
+  }
+
+  console.log(`[core99][${label}] core=${ids.length}, writingLessons=${writingRecords.length}, maxNoWritingGap=${maxNoWritingGap}, missingCodes=${missingCodes.join(",") || "none"}`);
+  for (const record of coreRecords) {
+    console.log(`[core99][${label}][item] ${JSON.stringify(record)}`);
+  }
+}
+
+coreRouteDiagnostics("P1", P1_ACCELERATED_IDS, p1AllIds);
+coreRouteDiagnostics("P2", P2_ACCELERATED_IDS, p2AllIds);
+coreRouteDiagnostics("P3", P3_ACCELERATED_IDS, p3AllIds);
+
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
 
