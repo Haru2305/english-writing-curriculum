@@ -526,6 +526,80 @@ for (const [id, checks] of Object.entries(p4PresentationChecks)) {
   }
 }
 
+
+function writingText(section) {
+  const parts = [section.title];
+  for (const unit of section.units ?? []) {
+    if (unit.title) parts.push(unit.title);
+    for (const line of unit.lines ?? []) parts.push(line);
+    for (const block of unit.blocks ?? []) {
+      for (const line of block.lines ?? []) parts.push(line);
+    }
+  }
+  return parts.filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+}
+
+function writingLimit(text) {
+  const range = text.match(/(\d+)\s*[–-]\s*(\d+)\s*(?:English\s+)?words?/i);
+  if (range) return `${range[1]}-${range[2]}w`;
+  const about = text.match(/about\s+(\d+)\s+English\s+words?/i);
+  if (about) return `~${about[1]}w`;
+  const exact = text.match(/(?:in\s+)?(\d+)\s+(?:English\s+)?words?/i);
+  if (exact) return `${exact[1]}w`;
+  if (/one sentence|in one sentence|一文|1文/i.test(text)) return "1sent";
+  return "";
+}
+
+function writingStage(text) {
+  const limit = writingLimit(text);
+  if (limit === "1sent") return 1;
+  const number = Number(limit.match(/\d+/)?.[0] ?? 0);
+  if (number && number <= 40) return 2;
+  if (number && number <= 80) return 3;
+  if (number >= 90) return 5;
+  if (/Sentence frame|frame|complete the sentence|rewrite|one sentence/i.test(text)) return 1;
+  if (/Guided Writing|Mini Writing|Short Writing|Short Output/i.test(text)) return 2;
+  if (/Writing Task|Proposal Writing|Evaluation Writing|Final Writing/i.test(text)) return 4;
+  return 3;
+}
+
+const writingInventory = [];
+const writingPhaseSummary = new Map();
+
+for (const entry of catalog) {
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const lesson = parseGenericLesson(raw, entry.id);
+  for (const section of lesson.groups.writing ?? []) {
+    const text = writingText(section);
+    const record = {
+      id: entry.id,
+      phase: entry.phase || "",
+      title: section.title || "(untitled)",
+      limit: writingLimit(text),
+      stage: writingStage(text),
+      source: /reading|passage|table|data|source|本文|資料|use at least|according to|based on/i.test(text),
+      plan: /Planning|Plan|outline|criteria|reason|example|mechanism|safeguard|limitation/i.test(text),
+      snippet: text.slice(0, 420)
+    };
+    writingInventory.push(record);
+    const phase = record.phase || "unknown";
+    const summary = writingPhaseSummary.get(phase) ?? { count: 0, stages: {}, limits: {} };
+    summary.count += 1;
+    summary.stages[record.stage] = (summary.stages[record.stage] ?? 0) + 1;
+    const key = record.limit || "none";
+    summary.limits[key] = (summary.limits[key] ?? 0) + 1;
+    writingPhaseSummary.set(phase, summary);
+  }
+}
+
+console.log(`[writing-gradient] total=${writingInventory.length}`);
+for (const [phase, summary] of writingPhaseSummary) {
+  console.log(`[writing-gradient][phase] ${phase} ${JSON.stringify(summary)}`);
+}
+for (const record of writingInventory) {
+  console.log(`[writing-gradient][item] ${JSON.stringify(record)}`);
+}
+
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
