@@ -21,9 +21,11 @@
 P1の完走自体を目的化せず、比較・因果・claim strength・trade-off・priority・qualification・proposalをP2以降で使える状態にすることを優先する。
 
 時間運用:
-- learner-facingの演習時間は原則 **約45〜50分**
+- 2026-10-03 independent timing auditで、phase一律の時間レンジを廃止
+- regular lessonは問題量から個別設定し、provisional targetは30〜45分
+- Checkpointは40〜50分
 - 答え・解説・Post-solve確認はタイマー終了後
-- 「1教材60分」を固定目標にしない
+- 詳細：`curriculum/core99-independent-time-audit.md`
 
 ## P2 — 処理速度・論理
 
@@ -46,9 +48,12 @@ P1の完走自体を目的化せず、比較・因果・claim strength・trade-o
 P2では、構文処理・段落機能・複数本文・資料統合・推論・要約・60→80→90語Writingの階段をCoreに残し、Transfer反復を主にOptionalへ回す。
 
 時間運用:
-- learner-facingの演習時間は **約50〜55分** を中心にする
-- 後半Writing / Checkpointは最大約57分まで許容
+- phase一律の55分規格は使わない
+- regular lessonはprovisional 30〜50分
+- Checkpointは45〜60分
+- Summary / Writing / mixed-sourceを統合する回だけ60分近くまで上げる
 - 答え・解説・Post-solve確認はタイマー終了後
+- 詳細：`curriculum/core99-independent-time-audit.md`
 
 ## P3 — 入試実戦化
 
@@ -79,9 +84,13 @@ P3では原則として major new Focus を増やさず、既習技能の Transf
 P3では、未知概念・高密度文・因果・要約・文挿入・複数資料・二制度比較・条件付き評価・本文連動WritingをCoreに残し、題材違いのTransfer反復をOptionalへ回す。
 
 時間運用:
-- learner-facingの演習時間は **約55〜60分**
-- Checkpoint / Final Gateは60分に近づける
+- regular lessonはprovisional 35〜55分
+- Checkpoint / Final Gateは50〜60分
+- 単一技能regularを60分近くに固定しない
+- mixed-source + Summary + Writing型は55〜60分を維持
 - 答え・解説・Post-solve確認はタイマー終了後
+- E204 Final Gateは60分capのstretch test
+- 詳細：`curriculum/core99-independent-time-audit.md`
 
 P1 15回＋P2 30回＋P3 54回で、P4前の標準Coreは99回。
 
