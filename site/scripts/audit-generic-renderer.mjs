@@ -1193,15 +1193,22 @@ const indexPageText = fs.readFileSync(
   "utf8"
 );
 for (const required of [
-  "学習を始める",
+  "初見の入試問題に、自力で対応できるようになる",
+  "長い英文を読み、必要な情報を選び、問いに合わせて考え",
+  "読む",
+  "考える",
+  "まとめる",
+  "書く",
   "教材番号から開く",
-  "筑波大対策",
-  "通常ルート",
-  "4段階で仕上げる",
-  "文の論理をつくる",
-  "まとまりのある英文を書く",
-  "資料を読み取って書く",
-  "筑波大形式で仕上げる",
+  "本編",
+  "99回で、初見問題に対応する力を作る",
+  "読む・考える土台を作る",
+  "読んだ情報から答案を作る",
+  "初見問題でも使い切る",
+  "ここまでで本編完成",
+  "志望校対策｜必要な人だけ",
+  "筑波大医学類を受けるなら、最後の30日で形式に合わせる",
+  "筑波大医学類 30日仕上げ",
   "追加練習を探す",
   "全教材を見る",
   "教材1〜234"
@@ -1211,6 +1218,13 @@ for (const required of [
   }
 }
 for (const forbidden of [
+  "学習を始める",
+  "通常ルート",
+  "4段階で仕上げる",
+  "文の論理をつくる",
+  "まとまりのある英文を書く",
+  "資料を読み取って書く",
+  "筑波大形式で仕上げる",
   "まず1回やる",
   "初めて使う",
   "初めて使うなら",
@@ -1252,8 +1266,16 @@ if (
   || !indexPageText.includes("route.practice")
   || !indexPageText.includes("route.goal")
   || !indexPageText.includes("通常ルート {route.count}回")
+  || !indexPageText.includes("できるようになる")
 ) {
   failures.push("index learning-stage summaries lost practice/outcome context");
+}
+if (
+  !indexPageText.includes("routes = [")
+  || !indexPageText.includes("tsukubaSpecialization")
+  || !indexPageText.includes("[...routes, tsukubaSpecialization]")
+) {
+  failures.push("index no longer separates general curriculum from school-specific specialization");
 }
 if (!globalCssText.includes("grid-template-columns: 34px minmax(0, 1fr) auto 18px;")) {
   failures.push("index learning-stage summary layout can wrap the disclosure icon into a stray row");
@@ -1265,8 +1287,11 @@ if (/<details class="repair-catalog"[^>]*\sopen(?:\s|=|>)/.test(indexPageText)) 
 if ((indexPageText.match(/class="entry-primary(?:-button)?"/g) ?? []).length !== 0) {
   failures.push("index should not restore the oversized first-time E001 entry");
 }
-if (!indexPageText.includes('href="/e205/"')) {
-  failures.push("index Tsukuba entry link is missing");
+if (
+  !indexPageText.includes("const tsukubaSpecialization")
+  || !indexPageText.includes("tsukubaSpecialization.route.map")
+) {
+  failures.push("index optional Tsukuba specialization is missing");
 }
 if (
   !indexPageText.includes('id="lesson-jump-form"')
