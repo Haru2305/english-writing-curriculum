@@ -65,6 +65,10 @@ function sectionRole(title, side = "problem") {
   return "challenge";
 }
 
+function isAnswerListTitle(title = "") {
+  return ["答えだけ", "解答一覧"].includes(cleanLine(title));
+}
+
 function parseSectionLines(bodyLines, side = "problem") {
   const sections = [];
   let section = { title: "", role: side === "answer" ? "review" : "challenge", units: [] };
@@ -86,17 +90,22 @@ function parseSectionLines(bodyLines, side = "problem") {
     const line = rawLine.trim();
 
     if (!line || line === "---" || /^_+$/.test(line)) {
-      flushBlock();
+      if (side === "answer" && isAnswerListTitle(section.title)) {
+        flushSection();
+      } else {
+        flushBlock();
+      }
       continue;
     }
 
     const text = cleanLine(line);
-    const staysInAnswerKey =
-      side === "answer"
-      && ["答えだけ", "解答一覧"].includes(cleanLine(section.title))
-      && /^(?:Q\d+|Nuance\s+\d+|Guided Writing)\s*[｜:：]/i.test(text);
 
-    if (!staysInAnswerKey && isHeading(line, side)) {
+    if (side === "answer" && isAnswerListTitle(section.title)) {
+      block.push(line);
+      continue;
+    }
+
+    if (isHeading(line, side)) {
       flushSection();
       section.title = text;
       section.role = sectionRole(line, side);
