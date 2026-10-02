@@ -86,7 +86,7 @@ for (const id of REPRESENTATIVE_IDS) {
 
   for (const [name, pattern] of [
     ["literal-header-code", /<strong>E\d{3}<\/strong>/],
-    ["literal-nav-code", />[^<]*E\d{3}[^<]*<\/a>/],
+    ["literal-nav-code", />[^<{]*E\d{3}[^<{]*<\/a>/],
     ["literal-meta-code", /(?:pageTitle\s*=\s*"E\d{3}|description="E\d{3})/]
   ]) {
     if (pattern.test(source)) {
