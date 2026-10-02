@@ -27,6 +27,19 @@ P1の完走自体を目的化せず、比較・因果・claim strength・trade-o
 - 既習表現を未知題材で再利用
 - 時間意識を上げる
 
+### Current operating rule — Accelerated P2
+
+2026年10月以降は、P2の全54教材を標準必修にしない。
+
+- 標準ルート：30回
+- Core：E043 / E045 / E046 / E048 / E050 / E053 / E054 / E055 / E058 / E060 / E061 / E066 / E068 / E071 / E072 / E073 / E074 / E078 / E079 / E080 / E081 / E084 / E085 / E086 / E087 / E090 / E091 / E092 / E093 / E096
+- 残り24回：Checkpointで弱点が出た技能だけ戻る Targeted Review
+- E043–E096は削除せず、Published corpusとして維持
+- E096終了後はP3へ進む
+- 詳細：`curriculum/p2-accelerated-route.md`
+
+P2では、構文処理・段落機能・複数本文・資料統合・推論・要約・60→80→90語Writingの階段をCoreに残し、Transfer反復を主にOptionalへ回す。
+
 ## P3 — 入試実戦化
 
 目的:
