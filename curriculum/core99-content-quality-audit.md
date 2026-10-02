@@ -205,3 +205,164 @@ P1 Core 15は**これ以上削らなくてよい**。
 WritingはP1では2〜5文を中心に留め、各Checkpointで複数技能を統合する。ここで段落作文を重くしすぎず、P2へ入ってから本文依存Writingとparagraph constructionへ負荷を移す現在の役割分担が妥当。
 
 今回の主要修正は、問題追加ではなく**圧縮後のCore Routeに合わせた前提知識の再配線**だった。
+
+
+## P2
+
+### Overall finding
+
+P2 Core 30本の教材内容そのものは、P1からP3へつなぐBridgeとして妥当。
+
+前半は
+**sentence structure → retrieval / correctness → reference / cohesion → paragraph function / structure → stance / comparison / source integration**
+へ進み、後半は
+**inference / summary → 60–80語 → 80–100語 → 90–110語 → proposal / priority → Final Checkpoint**
+へ移る。
+
+問題は教材の不足ではなく、P1と同様に**圧縮後のCore Routeと、旧Bundle完走前提のCheckpoint記述がずれていたこと**だった。
+
+### B008 — E043 / E045 / E046 / E048
+
+判定：**Keep with self-containment repair**
+
+- E043で節境界・有限動詞、E045でretrieval、E046でCorrectを順に導入しており、P1からP2への入口として妥当
+- 旧E048はOptional側で正式導入するmain-clause処理とtimed processingまで「既習」として扱っていた
+- main clauseはE043の有限動詞guide内で既に扱えるため、新規教材追加は不要
+- timed processingだけE048のPlanでFast Introduceへ変更
+- 「速読」ではなく、main claim / structure / question targetへ時間を配る技能として明示
+
+### B009 — E050 / E053 / E054
+
+判定：**Keep with self-containment repair**
+
+- E050のreference tracking → E053のclaim / reason / evidenceとcohesionは自然な勾配
+- 旧E054は文脈語義・lexical nuance・NaturalまでBundle内既習扱いしていたが、それらのdedicated lessonはTargeted Review
+- E054のPlanで以下をFast Introduce:
+  - contextから未知語の意味範囲を絞る
+  - lexical choiceをmeaning / object / collocationで判断する
+  - Correctを保ったままNaturalへ直す
+- Planを3→5分、Reading / Questionsを各1分短縮して総60分は維持
+
+### B010 — E055 / E058 / E060
+
+判定：**Keep with self-containment repair**
+
+- E055のparagraph functionとE058のlong NPはCoreで保持する価値が高い
+- 旧E060はE055〜E059を全て履修済みと仮定していた
+- E060でmain point compression / output switching / parallel & contrastをFast Introduce
+- 段落機能から主旨へ進む回路を
+  **function → main point → structure → Japanese output**
+  として自己完結させた
+- 専用Transfer教材を追加しなくてもCheckpointで最低限の操作は成立
+
+### B011 — E061 / E066
+
+判定：**Keep with self-containment repair**
+
+- E061のclaim strengthはP1のevidence strengthをP2読解へ引き上げる重要回
+- 旧E066はinformation structure・output switching・parallel processingをBundle完走前提で要求していた
+- E066のPlanで以下をFast Introduce:
+  - old information → new information
+  - head noun / parallel / insertionを先に安定させてから日本語へ
+- E058のlong-NPとE061のstanceを土台にするため、追加lessonなしでも成立
+
+### B012 — E068 / E071 / E072
+
+判定：**Keep with first-Core-encounter repair**
+
+- E068で2本文比較を正式にCore化
+- 旧E071はformat adaptationを「Transfer」と呼んでいたが、canonical introduceはTargeted Review
+- E071をCore上のFast Introduceへ変更し、
+  English short answer / Japanese explanation / translation
+  の違いを明示
+- E072では比較・claim strength・information flow・format adaptationを統合
+- Core-onlyで順に進んでも前提抜けがなくなった
+
+### B013 — E073 / E074 / E078
+
+判定：**Keep**
+
+- unknown topic → passage + table → checkpoint の流れが明確
+- 背景知識を使わず definition → rule → evidence → conclusion へ進む設計はP3へ高い転用性がある
+- E078は最大値探しではなくmandatory criteriaとtie-breakerを分けるため、資料統合として十分
+- Optionalのtransfer反復を省いてもCoreだけで成立
+
+### B014 — E079 / E080 / E081 / E084
+
+判定：**Keep with source-set Fast Introduce**
+
+- E079 compressed structure → E080 inference → E081 summary は非常に良い勾配
+- E084はcontinuous text + Notice / Email / FAQを統合するが、非連続資料専用introはOptional
+- E084のCheckpoint Planでsource-set readingをFast Introduce:
+  source role → procedural fact source → limited inference
+- Planを3→4分、Continuous Textを15→14分にして60分維持
+
+### B015 — E085 / E086 / E087 / E090
+
+判定：**Keep**
+
+Writing勾配がP2で最もきれいな区間。
+
+- E085: precisionを中心に60–80語
+- E086: 本文のlogicを別題材へFree transfer、80–100語
+- E087: Plan→Draft→Revise、90–110語
+- E090: Summary + evidence-linked Writingを同一60分内で統合
+
+語数だけでなく、
+**support decrease / transfer independence / revision / source use**
+が同時に上がっているため、一律短縮や問題追加は不要。
+
+### B016 — E091 / E092 / E093 / E096
+
+判定：**Keep**
+
+- E091 problem→solution correspondence
+- E092 proposal + mechanism + limitation
+- E093 criteria → evaluation → priority
+- E096 summary / Japanese output / table / proposal を統合
+
+P2終盤では「自由に意見を書く」ではなく、
+**problem definition → criteria → mechanism → limitation → next action**
+へ収束しており、P3のevidence-linked judgmentへ自然につながる。
+
+## P2 presentation standardization
+
+Core 30本すべてに `## 解答一覧` を追加した。
+
+原則:
+- objective itemは `Q1｜B` のように正答だけ
+- free responseは `解答例は設問解説参照`
+- Summaryは `モデル要約はWriting解説参照`
+- Writingは `モデル答案はWriting解説参照`
+
+模範答案や長い解答例を一覧へ複製しない。
+
+これにより、
+**答え確認 → 詳細解説 → Writing / learning point**
+の役割を分離しつつ、answer-side bloatを抑える。
+
+## P2 overall conclusion
+
+P2 Core 30は**維持**。
+
+Core Routeの勾配は、
+
+**structure / correctness
+→ cohesion / paragraph function
+→ stance / information flow / multi-text comparison
+→ unknown topic / table integration
+→ inference / summary
+→ 60–110-word Writing
+→ proposal / priority
+→ Final Checkpoint**
+
+となっている。
+
+P1よりsupportは減り、P3ほどevidence evaluationを重くしない中間Phaseとして役割が明確。
+
+今回の主要修正は、
+1. 圧縮後に残ったBundle完走前提をFast Introduceへ置換
+2. Core 30本の解答一覧を統一
+3. 60分枠を維持したままsupportの置き場所を調整
+
+であり、新規問題追加は不要。
