@@ -57,32 +57,32 @@ const tsukubaRoute = lessons
 const routes = [
   {
     id: "route-foundation",
-    label: "基礎",
-    title: "比較・因果・主張",
+    title: "文の論理をつくる",
+    description: "比較・因果・主張を、英語の文として組み立てる",
     count: foundationRoute.length,
     range: "E001–E042",
     route: foundationRoute
   },
   {
     id: "route-structure",
-    label: "構成・要約",
-    title: "文・段落・要約・英作文",
+    title: "まとまりのある英文を書く",
+    description: "文をつなぎ、段落・要約・自由英作文へ広げる",
     count: structureRoute.length,
     range: "E043–E096",
     route: structureRoute
   },
   {
     id: "route-practice",
-    label: "実戦",
-    title: "初見資料から判断して書く",
+    title: "資料を読み取って書く",
+    description: "初見の文章・図表から必要な情報を選び、答案を作る",
     count: practiceRoute.length,
     range: "E097–E204",
     route: practiceRoute
   },
   {
     id: "route-tsukuba",
-    label: "筑波30日",
-    title: "本番形式を120分で回す",
+    title: "筑波大形式で仕上げる",
+    description: "過去問形式で、時間内に読み・考え・書く",
     count: tsukubaRoute.length,
     range: "E205–E234",
     route: tsukubaRoute
@@ -135,30 +135,9 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
 
     <a class="entry-secondary-link" href="/e205/">
       <small>筑波を受けるなら</small>
-      <strong>30日対策へ</strong>
+      <strong>筑波大形式の演習へ</strong>
       <span>E205から始める</span>
     </a>
-  </section>
-
-  <section class="index-section roadmap-section" aria-labelledby="roadmap-heading">
-    <div class="index-section-heading">
-      <p class="eyebrow">学習ロードマップ</p>
-      <h2 id="roadmap-heading">教材はこの順に進む</h2>
-      <p>ここは選択肢ではなく、全体像です。初めてなら上から順に進めます。</p>
-    </div>
-
-    <div class="roadmap-list">
-      {routes.map((route, index) => (
-        <div class="roadmap-item">
-          <span class="roadmap-number">{index + 1}</span>
-          <span class="roadmap-main">
-            <small>{route.label}</small>
-            <strong>{route.title}</strong>
-          </span>
-          <span class="roadmap-meta">{route.count}回</span>
-        </div>
-      ))}
-    </div>
   </section>
 
   <a class="thinking-tools-entry compact-thinking-tools-entry" href="/thinking-tools/">
@@ -169,9 +148,9 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
 
   <section class="index-section core-routes-section" aria-labelledby="core-routes-heading">
     <div class="index-section-heading">
-      <p class="eyebrow">ルート一覧</p>
-      <h2 id="core-routes-heading">各段階の教材を見る</h2>
-      <p>必要な段階だけ開いて、上から順に進めます。</p>
+      <p class="eyebrow">教材一覧</p>
+      <h2 id="core-routes-heading">学習段階から教材を開く</h2>
+      <p>今取り組む段階だけ開けば大丈夫です。</p>
     </div>
 
     <div class="core-route-stack">
@@ -179,8 +158,8 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
         <details class="core-route-details" id={route.id}>
           <summary>
             <span class="core-route-summary-main">
-              <small>{route.label}</small>
               <strong>{route.title}</strong>
+              <small>{route.description}</small>
             </span>
             <span class="core-route-summary-meta">{route.count}回｜{route.range}</span>
           </summary>
