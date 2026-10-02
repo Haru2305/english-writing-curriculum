@@ -638,31 +638,6 @@ for (const [id, title, minWords, maxWords] of [
   }
 }
 
-// Late P3 should visibly model two different output operations:
-// compress the source, then make a judgment/proposal/evaluation.
-for (const [id, secondTask] of Object.entries(advancedWritingPairs)) {
-  const lesson = parsedLesson(id);
-  const summary = lesson.groups.review.find((section) =>
-    ["Model English summary", "Model summary"].includes(section.title)
-  );
-  const expectedSecondTitle =
-    secondTask === "Judgment Writing"
-      ? "Model judgment"
-      : secondTask === "Evaluation Writing"
-        ? "Model evaluation"
-        : "Model writing";
-  const second = lesson.groups.review.find((section) => section.title === expectedSecondTitle);
-  const summaryWords = englishWordCount(reviewBody(summary));
-  const secondWords = englishWordCount(reviewBody(second));
-
-  if (!summary || summaryWords < 50 || summaryWords > 85) {
-    failures.push(`${id}: late-P3 model summary not independently calibrated (words=${summaryWords})`);
-  }
-  if (!second || secondWords < 70 || secondWords > 110) {
-    failures.push(`${id}: late-P3 second model not independently calibrated: ${expectedSecondTitle} / ${secondWords} words`);
-  }
-}
-
 {
   const e096Titles = parsedLesson("E096").groups.review.map((section) => section.title);
   if (!e096Titles.includes("Japanese Output｜解答例")) {
@@ -724,6 +699,32 @@ for (const [id, secondTitle] of Object.entries(advancedWritingPairs)) {
     failures.push(`${id}: advanced P3 dual-output structure not split: ${titles.join(" / ")}`);
   }
 }
+
+// Late P3 should visibly model two different output operations:
+// compress the source, then make a judgment/proposal/evaluation.
+for (const [id, secondTask] of Object.entries(advancedWritingPairs)) {
+  const lesson = parsedLesson(id);
+  const summary = lesson.groups.review.find((section) =>
+    ["Model English summary", "Model summary"].includes(section.title)
+  );
+  const expectedSecondTitle =
+    secondTask === "Judgment Writing"
+      ? "Model judgment"
+      : secondTask === "Evaluation Writing"
+        ? "Model evaluation"
+        : "Model writing";
+  const second = lesson.groups.review.find((section) => section.title === expectedSecondTitle);
+  const summaryWords = englishWordCount(reviewBody(summary));
+  const secondWords = englishWordCount(reviewBody(second));
+
+  if (!summary || summaryWords < 50 || summaryWords > 85) {
+    failures.push(`${id}: late-P3 model summary not independently calibrated (words=${summaryWords})`);
+  }
+  if (!second || secondWords < 70 || secondWords > 110) {
+    failures.push(`${id}: late-P3 second model not independently calibrated: ${expectedSecondTitle} / ${secondWords} words`);
+  }
+}
+
 
 const p4PlanningLessons = ["E208", "E212", "E218"];
 for (const id of p4PlanningLessons) {
