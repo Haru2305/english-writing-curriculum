@@ -1,5 +1,5 @@
 ---
-import { toLearnerText as userText } from "../lib/learner-text.js";
+import { toLearnerText as userText, toLearnerLabel as userLabel } from "../lib/learner-text.js";
 import { reviewPresentation } from "../lib/review-presentation.js";
 
 const { sections = [], answer = false } = Astro.props;
@@ -76,14 +76,14 @@ function lineClass(line, sectionTitle = "") {
     {answer && ["learning", "writing"].includes(reviewMeta?.kind) && reviewMeta?.label && (
       <span class="review-kind-label">{reviewMeta.label}</span>
     )}
-    {section.title && <h2 class="content-group-title">{userText(section.title)}</h2>}
+    {section.title && <h2 class="content-group-title">{userLabel(section.title)}</h2>}
     <div class="content-group-body">
       {section.units.map((unit) =>
         unit.type === "subgroup" ? (
           isCollapsibleSubgroup(unit.title) ? (
             <details class="micro-group collapsible-micro-group">
               <summary class="micro-group-title collapsible-micro-group-title">
-                {userText(unit.title)}
+                {userLabel(unit.title)}
               </summary>
               <div class="micro-group-body">
                 {unit.blocks.map((block) => (
@@ -97,7 +97,7 @@ function lineClass(line, sectionTitle = "") {
             </details>
           ) : (
             <section class="micro-group">
-              <h3 class="micro-group-title">{userText(unit.title)}</h3>
+              <h3 class="micro-group-title">{userLabel(unit.title)}</h3>
               <div class="micro-group-body">
                 {unit.blocks.map((block) => (
                   <div class={"micro-block " + blockClass(block.lines, section.title)}>

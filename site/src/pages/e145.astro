@@ -4,6 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
+import { toLearnerText, toLearnerLabel } from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 import {
   stripFrontMatter,
@@ -45,7 +46,7 @@ const answerSections = parseSections(split.answer.trim().split("\n"), {
   sectionMatcher: (line) => /^Q\d+｜解答例$/.test(line)
 });
 
-const title = problemHeader.titleLine.replace(/^E145｜/, "");
+const title = toLearnerLabel(problemHeader.titleLine.replace(/^E145｜/, ""));
 const pageTitle = "E145｜" + title;
 const timeText = flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "";
 const coreTime = timeText.match(/Core\s*(\d+)分/i)?.[1];
@@ -232,7 +233,7 @@ const referenceShortcuts = [
 ];
 ---
 
-<BaseLayout title={pageTitle} description="E145 未知概念＋Claim Check代表教材">
+<BaseLayout title={pageTitle} description="E145 未知概念＋Claim Check">
   <article>
     <header class="lesson-header">
       <div class="series-mark" aria-label="シリーズと教材番号">

@@ -1,4 +1,4 @@
-import { toLearnerText } from "./learner-text.js";
+import { toLearnerLabel } from "./learner-text.js";
 
 const QUESTION_HEADING = /^(?:Q\d+|\d+)\s*(?:[｜:：.]|\s+)/i;
 const MODEL_WRITING_REVIEW = /^(?:Model answer|Model output|Model short output|Model writing|Model summary|Model English summary|Model judgment|Model evaluation|モデル答案|モデル$)/i;
@@ -6,7 +6,7 @@ const WRITING_REVIEW = /^(?:Nuance Check|Guided Writing|Short Writing|Mini Writi
 
 export function reviewPresentation(title = "") {
   const raw = String(title).trim();
-  const text = toLearnerText(raw);
+  const text = toLearnerLabel(raw);
 
   if (["答えだけ", "解答一覧"].includes(text)) {
     return { kind: "answer-list", label: "" };
@@ -20,11 +20,11 @@ export function reviewPresentation(title = "") {
     return { kind: "learning", label: "振り返り" };
   }
 
-  if (/^(?:B\d{3} Checkpoint|P\d Final Gate Check|Pass standard)$/i.test(text)) {
+  if (/^(?:B\d{3} Checkpoint|P\d Final Gate Check|チェック回|筑波 チェック回|最終チェック|筑波 最終チェック|Pass standard)$/i.test(text)) {
     return { kind: "learning", label: "実戦チェック" };
   }
 
-  if (/^(?:到達目安|P\d Final Gate 判定)$/i.test(text)) {
+  if (/^(?:到達目安|P\d Final Gate 判定|最終チェック\s*判定|筑波 最終チェック\s*判定)$/i.test(text)) {
     return { kind: "learning", label: "到達判定" };
   }
 
@@ -36,7 +36,7 @@ export function reviewPresentation(title = "") {
     return { kind: "learning", label: "思考・転用" };
   }
 
-  if (/^Final Gate｜Q3Bの読み方/i.test(text)) {
+  if (/^(?:Final Gate|最終チェック)｜Q3Bの読み方/i.test(text)) {
     return { kind: "question", label: "設問解説" };
   }
 

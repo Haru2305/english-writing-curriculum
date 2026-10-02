@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "./LessonSections.astro";
 import PrintButton from "./PrintButton.astro";
 import { reviewPresentation } from "../lib/review-presentation.js";
+import { toLearnerLabel } from "../lib/learner-text.js";
 
 const {
   lesson,
@@ -11,6 +12,7 @@ const {
 } = Astro.props;
 
 const { id, title, minutes, groups, hasWriting, hasReview } = lesson;
+const learnerTitle = toLearnerLabel(title);
 
 const supportTarget = hasWriting ? "write-support" : "challenge-support";
 
@@ -29,7 +31,7 @@ const reviewLearningSections = groups.review.filter((section) => {
 });
 ---
 
-<BaseLayout title={id + "｜" + title} description={id + " 英語教材"}>
+<BaseLayout title={id + "｜" + learnerTitle} description={id + " 英語教材"}>
   <article class="generic-lesson">
     <header class="lesson-header">
       <div class="series-mark" aria-label="シリーズと教材番号">
@@ -37,7 +39,7 @@ const reviewLearningSections = groups.review.filter((section) => {
         <span aria-hidden="true">/</span>
         <strong>{id}</strong>
       </div>
-      <h1 class="lesson-title">{title}</h1>
+      <h1 class="lesson-title">{learnerTitle}</h1>
       {minutes && <p class="lesson-meta">目安{minutes}分</p>}
     </header>
 

@@ -4,6 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
+import { toLearnerText, toLearnerLabel } from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 import {
   stripFrontMatter,
@@ -46,7 +47,7 @@ const answerSections = parseSections(split.answer.trim().split("\n"), {
   ]
 });
 
-const title = problemHeader.titleLine.replace(/^E087｜/, "");
+const title = toLearnerLabel(problemHeader.titleLine.replace(/^E087｜/, ""));
 const pageTitle = "E087｜" + title;
 const timeText = flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "";
 const coreTime = timeText.match(/Core\s*(\d+)分/i)?.[1];
@@ -185,7 +186,7 @@ const referenceShortcuts = [
 ];
 ---
 
-<BaseLayout title={pageTitle} description="E087 自由英作文・Plan→Draft→Revise代表教材">
+<BaseLayout title={pageTitle} description="E087 自由英作文・Plan→Draft→Revise">
   <article>
     <header class="lesson-header">
       <div class="series-mark" aria-label="シリーズと教材番号">
