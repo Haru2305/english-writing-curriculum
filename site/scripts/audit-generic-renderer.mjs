@@ -16,7 +16,7 @@ const answerMarkers = [
   "Answers and Explanations"
 ];
 
-const writingCue = /^(?:Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Prompt|Planning|Plan→Draft→Revise|Part\s+(?:\d+|[A-Z])\s*[｜:：].*(?:Q3B|Writing|Composition))/im;
+const writingCue = /^(?:Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Judgment Writing|Evaluation Writing|Proposal Writing|Trade-off Writing|Summary-linked Writing|Text-linked Writing|Prompt|Planning|Plan→Draft→Revise|Part\s+(?:\d+|[A-Z])\s*[｜:：].*(?:Q3B|Writing|Composition))/im;
 const supportCue = /^(?:Self-check|Revision Check|P4 Final Gate Check)/im;
 const answerItem = /^(?:Q\d+|\d+)\s*(?:[｜:：.]\s*|\s+)(?:解答例|解答|完成|[A-D](?:\b|\s)|[A-D]\s+.+)/i;
 
@@ -527,77 +527,85 @@ for (const [id, checks] of Object.entries(p4PresentationChecks)) {
 }
 
 
-function writingText(section) {
-  const parts = [section.title];
-  for (const unit of section.units ?? []) {
-    if (unit.title) parts.push(unit.title);
-    for (const line of unit.lines ?? []) parts.push(line);
-    for (const block of unit.blocks ?? []) {
-      for (const line of block.lines ?? []) parts.push(line);
-    }
-  }
-  return parts.filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+
+function parsedLesson(id) {
+  const entry = catalog.find((item) => item.id === id);
+  if (!entry) throw new Error(`missing lesson ${id}`);
+  return parseGenericLesson(fs.readFileSync(entry.filePath, "utf8"), id);
 }
 
-function writingLimit(text) {
-  const range = text.match(/(\d+)\s*[–-]\s*(\d+)\s*(?:English\s+)?words?/i);
-  if (range) return `${range[1]}-${range[2]}w`;
-  const about = text.match(/about\s+(\d+)\s+English\s+words?/i);
-  if (about) return `~${about[1]}w`;
-  const exact = text.match(/(?:in\s+)?(\d+)\s+(?:English\s+)?words?/i);
-  if (exact) return `${exact[1]}w`;
-  if (/one sentence|in one sentence|一文|1文/i.test(text)) return "1sent";
-  return "";
+function writingBody(section) {
+  return [
+    section?.title ?? "",
+    ...(section?.units ?? []).flatMap((unit) => [
+      unit.title ?? "",
+      ...(unit.lines ?? []),
+      ...(unit.blocks ?? []).flatMap((block) => block.lines ?? [])
+    ])
+  ].filter(Boolean).join(" ");
 }
 
-function writingStage(text) {
-  const limit = writingLimit(text);
-  if (limit === "1sent") return 1;
-  const number = Number(limit.match(/\d+/)?.[0] ?? 0);
-  if (number && number <= 40) return 2;
-  if (number && number <= 80) return 3;
-  if (number >= 90) return 5;
-  if (/Sentence frame|frame|complete the sentence|rewrite|one sentence/i.test(text)) return 1;
-  if (/Guided Writing|Mini Writing|Short Writing|Short Output/i.test(text)) return 2;
-  if (/Writing Task|Proposal Writing|Evaluation Writing|Final Writing/i.test(text)) return 4;
-  return 3;
-}
-
-const writingInventory = [];
-const writingPhaseSummary = new Map();
-
-for (const entry of catalog) {
-  const raw = fs.readFileSync(entry.filePath, "utf8");
-  const lesson = parseGenericLesson(raw, entry.id);
-  for (const section of lesson.groups.writing ?? []) {
-    const text = writingText(section);
-    const record = {
-      id: entry.id,
-      phase: entry.phase || "",
-      title: section.title || "(untitled)",
-      limit: writingLimit(text),
-      stage: writingStage(text),
-      source: /reading|passage|table|data|source|本文|資料|use at least|according to|based on/i.test(text),
-      plan: /Planning|Plan|outline|criteria|reason|example|mechanism|safeguard|limitation/i.test(text),
-      snippet: text.slice(0, 420)
-    };
-    writingInventory.push(record);
-    const phase = record.phase || "unknown";
-    const summary = writingPhaseSummary.get(phase) ?? { count: 0, stages: {}, limits: {} };
-    summary.count += 1;
-    summary.stages[record.stage] = (summary.stages[record.stage] ?? 0) + 1;
-    const key = record.limit || "none";
-    summary.limits[key] = (summary.limits[key] ?? 0) + 1;
-    writingPhaseSummary.set(phase, summary);
+for (const [id, title, requiredText] of [
+  ["E001", "Mini Writing", "2〜3文"],
+  ["E053", "Short Writing", "4-sentence paragraph"],
+  ["E085", "Writing Task", "60–80 English words"],
+  ["E086", "Writing Task", "80–100 English words"],
+  ["E087", "Writing Task", "90–110 English words"],
+  ["E097", "Writing Task", "100–120 English words"]
+]) {
+  const lesson = parsedLesson(id);
+  const section = lesson.groups.writing.find((item) => item.title === title);
+  const body = writingBody(section);
+  if (!section || !body.includes(requiredText)) {
+    failures.push(`${id}: writing-gradient milestone missing ${title} / ${requiredText}`);
   }
 }
 
-console.log(`[writing-gradient] total=${writingInventory.length}`);
-for (const [phase, summary] of writingPhaseSummary) {
-  console.log(`[writing-gradient][phase] ${phase} ${JSON.stringify(summary)}`);
+const advancedWritingPairs = {
+  E141: "Judgment Writing",
+  E144: "Proposal Writing",
+  E147: "Evaluation Writing",
+  E150: "Proposal Writing",
+  E153: "Evaluation Writing",
+  E156: "Proposal Writing",
+  E159: "Evaluation Writing",
+  E162: "Proposal Writing",
+  E165: "Evaluation Writing",
+  E168: "Proposal Writing",
+  E171: "Evaluation Writing",
+  E174: "Proposal Writing",
+  E177: "Evaluation Writing",
+  E180: "Proposal Writing",
+  E183: "Trade-off Writing",
+  E186: "Trade-off Writing",
+  E189: "Evaluation Writing",
+  E192: "Evaluation Writing",
+  E195: "Summary-linked Writing",
+  E198: "Text-linked Writing",
+  E202: "Evaluation Writing",
+  E204: "Final Writing"
+};
+
+for (const [id, secondTitle] of Object.entries(advancedWritingPairs)) {
+  const titles = parsedLesson(id).groups.writing.map((section) => section.title);
+  if (!titles.includes("English Summary") || !titles.includes(secondTitle)) {
+    failures.push(`${id}: advanced P3 dual-output structure not split: ${titles.join(" / ")}`);
+  }
 }
-for (const record of writingInventory) {
-  console.log(`[writing-gradient][item] ${JSON.stringify(record)}`);
+
+const p4PlanningLessons = ["E208", "E212", "E218"];
+for (const id of p4PlanningLessons) {
+  const titles = parsedLesson(id).groups.writing.map((section) => section.title);
+  if (!titles.includes("Planning")) {
+    failures.push(`${id}: expected explicit P4 planning scaffold missing`);
+  }
+}
+
+for (const id of ["E219", "E222", "E228", "E234"]) {
+  const titles = parsedLesson(id).groups.writing.map((section) => section.title);
+  if (titles.includes("Planning")) {
+    failures.push(`${id}: late P4 should not regain explicit Planning scaffold`);
+  }
 }
 
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
