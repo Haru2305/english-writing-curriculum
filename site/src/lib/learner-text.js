@@ -103,6 +103,7 @@ export function toLearnerLabel(text = "") {
 
   return toLearnerText(normalized)
     .replace(/^筑波\s*確認回\s*[：:｜]\s*/i, "筑波 チェック回｜")
+    .replace(/^確認回$/i, "チェック回")
     .replace(/^確認回\s*[：:｜]\s*/i, "チェック回｜")
     .replace(/^最終確認\s*[：:｜]\s*/i, "最終チェック｜")
     .replace(/^最終確認$/i, "最終チェック")
