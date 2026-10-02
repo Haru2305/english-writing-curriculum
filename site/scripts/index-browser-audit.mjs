@@ -23,6 +23,8 @@ for (const mode of modes) {
   });
   const page = await context.newPage();
   await page.goto(base + "/", { waitUntil: "networkidle" });
+  await page.evaluate(() => document.fonts?.ready);
+  await page.waitForTimeout(100);
 
   async function measure(state) {
     return page.evaluate((state) => {
@@ -87,6 +89,7 @@ for (const mode of modes) {
   }
 
   results.push({ mode: mode.name, ...(await measure("initial")) });
+  await page.screenshot({ path: path.join(out, `index-${mode.name}-viewport.png`) });
   await page.screenshot({ path: path.join(out, `index-${mode.name}-initial.png`), fullPage: true });
 
   await page.locator(".core-route-details").first().locator("summary").click();
