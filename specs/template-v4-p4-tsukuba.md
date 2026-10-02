@@ -46,6 +46,15 @@ Recent-paper matrix reviewed on 2026-09-30:
 4. Word-order construction with precise syntax.
 5. Short free composition, generally around 80–100 words, directly answering the prompt with reasons / examples.
 
+### Q3B construction rule
+
+Treat Q3B as prompt-/stimulus-based free composition.
+
+- Q3B must not require evidence from Q1 or Q2.
+- If a task needs a concept or factual cue, include that cue inside Q3B itself.
+- The learner may reuse P3 reasoning internally, but the visible task should remain answerable as an independent Q3B prompt.
+- Do not add artificial instructions such as "use at least one idea from the reading(s)" unless that reading is explicitly part of Q3B itself.
+
 Do not over-weight T/F merely because generic trend summaries mention it; recent actual papers show Japanese explanation and contextual selection / cloze as the higher-priority recurring forms.
 
 ## B035 rules
@@ -84,3 +93,5 @@ Days 1–6, Core 60 minutes each.
 B035 and Days 7–8 of B036: 60 minutes.
 Days 9–18: 90–120 minutes.
 Days 19–30: 120 minutes.
+
+For Days 19–30, reserve at least **5 minutes** for final whole-test review. Passage density or a difficult Q3A/Q3B item must not consume that protected review floor.
