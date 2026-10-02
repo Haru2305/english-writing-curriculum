@@ -39,10 +39,14 @@ function learnerCurriculumLabels(text = "") {
 
     // Phase codes are replaced only in contexts that clearly refer to curriculum stages.
     // Plain P1/P2/P3/P4 paragraph locators remain untouched.
-    .replace(/\bP1(?=で|では|へ|の|以降|完了|序盤|本体)/g, "基礎")
-    .replace(/\bP2(?=で|では|へ|の|以降|完了|序盤|本体)/g, "構成・要約")
-    .replace(/\bP3(?=で|では|へ|の|以降|完了|序盤|本体)/g, "実戦")
-    .replace(/\bP4(?=で|では|へ|の|以降|完了|序盤|本体)/g, "筑波30日対策")
+    .replace(/\bP1(?=で|では|へ|の|以降|完了|序盤|本体|最初|移行)/g, "基礎")
+    .replace(/\bP2(?=で|では|へ|の|以降|完了|序盤|本体|最初|移行)/g, "構成・要約")
+    .replace(/\bP3(?=で|では|へ|の|以降|完了|序盤|本体|最初|移行)/g, "実戦")
+    .replace(/\bP4(?=で|では|へ|の|以降|完了|序盤|本体|最初|移行)/g, "筑波30日対策")
+    .replace(/\bP1\s+Repair\b/gi, "基礎の補修")
+    .replace(/\bP2\s+Repair\b/gi, "構成・要約の補修")
+    .replace(/\bP3\s+Repair\b/gi, "実戦の補修")
+    .replace(/\bP4\s+Repair\b/gi, "筑波30日対策の補修")
     .replace(/\bP2\s+lexical nuance/gi, "この段階の lexical nuance")
     .replace(/\bP[1-4]\s+Final\s+Plan/gi, "最終プラン");
 }
