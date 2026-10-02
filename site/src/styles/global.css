@@ -2655,10 +2655,46 @@ h1 {
 
 
 /* Learner entry page */
+.curriculum-goal-lead {
+  max-width: 900px;
+}
+
+.curriculum-goal {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.curriculum-goal > div {
+  padding: 12px 13px;
+  border: 1px solid #d8d7cf;
+  border-radius: 10px;
+  background: #f8f7f3;
+}
+
+.curriculum-goal strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.curriculum-goal span {
+  display: block;
+  margin-top: 4px;
+  color: #62625c;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
 .entry-secondary {
   display: grid;
   gap: 10px;
   margin-top: 26px;
+}
+
+.entry-secondary-single {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .lesson-jump-form,
@@ -2757,6 +2793,10 @@ h1 {
 @media (min-width: 720px) {
   .entry-secondary {
     grid-template-columns: 1.2fr 0.8fr;
+  }
+
+  .entry-secondary.entry-secondary-single {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -2986,6 +3026,40 @@ h1 {
   padding: 10px;
 }
 
+.core-completion {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-left: 3px solid #5f5f59;
+  background: #f2f1ec;
+}
+
+.core-completion strong {
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.core-completion p {
+  margin: 4px 0 0;
+  color: #575751;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.specialization-section {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid #d8d7cf;
+}
+
+.specialization-details {
+  background: #f8f7f3;
+}
+
+.specialization-mark {
+  border-color: #aead9f;
+  background: #efeee8;
+}
+
 .repair-section {
   display: grid;
   gap: 10px;
@@ -3082,6 +3156,12 @@ h1 {
   }
 }
 
+@media (max-width: 760px) {
+  .curriculum-goal {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 640px) {
   .core-route-details > summary {
     grid-template-columns: 30px minmax(0, 1fr) 18px;
@@ -3118,6 +3198,12 @@ h1 {
   .core-route-summary-points {
     grid-template-columns: minmax(0, 1fr);
     gap: 4px;
+  }
+}
+
+@media (max-width: 460px) {
+  .curriculum-goal {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
