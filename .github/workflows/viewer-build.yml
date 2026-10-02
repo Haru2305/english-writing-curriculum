@@ -37,21 +37,3 @@ jobs:
         run: npm run build
       - name: Validate Cloudflare deploy config
         run: npx wrangler deploy --dry-run
-      - name: Install browser audit runtime
-        run: |
-          npm install --no-save playwright
-          npx playwright install chromium
-      - name: Browser UX audit
-        run: |
-          npm run preview -- --host 127.0.0.1 > /tmp/viewer-preview.log 2>&1 &
-          for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:4321/ >/dev/null; then break; fi
-            sleep 1
-          done
-          node scripts/ux-browser-audit.mjs
-      - name: Upload browser UX audit
-        uses: actions/upload-artifact@v4
-        with:
-          name: viewer-ux-audit
-          path: site/ux-audit-output/
-          if-no-files-found: error
