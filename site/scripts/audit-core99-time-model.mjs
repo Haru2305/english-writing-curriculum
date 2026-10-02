@@ -68,26 +68,16 @@ function questionCount(problem = "") {
 }
 
 function explicitTimedMinutes(problem = "") {
-  const line = problem
-    .split("\n")
-    .map((line) => line.trim())
-    .find((line) => /Post-solve\s*\d+\s*分/i.test(line) && /Core\s*\d+\s*分/i.test(line));
-
-  if (line) {
-    const total = Number(line.match(/Core\s*(\d+)\s*分/i)?.[1] ?? 0) || null;
-    const post = Number(line.match(/Post-solve\s*(\d+)\s*分/i)?.[1] ?? 0);
-    return {
-      total,
-      post,
-      exercise: total == null ? null : total - post
-    };
-  }
-
-  const meta = problem.match(/目安\s*(\d+)\s*分/i);
+  const lines = problem.split("\n").map((line) => line.trim());
+  const allocationLine = lines.find((line) => /Post-solve\s*\d+\s*分/i.test(line)) ?? "";
+  const coreTotal = Number(allocationLine.match(/Core\s*(\d+)\s*分/i)?.[1] ?? 0) || null;
+  const metaTotal = Number(problem.match(/目安\s*(\d+)\s*分/i)?.[1] ?? 0) || null;
+  const total = coreTotal ?? metaTotal;
+  const post = Number(allocationLine.match(/Post-solve\s*(\d+)\s*分/i)?.[1] ?? 0);
   return {
-    total: meta ? Number(meta[1]) : null,
-    post: 0,
-    exercise: meta ? Number(meta[1]) : null
+    total,
+    post,
+    exercise: total == null ? null : total - post
   };
 }
 
@@ -185,132 +175,155 @@ function estimateWritingSection(section) {
   };
 }
 
+function problemForIndependentModel(problem = "") {
+  const lines = String(problem).replace(/^---\n[\s\S]*?\n---\n+/m, "").split("\n");
+  return lines
+    .filter((line, index) => {
+      const text = line.trim();
+      if (!text) return false;
+      if (index <= 1 && /^E\d{3}|^P[1-4]\b/.test(text)) return false;
+      if (text === "時間配分") return false;
+      if (/\d+\s*分\s*\/.*Post-solve\s*\d+\s*分/i.test(text)) return false;
+      return true;
+    })
+    .join("\n");
+}
+
+function sourceCount(text = "") {
+  const hits = new Set();
+  const patterns = [
+    [/(?:^|\n)\s*(?:Reading|Passage)(?:\s|$)/gim, "main"],
+    [/(?:^|\n)\s*(?:Source|Text|Passage)\s+([A-Z])(?:\s|$)/gim, "letter"],
+    [/(?:^|\n)\s*(?:Data Table|Table)(?:\s|$)/gim, "table"],
+    [/(?:^|\n)\s*FAQ(?:\s|$)/gim, "faq"],
+    [/(?:^|\n)\s*(?:Internal Memo|Memo|Protocol|Notice|Email)(?:\s|$)/gim, "aux"]
+  ];
+  for (const [pattern, kind] of patterns) {
+    let index = 0;
+    for (const match of String(text).matchAll(pattern)) {
+      hits.add(kind === "letter" ? `${kind}-${match[1]}-${index++}` : `${kind}-${index++}`);
+    }
+  }
+  return Math.max(1, hits.size);
+}
+
+function defaultOutputCount(lesson, explicitTargets) {
+  const outputSections = lesson.groups.writing.filter((section) =>
+    /Writing|Summary|Output|Prompt|Composition|Judgment|Evaluation|Proposal|Trade-off/i.test(section.title)
+  ).length;
+  return Math.max(0, outputSections - explicitTargets);
+}
+
 function estimateLesson(id) {
   const entry = catalog.get(id);
   const raw = fs.readFileSync(entry.filePath, "utf8");
   const split = splitRaw(raw);
   const lesson = parseGenericLesson(raw, id);
   const timed = explicitTimedMinutes(split.problem);
+  const modelText = problemForIndependentModel(split.problem);
 
-  // The estimate deliberately ignores the existing allocation line and Core minute total.
-  const setupSections = lesson.groups.setup.filter((section) =>
-    !/^(?:今日の狙い|時間配分)$/i.test(section.title)
+  // Independent content inputs. No assigned section minutes are used below.
+  const enWords = englishWords(modelText);
+  const jaChars = japaneseChars(modelText);
+  const qCount = questionCount(modelText);
+  const actionCount = actionableLines(modelText);
+  const taskUnits = Math.max(qCount, Math.ceil(actionCount * 0.60));
+
+  const wordTargets = targetWords(modelText);
+  const jpTargets = targetJapaneseChars(modelText);
+  const explicitTargetCount = wordTargets.length + jpTargets.length;
+  const extraOutputCount = defaultOutputCount(lesson, explicitTargetCount);
+
+  const inputs = {
+    low: enWords / 95 + jaChars / 500,
+    central: enWords / 75 + jaChars / 350,
+    high: enWords / 60 + jaChars / 250
+  };
+
+  const tasks = {
+    low: taskUnits * 1.0,
+    central: taskUnits * 1.6,
+    high: taskUnits * 2.2
+  };
+
+  const wordOutput = wordTargets.reduce(
+    (acc, words) => {
+      const summaryLike = /Summary/i.test(modelText) && wordTargets.length === 1;
+      const low = summaryLike ? 2.0 + words / 12 + 1.5 : 2.5 + words / 12 + 2.0;
+      const central = summaryLike ? 2.5 + words / 10 + 2.0 : 3.0 + words / 9.5 + 2.5;
+      const high = summaryLike ? 3.0 + words / 8 + 2.5 : 4.0 + words / 7.5 + 3.5;
+      return { low: acc.low + low, central: acc.central + central, high: acc.high + high };
+    },
+    { low: 0, central: 0, high: 0 }
   );
-  const challengeSections = lesson.groups.challenge;
-  const writingSections = lesson.groups.writing;
-  const supportSections = lesson.groups.support;
 
-  const setupText = setupSections.map(sectionText).join("\n");
-  const setupEn = englishWords(setupText);
-  const setupJa = japaneseChars(setupText);
-  const setupActions = actionableLines(setupText);
-
-  const readingText = challengeSections
-    .filter((section) => isReadingLike(section.title))
-    .map(sectionText)
-    .join("\n");
-  const otherChallengeText = challengeSections
-    .filter((section) => !isReadingLike(section.title))
-    .map(sectionText)
-    .join("\n");
-
-  const readingEn = englishWords(readingText);
-  const readingJa = japaneseChars(readingText);
-  const otherEn = englishWords(otherChallengeText);
-  const otherJa = japaneseChars(otherChallengeText);
-
-  const qCount = questionCount(split.problem);
-  const otherActions = challengeSections
-    .filter((section) => !isReadingLike(section.title))
-    .reduce((sum, section) => sum + actionableLines(sectionText(section)), 0);
-
-  const dataSections = challengeSections.filter((section) => isDataLike(section.title)).length;
-  const questionSections = challengeSections.filter((section) => isQuestionLike(section.title)).length;
-  const sourceSections = challengeSections.filter((section) =>
-    /^(?:Reading|Passage|Text\s+[A-Z]|Source\s+[A-Z]|Data Table|Table|FAQ|Memo|Protocol)/i.test(section.title)
-  ).length;
-
-  const setup = {
-    low: setupEn / 125 + setupJa / 400 + setupActions * 0.15,
-    central: setupEn / 95 + setupJa / 280 + setupActions * 0.25,
-    high: setupEn / 70 + setupJa / 200 + setupActions * 0.4
-  };
-
-  const reading = {
-    low: readingEn / 105 + readingJa / 500,
-    central: readingEn / 82 + readingJa / 360,
-    high: readingEn / 65 + readingJa / 260
-  };
-
-  const challengeInput = {
-    low: otherEn / 150 + otherJa / 520,
-    central: otherEn / 120 + otherJa / 400,
-    high: otherEn / 95 + otherJa / 300
-  };
-
-  const taskUnits = Math.max(qCount, Math.ceil(otherActions * 0.55), questionSections);
-  const questions = {
-    low: taskUnits * 0.9,
-    central: taskUnits * 1.35,
-    high: taskUnits * 1.9
-  };
-
-  const integrationUnits = Math.max(0, sourceSections - 1) + dataSections;
-  const integration = {
-    low: integrationUnits * 0.45,
-    central: integrationUnits * 0.9,
-    high: integrationUnits * 1.4
-  };
-
-  const complexityText = `${entry.title}\n${split.problem}`;
-  const conceptHits = [
-    /未知概念|unknown concept/i,
-    /高密度|dense/i,
-    /複数資料|mixed-format|integration/i,
-    /因果|causal|confound/i,
-    /条件付き|conditional/i
-  ].filter((pattern) => pattern.test(complexityText)).length;
-  const complexity = {
-    low: Math.min(1.5, conceptHits * 0.25),
-    central: Math.min(3.0, conceptHits * 0.65),
-    high: Math.min(5.0, conceptHits * 1.0)
-  };
-
-  const outputs = writingSections.map(estimateWritingSection);
-  const writing = outputs.reduce(
-    (acc, item) => ({
-      low: acc.low + item.low,
-      central: acc.central + item.central,
-      high: acc.high + item.high
+  const jpOutput = jpTargets.reduce(
+    (acc, chars) => ({
+      low: acc.low + 2.0 + chars / 28 + 1.0,
+      central: acc.central + 2.5 + chars / 22 + 1.5,
+      high: acc.high + 3.0 + chars / 17 + 2.0
     }),
     { low: 0, central: 0, high: 0 }
   );
 
-  const supportText = supportSections.map(sectionText).join("\n");
-  const supportItems = Math.max(
-    1,
-    supportText.split("\n").filter((line) => line.trim() && !/^[-_]+$/.test(line.trim())).length
-  );
-  const selfCheck = supportSections.length
-    ? {
-        low: Math.max(1.0, Math.min(2.5, supportItems * 0.22)),
-        central: Math.max(1.5, Math.min(3.5, supportItems * 0.32)),
-        high: Math.max(2.0, Math.min(4.5, supportItems * 0.45))
-      }
-    : { low: 0, central: 0, high: 0 };
+  const extraOutputs = {
+    low: extraOutputCount * 4.5,
+    central: extraOutputCount * 7.0,
+    high: extraOutputCount * 10.0
+  };
 
-  const low = setup.low + reading.low + challengeInput.low + questions.low + integration.low + complexity.low + writing.low + selfCheck.low;
-  const central = setup.central + reading.central + challengeInput.central + questions.central + integration.central + complexity.central + writing.central + selfCheck.central;
-  const high = setup.high + reading.high + challengeInput.high + questions.high + integration.high + complexity.high + writing.high + selfCheck.high;
+  const sources = sourceCount(modelText);
+  const integrationUnits = Math.max(0, sources - 1);
+  const integration = {
+    low: integrationUnits * 0.8,
+    central: integrationUnits * 1.5,
+    high: integrationUnits * 2.2
+  };
+
+  const guideHits = (modelText.match(/(?:^|\n)\s*(?:Quick Guide|Guide|Strategy|Plan→Draft→Revise|Checkpoint Plan|Mixed-source Plan|Concept Build|Transfer Guide)/gim) ?? []).length;
+  const guide = {
+    low: Math.min(2.0, guideHits * 0.5),
+    central: Math.min(4.0, guideHits * 1.25),
+    high: Math.min(6.0, guideHits * 2.0)
+  };
+
+  const conceptHits = [
+    /未知概念|unknown concept/i,
+    /高密度|dense/i,
+    /複数資料|mixed-source|mixed-format|integration/i,
+    /因果|causal|confound/i,
+    /条件付き|conditional/i
+  ].filter((pattern) => pattern.test(`${entry.title}\n${modelText}`)).length;
+  const complexity = {
+    low: Math.min(2.0, conceptHits * 0.35),
+    central: Math.min(4.0, conceptHits * 0.8),
+    high: Math.min(6.0, conceptHits * 1.2)
+  };
+
+  const selfCheckMatch = modelText.match(/(?:^|\n)Self-check\s*\n([\s\S]*?)(?=\n(?:[A-Z][A-Za-z -]{2,}|#{1,3}\s|_{3,}|$))/i);
+  const selfCheckItems = selfCheckMatch
+    ? selfCheckMatch[1].split("\n").filter((line) => line.trim()).length
+    : 0;
+  const selfCheck = selfCheckItems
+    ? {
+        low: Math.max(1.0, Math.min(2.5, selfCheckItems * 0.25)),
+        central: Math.max(1.5, Math.min(3.5, selfCheckItems * 0.4)),
+        high: Math.max(2.0, Math.min(4.5, selfCheckItems * 0.55))
+      }
+    : { low: 1.0, central: 1.5, high: 2.0 };
+
+  const low = inputs.low + tasks.low + wordOutput.low + jpOutput.low + extraOutputs.low + integration.low + guide.low + complexity.low + selfCheck.low;
+  const central = inputs.central + tasks.central + wordOutput.central + jpOutput.central + extraOutputs.central + integration.central + guide.central + complexity.central + selfCheck.central;
+  const high = inputs.high + tasks.high + wordOutput.high + jpOutput.high + extraOutputs.high + integration.high + guide.high + complexity.high + selfCheck.high;
 
   const allocated = timed.exercise;
   const delta = allocated == null ? null : allocated - central;
   let status = "balanced";
   if (allocated != null) {
-    if (allocated > high + 3 || delta >= 8) status = "loose";
-    else if (allocated > high || delta >= 5) status = "soft";
-    else if (allocated < low - 3 || delta <= -8) status = "too-tight";
-    else if (allocated < low || delta <= -5) status = "tight";
+    if (allocated > high + 5 || delta >= 12) status = "loose";
+    else if (allocated > high || delta >= 7) status = "soft";
+    else if (allocated < low - 4 || delta <= -10) status = "too-tight";
+    else if (allocated < low || delta <= -6) status = "tight";
   }
 
   return {
@@ -324,22 +337,18 @@ function estimateLesson(id) {
     delta,
     status,
     metrics: {
-      setupEn,
-      setupJa,
-      readingEn,
-      readingJa,
-      otherEn,
-      otherJa,
+      enWords,
+      jaChars,
       qCount,
       taskUnits,
-      dataSections,
-      sourceSections,
-      writingSections: writingSections.length,
-      writingTargets: outputs.map((item) => item.targetWords).filter(Boolean)
+      sources,
+      writingSections: lesson.groups.writing.length,
+      writingTargets: wordTargets,
+      japaneseTargets: jpTargets,
+      extraOutputCount
     }
   };
 }
-
 const rows = coreIds.map(estimateLesson);
 
 function round(value) {
@@ -353,8 +362,8 @@ function median(values) {
 }
 
 console.log("[time-model] methodology=independent content model; existing timing used only as comparison");
-console.log("[time-model] rates=input close-reading 82 wpm central; setup 95 wpm; drafting 9 wpm; task solving 1.35 min/unit");
-console.log("[time-model] row format=id|phase|allocated|low|central|high|delta|status|readingWords|taskUnits|writingTargets");
+console.log("[time-model] rates=all problem input 75 English wpm + 350 Japanese chars/min central; task solving 1.6 min/unit; English drafting 9.5 wpm plus planning/revision");
+console.log("[time-model] row format=id|phase|allocated|low|central|high|delta|status|inputWords|taskUnits|sources|writingTargets|japaneseTargets");
 
 for (const row of rows) {
   console.log(
@@ -368,9 +377,11 @@ for (const row of rows) {
       round(row.high),
       round(row.delta),
       row.status,
-      row.metrics.readingEn,
+      row.metrics.enWords,
       row.metrics.taskUnits,
-      row.metrics.writingTargets.join(",") || "-"
+      row.metrics.sources,
+      row.metrics.writingTargets.join(",") || "-",
+      row.metrics.japaneseTargets.join(",") || "-"
     ].join("|")
   );
 }
