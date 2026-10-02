@@ -171,12 +171,35 @@ for (const entry of generic.filter((item) => {
     .map((match) => match[1])
     .filter((inner) => /\s\/\s/.test(inner));
 
+
+  const weakTargetWords = new Set([
+    "a", "an", "the", "and", "or", "but", "if", "when", "while", "because",
+    "whether", "than", "from", "to", "of", "in", "on", "at", "for", "by",
+    "with", "without", "as", "only", "not", "also", "rather", "more", "less",
+    "so", "that", "what", "which", "who", "how"
+  ]);
+
+  const completedItems = [...split.answer.matchAll(
+    /(?:^|\n)(\d+)\s*完成\s*\n(?:\s*\n)*([^\n]+)\n(?:\s*\n)*3番目[:：]\s*([^\n]+)\n(?:\s*\n)*5番目[:：]\s*([^\n]+)/g
+  )];
+
+  for (const match of completedItems) {
+    const number = match[1];
+    for (const [position, target] of [["3番目", match[3]], ["5番目", match[4]]]) {
+      const tokens = normalizeOrderText(target).split(" ").filter(Boolean);
+      const hasContentWord = tokens.some((token) => !weakTargetWords.has(token));
+      if (!hasContentWord) {
+        failures.push(`${entry.id} #${number}: ${position} can be answered with function words alone: ${target.trim()}`);
+      }
+    }
+  }
+
   for (const inner of prompts) {
     p4WordOrderCount += 1;
     const chunks = inner.split(/\s*\/\s*/).map((chunk) => chunk.trim()).filter(Boolean);
 
-    if (chunks.length < 7) {
-      failures.push(`${entry.id}: word-order item has only ${chunks.length} chunks`);
+    if (chunks.length !== 8) {
+      failures.push(`${entry.id}: word-order item should have 8 chunks, found ${chunks.length}`);
       continue;
     }
 
@@ -314,9 +337,9 @@ for (const [title, expectedKind, expectedLabel] of [
 
 
 for (const [id, expectedPrefixes] of Object.entries({
-  E210: ["1｜", "2｜", "3｜A", "4｜3番目 be / 5番目 as", "Writing｜"],
-  E216: ["1｜", "4｜C → B → D → A", "9｜3番目 what / 5番目 notice", "11｜3番目 whether / 5番目 reflects", "Writing｜"],
-  E234: ["1｜", "5｜B → D → A → C", "10｜3番目 only when / 5番目 reliably predict", "12｜3番目 what a measure / 5番目 as well as", "Writing｜"]
+  E210: ["1｜", "2｜", "3｜A", "4｜3番目 because publishing it / 5番目 the behavior", "Writing｜"],
+  E216: ["1｜", "4｜C → B → D → A", "9｜3番目 prior preference / 5番目 what the system", "10｜3番目 when people learn / 5番目 the metric", "11｜3番目 a metric rises / 5番目 the learning", "Writing｜"],
+  E234: ["1｜", "5｜B → D → A → C", "10｜3番目 treatment-driven changes / 5番目 reliably predict", "11｜3番目 from an average level / 5番目 the timing of exposure", "12｜3番目 what a measure represents / 5番目 what important information", "Writing｜"]
 })) {
   const entry = generic.find((item) => item.id === id);
   const lesson = parseGenericLesson(fs.readFileSync(entry.filePath, "utf8"), id);
