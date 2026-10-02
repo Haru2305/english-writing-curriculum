@@ -366,3 +366,186 @@ P1よりsupportは減り、P3ほどevidence evaluationを重くしない中間Ph
 3. 60分枠を維持したままsupportの置き場所を調整
 
 であり、新規問題追加は不要。
+
+
+## P3
+
+### Overall finding
+
+P3 Core 54本は、P2から入試実戦へ移るPhaseとして**維持**する。
+
+P3の難化は単純な長文化ではなく、
+
+**support reduction
+→ source integration
+→ concept construction
+→ evidence evaluation
+→ summary-linked / text-linked Writing
+→ near-independent 60-minute execution**
+
+で進んでいる。
+
+P1/P2より圧縮後の依存切れは少なく、主要修正は「Optionalで正式導入される技能をCheckpointで初出にしない」ための再配線と、解答表示の統一だった。
+
+### B017–B018 — P3 entry
+
+判定：**Keep**
+
+- E097でP2のcriteria→choiceを100–120語へ引き上げる
+- E100でarticle / table / noticeを一つのsummaryへ統合
+- E102でsummary + judgmentを60分内に統合
+- E104はdense sentence処理、E105はtwo-passage conditional judgment、E108は両者を実戦セットで統合
+- P3入口として「技能名を思い出す」supportより、Taskから必要処理を選ぶ方向へ移っている
+
+問題追加は不要。
+
+### B019 — E109 / E113 / E114
+
+判定：**Keep with scope repair**
+
+- E109は未知概念をdefinition / contrast / exampleから構築
+- E113は本文・FAQ・表を一つのdecision questionへ統合
+- E114旧版は「レジスター」まで再訪すると書いていたが、実際の問題はcontext / reference / claim strength / example function / Naturalが中心
+- learner-facing scopeを実際のTaskへ合わせ、不要な「レジスター」表記を削除
+- 新規問題は追加しない
+
+### B020 — E117 / E119 / E120
+
+判定：**Keep with first-Core-encounter repair**
+
+- E117でcause→effect chainをCore導入
+- canonical D05 concession と D09 example→generalization はOptional側にあった
+- 旧E119はD05をTransfer扱い、E120 CheckpointはD05/D09を既習扱いしていた
+- E119をCore上のFast Introduceへ変更:
+  - concession = benefitを認めてもmain claimまで同意したことにはならない
+  - generalization = single caseからは条件付き原則まで
+- これによりE120で新技能名を初導入しない
+
+### B021 — E122 / E125 / E126
+
+判定：**Keep with first-Core-encounter repair**
+
+- E122で70–90語English Summaryを正式にCore化
+- D10 exception→qualificationのcanonical introduceはOptional
+- E125をD10 Fast Introduceへ変更し、
+  **general rule → observable exception → qualified conclusion**
+  の順を明示
+- E126 Checkpointはその統合に専念できる
+
+### B022 — E127 / E131 / E132
+
+判定：**Keep with output-format repair**
+
+- E127でquestion→answer structureをCore化
+- RF06日本語要約のdedicated introduceはOptional
+- E131でJapanese synthesisをFast Introduce:
+  source順の列挙ではなく
+  **central question → causes → evidence pattern → limitation**
+  を自然な日本語へ再構成
+- E132は日本語要約＋英語短答の切替に専念
+
+### B023–B026 — insertion / comparison / unknown concept / dense prose
+
+判定：**Keep**
+
+- E133 → E137 → E138で文挿入をlocal clueからtwo-passage / paragraph-functionまで上げる
+- E141 / E143 / E144でsummary→judgment / proposalへ接続
+- E145 / E147 / E150でunknown concept / two-system evaluation / checkpointを統合
+- E152 / E153 / E156でdense structure / causal interpretation / comparisonを支援ほぼなしへ移す
+
+この区間ではOptionalを飛ばしてもCore-onlyで成立する。
+
+### B027–B030 — bias / measurement / operational evidence
+
+判定：**Keep**
+
+P3後半のEvidence概念が明確にCoreへ残っている。
+
+- E157: self-selection bias
+- E163: regression to the mean
+- E169系のbase-rate reasoningを経由しつつ、CoreではE170でaverage / peak / distributionを扱う
+- E175: survivorship / visible-case bias
+- E180: freshness / current-decision evidence
+
+題材を難しくするだけでなく、「見えた数字をそのまま結論にしない」処理が積み上がる。
+
+### B031–B034 — causal inference / proxy / distribution / feedback / Final Gate
+
+判定：**Keep**
+
+P4へ持ち越すEvidence chainが非常に強い。
+
+- E185: observational association → plausible mechanism → alternative explanation → stronger test
+- E194: proxy ≠ underlying target
+- E197: intervention / default changes observed behavior
+- E201: average ≠ individual distribution
+- E204: summary score compression + source integration + final judgment
+
+特にE185は、単なる「相関≠因果」で終わらず、
+**association → mechanism hypothesis → competing explanations → experimental test**
+まで要求するため、P3後半の核として残す価値が高い。
+
+E194 / E197 / E201もP4で再利用する抽象概念としてCore維持が妥当。
+
+## P3 support gradient
+
+P3のsupport reductionは明確。
+
+前半:
+- Guide / Comparison axis / Integration mapがまだ明示される
+- 100–120語Writingへ移行
+
+中盤:
+- Silent Planが4分→2分→1分へ縮小
+- unknown concept / dense sentence / source setを自分で切り替える
+- summaryとjudgmentの両方を同一回で処理
+
+後半:
+- Checkpoint Plan 1分
+- self-checkも1分
+- promptが手順を細かく教えるのではなく、output requirementだけを示す
+- evidence conceptを自分で選び、100–120語級の判断へ転用
+
+したがってP2→P3の難化は、文章量ではなく**支援の減少と判断の自立**として成立している。
+
+## P3 presentation standardization
+
+Core 54本すべてに `## 解答一覧` を追加した。
+
+原則:
+- objective answerは正答のみ
+- free responseは `詳細は設問解説参照`
+- Summaryは `モデル要約はWriting解説参照`
+- Writingは `モデル答案はWriting解説参照`
+- Japanese Outputも長い解答例を一覧へ重複しない
+
+P3は自由記述が多いため、P1/P2以上に**一覧へ本文を複製しない**ことを優先する。
+
+## P3 overall conclusion
+
+P3 Core 54は削減不要。
+
+最終的な勾配は、
+
+**mixed sources / 100–120-word judgment
+→ dense prose / conditional comparison
+→ unknown concepts / causal chains
+→ summary / exception / insertion
+→ proposal / source-linked judgment
+→ bias / measurement / causal inference
+→ proxy / distribution / feedback
+→ P3 Final Gate**
+
+となっている。
+
+今回の修正は、
+1. B019のscope表記修正
+2. E119でD05/D09をFast Introduce
+3. E125でD10をFast Introduce
+4. E131でRF06 Japanese synthesisをFast Introduce
+5. Core 54本のcompact answer list統一
+6. accelerated routeに「Checkpointより前にFast Introduce」の運用原則を明記
+
+に限定した。
+
+新規問題追加・Core数増加は不要。
