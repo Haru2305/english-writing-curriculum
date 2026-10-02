@@ -327,6 +327,29 @@ for (const code of core99RawMissing) {
   console.log(`[core99][RAW-MISSING] ${code} -> ${lessons.join(",")}`);
 }
 
+const learnerConceptPath = new URL("../../curriculum/learner-facing-concepts.md", import.meta.url);
+const learnerConceptText = fs.readFileSync(learnerConceptPath, "utf8");
+const learnerConceptRows = learnerConceptText
+  .split("\n")
+  .filter((line) => /^\| IDEA\d+ /.test(line))
+  .map((line) => {
+    const cells = line.split("|").map((cell) => cell.trim());
+    const idea = cells[1]?.split(" ")[0] ?? "";
+    const introduce = cells[2]?.match(/E\d{3}/)?.[0] ?? "";
+    const recall = [...(cells[3]?.matchAll(/E\d{3}/g) ?? [])].map((match) => match[0]);
+    const transfer = [...(cells[4]?.matchAll(/E\d{3}/g) ?? [])].map((match) => match[0]);
+    return { idea, introduce, recall, transfer };
+  });
+
+const skippedIntroductions = learnerConceptRows.filter((row) =>
+  row.introduce && Number(row.introduce.slice(1)) <= 204 && !core99Ids.includes(row.introduce)
+);
+console.log(`[core99][CONCEPTS] total=${learnerConceptRows.length}, skippedIntroductions=${skippedIntroductions.length}`);
+for (const row of skippedIntroductions) {
+  const downstreamCore = [...row.recall, ...row.transfer].filter((id) => core99Ids.includes(id));
+  console.log(`[core99][CONCEPT-SKIP] ${row.idea} intro=${row.introduce} downstreamCore=${downstreamCore.join(",") || "none"}`);
+}
+
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
 
