@@ -32,8 +32,8 @@ Parser-based audit after route refinement:
 
 Across Core 99:
 
-- **41 lessons** contain substantial Writing such as Writing Task / Judgment / Evaluation / Proposal / Trade-off / source-linked writing
-- **33 lessons** contain summary output
+- **40 lessons** contain substantial Writing such as Writing Task / Judgment / Evaluation / Proposal / Trade-off / source-linked writing
+- **32 lessons** contain summary output
 - some P2 Summary Tasks are not classified by the generic parser as Writing, so the 68/99 count understates total learner output
 
 The five-lesson gaps in P2/P3 are not empty reading stretches:
@@ -45,17 +45,21 @@ Therefore no route swap is needed merely to make the Writing count look smoother
 
 ## P3 evidence-concept correction
 
-The first P3 compression over-weighted repeated two-system evaluation and under-weighted three high-transfer evidence concepts used later in P4.
+The first P3 compression over-weighted repeated two-system evaluation and under-weighted high-transfer evidence reasoning.
 
-The final route makes these swaps without changing the 54-lesson P3 total:
+Earlier refinement had already restored E170, E185, and E197 to Core. The end-to-end pass found one remaining repetition pattern: E147 → E153 → E159 → E165 → E171 placed a near-identical **two-option comparison → summary → evaluation** lesson in the second Core slot of five consecutive bundles.
+
+The final route therefore makes one additional swap without changing the 54-lesson P3 total:
 
 | Moved to Core | Moved to Targeted Review | Reason |
 |---|---|---|
-| E170 — average ≠ distribution | E169 — base-rate exercise | average/distribution is a canonical learner-facing Priority A concept and reappears later |
-| E185 — association / confounding / causation | E182 — measurement precision | confounding is a canonical Priority A concept; measurement precision is still exercised in E186 and later measurement lessons |
-| E197 — prediction/recommendation feedback loop | E177 — repeated two-system evaluation | feedback loops are highly transferable and directly support later P4; two-system evaluation is already heavily represented |
+| E169 — base-rate reasoning | E171 — repeated two-system evaluation | base rate adds a distinct evidence operation; comparison/evaluation is already heavily represented |
+| E185 — association / confounding / causation | E182 — measurement precision | confounding is a canonical Priority A concept; measurement precision remains exercised elsewhere |
+| E197 — prediction/recommendation feedback loop | E177 — repeated two-system evaluation | feedback loops are highly transferable and directly support later P4 |
 
-This makes the late-P3 Core better aligned with the curriculum's highest-value evidence reasoning.
+E170 remains Core as the first explicit **aggregate average vs peak/subgroup** lesson. E201 later makes the stronger **average ≠ individual distribution** distinction explicit.
+
+This keeps Writing density high while reducing template repetition and broadening the evidence repertoire.
 
 ## Skill coverage
 
@@ -95,10 +99,22 @@ E020 was rewritten to explain the fixed-cost / low-use-service idea directly, so
 The three phase boundaries remain pedagogically coherent:
 
 - P1 ends with E042: proposal / judgment / objection handling
-- P2 begins at E043: sentence structure and processing, then builds to E085–E087 at 60–80 / 80–100 / 90–110 words and E096 Final Checkpoint
+- P2 begins at E043 by deliberately returning to sentence structure and processing; E043 now states explicitly that this is a speed/accuracy reset, not a drop in curriculum level. P2 then builds to E085–E087 at 60–80 / 80–100 / 90–110 words and E096 Final Checkpoint
 - P3 begins at E097 with 100–120-word evidence-linked prioritization and ends at E204 Final Gate with mixed sources, summary, written explanation, and free writing
 
 The route therefore increases both linguistic load and reasoning independence instead of merely increasing word count.
+
+## End-to-end route integrity
+
+The final pass found one implementation mismatch: the learner-facing P3 route data had E185 before E183, while the canonical curriculum document used E183 → E185 → E186. The site route was corrected to preserve canonical lesson order.
+
+A renderer audit now requires each accelerated route to keep lesson IDs strictly increasing. This prevents a future route-data edit from silently changing the intended teaching sequence.
+
+The same pass also confirmed:
+- no further Core reduction is warranted
+- P1 → P2 is the only boundary that can feel like a temporary difficulty reset; the learner-facing bridge now explains why
+- P2 → P3 is already smooth because E097 explicitly transfers the E093/E096 criteria-based decision structure into 100–120-word evidence-linked writing
+- E204 remains an appropriate pre-P4 gate: it integrates mixed sources, summary, causal limitation, and conditional recommendation before P4 switches to university-specific formats
 
 ## Operating rule
 

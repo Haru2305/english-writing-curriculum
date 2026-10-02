@@ -29,7 +29,7 @@ E152 / E153 / E156
 ### B027–B030｜バイアス・測定・二制度評価・複数資料
 E157 / E159 / E162  
 E163 / E165 / E168  
-E170 / E171 / E174  
+E169 / E170 / E174  
 E175 / E180
 
 ### B031–B034｜測定・調査設計・本文連動Writing・Final Gate
@@ -50,7 +50,7 @@ E201 / E202 / E204
 - 文挿入・段落機能
 - 複数本文比較
 - 表・FAQ・memoなどの非連続資料統合
-- selection bias / regression to the mean / visible-case bias
+- selection bias / regression to the mean / base-rate reasoning / visible-case bias
 - confounding / association ≠ causation
 - proxy / measurement / average ≠ distribution
 - prediction / recommendation feedback loop
@@ -75,7 +75,7 @@ E201 / E202 / E204
 - B026: E151 / E154 / E155
 - B027: E158 / E160 / E161
 - B028: E164 / E166 / E167
-- B029: E169 / E172 / E173
+- B029: E171 / E172 / E173
 - B030: E176 / E177 / E178 / E179
 - B031: E181 / E182 / E184
 - B032: E187 / E188 / E191

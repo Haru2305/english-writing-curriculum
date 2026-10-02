@@ -87,6 +87,12 @@ const generic = getGenericLessonCatalog();
 const failures = [];
 const summaries = new Map();
 
+function isStrictlyIncreasingLessonIds(ids) {
+  return ids.every((id, index) =>
+    index === 0 || Number(id.slice(1)) > Number(ids[index - 1].slice(1))
+  );
+}
+
 
 const p1AllIds = Array.from({ length: 42 }, (_, index) =>
   `E${String(index + 1).padStart(3, "0")}`
@@ -97,6 +103,9 @@ const p1OptionalSet = new Set(p1OptionalIds);
 const p1Combined = new Set([...P1_ACCELERATED_IDS, ...p1OptionalIds]);
 const p1CheckpointIds = ["E006", "E012", "E018", "E024", "E030", "E036", "E042"];
 
+if (!isStrictlyIncreasingLessonIds(P1_ACCELERATED_IDS)) {
+  failures.push("P1 accelerated route should preserve increasing lesson order");
+}
 if (P1_ACCELERATED_IDS.length !== 15 || p1RouteSet.size !== 15) {
   failures.push(`P1 accelerated route must contain 15 unique lessons: ${P1_ACCELERATED_IDS.join(", ")}`);
 }
@@ -162,6 +171,9 @@ const p2OptionalSet = new Set(p2OptionalIds);
 const p2Combined = new Set([...P2_ACCELERATED_IDS, ...p2OptionalIds]);
 const p2CheckpointIds = ["E048", "E054", "E060", "E066", "E072", "E078", "E084", "E090", "E096"];
 
+if (!isStrictlyIncreasingLessonIds(P2_ACCELERATED_IDS)) {
+  failures.push("P2 accelerated route should preserve increasing lesson order");
+}
 if (P2_ACCELERATED_IDS.length !== 30 || p2RouteSet.size !== 30) {
   failures.push(`P2 accelerated route must contain 30 unique lessons: ${P2_ACCELERATED_IDS.join(", ")}`);
 }
@@ -196,6 +208,9 @@ const p3CheckpointIds = Array.from({ length: 18 }, (_, index) =>
   `E${String(102 + index * 6).padStart(3, "0")}`
 );
 
+if (!isStrictlyIncreasingLessonIds(P3_ACCELERATED_IDS)) {
+  failures.push("P3 accelerated route should preserve increasing lesson order");
+}
 if (P3_ACCELERATED_IDS.length !== 54 || p3RouteSet.size !== 54) {
   failures.push(`P3 accelerated route must contain 54 unique lessons: count=${P3_ACCELERATED_IDS.length}`);
 }
@@ -215,7 +230,7 @@ for (const id of p3CheckpointIds) {
 for (const id of [
   "E097", "E104", "E109", "E117", "E122", "E127", "E133",
   "E141", "E145", "E147", "E153", "E157", "E159", "E163", "E165",
-  "E170", "E171", "E175", "E183", "E185", "E189", "E190",
+  "E169", "E170", "E175", "E183", "E185", "E189", "E190",
   "E194", "E195", "E197", "E201", "E202", "E204"
 ]) {
   if (!p3RouteSet.has(id)) failures.push(`P3 accelerated route missing milestone ${id}`);
