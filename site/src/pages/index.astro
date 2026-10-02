@@ -70,48 +70,51 @@ const tsukubaRoute = lessons
 const routes = [
   {
     id: "route-foundation",
-    title: "文の論理をつくる",
-    description: "比較・因果・主張を、英語の文として組み立てる",
+    title: "読む・考える土台を作る",
+    description: "英文の意味を正確に取り、考えを一本の筋道にする",
     practice: "比較・因果・主張／語句の使い分け／短いWriting",
-    goal: "理由→仕組み→具体例の筋道を、短い英文で最後まで通す",
+    goal: "理由 → なぜそうなるか → 具体例を、自分で組み立てられる",
     count: foundationRoute.length,
     range: "教材1〜42",
     route: foundationRoute
   },
   {
     id: "route-structure",
-    title: "まとまりのある英文を書く",
-    description: "文をつなぎ、段落・要約・自由英作文へ広げる",
-    practice: "文の骨格／段落構成／要約／自由英作文",
-    goal: "複数文をつないで、まとまりのある答案を自力で作る",
+    title: "読んだ情報から答案を作る",
+    description: "長文の根拠を選び、要約・記述・英作文へ変える",
+    practice: "構文・段落／推論／要約／複数本文／60〜100語のWriting",
+    goal: "本文を読んで終わらず、設問に合う形の答案まで自力で作れる",
     count: structureRoute.length,
     range: "教材43〜96",
     route: structureRoute
   },
   {
     id: "route-practice",
-    title: "資料を読み取って書く",
-    description: "初見の文章・図表から必要な情報を選び、答案を作る",
-    practice: "初見文章・図表／情報選択／要約／判断・提案・評価",
-    goal: "資料を根拠にして、読み取りから英作文まで一続きで処理する",
+    title: "初見問題でも使い切る",
+    description: "知らない題材でも、読む・考える・書くを止めずにつなぐ",
+    practice: "未知概念／図表・複数資料／証拠評価／条件付き判断／実戦Writing",
+    goal: "初見テーマでも、根拠を選び、判断し、時間内に答案を完成できる",
     count: practiceRoute.length,
     range: "教材97〜204",
     route: practiceRoute
-  },
-  {
-    id: "route-tsukuba",
-    title: "筑波大形式で仕上げる",
-    description: "過去問形式で、時間内に読み・考え・書く",
-    practice: "長文読解／語句整序／記述／自由英作文／時間配分",
-    goal: "本番の順序と時間配分で、最後まで答案を完成させる",
-    count: tsukubaRoute.length,
-    range: "教材205〜234",
-    route: tsukubaRoute
   }
 ];
 
+const tsukubaSpecialization = {
+  id: "route-tsukuba",
+  title: "筑波大医学類 30日仕上げ",
+  description: "本編で作った力を、筑波の120分と出題形式に合わせる",
+  practice: "長文読解／日本語記述／語句整序／約100語英作文／時間配分",
+  goal: "120分で全形式を回し、最後の見直しまで含めて再現する",
+  count: tsukubaRoute.length,
+  range: "教材205〜234",
+  route: tsukubaRoute
+};
+
 const coreLessonIds = new Set(
-  routes.flatMap((route) => route.route.map((item) => item.lesson.id))
+  [...routes, tsukubaSpecialization].flatMap((route) =>
+    route.route.map((item) => item.lesson.id)
+  )
 );
 
 const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle) => {
@@ -139,10 +142,32 @@ const additionalLessonCount = additionalBundles.reduce(
 ---
 
 <BaseLayout title="自由英作文｜教材ビューア">
-  <p class="eyebrow">自由英作文</p>
-  <h1>学習を始める</h1>
+  <p class="eyebrow">大学受験英語</p>
+  <h1>初見の入試問題に、自力で対応できるようになる</h1>
+  <p class="lead curriculum-goal-lead">
+    長い英文を読み、必要な情報を選び、問いに合わせて考え、要約・記述・英作文まで制限時間内に答案にする。その一連の力を身につけます。
+  </p>
 
-  <section class="entry-secondary" aria-label="教材を開く">
+  <section class="curriculum-goal" aria-label="この教材で目指す力">
+    <div>
+      <strong>読む</strong>
+      <span>長文の構造と根拠をつかむ</span>
+    </div>
+    <div>
+      <strong>考える</strong>
+      <span>因果・比較・証拠・条件を使って判断する</span>
+    </div>
+    <div>
+      <strong>まとめる</strong>
+      <span>要点を選び、字数や設問形式に合わせる</span>
+    </div>
+    <div>
+      <strong>書く</strong>
+      <span>初見テーマでも80〜120語程度の英作文を組み立てる</span>
+    </div>
+  </section>
+
+  <section class="entry-secondary entry-secondary-single" aria-label="教材を開く">
     <form class="lesson-jump-form" id="lesson-jump-form">
       <label for="lesson-jump-input">
         <strong>教材番号から開く</strong>
@@ -161,11 +186,6 @@ const additionalLessonCount = additionalBundles.reduce(
       <small id="lesson-jump-help">教材1〜234</small>
       <p class="lesson-jump-error" id="lesson-jump-error" role="alert" hidden></p>
     </form>
-
-    <a class="entry-secondary-link" href="/e205/">
-      <strong>筑波大対策</strong>
-      <span>教材205から始める</span>
-    </a>
   </section>
 
   <a class="thinking-tools-entry compact-thinking-tools-entry" href="/thinking-tools/">
@@ -176,9 +196,9 @@ const additionalLessonCount = additionalBundles.reduce(
 
   <section class="index-section core-routes-section" aria-labelledby="core-routes-heading">
     <div class="index-section-heading">
-      <p class="eyebrow">通常ルート</p>
-      <h2 id="core-routes-heading">4段階で仕上げる</h2>
-      <p>今の段階を開くと、通常ルートで進める教材だけが表示されます。</p>
+      <p class="eyebrow">本編</p>
+      <h2 id="core-routes-heading">99回で、初見問題に対応する力を作る</h2>
+      <p>特定大学の形式ではなく、どの入試でも使う「読む → 考える → 答案にする」を3段階で作ります。</p>
     </div>
 
     <div class="core-route-stack">
@@ -190,8 +210,8 @@ const additionalLessonCount = additionalBundles.reduce(
               <strong>{route.title}</strong>
               <small class="core-route-description">{route.description}</small>
               <span class="core-route-summary-points">
-                <span><b>練習</b>{route.practice}</span>
-                <span><b>到達</b>{route.goal}</span>
+                <span><b>やること</b>{route.practice}</span>
+                <span><b>できるようになる</b>{route.goal}</span>
               </span>
             </span>
             <span class="core-route-summary-meta">
@@ -213,6 +233,48 @@ const additionalLessonCount = additionalBundles.reduce(
         </details>
       ))}
     </div>
+
+    <div class="core-completion">
+      <strong>ここまでで本編完成</strong>
+      <p>知らない題材でも、根拠を読み取り、自分で考え、要約・記述・英作文として時間内に答えを作ることを目指します。</p>
+    </div>
+  </section>
+
+  <section class="index-section specialization-section" aria-labelledby="specialization-heading">
+    <div class="index-section-heading">
+      <p class="eyebrow">志望校対策｜必要な人だけ</p>
+      <h2 id="specialization-heading">筑波大医学類を受けるなら、最後の30日で形式に合わせる</h2>
+      <p>本編で作った汎用力を、筑波の120分・出題順・記述量・約100語英作文に合わせて再現できる形へ仕上げます。</p>
+    </div>
+
+    <details class="core-route-details specialization-details" id={tsukubaSpecialization.id}>
+      <summary>
+        <span class="core-route-stage specialization-mark" aria-hidden="true">＋</span>
+        <span class="core-route-summary-main">
+          <strong>{tsukubaSpecialization.title}</strong>
+          <small class="core-route-description">{tsukubaSpecialization.description}</small>
+          <span class="core-route-summary-points">
+            <span><b>やること</b>{tsukubaSpecialization.practice}</span>
+            <span><b>できるようになる</b>{tsukubaSpecialization.goal}</span>
+          </span>
+        </span>
+        <span class="core-route-summary-meta">
+          <strong>{tsukubaSpecialization.count}日</strong>
+          <small>{tsukubaSpecialization.range}</small>
+        </span>
+      </summary>
+      <div class="accelerated-route-list">
+        {tsukubaSpecialization.route.map((item) => (
+          <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
+            <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
+            <span class="accelerated-route-main">
+              <strong>{toLearnerLessonNumber(item.lesson.id)}｜{learnerTitle(item.lesson.title)}</strong>
+              <small>{item.focus}</small>
+            </span>
+          </a>
+        ))}
+      </div>
+    </details>
   </section>
 
   <section class="index-section repair-section" aria-label="追加練習と全教材">
