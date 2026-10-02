@@ -1,6 +1,6 @@
 # English Writing Curriculum
 
-大学受験英語の長期カリキュラム管理リポジトリです。
+大学受験英作文に特化した教材作成リポジトリです。
 
 ## Canonical source policy
 
