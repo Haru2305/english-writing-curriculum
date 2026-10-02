@@ -226,90 +226,8 @@ if (P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length + P3_ACCELERATED_IDS.l
 }
 
 
-function coreRouteDiagnostics(label, ids, allIds) {
-  const coreRecords = ids.map((id) => {
-    const entry = catalog.find((item) => item.id === id);
-    const raw = fs.readFileSync(entry.filePath, "utf8");
-    const lesson = parseGenericLesson(raw, id);
-    const meta = raw.split("\n").find((line) => /^P[123]\b/.test(line.trim())) ?? "";
-    const codes = [...new Set(meta.match(/\b(?:A|RQ|RF|WF|WT|WQ|D|SS)\d{2}\b/g) ?? [])];
-    return {
-      id,
-      title: lesson.title,
-      writing: lesson.groups.writing.map((section) => section.title),
-      codes
-    };
-  });
-
-  const allCodes = new Set();
-  const coreCodes = new Set();
-  for (const id of allIds) {
-    const entry = catalog.find((item) => item.id === id);
-    const raw = fs.readFileSync(entry.filePath, "utf8");
-    const meta = raw.split("\n").find((line) => /^P[123]\b/.test(line.trim())) ?? "";
-    for (const code of meta.match(/\b(?:A|RQ|RF|WF|WT|WQ|D|SS)\d{2}\b/g) ?? []) allCodes.add(code);
-  }
-  for (const record of coreRecords) for (const code of record.codes) coreCodes.add(code);
-
-  const missingCodes = [...allCodes].filter((code) => !coreCodes.has(code)).sort();
-  const writingRecords = coreRecords.filter((record) => record.writing.length);
-  let maxNoWritingGap = 0;
-  let currentGap = 0;
-  for (const record of coreRecords) {
-    if (record.writing.length) currentGap = 0;
-    else {
-      currentGap += 1;
-      maxNoWritingGap = Math.max(maxNoWritingGap, currentGap);
-    }
-  }
-
-  console.log(`[core99][${label}] core=${ids.length}, writingLessons=${writingRecords.length}, maxNoWritingGap=${maxNoWritingGap}, missingCodes=${missingCodes.join(",") || "none"}`);
-  for (const record of coreRecords) {
-    console.log(`[core99][${label}][item] ${JSON.stringify(record)}`);
-  }
-}
-
-coreRouteDiagnostics("P1", P1_ACCELERATED_IDS, p1AllIds);
-coreRouteDiagnostics("P2", P2_ACCELERATED_IDS, p2AllIds);
-coreRouteDiagnostics("P3", P3_ACCELERATED_IDS, p3AllIds);
-
-
 const core99Ids = [...P1_ACCELERATED_IDS, ...P2_ACCELERATED_IDS, ...P3_ACCELERATED_IDS];
 const allP1P3Ids = [...p1AllIds, ...p2AllIds, ...p3AllIds];
-
-function metaCodesFor(id) {
-  const entry = catalog.find((item) => item.id === id);
-  const raw = fs.readFileSync(entry.filePath, "utf8");
-  const meta = raw.split("\n").find((line) => /^P[123]\b/.test(line.trim())) ?? "";
-  return new Set(meta.match(/\b(?:A|RQ|RF|WF|WT|WQ|D|SS)\d{2}\b/g) ?? []);
-}
-
-const allP1P3Codes = new Set(allP1P3Ids.flatMap((id) => [...metaCodesFor(id)]));
-const core99Codes = new Set(core99Ids.flatMap((id) => [...metaCodesFor(id)]));
-const core99MissingCodes = [...allP1P3Codes].filter((code) => !core99Codes.has(code)).sort();
-
-const core99Output = core99Ids.map((id) => {
-  const entry = catalog.find((item) => item.id === id);
-  const raw = fs.readFileSync(entry.filePath, "utf8");
-  const lesson = parseGenericLesson(raw, id);
-  const split = splitRaw(raw);
-  const substantialWriting = lesson.groups.writing.some((section) =>
-    /Writing Task|Judgment Writing|Evaluation Writing|Proposal Writing|Trade-off Writing|Summary-linked Writing|Text-linked Writing|Final Writing|Part .*Writing/i.test(section.title)
-  );
-  const hasSummaryTask = /^Summary Task$|^Japanese Summary Task$/m.test(split.problem);
-  const hasEnglishSummary = lesson.groups.writing.some((section) => /English Summary/i.test(section.title));
-  return { id, substantialWriting, hasSummaryTask, hasEnglishSummary };
-});
-
-const substantialCount = core99Output.filter((item) => item.substantialWriting).length;
-const summaryOutputCount = core99Output.filter((item) => item.hasSummaryTask || item.hasEnglishSummary).length;
-
-console.log(`[core99][ALL] core=${core99Ids.length}, codes=${core99Codes.size}/${allP1P3Codes.size}, missingCodes=${core99MissingCodes.join(",") || "none"}, substantialWriting=${substantialCount}, summaryOutput=${summaryOutputCount}`);
-
-for (const code of core99MissingCodes) {
-  const lessons = allP1P3Ids.filter((id) => metaCodesFor(id).has(code));
-  console.log(`[core99][MISSING] ${code} -> ${lessons.join(",")}`);
-}
 
 function rawCodesFor(id) {
   const entry = catalog.find((item) => item.id === id);
@@ -318,47 +236,87 @@ function rawCodesFor(id) {
   return new Set(split.problem.match(/\b(?:A|RQ|RF|WF|WT|WQ|D|SS)\d{2}\b/g) ?? []);
 }
 
+const core99Output = core99Ids.map((id) => {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const lesson = parseGenericLesson(raw, id);
+  const split = splitRaw(raw);
+  return {
+    id,
+    hasWriting: lesson.groups.writing.length > 0,
+    substantialWriting: lesson.groups.writing.some((section) =>
+      /Writing Task|Judgment Writing|Evaluation Writing|Proposal Writing|Trade-off Writing|Summary-linked Writing|Text-linked Writing|Final Writing|Part .*Writing/i.test(section.title)
+    ),
+    summaryOutput:
+      /^Summary Task$|^Japanese Summary Task$/m.test(split.problem)
+      || lesson.groups.writing.some((section) => /English Summary/i.test(section.title))
+  };
+});
+
+const core99WritingCount = core99Output.filter((item) => item.hasWriting).length;
+const core99SubstantialWritingCount = core99Output.filter((item) => item.substantialWriting).length;
+const core99SummaryOutputCount = core99Output.filter((item) => item.summaryOutput).length;
+
+if (core99Ids.length !== 99) {
+  failures.push(`Core route changed from 99 lessons: ${core99Ids.length}`);
+}
+if (core99WritingCount < 65) {
+  failures.push(`Core 99 Writing density too low: ${core99WritingCount}/99`);
+}
+if (core99SubstantialWritingCount < 40) {
+  failures.push(`Core 99 substantial-Writing coverage too low: ${core99SubstantialWritingCount}/99`);
+}
+if (core99SummaryOutputCount < 30) {
+  failures.push(`Core 99 summary-output coverage too low: ${core99SummaryOutputCount}/99`);
+}
+
 const allRawCodes = new Set(allP1P3Ids.flatMap((id) => [...rawCodesFor(id)]));
 const core99RawCodes = new Set(core99Ids.flatMap((id) => [...rawCodesFor(id)]));
 const core99RawMissing = [...allRawCodes].filter((code) => !core99RawCodes.has(code)).sort();
-console.log(`[core99][RAW] codes=${core99RawCodes.size}/${allRawCodes.size}, missingCodes=${core99RawMissing.join(",") || "none"}`);
-for (const code of core99RawMissing) {
-  const lessons = allP1P3Ids.filter((id) => rawCodesFor(id).has(code));
-  console.log(`[core99][RAW-MISSING] ${code} -> ${lessons.join(",")}`);
+const allowedOptionalOnlyCodes = new Set(["A04", "A10"]);
+const unexpectedMissingCodes = core99RawMissing.filter((code) => !allowedOptionalOnlyCodes.has(code));
+
+if (core99RawCodes.size < 70 || unexpectedMissingCodes.length) {
+  failures.push(
+    `Core 99 skill coverage regressed: ${core99RawCodes.size}/${allRawCodes.size}; unexpected missing=${unexpectedMissingCodes.join(",") || "none"}`
+  );
+}
+
+for (const id of ["E157", "E170", "E175", "E185", "E194", "E197"]) {
+  if (!p3RouteSet.has(id)) {
+    failures.push(`P3 Core missing high-transfer evidence concept introduction: ${id}`);
+  }
 }
 
 const learnerConceptPath = new URL("../../curriculum/learner-facing-concepts.md", import.meta.url);
 const learnerConceptText = fs.readFileSync(learnerConceptPath, "utf8");
+if (!learnerConceptText.includes("## Accelerated-route override")) {
+  failures.push("Accelerated-route concept override is missing");
+}
+
 const learnerConceptRows = learnerConceptText
   .split("\n")
   .filter((line) => /^\| IDEA\d+ /.test(line))
   .map((line) => {
     const cells = line.split("|").map((cell) => cell.trim());
-    const idea = cells[1]?.split(" ")[0] ?? "";
     const introduce = cells[2]?.match(/E\d{3}/)?.[0] ?? "";
     const recall = [...(cells[3]?.matchAll(/E\d{3}/g) ?? [])].map((match) => match[0]);
     const transfer = [...(cells[4]?.matchAll(/E\d{3}/g) ?? [])].map((match) => match[0]);
-    return { idea, introduce, recall, transfer };
+    return { introduce, recall, transfer };
   });
 
-const skippedIntroductions = learnerConceptRows.filter((row) =>
-  row.introduce && Number(row.introduce.slice(1)) <= 204 && !core99Ids.includes(row.introduce)
-);
-console.log(`[core99][CONCEPTS] total=${learnerConceptRows.length}, skippedIntroductions=${skippedIntroductions.length}`);
-for (const row of skippedIntroductions) {
+for (const row of learnerConceptRows) {
+  if (!row.introduce || core99Ids.includes(row.introduce)) continue;
   const downstreamCore = [...row.recall, ...row.transfer].filter((id) => core99Ids.includes(id));
-  console.log(`[core99][CONCEPT-SKIP] ${row.idea} intro=${row.introduce} downstreamCore=${downstreamCore.join(",") || "none"}`);
-}
-
-for (const row of skippedIntroductions) {
-  for (const id of [...row.recall, ...row.transfer].filter((candidate) => core99Ids.includes(candidate))) {
+  for (const id of downstreamCore) {
     const entry = catalog.find((item) => item.id === id);
     const raw = fs.readFileSync(entry.filePath, "utf8");
     if (raw.includes(row.introduce)) {
-      console.log(`[core99][CONCEPT-REF] ${row.idea} core=${id} explicitly references optional intro=${row.introduce}`);
+      failures.push(`${id}: Core lesson explicitly assumes Optional concept-introduction lesson ${row.introduce}`);
     }
   }
 }
+
 
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
@@ -1002,6 +960,7 @@ console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${ge
 console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optional=${p1OptionalIds.length}`);
 console.log(`[generic-audit] p2Accelerated=${P2_ACCELERATED_IDS.length}, p2Optional=${p2OptionalIds.length}, p1p2Core=${P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length}`);
 console.log(`[generic-audit] p3Accelerated=${P3_ACCELERATED_IDS.length}, p3Optional=${p3OptionalIds.length}, preP4Core=${P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length + P3_ACCELERATED_IDS.length}`);
+console.log(`[generic-audit] core99Writing=${core99WritingCount}, substantial=${core99SubstantialWritingCount}, summaries=${core99SummaryOutputCount}, rawSkills=${core99RawCodes.size}/${allRawCodes.size}`);
 console.log(`[generic-audit] p1CoreReviewTailChars=${p1CoreReviewTailChars}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
