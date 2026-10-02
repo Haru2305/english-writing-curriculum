@@ -1,4 +1,4 @@
-import { toLearnerText } from "./learner-text.js";
+import { toLearnerLabel } from "./learner-text.js";
 
 const QUESTION_HEADING = /^(?:Q\d+|\d+)\s*(?:[｜:：.]|\s+)/i;
 const MODEL_WRITING_REVIEW = /^(?:Model answer|Model output|Model short output|Model writing|Model summary|Model English summary|Model judgment|Model evaluation|モデル答案|モデル$)/i;
@@ -6,7 +6,7 @@ const WRITING_REVIEW = /^(?:Nuance Check|Guided Writing|Short Writing|Mini Writi
 
 export function reviewPresentation(title = "") {
   const raw = String(title).trim();
-  const text = toLearnerText(raw);
+  const text = toLearnerLabel(raw);
 
   if (["答えだけ", "解答一覧"].includes(text)) {
     return { kind: "answer-list", label: "" };
