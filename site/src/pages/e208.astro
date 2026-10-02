@@ -4,7 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
-import { toLearnerText, toLearnerLabel } from "../lib/learner-text.js";
+import { toLearnerText, toLearnerLabel, toLearnerLessonNumber } from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 import {
   stripFrontMatter,
@@ -32,7 +32,8 @@ const answerSections = parseSections(split.answer.trim().split("\n"), {
 });
 
 const title = toLearnerLabel(problemHeader.titleLine.replace(/^E208｜/, ""));
-const pageTitle = "E208｜" + title;
+const lessonLabel = toLearnerLessonNumber("E208");
+const pageTitle = lessonLabel + "｜" + title;
 const timeText = flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "";
 const coreTime = timeText.match(/Core\s*(\d+)分/i)?.[1];
 const learnerMeta = coreTime ? `目安${coreTime}分` : "";
@@ -91,13 +92,13 @@ const lessonKeys = [
 const writeMap = ["Choice", "Reason", "Mechanism", "Concrete example", "Qualification / conclusion"];
 ---
 
-<BaseLayout title={pageTitle} description="E208 筑波型・約100語自由英作文">
+<BaseLayout title={pageTitle} description={lessonLabel + " 筑波型・約100語自由英作文"}>
   <article>
     <header class="lesson-header">
       <div class="series-mark" aria-label="シリーズと教材番号">
         <span>自由英作文</span>
         <span aria-hidden="true">/</span>
-        <strong>E208</strong>
+        <strong>{lessonLabel}</strong>
       </div>
       <h1 class="lesson-title">{title}</h1>
       {learnerMeta && <p class="lesson-meta">{learnerMeta}</p>}
@@ -341,9 +342,9 @@ const writeMap = ["Choice", "Reason", "Mechanism", "Concrete example", "Qualific
     </script>
 
     <nav class="nav-row" aria-label="教材ナビゲーション">
-      <a class="nav-link" href="/e207/">← E207</a>
+      <a class="nav-link" href="/e207/">← {toLearnerLessonNumber("E207")}</a>
       <a class="nav-link" href="/">一覧へ</a>
-      <a class="nav-link" href="/e209/">E209 →</a>
+      <a class="nav-link" href="/e209/">{toLearnerLessonNumber("E209")} →</a>
     </nav>
   </article>
 </BaseLayout>

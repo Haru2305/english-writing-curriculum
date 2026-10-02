@@ -4,7 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
-import { toLearnerText, toLearnerLabel } from "../lib/learner-text.js";
+import { toLearnerText, toLearnerLabel, toLearnerLessonNumber } from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 import {
   stripFrontMatter,
@@ -48,7 +48,8 @@ const answerSections = parseSections(split.answer.trim().split("\n"), {
 });
 
 const title = toLearnerLabel(problemHeader.titleLine.replace(/^E087｜/, ""));
-const pageTitle = "E087｜" + title;
+const lessonLabel = toLearnerLessonNumber("E087");
+const pageTitle = lessonLabel + "｜" + title;
 const timeText = flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "";
 const coreTime = timeText.match(/Core\s*(\d+)分/i)?.[1];
 const learnerMeta = coreTime ? `目安${coreTime}分` : "";
@@ -186,13 +187,13 @@ const referenceShortcuts = [
 ];
 ---
 
-<BaseLayout title={pageTitle} description="E087 自由英作文・Plan→Draft→Revise">
+<BaseLayout title={pageTitle} description={lessonLabel + " 自由英作文・Plan→Draft→Revise"}>
   <article>
     <header class="lesson-header">
       <div class="series-mark" aria-label="シリーズと教材番号">
         <span>自由英作文</span>
         <span aria-hidden="true">/</span>
-        <strong>E087</strong>
+        <strong>{lessonLabel}</strong>
       </div>
       <h1 class="lesson-title">{title}</h1>
       {learnerMeta && <p class="lesson-meta">{learnerMeta}</p>}
@@ -563,9 +564,9 @@ const referenceShortcuts = [
     </script>
 
     <nav class="nav-row" aria-label="教材ナビゲーション">
-      <a class="nav-link" href="/e086/">← E086</a>
+      <a class="nav-link" href="/e086/">← {toLearnerLessonNumber("E086")}</a>
       <a class="nav-link" href="/">一覧へ</a>
-      <a class="nav-link" href="/e088/">E088 →</a>
+      <a class="nav-link" href="/e088/">{toLearnerLessonNumber("E088")} →</a>
     </nav>
   </article>
 </BaseLayout>

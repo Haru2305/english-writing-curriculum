@@ -5,6 +5,7 @@ const INTERNAL_PREFIX = new RegExp(
 );
 const INTERNAL_CODE_ANY = new RegExp(INTERNAL_FAMILY + "\\d{1,4}", "i");
 const INTERNAL_CODE_GLOBAL = new RegExp(INTERNAL_FAMILY + "\\d{1,4}", "gi");
+const LESSON_CODE_ANY = /\bE\d{3}\b/i;
 const SHORT_INTERNAL_PREFIX = /^(?:P|G|A|B|D)\d{2,4}\s*[｜:：]\s*/i;
 
 function stripAuthoringBodyLabels(text = "") {
@@ -73,8 +74,14 @@ function stripAuthoringBodyLabels(text = "") {
     .replace(/最終Gate/g, "最終確認");
 }
 
+export function toLearnerLessonNumber(id = "") {
+  const match = String(id).trim().match(/^E?0*(\d{1,3})$/i);
+  return match ? `教材 ${Number(match[1])}` : String(id).trim();
+}
+
 export function toLearnerText(text = "") {
   const cleaned = stripAuthoringBodyLabels(text)
+    .replace(/\bE0*(\d{1,3})\b/gi, (_, number) => `教材${Number(number)}`)
     .replace(/^(Q\d+)[｜:：]\s*(?:RQ|RF|WF|SS|TF)\d+\s*$/i, "$1")
     .replace(INTERNAL_PREFIX, "")
     .replace(INTERNAL_CODE_GLOBAL, "")
@@ -132,5 +139,6 @@ export function startsWithInternalCode(text = "") {
 }
 
 export function containsInternalCode(text = "") {
-  return INTERNAL_CODE_ANY.test(String(text));
+  const value = String(text);
+  return INTERNAL_CODE_ANY.test(value) || LESSON_CODE_ANY.test(value);
 }

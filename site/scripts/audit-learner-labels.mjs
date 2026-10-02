@@ -6,6 +6,7 @@ import { toLearnerLabel, toLearnerText } from "../src/lib/learner-text.js";
 const catalog = getLessonCatalog();
 
 const labelPatterns = [
+  ["lesson-code", /\bE\d{3}\b/i],
   ["bundle-code", /\bB\d{3}\b/i],
   ["phase-authoring", /\bP[1-4]\b/i],
   ["bundle-word", /\bBundle\b/i],
@@ -16,6 +17,7 @@ const labelPatterns = [
 ];
 
 const bodyPatterns = [
+  ["lesson-code", /\bE\d{3}\b/i],
   ["bundle-code", /\bB\d{3}\b/i],
   ["phase-authoring", /\bP[1-4](?=\s+(?:Final|Bridge|Strategy|Repair)|(?:で|では|へ|の|以降|完了|序盤|本体|最初|移行))/i],
   ["bundle-word", /\bBundle\s*\d*\b/i],
@@ -69,13 +71,32 @@ for (const entry of catalog) {
 for (const id of REPRESENTATIVE_IDS) {
   const path = new URL(`../src/pages/${id.toLowerCase()}.astro`, import.meta.url);
   const source = fs.readFileSync(path, "utf8");
-  if (!source.includes("toLearnerLabel") || !/const title\s*=\s*toLearnerLabel\(/.test(source)) {
+  if (
+    !source.includes("toLearnerLabel")
+    || !source.includes("toLearnerLessonNumber")
+    || !/const title\s*=\s*toLearnerLabel\(/.test(source)
+  ) {
     failures.push({
       id,
       zone: "dedicated-renderer",
       hit: ["missing-title-sanitizer"],
-      text: "Dedicated page does not sanitize its learner-facing title."
+      text: "Dedicated page does not sanitize its learner-facing title/lesson number."
     });
+  }
+
+  for (const [name, pattern] of [
+    ["literal-header-code", /<strong>E\d{3}<\/strong>/],
+    ["literal-nav-code", />[^<{]*E\d{3}[^<{]*<\/a>/],
+    ["literal-meta-code", /(?:pageTitle\s*=\s*"E\d{3}|description="E\d{3})/]
+  ]) {
+    if (pattern.test(source)) {
+      failures.push({
+        id,
+        zone: "dedicated-renderer",
+        hit: [name],
+        text: "Dedicated page still exposes an E-code to learners."
+      });
+    }
   }
 }
 

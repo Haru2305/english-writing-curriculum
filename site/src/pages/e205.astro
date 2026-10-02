@@ -4,7 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
-import { toLearnerText, toLearnerLabel } from "../lib/learner-text.js";
+import { toLearnerText, toLearnerLabel, toLearnerLessonNumber } from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 import {
   stripFrontMatter,
@@ -33,7 +33,8 @@ const answerSections = parseSections(split.answer.trim().split("\n"), {
 });
 
 const title = toLearnerLabel(problemHeader.titleLine.replace(/^E205｜/, ""));
-const pageTitle = "E205｜" + title;
+const lessonLabel = toLearnerLessonNumber("E205");
+const pageTitle = lessonLabel + "｜" + title;
 const timeText = flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "";
 const coreTime = timeText.match(/Core\s*(\d+)分/i)?.[1];
 const learnerMeta = coreTime ? `目安${coreTime}分` : "";
@@ -146,13 +147,13 @@ const answerOverview = questionReviews.map((item) => ({
 }));
 ---
 
-<BaseLayout title={pageTitle} description="E205 筑波対策・長文">
+<BaseLayout title={pageTitle} description={lessonLabel + " 筑波対策・長文"}>
   <article>
     <header class="lesson-header">
       <div class="series-mark" aria-label="シリーズと教材番号">
         <span>自由英作文</span>
         <span aria-hidden="true">/</span>
-        <strong>E205</strong>
+        <strong>{lessonLabel}</strong>
       </div>
       <h1 class="lesson-title">{title}</h1>
       {learnerMeta && <p class="lesson-meta">{learnerMeta}</p>}
@@ -489,9 +490,9 @@ const answerOverview = questionReviews.map((item) => ({
     </script>
 
     <nav class="nav-row" aria-label="教材ナビゲーション">
-      <a class="nav-link" href="/e204/">← E204</a>
+      <a class="nav-link" href="/e204/">← {toLearnerLessonNumber("E204")}</a>
       <a class="nav-link" href="/">一覧へ</a>
-      <a class="nav-link" href="/e206/">E206 →</a>
+      <a class="nav-link" href="/e206/">{toLearnerLessonNumber("E206")} →</a>
     </nav>
   </article>
 </BaseLayout>
