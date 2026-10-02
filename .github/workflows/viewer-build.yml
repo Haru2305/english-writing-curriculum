@@ -37,5 +37,17 @@ jobs:
         run: node scripts/audit-learner-labels.mjs
       - name: Build
         run: npm run build
+      - name: Install final rendered-label audit runtime
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium
+      - name: Final rendered learner-label audit
+        run: |
+          npm run preview -- --host 127.0.0.1 > /tmp/viewer-preview.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4321/ >/dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/audit-rendered-labels-final.mjs
       - name: Validate Cloudflare deploy config
         run: npx wrangler deploy --dry-run
