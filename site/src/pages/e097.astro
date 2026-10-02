@@ -49,7 +49,7 @@ const answerSections = parseSections(split.answer.trim().split("\n"), {
 
 const title = toLearnerText(problemHeader.titleLine.replace(/^E097｜/, ""));
 const pageTitle = "E097｜" + title;
-const timeText = flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "";
+const timeText = toLearnerText(flatSectionLines(findSection(problemSections, "時間配分"))[0] ?? "");
 const coreTime = timeText.match(/Core\s*(\d+)分/i)?.[1];
 const learnerMeta = coreTime ? `目安${coreTime}分` : "";
 
