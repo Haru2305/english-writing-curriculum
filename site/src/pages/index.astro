@@ -4,6 +4,7 @@ import { getLessonCatalog } from "../lib/lesson-catalog.js";
 import { P1_ACCELERATED_ROUTE } from "../data/p1-accelerated-route.js";
 import { P2_ACCELERATED_ROUTE } from "../data/p2-accelerated-route.js";
 import { P3_ACCELERATED_ROUTE } from "../data/p3-accelerated-route.js";
+import { toLearnerLessonNumber } from "../lib/learner-text.js";
 
 const lessons = getLessonCatalog();
 const lessonById = new Map(lessons.map((lesson) => [lesson.id, lesson]));
@@ -30,6 +31,18 @@ function learnerTitle(title = "") {
     .replace(/\s{2,}/g, " ")
     .replace(/｜\s*｜/g, "｜")
     .trim();
+}
+
+function lessonNumber(id = "") {
+  return Number(String(id).replace(/^E/i, ""));
+}
+
+function bundleTopic(groupLessons) {
+  const checkpointTitle = learnerTitle(groupLessons[groupLessons.length - 1]?.title ?? "");
+  const topic = checkpointTitle
+    .replace(/^(?:筑波\s+)?(?:チェック回|最終チェック)(?:判定)?\s*[｜:：]?\s*/i, "")
+    .trim();
+  return topic || learnerTitle(groupLessons[0]?.title ?? "");
 }
 
 function buildRoute(source) {
@@ -60,7 +73,7 @@ const routes = [
     title: "文の論理をつくる",
     description: "比較・因果・主張を、英語の文として組み立てる",
     count: foundationRoute.length,
-    range: "E001–E042",
+    range: "教材1〜42",
     route: foundationRoute
   },
   {
@@ -68,7 +81,7 @@ const routes = [
     title: "まとまりのある英文を書く",
     description: "文をつなぎ、段落・要約・自由英作文へ広げる",
     count: structureRoute.length,
-    range: "E043–E096",
+    range: "教材43〜96",
     route: structureRoute
   },
   {
@@ -76,7 +89,7 @@ const routes = [
     title: "資料を読み取って書く",
     description: "初見の文章・図表から必要な情報を選び、答案を作る",
     count: practiceRoute.length,
-    range: "E097–E204",
+    range: "教材97〜204",
     route: practiceRoute
   },
   {
@@ -84,18 +97,37 @@ const routes = [
     title: "筑波大形式で仕上げる",
     description: "過去問形式で、時間内に読み・考え・書く",
     count: tsukubaRoute.length,
-    range: "E205–E234",
+    range: "教材205〜234",
     route: tsukubaRoute
   }
 ];
 
+const coreLessonIds = new Set(
+  routes.flatMap((route) => route.route.map((item) => item.lesson.id))
+);
+
 const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle) => {
   const groupLessons = lessons.filter((lesson) => lesson.bundle === bundle);
+  const firstNumber = lessonNumber(groupLessons[0]?.id);
+  const lastNumber = lessonNumber(groupLessons[groupLessons.length - 1]?.id);
   return {
     lessons: groupLessons,
-    range: `${groupLessons[0]?.id}–${groupLessons[groupLessons.length - 1]?.id}`
+    range: `教材${firstNumber}〜${lastNumber}`,
+    topic: bundleTopic(groupLessons)
   };
 });
+
+const additionalBundles = bundles
+  .map((group) => ({
+    ...group,
+    lessons: group.lessons.filter((lesson) => !coreLessonIds.has(lesson.id))
+  }))
+  .filter((group) => group.lessons.length > 0);
+
+const additionalLessonCount = additionalBundles.reduce(
+  (sum, group) => sum + group.lessons.length,
+  0
+);
 ---
 
 <BaseLayout title="自由英作文｜教材ビューア">
@@ -113,18 +145,18 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
           name="lesson"
           inputmode="text"
           autocomplete="off"
-          placeholder="例：E086"
+          placeholder="例：86"
           aria-describedby="lesson-jump-help"
         />
         <button type="submit">開く</button>
       </div>
-      <small id="lesson-jump-help">E001〜E234</small>
+      <small id="lesson-jump-help">教材1〜234</small>
       <p class="lesson-jump-error" id="lesson-jump-error" role="alert" hidden></p>
     </form>
 
     <a class="entry-secondary-link" href="/e205/">
       <strong>筑波大対策</strong>
-      <span>E205から始める</span>
+      <span>教材205から始める</span>
     </a>
   </section>
 
@@ -156,7 +188,7 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
               <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
                 <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
                 <span class="accelerated-route-main">
-                  <strong>{item.lesson.id}｜{learnerTitle(item.lesson.title)}</strong>
+                  <strong>{toLearnerLessonNumber(item.lesson.id)}｜{learnerTitle(item.lesson.title)}</strong>
                   <small>{item.focus}</small>
                 </span>
               </a>
@@ -167,31 +199,65 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
     </div>
   </section>
 
-  <section class="index-section repair-section" aria-labelledby="repair-heading">
-    <details class="repair-catalog">
+  <section class="index-section repair-section" aria-label="追加練習と全教材">
+    <details class="repair-catalog additional-practice-catalog">
       <summary>
         <span>
-          <small>必要なときだけ</small>
-          <strong id="repair-heading">補修・全教材</strong>
+          <small>苦手な内容をもう少し練習したいとき</small>
+          <strong>追加練習を探す</strong>
         </span>
-        <span>E001–E234</span>
+        <span>{additionalLessonCount}教材</span>
       </summary>
       <div class="repair-catalog-body">
         <p>
-          チェック回で弱点が見つかったときに使います。全234教材を最初から順番に消化する必要はありません。
+          通常の学習ルート以外の練習教材です。チェック回などで苦手が見つかったときに、内容を見て必要なものだけ選びます。
+        </p>
+
+        <div class="bundle-list">
+          {additionalBundles.map((group) => (
+            <details class="bundle-group">
+              <summary>
+                <strong>{group.topic}</strong>
+                <span>{group.range}｜{group.lessons.length}教材</span>
+              </summary>
+              <div class="bundle-lessons">
+                {group.lessons.map((lesson) => (
+                  <a href={"/" + lesson.slug + "/"} class="bundle-lesson">
+                    <span>{toLearnerLessonNumber(lesson.id)}</span>
+                    <strong>{learnerTitle(lesson.title)}</strong>
+                  </a>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </details>
+
+    <details class="repair-catalog all-materials-catalog">
+      <summary>
+        <span>
+          <small>番号や題名から直接探したいとき</small>
+          <strong>全教材を見る</strong>
+        </span>
+        <span>教材1〜234</span>
+      </summary>
+      <div class="repair-catalog-body">
+        <p>
+          全234教材を番号順に確認できます。通常は上の学習段階か追加練習から選べば十分です。
         </p>
 
         <div class="bundle-list">
           {bundles.map((group) => (
             <details class="bundle-group">
               <summary>
-                <strong>{group.range}</strong>
-                <span>{group.lessons.length}教材</span>
+                <strong>{group.topic}</strong>
+                <span>{group.range}</span>
               </summary>
               <div class="bundle-lessons">
                 {group.lessons.map((lesson) => (
                   <a href={"/" + lesson.slug + "/"} class="bundle-lesson">
-                    <span>{lesson.id}</span>
+                    <span>{toLearnerLessonNumber(lesson.id)}</span>
                     <strong>{learnerTitle(lesson.title)}</strong>
                   </a>
                 ))}
@@ -221,7 +287,7 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
         const number = normalized ? Number(normalized[1]) : NaN;
 
         if (!Number.isInteger(number) || number < 1 || number > 234) {
-          error.textContent = "E001〜E234の教材番号を入力してください";
+          error.textContent = "1〜234の教材番号を入力してください";
           error.hidden = false;
           input.focus();
           return;
