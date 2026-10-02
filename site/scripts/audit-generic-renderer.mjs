@@ -684,6 +684,41 @@ for (const entry of catalog.filter((item) => Number(item.id.slice(1)) <= 204)) {
   }
 }
 
+
+const earlyModelInventory = [];
+
+for (const entry of catalog.filter((item) => Number(item.id.slice(1)) <= 204)) {
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const matches = [...split.answer.matchAll(
+    /(?:^|\n)(モデル答案|モデル)\s*\n+([^\n]+(?:\n(?!\s*\n|別解|自己修正|WQ\d+|到達目安|思考の再利用|解説補強)[^\n]+)*)/g
+  )];
+
+  for (const match of matches) {
+    const model = match[2].replace(/\n+/g, " ").replace(/\s+/g, " ").trim();
+    if (!/[A-Za-z]/.test(model)) continue;
+    const words = model.split(/\s+/).filter(Boolean).length;
+    const sentences = (model.match(/[.!?](?=\s|$)/g) ?? []).length;
+    earlyModelInventory.push({
+      id: entry.id,
+      phase: entry.phase,
+      title: match[1],
+      words,
+      sentences,
+      reason: /\bbecause\b|\bsince\b|\btherefore\b|\bso that\b/i.test(model),
+      contrast: /\bhowever\b|\bwhile\b|\balthough\b|\bwhereas\b|\bbut\b/i.test(model),
+      qualification: /\bmay\b|\bmight\b|\bunless\b|\bonly if\b|\bdepends? on\b|\bnot necessarily\b/i.test(model),
+      example: /\bfor example\b|\bfor instance\b|\bsuch as\b/i.test(model),
+      text: model.slice(0, 900)
+    });
+  }
+}
+
+console.log(`[model-gradient][early] total=${earlyModelInventory.length}`);
+for (const record of earlyModelInventory) {
+  console.log(`[model-gradient][early-item] ${JSON.stringify(record)}`);
+}
+
 console.log(`[model-gradient] total=${p1p3ModelInventory.length}`);
 for (const record of p1p3ModelInventory) {
   console.log(`[model-gradient][item] ${JSON.stringify(record)}`);
