@@ -17,6 +17,10 @@ import {
   P2_ACCELERATED_IDS,
   P2_OPTIONAL_BY_BUNDLE
 } from "../src/data/p2-accelerated-route.js";
+import {
+  P3_ACCELERATED_IDS,
+  P3_OPTIONAL_BY_BUNDLE
+} from "../src/data/p3-accelerated-route.js";
 
 const answerMarkers = [
   "解答・解説・自己修正",
@@ -178,6 +182,47 @@ for (const id of ["E043", "E053", "E061", "E068", "E073", "E074", "E079", "E080"
 }
 if (P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length !== 45) {
   failures.push("P1+P2 accelerated route should reach P3 in 45 Core lessons");
+}
+
+
+const p3AllIds = Array.from({ length: 108 }, (_, index) =>
+  `E${String(index + 97).padStart(3, "0")}`
+);
+const p3OptionalIds = Object.values(P3_OPTIONAL_BY_BUNDLE).flat();
+const p3RouteSet = new Set(P3_ACCELERATED_IDS);
+const p3OptionalSet = new Set(p3OptionalIds);
+const p3Combined = new Set([...P3_ACCELERATED_IDS, ...p3OptionalIds]);
+const p3CheckpointIds = Array.from({ length: 18 }, (_, index) =>
+  `E${String(102 + index * 6).padStart(3, "0")}`
+);
+
+if (P3_ACCELERATED_IDS.length !== 54 || p3RouteSet.size !== 54) {
+  failures.push(`P3 accelerated route must contain 54 unique lessons: count=${P3_ACCELERATED_IDS.length}`);
+}
+if (p3OptionalIds.length !== 54 || p3OptionalSet.size !== 54) {
+  failures.push(`P3 targeted review must contain 54 unique lessons: count=${p3OptionalIds.length}`);
+}
+if (P3_ACCELERATED_IDS.some((id) => p3OptionalSet.has(id))) {
+  failures.push("P3 accelerated and optional routes overlap");
+}
+if (p3Combined.size !== 108 || p3AllIds.some((id) => !p3Combined.has(id))) {
+  failures.push("P3 accelerated + optional routes do not partition E097–E204");
+}
+for (const id of p3CheckpointIds) {
+  if (!p3RouteSet.has(id)) failures.push(`P3 accelerated route missing checkpoint ${id}`);
+}
+
+for (const id of [
+  "E097", "E104", "E109", "E117", "E122", "E127", "E133",
+  "E141", "E145", "E147", "E153", "E157", "E159", "E163", "E165",
+  "E169", "E171", "E175", "E177", "E182", "E183", "E189", "E190",
+  "E194", "E195", "E201", "E202", "E204"
+]) {
+  if (!p3RouteSet.has(id)) failures.push(`P3 accelerated route missing milestone ${id}`);
+}
+
+if (P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length + P3_ACCELERATED_IDS.length !== 99) {
+  failures.push("P1+P2+P3 accelerated route should contain 99 Core lessons before P4");
 }
 
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
@@ -821,6 +866,7 @@ const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216",
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optional=${p1OptionalIds.length}`);
 console.log(`[generic-audit] p2Accelerated=${P2_ACCELERATED_IDS.length}, p2Optional=${p2OptionalIds.length}, p1p2Core=${P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length}`);
+console.log(`[generic-audit] p3Accelerated=${P3_ACCELERATED_IDS.length}, p3Optional=${p3OptionalIds.length}, preP4Core=${P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length + P3_ACCELERATED_IDS.length}`);
 console.log(`[generic-audit] p1CoreReviewTailChars=${p1CoreReviewTailChars}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);

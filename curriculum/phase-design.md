@@ -54,6 +54,22 @@ Current:
 
 P3では原則として major new Focus を増やさず、既習技能の Transfer / Checkpoint を中心にする。
 
+### Current operating rule — Accelerated P3
+
+2026年10月以降は、P3の全108教材を標準必修にしない。
+
+- 標準ルート：54回
+- 各Bundleは原則「重要な実戦技能2回＋Checkpoint 1回」
+- 18個のP3 CheckpointはすべてCore
+- 残り54回：Checkpointで弱点が出た技能だけ戻る Targeted Review
+- E097–E204は削除せず、Published corpusとして維持
+- E204終了後はP4へ進む
+- 詳細：`curriculum/p3-accelerated-route.md`
+
+P3では、未知概念・高密度文・因果・要約・文挿入・複数資料・二制度比較・条件付き評価・本文連動WritingをCoreに残し、題材違いのTransfer反復をOptionalへ回す。
+
+P1 15回＋P2 30回＋P3 54回で、P4前の標準Coreは99回。
+
 ## P4 — 筑波大学医学類 志望校適応・本番統合
 
 期間:
