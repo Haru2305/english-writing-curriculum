@@ -2651,6 +2651,277 @@ h1 {
   background: #f8f7f2;
 }
 
+
+/* Learner entry page */
+.entry-guide {
+  margin-top: 30px;
+}
+
+.route-stage-grid {
+  display: grid;
+  gap: 11px;
+}
+
+.route-stage-card {
+  padding: 16px;
+  border: 1px solid #d6d5cd;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.route-stage-label {
+  margin: 0 0 5px;
+  color: #6f6f68;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.route-stage-card h3 {
+  margin: 0;
+  font-family: var(--textbook-font);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.route-stage-card > p:not(.route-stage-label) {
+  margin: 8px 0 0;
+  color: #5f5f59;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.route-stage-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 11px;
+  color: #74746d;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.route-stage-meta span + span::before {
+  content: "·";
+  margin-right: 8px;
+}
+
+.route-stage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.route-start-link,
+.route-outline-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.route-start-link {
+  border: 1px solid #292927;
+  background: #292927;
+  color: #fff;
+}
+
+.route-outline-link {
+  border: 1px solid #c9c8c0;
+  background: #f8f7f3;
+  color: #4f4f49;
+}
+
+.core-routes-section {
+  margin-top: 42px;
+}
+
+.core-route-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.core-route-details {
+  scroll-margin-top: 72px;
+  border: 1px solid #d7d6ce;
+  border-radius: 12px;
+  background: #fff;
+  overflow: clip;
+}
+
+.core-route-details > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 62px;
+  padding: 13px 14px;
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.core-route-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.core-route-details > summary::after {
+  content: "＋";
+  color: #77776f;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.core-route-details[open] > summary::after {
+  content: "−";
+}
+
+.core-route-summary-main {
+  min-width: 0;
+}
+
+.core-route-summary-main small {
+  display: block;
+  margin-bottom: 2px;
+  color: #73736c;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+}
+
+.core-route-summary-main strong {
+  display: block;
+  font-family: var(--textbook-font);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.core-route-summary-meta {
+  color: #6f6f68;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.core-route-details[open] > summary {
+  border-bottom: 1px solid #e2e1da;
+  background: #f6f5f0;
+}
+
+.core-route-details .accelerated-route-list {
+  margin: 0;
+  padding: 10px;
+}
+
+.repair-section {
+  margin-top: 42px;
+}
+
+.repair-catalog {
+  border: 1px solid #d2d1c9;
+  border-radius: 14px;
+  background: #f4f3ee;
+  overflow: clip;
+}
+
+.repair-catalog > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 68px;
+  padding: 14px 15px;
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.repair-catalog > summary::-webkit-details-marker {
+  display: none;
+}
+
+.repair-catalog > summary span:first-child small {
+  display: block;
+  margin-bottom: 3px;
+  color: #77776f;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.repair-catalog > summary span:first-child strong {
+  display: block;
+  font-family: var(--textbook-font);
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.repair-catalog > summary > span:last-child {
+  color: #6c6c65;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.repair-catalog[open] > summary {
+  border-bottom: 1px solid #d9d8d0;
+}
+
+.repair-catalog-body {
+  padding: 14px;
+}
+
+.repair-catalog-body > p {
+  margin: 0 0 14px;
+  color: #64645e;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.repair-catalog .bundle-group > summary {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.repair-catalog .bundle-group > summary strong {
+  font-size: 12px;
+}
+
+.repair-catalog .bundle-group > summary span {
+  justify-self: end;
+  white-space: nowrap;
+}
+
+@media (min-width: 720px) {
+  .route-stage-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .route-stage-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .route-stage-actions {
+    margin-top: auto;
+    padding-top: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .core-route-details > summary {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  .core-route-summary-meta {
+    white-space: normal;
+  }
+}
+
 .accelerated-route-list {
   display: grid;
   gap: 7px;
