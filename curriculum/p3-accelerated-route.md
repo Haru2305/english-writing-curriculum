@@ -6,7 +6,7 @@ P3の全108教材を順番に必修化しない。
 
 2026年10月以降の標準運用では、P3は **54回のCore Route** に圧縮する。残り54教材は削除せず、Checkpointで弱点が出た技能にだけ戻る Targeted Review として使う。
 
-P3は入試実戦化の中心なので、P1/P2よりもCore比率を高く保つ。各Bundleは原則として **重要な実戦技能2回＋Checkpoint 1回** をCoreとし、題材違いのTransfer反復や近接技能の追加演習をOptionalへ回す。
+P3は入試実戦化の中心なので、P1/P2よりもCore比率を高く保つ。各Bundleは原則として **重要な実戦技能2回＋Checkpoint 1回** をCoreとする。ただし、後半の高転用性Evidence概念（confounding / average≠distribution / feedback loop）を落とさないため、B030とB033の配分は例外的に調整する。題材違いのTransfer反復や近接技能の追加演習をOptionalへ回す。
 
 ## Core Route — 54 lessons
 
@@ -29,13 +29,13 @@ E152 / E153 / E156
 ### B027–B030｜バイアス・測定・二制度評価・複数資料
 E157 / E159 / E162  
 E163 / E165 / E168  
-E169 / E171 / E174  
-E175 / E177 / E180
+E170 / E171 / E174  
+E175 / E180
 
 ### B031–B034｜測定・調査設計・本文連動Writing・Final Gate
-E182 / E183 / E186  
+E183 / E185 / E186  
 E189 / E190 / E192  
-E194 / E195 / E198  
+E194 / E195 / E197 / E198  
 E201 / E202 / E204
 
 ## What remains in Core
@@ -50,8 +50,10 @@ E201 / E202 / E204
 - 文挿入・段落機能
 - 複数本文比較
 - 表・FAQ・memoなどの非連続資料統合
-- selection bias / regression to the mean / base rate / visible-case bias
-- proxy / measurement / distribution
+- selection bias / regression to the mean / visible-case bias
+- confounding / association ≠ causation
+- proxy / measurement / average ≠ distribution
+- prediction / recommendation feedback loop
 - 二制度比較と条件付き評価
 - summary-linked / text-linked Writing
 - 18個すべてのCheckpoint
@@ -59,7 +61,7 @@ E201 / E202 / E204
 
 ## Optional / Targeted Review — 54 lessons
 
-各Bundleの残り3回をOptionalとする。
+原則として各Bundleの残り3回をOptionalとする。B030は4回、B033は2回とし、P3全体では54回を維持する。
 
 - B017: E098 / E099 / E101
 - B018: E103 / E106 / E107
@@ -73,11 +75,11 @@ E201 / E202 / E204
 - B026: E151 / E154 / E155
 - B027: E158 / E160 / E161
 - B028: E164 / E166 / E167
-- B029: E170 / E172 / E173
-- B030: E176 / E178 / E179
-- B031: E181 / E184 / E185
+- B029: E169 / E172 / E173
+- B030: E176 / E177 / E178 / E179
+- B031: E181 / E182 / E184
 - B032: E187 / E188 / E191
-- B033: E193 / E196 / E197
+- B033: E193 / E196
 - B034: E199 / E200 / E203
 
 ## Operating rule

@@ -47,15 +47,14 @@ export const P3_ACCELERATED_ROUTE = [
   { id: "E165", focus: "授業録画の二制度を比較評価" },
   { id: "E168", focus: "B028 Checkpoint｜初見概念・高密度文・複数資料・作文" },
 
-  { id: "E169", focus: "基準率｜目立つ事例だけで確率判断しない" },
+  { id: "E170", focus: "平均値の改善と分布を分ける｜average ≠ distribution" },
   { id: "E171", focus: "研究データ公開の二案を比較評価" },
   { id: "E174", focus: "B029 Checkpoint｜初見概念・表・要約・提案" },
 
   { id: "E175", focus: "可視事例の偏り｜見えている例だけで判断しない" },
-  { id: "E177", focus: "学習支援の二制度を比較評価" },
   { id: "E180", focus: "B030 Checkpoint｜高密度文・表・要約・提案" },
 
-  { id: "E182", focus: "測定値の精密さと信頼性を分ける" },
+  { id: "E185", focus: "観察された関連と因果を分ける｜confounding" },
   { id: "E183", focus: "二つの調査設計を比較する" },
   { id: "E186", focus: "B031 Checkpoint｜言い換え・複数資料・比較作文" },
 
@@ -65,6 +64,7 @@ export const P3_ACCELERATED_ROUTE = [
 
   { id: "E194", focus: "代理指標｜measureとgoalを分ける" },
   { id: "E195", focus: "二本文要約→本文連動Writing" },
+  { id: "E197", focus: "feedback loop｜予測・推薦が次の行動とデータを変える" },
   { id: "E198", focus: "B033 Checkpoint｜高密度文・要約・本文連動作文" },
 
   { id: "E201", focus: "平均値の改善と分布を分けて読む" },
@@ -85,11 +85,11 @@ export const P3_OPTIONAL_BY_BUNDLE = {
   B026: ["E151", "E154", "E155"],
   B027: ["E158", "E160", "E161"],
   B028: ["E164", "E166", "E167"],
-  B029: ["E170", "E172", "E173"],
-  B030: ["E176", "E178", "E179"],
-  B031: ["E181", "E184", "E185"],
+  B029: ["E169", "E172", "E173"],
+  B030: ["E176", "E177", "E178", "E179"],
+  B031: ["E181", "E182", "E184"],
   B032: ["E187", "E188", "E191"],
-  B033: ["E193", "E196", "E197"],
+  B033: ["E193", "E196"],
   B034: ["E199", "E200", "E203"]
 };
 

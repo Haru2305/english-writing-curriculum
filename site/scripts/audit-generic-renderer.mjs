@@ -215,8 +215,8 @@ for (const id of p3CheckpointIds) {
 for (const id of [
   "E097", "E104", "E109", "E117", "E122", "E127", "E133",
   "E141", "E145", "E147", "E153", "E157", "E159", "E163", "E165",
-  "E169", "E171", "E175", "E177", "E182", "E183", "E189", "E190",
-  "E194", "E195", "E201", "E202", "E204"
+  "E170", "E171", "E175", "E183", "E185", "E189", "E190",
+  "E194", "E195", "E197", "E201", "E202", "E204"
 ]) {
   if (!p3RouteSet.has(id)) failures.push(`P3 accelerated route missing milestone ${id}`);
 }
@@ -224,6 +224,99 @@ for (const id of [
 if (P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length + P3_ACCELERATED_IDS.length !== 99) {
   failures.push("P1+P2+P3 accelerated route should contain 99 Core lessons before P4");
 }
+
+
+const core99Ids = [...P1_ACCELERATED_IDS, ...P2_ACCELERATED_IDS, ...P3_ACCELERATED_IDS];
+const allP1P3Ids = [...p1AllIds, ...p2AllIds, ...p3AllIds];
+
+function rawCodesFor(id) {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  return new Set(split.problem.match(/\b(?:A|RQ|RF|WF|WT|WQ|D|SS)\d{2}\b/g) ?? []);
+}
+
+const core99Output = core99Ids.map((id) => {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const lesson = parseGenericLesson(raw, id);
+  const split = splitRaw(raw);
+  return {
+    id,
+    hasWriting: lesson.groups.writing.length > 0,
+    substantialWriting: lesson.groups.writing.some((section) =>
+      /Writing Task|Judgment Writing|Evaluation Writing|Proposal Writing|Trade-off Writing|Summary-linked Writing|Text-linked Writing|Final Writing|Part .*Writing/i.test(section.title)
+    ),
+    summaryOutput:
+      /^Summary Task$|^Japanese Summary Task$/m.test(split.problem)
+      || lesson.groups.writing.some((section) => /English Summary/i.test(section.title))
+  };
+});
+
+const core99WritingCount = core99Output.filter((item) => item.hasWriting).length;
+const core99SubstantialWritingCount = core99Output.filter((item) => item.substantialWriting).length;
+const core99SummaryOutputCount = core99Output.filter((item) => item.summaryOutput).length;
+
+if (core99Ids.length !== 99) {
+  failures.push(`Core route changed from 99 lessons: ${core99Ids.length}`);
+}
+if (core99WritingCount < 65) {
+  failures.push(`Core 99 Writing density too low: ${core99WritingCount}/99`);
+}
+if (core99SubstantialWritingCount < 40) {
+  failures.push(`Core 99 substantial-Writing coverage too low: ${core99SubstantialWritingCount}/99`);
+}
+if (core99SummaryOutputCount < 30) {
+  failures.push(`Core 99 summary-output coverage too low: ${core99SummaryOutputCount}/99`);
+}
+
+const allRawCodes = new Set(allP1P3Ids.flatMap((id) => [...rawCodesFor(id)]));
+const core99RawCodes = new Set(core99Ids.flatMap((id) => [...rawCodesFor(id)]));
+const core99RawMissing = [...allRawCodes].filter((code) => !core99RawCodes.has(code)).sort();
+const allowedOptionalOnlyCodes = new Set(["A04", "A10"]);
+const unexpectedMissingCodes = core99RawMissing.filter((code) => !allowedOptionalOnlyCodes.has(code));
+
+if (core99RawCodes.size < 70 || unexpectedMissingCodes.length) {
+  failures.push(
+    `Core 99 skill coverage regressed: ${core99RawCodes.size}/${allRawCodes.size}; unexpected missing=${unexpectedMissingCodes.join(",") || "none"}`
+  );
+}
+
+for (const id of ["E157", "E170", "E175", "E185", "E194", "E197"]) {
+  if (!p3RouteSet.has(id)) {
+    failures.push(`P3 Core missing high-transfer evidence concept introduction: ${id}`);
+  }
+}
+
+const learnerConceptPath = new URL("../../curriculum/learner-facing-concepts.md", import.meta.url);
+const learnerConceptText = fs.readFileSync(learnerConceptPath, "utf8");
+if (!learnerConceptText.includes("## Accelerated-route override")) {
+  failures.push("Accelerated-route concept override is missing");
+}
+
+const learnerConceptRows = learnerConceptText
+  .split("\n")
+  .filter((line) => /^\| IDEA\d+ /.test(line))
+  .map((line) => {
+    const cells = line.split("|").map((cell) => cell.trim());
+    const introduce = cells[2]?.match(/E\d{3}/)?.[0] ?? "";
+    const recall = [...(cells[3]?.matchAll(/E\d{3}/g) ?? [])].map((match) => match[0]);
+    const transfer = [...(cells[4]?.matchAll(/E\d{3}/g) ?? [])].map((match) => match[0]);
+    return { introduce, recall, transfer };
+  });
+
+for (const row of learnerConceptRows) {
+  if (!row.introduce || core99Ids.includes(row.introduce)) continue;
+  const downstreamCore = [...row.recall, ...row.transfer].filter((id) => core99Ids.includes(id));
+  for (const id of downstreamCore) {
+    const entry = catalog.find((item) => item.id === id);
+    const raw = fs.readFileSync(entry.filePath, "utf8");
+    if (raw.includes(row.introduce)) {
+      failures.push(`${id}: Core lesson explicitly assumes Optional concept-introduction lesson ${row.introduce}`);
+    }
+  }
+}
+
 
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
@@ -867,6 +960,7 @@ console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${ge
 console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optional=${p1OptionalIds.length}`);
 console.log(`[generic-audit] p2Accelerated=${P2_ACCELERATED_IDS.length}, p2Optional=${p2OptionalIds.length}, p1p2Core=${P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length}`);
 console.log(`[generic-audit] p3Accelerated=${P3_ACCELERATED_IDS.length}, p3Optional=${p3OptionalIds.length}, preP4Core=${P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length + P3_ACCELERATED_IDS.length}`);
+console.log(`[generic-audit] core99Writing=${core99WritingCount}, substantial=${core99SubstantialWritingCount}, summaries=${core99SummaryOutputCount}, rawSkills=${core99RawCodes.size}/${allRawCodes.size}`);
 console.log(`[generic-audit] p1CoreReviewTailChars=${p1CoreReviewTailChars}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
