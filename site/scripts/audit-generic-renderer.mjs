@@ -676,10 +676,11 @@ for (const [id, required] of Object.entries({
 for (const id of ["E210", "E216", "E234"]) {
   const entry = catalog.find((item) => item.id === id);
   const raw = fs.readFileSync(entry.filePath, "utf8");
-  const split = splitRaw(raw);
-  const model = p4Models.get(id) ?? "";
-  if (!model || !split.answer.includes(`Writing｜${model}`)) {
-    failures.push(`${id}: answer-list Writing is not synchronized with model answer`);
+  const lesson = parseGenericLesson(raw, id);
+  const answerList = lesson.groups.review[0];
+  const answerListLines = answerList?.units.flatMap((unit) => unit.lines ?? []) ?? [];
+  if (!answerListLines.includes("Writing｜モデル答案はWriting解説参照")) {
+    failures.push(`${id}: compact answer-list Writing pointer is missing`);
   }
 }
 
