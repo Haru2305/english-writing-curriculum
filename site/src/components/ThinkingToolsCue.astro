@@ -6,10 +6,10 @@ const tools = toolsForLesson(lessonId);
 ---
 
 {tools.length > 0 && (
-  <aside class="thinking-tool-cue" aria-label="今回使う思考ツール">
+  <aside class="thinking-tool-cue" aria-label="今回の問題で使う考え方">
     <div class="thinking-tool-cue-head">
-      <span class="cue-label">思考ツール</span>
-      <a href="/thinking-tools/">一覧</a>
+      <span class="cue-label">今回の考え方</span>
+      <a href="/thinking-tools/">考え方を見る</a>
     </div>
     <div class="thinking-tool-cue-list">
       {tools.map((tool) => (

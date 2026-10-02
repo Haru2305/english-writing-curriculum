@@ -1172,6 +1172,23 @@ if (!genericViewText.includes("toLearnerLessonNumber")) {
   failures.push("generic viewer does not sanitize learner-facing lesson numbers");
 }
 if (
+  !genericViewText.includes("learnerTimingMeta")
+  || genericViewText.includes('class="lesson-meta">目安{minutes}分')
+) {
+  failures.push("generic viewer reverted to vague total-minute timing");
+}
+
+const lessonSectionsText = fs.readFileSync(
+  new URL("../src/components/LessonSections.astro", import.meta.url),
+  "utf8"
+);
+if (
+  !lessonSectionsText.includes("toLearnerTimingText")
+  || !lessonSectionsText.includes("答え・解説はタイマーを止めてから")
+) {
+  failures.push("lesson timing no longer separates timed practice from review");
+}
+if (
   genericViewText.includes("<strong>{id}</strong>")
   || genericViewText.includes("{previous.id}</a>")
   || genericViewText.includes("{next.id} →")
@@ -1200,6 +1217,10 @@ for (const required of [
   "まとめる",
   "書く",
   "教材番号から開く",
+  "問題の考え方を見る",
+  "1回 約45〜50分",
+  "1回 約50〜55分",
+  "1回 約55〜60分",
   "本編",
   "99回で、初見問題に対応する力を作る",
   "読む・考える土台を作る",
@@ -1307,9 +1328,46 @@ const baseLayoutText = fs.readFileSync(
 if (!baseLayoutText.includes('<a class="brand" href="/">自由英作文</a>')) {
   failures.push("site header lost learner-facing series identity");
 }
+if (!baseLayoutText.includes('href="/thinking-tools/">問題の考え方</a>')) {
+  failures.push("site header thinking help is not learner-facing");
+}
 for (const forbidden of ["prototype", "English Curriculum"]) {
   if (baseLayoutText.includes(forbidden)) {
     failures.push(`site header exposes development label: ${forbidden}`);
+  }
+}
+
+const thinkingToolsPageText = fs.readFileSync(
+  new URL("../src/pages/thinking-tools.astro", import.meta.url),
+  "utf8"
+);
+for (const required of [
+  "問題の考え方",
+  "どの問題でも、5つの順番で考える",
+  "今どこで止まった？",
+  "困り方から開く",
+  "考え方を全部見る"
+]) {
+  if (!thinkingToolsPageText.includes(required)) {
+    failures.push(`thinking help is missing learner-first guidance: ${required}`);
+  }
+}
+for (const forbidden of [
+  "各Eで実際に使った考え方",
+  "全部を毎回使う必要はありません"
+]) {
+  if (thinkingToolsPageText.includes(forbidden)) {
+    failures.push(`thinking help reverted to abstract tool-library framing: ${forbidden}`);
+  }
+}
+
+for (const page of Object.keys(dedicatedNavigation)) {
+  const pageText = fs.readFileSync(
+    new URL(`../src/pages/${page}.astro`, import.meta.url),
+    "utf8"
+  );
+  if (!pageText.includes("learnerTimingMeta")) {
+    failures.push(`${page}: dedicated page reverted to vague total-minute timing`);
   }
 }
 

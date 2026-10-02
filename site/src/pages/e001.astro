@@ -4,7 +4,12 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
-import { toLearnerText, toLearnerLabel, toLearnerLessonNumber } from "../lib/learner-text.js";
+import {
+  toLearnerText,
+  toLearnerLabel,
+  toLearnerLessonNumber,
+  learnerTimingMeta
+} from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 
 const sourcePath = path.resolve(process.cwd(), "../bundles/B001/E001.md");
@@ -309,7 +314,6 @@ const title = toLearnerLabel(problemHeader.titleLine.replace(/^E001｜/, ""));
 const lessonLabel = toLearnerLessonNumber("E001");
 const pageTitle = lessonLabel + "｜" + title;
 const timeMatch = problemHeader.metaLine.match(/目安\s*[^｜]+/);
-const learnerMeta = timeMatch?.[0]?.trim() ?? "";
 const problemSections = parseSections(problemHeader.bodyLines);
 const answerSections = parseSections(answerLines);
 
@@ -328,6 +332,11 @@ function flatSectionLines(section) {
 
 const timeSection = findSection(problemSections, "時間配分");
 const timeText = flatSectionLines(timeSection)[0] ?? "";
+const learnerMeta = learnerTimingMeta(
+  timeText,
+  "E001",
+  Number(timeMatch?.[0]?.match(/(\\d+)/)?.[1] || 0)
+);
 const glossSection = findSection(problemSections, "Gloss / Reading support");
 const selfCheckSection = findSection(problemSections, "Self-check");
 

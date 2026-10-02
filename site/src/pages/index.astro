@@ -74,6 +74,7 @@ const routes = [
     description: "英文の意味を正確に取り、考えを一本の筋道にする",
     practice: "比較・因果・主張／語句の使い分け／短いWriting",
     goal: "理由 → なぜそうなるか → 具体例を、自分で組み立てられる",
+    time: "1回 約45〜50分",
     count: foundationRoute.length,
     range: "教材1〜42",
     route: foundationRoute
@@ -84,6 +85,7 @@ const routes = [
     description: "長文の根拠を選び、要約・記述・英作文へ変える",
     practice: "構文・段落／推論／要約／複数本文／60〜100語のWriting",
     goal: "本文を読んで終わらず、設問に合う形の答案まで自力で作れる",
+    time: "1回 約50〜55分",
     count: structureRoute.length,
     range: "教材43〜96",
     route: structureRoute
@@ -94,6 +96,7 @@ const routes = [
     description: "知らない題材でも、読む・考える・書くを止めずにつなぐ",
     practice: "未知概念／図表・複数資料／証拠評価／条件付き判断／実戦Writing",
     goal: "初見テーマでも、根拠を選び、判断し、時間内に答案を完成できる",
+    time: "1回 約55〜60分",
     count: practiceRoute.length,
     range: "教材97〜204",
     route: practiceRoute
@@ -106,6 +109,7 @@ const tsukubaSpecialization = {
   description: "本編で作った力を、筑波の120分と出題形式に合わせる",
   practice: "長文読解／日本語記述／語句整序／約100語英作文／時間配分",
   goal: "120分で全形式を回し、最後の見直しまで含めて再現する",
+  time: "60分 → 90〜120分 → 120分",
   count: tsukubaRoute.length,
   range: "教材205〜234",
   route: tsukubaRoute
@@ -189,9 +193,9 @@ const additionalLessonCount = additionalBundles.reduce(
   </section>
 
   <a class="thinking-tools-entry compact-thinking-tools-entry" href="/thinking-tools/">
-    <small>困ったとき</small>
-    <strong>思考ツールを見る</strong>
-    <span>何を考えればよいか分からないときの共通ガイド</span>
+    <small>問題で止まったとき</small>
+    <strong>問題の考え方を見る</strong>
+    <span>何を答える → 何を根拠にする → どう答案にする、の順番に戻る</span>
   </a>
 
   <section class="index-section core-routes-section" aria-labelledby="core-routes-heading">
@@ -216,7 +220,7 @@ const additionalLessonCount = additionalBundles.reduce(
             </span>
             <span class="core-route-summary-meta">
               <strong>通常ルート {route.count}回</strong>
-              <small>{route.range}</small>
+              <small>{route.time}｜{route.range}</small>
             </span>
           </summary>
           <div class="accelerated-route-list">
@@ -260,7 +264,7 @@ const additionalLessonCount = additionalBundles.reduce(
         </span>
         <span class="core-route-summary-meta">
           <strong>{tsukubaSpecialization.count}日</strong>
-          <small>{tsukubaSpecialization.range}</small>
+          <small>{tsukubaSpecialization.time}｜{tsukubaSpecialization.range}</small>
         </span>
       </summary>
       <div class="accelerated-route-list">

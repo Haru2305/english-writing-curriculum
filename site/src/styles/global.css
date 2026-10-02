@@ -278,7 +278,17 @@ h1 {
   border-top: 0;
 }
 
-.reading-block .lesson-line {
+.reading-block .timing-guidance {
+  margin: -2px 0 10px;
+  padding: 8px 10px;
+  border-left: 3px solid #8a897f;
+  background: #f4f3ee;
+  color: #5f5f59;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.lesson-line {
   line-height: 2;
 }
 
@@ -1836,6 +1846,217 @@ h1 {
 .thinking-tools-header {
   padding-bottom: 20px;
   border-bottom: 1px solid #deded8;
+}
+
+.thinking-routine,
+.thinking-stuck {
+  margin-top: 28px;
+}
+
+.thinking-routine > header h2,
+.thinking-stuck > header h2 {
+  margin: 2px 0 5px;
+  font-family: var(--textbook-font);
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.thinking-routine > header p:last-child,
+.thinking-stuck > header p:last-child {
+  margin: 0;
+  color: #66665f;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.thinking-routine-list {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.thinking-routine-list li {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 10px;
+  padding: 11px 12px;
+  border: 1px solid #d9d8d0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.thinking-routine-list li > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #cac9c1;
+  border-radius: 999px;
+  color: #606059;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.thinking-routine-list strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.thinking-routine-list p {
+  margin: 3px 0 0;
+  color: #5f5f59;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.thinking-stuck-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.thinking-stuck-card {
+  border: 1px solid #d7d6ce;
+  border-radius: 11px;
+  background: #fff;
+  overflow: clip;
+}
+
+.thinking-stuck-card > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18px;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 13px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.thinking-stuck-card > summary::-webkit-details-marker {
+  display: none;
+}
+
+.thinking-stuck-card > summary::after {
+  content: "＋";
+  color: #77776f;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.thinking-stuck-card[open] > summary::after {
+  content: "−";
+}
+
+.thinking-stuck-card > summary strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+.thinking-stuck-card > summary small {
+  display: block;
+  margin-top: 3px;
+  color: #6b6b64;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.thinking-stuck-card ol {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0 13px 12px 42px;
+}
+
+.thinking-stuck-card li {
+  padding: 8px 0;
+  border-top: 1px solid #ecebe5;
+}
+
+.thinking-stuck-card li strong {
+  display: block;
+  color: #4f4f49;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.thinking-stuck-card li span {
+  display: block;
+  margin-top: 2px;
+  color: #55554f;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.thinking-tools-library {
+  margin-top: 30px;
+  border: 1px solid #d2d1c9;
+  border-radius: 13px;
+  background: #f4f3ee;
+  overflow: clip;
+}
+
+.thinking-tools-library > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 18px;
+  gap: 10px;
+  align-items: center;
+  padding: 13px 14px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.thinking-tools-library > summary::-webkit-details-marker {
+  display: none;
+}
+
+.thinking-tools-library > summary::after {
+  content: "＋";
+  color: #77776f;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.thinking-tools-library[open] > summary::after {
+  content: "−";
+}
+
+.thinking-tools-library > summary span:first-child small {
+  display: block;
+  color: #77776f;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.thinking-tools-library > summary span:first-child strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.thinking-tools-library > summary > span:last-of-type {
+  color: #77776f;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.thinking-tools-library-body {
+  padding: 14px;
+  border-top: 1px solid #d9d8d0;
+}
+
+.thinking-tools-library-intro {
+  margin: 0;
+  color: #62625c;
+  font-size: 12px;
+  line-height: 1.65;
 }
 
 .thinking-tools-note {

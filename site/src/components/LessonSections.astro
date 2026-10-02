@@ -1,8 +1,25 @@
 ---
-import { toLearnerText as userText, toLearnerLabel as userLabel } from "../lib/learner-text.js";
+import {
+  toLearnerText as userText,
+  toLearnerLabel as userLabel,
+  toLearnerTimingText
+} from "../lib/learner-text.js";
 import { reviewPresentation } from "../lib/review-presentation.js";
 
 const { sections = [], answer = false } = Astro.props;
+const lessonPathMatch = Astro.url.pathname.match(/\/e(\d{3})\/?$/i);
+const lessonId = lessonPathMatch ? `E${lessonPathMatch[1]}` : "";
+
+function sectionTitle(title = "") {
+  return userLabel(title) === "時間配分" ? "時間の使い方" : userLabel(title);
+}
+
+function displayLine(line = "", title = "") {
+  if (userLabel(title) === "時間配分") {
+    return toLearnerTimingText(line, lessonId);
+  }
+  return userText(line);
+}
 
 function isCollapsibleSubgroup(title) {
   return userText(title) === "Pre-solveの整理と本文での使い方";
@@ -76,7 +93,10 @@ function lineClass(line, sectionTitle = "") {
     {answer && ["learning", "writing"].includes(reviewMeta?.kind) && reviewMeta?.label && (
       <span class="review-kind-label">{reviewMeta.label}</span>
     )}
-    {section.title && <h2 class="content-group-title">{userLabel(section.title)}</h2>}
+    {section.title && <h2 class="content-group-title">{sectionTitle(section.title)}</h2>}
+    {userLabel(section.title) === "時間配分" && (
+      <p class="timing-guidance">時間を測るのは問題を解くところまで。答え・解説はタイマーを止めてから確認します。</p>
+    )}
     <div class="content-group-body">
       {section.units.map((unit) =>
         unit.type === "subgroup" ? (
@@ -89,7 +109,7 @@ function lineClass(line, sectionTitle = "") {
                 {unit.blocks.map((block) => (
                   <div class={"micro-block " + blockClass(block.lines, section.title)}>
                     {block.lines.map((line) => (
-                      <p class={"lesson-line " + lineClass(line, section.title)}>{userText(line)}</p>
+                      <p class={"lesson-line " + lineClass(line, section.title)}>{displayLine(line, section.title)}</p>
                     ))}
                   </div>
                 ))}
@@ -102,7 +122,7 @@ function lineClass(line, sectionTitle = "") {
                 {unit.blocks.map((block) => (
                   <div class={"micro-block " + blockClass(block.lines, section.title)}>
                     {block.lines.map((line) => (
-                      <p class={"lesson-line " + lineClass(line, section.title)}>{userText(line)}</p>
+                      <p class={"lesson-line " + lineClass(line, section.title)}>{displayLine(line, section.title)}</p>
                     ))}
                   </div>
                 ))}
@@ -124,7 +144,7 @@ function lineClass(line, sectionTitle = "") {
         ) : (
           <div class={"micro-block " + blockClass(unit.lines, section.title)}>
             {unit.lines.map((line) => (
-              <p class={"lesson-line " + lineClass(line, section.title)}>{userText(line)}</p>
+              <p class={"lesson-line " + lineClass(line, section.title)}>{displayLine(line, section.title)}</p>
             ))}
           </div>
         )

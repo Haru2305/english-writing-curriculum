@@ -79,6 +79,57 @@ export function toLearnerLessonNumber(id = "") {
   return match ? `教材 ${Number(match[1])}` : String(id).trim();
 }
 
+function timingParts(text = "") {
+  const raw = String(text);
+  const core = raw.match(/[＝=]\s*Core\s*(\d+)\s*分/i);
+  const beforeTotal = raw.split(/[＝=]/)[0];
+  const post = beforeTotal.match(/Post-solve\s*(\d+)\s*分/i);
+  const componentMinutes = [...beforeTotal.matchAll(/(\d+)\s*分/g)].map((match) => Number(match[1]));
+  const total = core ? Number(core[1]) : componentMinutes.reduce((sum, value) => sum + value, 0);
+  return {
+    total: total || null,
+    post: post ? Number(post[1]) : 0
+  };
+}
+
+export function toLearnerTimingText(text = "", lessonId = "") {
+  const cleaned = toLearnerText(text);
+  if (!/Post-solve\s*\d+\s*分/i.test(cleaned)) return cleaned;
+
+  const number = Number(String(lessonId).replace(/\D/g, ""));
+  const { total, post } = timingParts(cleaned);
+  if (!total) return cleaned;
+
+  if (number >= 205) {
+    return cleaned
+      .replace(/\s*\/\s*Post-solve\s*\d+\s*分/i, ` / 予備 ${post}分`)
+      .replace(/[＝=]\s*Core\s*\d+\s*分/i, `＝ 本番演習 ${total}分`)
+      .trim();
+  }
+
+  const exercise = Math.max(0, total - post);
+  return cleaned
+    .replace(/\s*\/\s*Post-solve\s*\d+\s*分/i, "")
+    .replace(/[＝=]\s*Core\s*\d+\s*分/i, "")
+    .replace(/\s+$/, "")
+    .concat(` ＝ 演習 ${exercise}分`);
+}
+
+export function learnerTimingMeta(text = "", lessonId = "", fallbackMinutes = null) {
+  const number = Number(String(lessonId).replace(/\D/g, ""));
+  const cleaned = toLearnerText(text);
+  const { total: parsedTotal, post } = timingParts(cleaned);
+  const total = parsedTotal || Number(fallbackMinutes || 0) || null;
+  if (!total) return "";
+
+  if (number >= 205) {
+    return `本番演習 ${total}分｜答え・解説は終了後`;
+  }
+
+  const exercise = Math.max(0, total - post);
+  return `演習目安 ${exercise}分｜答え・解説は時間外`;
+}
+
 export function toLearnerText(text = "") {
   const cleaned = stripAuthoringBodyLabels(text)
     .replace(/\bE0*(\d{1,3})\b/gi, (_, number) => `教材${Number(number)}`)
