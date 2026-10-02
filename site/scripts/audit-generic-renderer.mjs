@@ -134,6 +134,102 @@ for (const entry of generic) {
 }
 
 
+
+function normalizeOrderText(text) {
+  return text
+    .toLowerCase()
+    .replace(/[“”"'.,!?;:()[\]{}]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function longestIncreasingSubsequenceLength(values) {
+  const tails = [];
+  for (const value of values) {
+    let lo = 0;
+    let hi = tails.length;
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1;
+      if (tails[mid] < value) lo = mid + 1;
+      else hi = mid;
+    }
+    tails[lo] = value;
+  }
+  return tails.length;
+}
+
+let p4WordOrderCount = 0;
+
+for (const entry of generic.filter((item) => {
+  const n = Number(item.id.slice(1));
+  return n >= 205 && n <= 234;
+})) {
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const answerLines = lines(split.answer);
+  const prompts = [...split.problem.matchAll(/\(([^()\n]{10,220})\)/g)]
+    .map((match) => match[1])
+    .filter((inner) => /\s\/\s/.test(inner));
+
+  for (const inner of prompts) {
+    p4WordOrderCount += 1;
+    const chunks = inner.split(/\s*\/\s*/).map((chunk) => chunk.trim()).filter(Boolean);
+
+    if (chunks.length < 7) {
+      failures.push(`${entry.id}: word-order item has only ${chunks.length} chunks`);
+      continue;
+    }
+
+    const oversized = chunks.filter((chunk) => normalizeOrderText(chunk).split(" ").length > 4);
+    if (oversized.length) {
+      failures.push(`${entry.id}: oversized word-order chunk(s): ${oversized.join(" | ")}`);
+    }
+
+    const normalizedChunks = chunks.map(normalizeOrderText);
+    const answerLine = answerLines.find((line) => {
+      const normalized = normalizeOrderText(line);
+      return normalizedChunks.every((chunk) => normalized.includes(chunk));
+    });
+
+    if (!answerLine) {
+      failures.push(`${entry.id}: no completed answer sentence found for word-order item: (${inner})`);
+      continue;
+    }
+
+    const normalizedAnswer = normalizeOrderText(answerLine);
+    const positions = normalizedChunks.map((chunk) => normalizedAnswer.indexOf(chunk));
+    if (positions.some((position) => position < 0)) {
+      failures.push(`${entry.id}: could not map all word-order chunks to completed answer`);
+      continue;
+    }
+
+    const ranked = positions
+      .map((position, index) => ({ position, index }))
+      .sort((a, b) => a.position - b.position)
+      .reduce((ranks, item, rank) => {
+        ranks[item.index] = rank;
+        return ranks;
+      }, []);
+
+    const lisRatio = longestIncreasingSubsequenceLength(ranked) / ranked.length;
+    const preservedAdjacentPairs = ranked.slice(0, -1)
+      .filter((rank, index) => ranked[index + 1] === rank + 1).length;
+    const adjacentRatio = preservedAdjacentPairs / Math.max(1, ranked.length - 1);
+
+    if (lisRatio >= 0.72) {
+      failures.push(`${entry.id}: word-order prompt remains too close to answer order (LIS ${lisRatio.toFixed(2)}): (${inner})`);
+    }
+
+    if (adjacentRatio >= 0.34) {
+      failures.push(`${entry.id}: too many answer-order adjacencies remain (${preservedAdjacentPairs}/${ranked.length - 1}): (${inner})`);
+    }
+  }
+}
+
+if (p4WordOrderCount < 60) {
+  failures.push(`P4 word-order coverage unexpectedly low: ${p4WordOrderCount}`);
+}
+
 const sentinels = {
   E002: {
     review: ["Q1. B", "Q3. C"]
