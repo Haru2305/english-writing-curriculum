@@ -3,7 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "./LessonSections.astro";
 import PrintButton from "./PrintButton.astro";
 import { reviewPresentation } from "../lib/review-presentation.js";
-import { toLearnerLabel, toLearnerLessonNumber } from "../lib/learner-text.js";
+import {
+  toLearnerLabel,
+  toLearnerLessonNumber,
+  learnerTimingMeta
+} from "../lib/learner-text.js";
 
 const {
   lesson,
@@ -14,6 +18,19 @@ const {
 const { id, title, minutes, groups, hasWriting, hasReview } = lesson;
 const learnerTitle = toLearnerLabel(title);
 const lessonLabel = toLearnerLessonNumber(id);
+
+function sectionLines(section) {
+  if (!section) return [];
+  return section.units.flatMap((unit) =>
+    unit.type === "subgroup"
+      ? unit.blocks.flatMap((block) => block.lines)
+      : unit.lines
+  );
+}
+
+const timingSection = groups.setup.find((section) => toLearnerLabel(section.title) === "時間配分");
+const timingText = sectionLines(timingSection)[0] ?? "";
+const learnerMeta = learnerTimingMeta(timingText, id, minutes);
 
 const supportTarget = hasWriting ? "write-support" : "challenge-support";
 
@@ -41,7 +58,7 @@ const reviewLearningSections = groups.review.filter((section) => {
         <strong>{lessonLabel}</strong>
       </div>
       <h1 class="lesson-title">{learnerTitle}</h1>
-      {minutes && <p class="lesson-meta">目安{minutes}分</p>}
+      {learnerMeta && <p class="lesson-meta">{learnerMeta}</p>}
     </header>
 
     <PrintButton />
