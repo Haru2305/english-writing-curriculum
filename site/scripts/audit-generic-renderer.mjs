@@ -105,6 +105,45 @@ for (const id of p1CheckpointIds) {
   if (!p1RouteSet.has(id)) failures.push(`P1 accelerated route missing checkpoint ${id}`);
 }
 
+let p1CoreReviewTailChars = 0;
+
+for (const id of P1_ACCELERATED_IDS) {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const marker = "\n自己修正\n";
+  const index = split.answer.indexOf(marker);
+
+  if (index < 0) {
+    failures.push(`${id}: compact P1 Core self-correction section missing`);
+    continue;
+  }
+
+  const tail = split.answer.slice(index);
+  p1CoreReviewTailChars += tail.length;
+
+  if (tail.length > 550) {
+    failures.push(`${id}: P1 Core review tail is too long (${tail.length} chars)`);
+  }
+  if (/AC0[2-5]|任意Escalation/.test(tail)) {
+    failures.push(`${id}: legacy long-form P1 self-assessment returned`);
+  }
+  for (const required of [
+    "解説補強｜Core recap",
+    "### 核",
+    "### 模範解答の読み方",
+    "### 次へ"
+  ]) {
+    if (!tail.includes(required)) {
+      failures.push(`${id}: compact P1 Core review missing ${required}`);
+    }
+  }
+}
+
+if (p1CoreReviewTailChars > 6500) {
+  failures.push(`P1 Core review tails have grown too large in aggregate: ${p1CoreReviewTailChars} chars`);
+}
+
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
 
@@ -745,6 +784,7 @@ for (const id of ["E219", "E222", "E228", "E234"]) {
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optional=${p1OptionalIds.length}`);
+console.log(`[generic-audit] p1CoreReviewTailChars=${p1CoreReviewTailChars}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
 for (const id of samples) {
