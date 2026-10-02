@@ -18,13 +18,18 @@ function learnerFocus(focus = "") {
 
 function learnerTitle(title = "") {
   return title
-    .replace(/^筑波P\d+\s+Final Gate[｜：:]\s*/i, "筑波 最終チェック｜")
-    .replace(/^P\d+\s+Bridge\s+\d+\s+Checkpoint[｜：:]\s*/i, "チェック回｜")
-    .replace(/^P\d+\s+Final Checkpoint[｜：:]\s*/i, "最終チェック｜")
-    .replace(/^P\d+\s+Final Gate[｜：:]\s*/i, "最終チェック｜")
-    .replace(/^B\d+\s+Checkpoint[｜：:]\s*/i, "チェック回｜")
-    .replace(/^Bundle\s+\d+\s+Checkpoint[｜：:]\s*/i, "チェック回｜")
-    .replace(/^P\d+入口[｜：:]\s*/i, "入口｜");
+    .replace(/筑波P\d+\s+Final Gate/gi, "筑波 最終チェック")
+    .replace(/P\d+\s+Bridge\s+\d+\s+Checkpoint/gi, "チェック回")
+    .replace(/P\d+\s+Final Checkpoint/gi, "最終チェック")
+    .replace(/P\d+\s+Final Gate/gi, "最終チェック")
+    .replace(/B\d{3}\s+Checkpoint/gi, "チェック回")
+    .replace(/Bundle\s+\d+\s+Checkpoint/gi, "チェック回")
+    .replace(/P\d+入口/gi, "入口")
+    .replace(/\bB\d{3}\b/gi, "")
+    .replace(/\bP[1-4]\b/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/｜\s*｜/g, "｜")
+    .trim();
 }
 
 function buildRoute(source) {
