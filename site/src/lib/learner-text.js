@@ -37,6 +37,7 @@ function stripAuthoringBodyLabels(text = "") {
     .replace(/\bP2のspeed/g, "ここでのspeed")
     .replace(/\bP2 lexical nuance asks:/g, "Lexical nuance asks:")
     .replace(/次はP2本体で/g, "次は本編で")
+    .replace(/\bP2 Final Checkpoint/g, "最終チェック")
     .replace(/\bP2 Final Plan/g, "最終確認の時間配分")
     .replace(/\bP2 Repair/g, "この段階の補修")
     .replace(/\bP3序盤/g, "次の実戦段階")
