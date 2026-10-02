@@ -1177,6 +1177,60 @@ if (!globalCssText.includes('"BIZ UDPMincho", sans-serif')) {
   failures.push("UI font stack lost Japanese webfont fallback");
 }
 
+
+const indexPageText = fs.readFileSync(
+  new URL("../src/pages/index.astro", import.meta.url),
+  "utf8"
+);
+for (const required of [
+  "今日の教材を選ぶ",
+  "どこから始める？",
+  "基本ルート",
+  "補修・全教材",
+  "比較・因果・主張を固める",
+  "文から段落、要約、英作文へ",
+  "初見資料から判断して書く",
+  "30日で本番形式へ"
+]) {
+  if (!indexPageText.includes(required)) {
+    failures.push(`index learner entry is missing: ${required}`);
+  }
+}
+for (const forbidden of [
+  "P1短縮ルート",
+  "P2短縮ルート",
+  "P3短縮ルート",
+  "Representative lessons",
+  "代表教材",
+  "Mobile lesson viewer",
+  "canonical教材",
+  "全234教材。bundle",
+  "October accelerated route"
+]) {
+  if (indexPageText.includes(forbidden)) {
+    failures.push(`index learner entry exposes authoring language: ${forbidden}`);
+  }
+}
+if (/<details class="core-route-details"[^>]*\sopen(?:\s|=|>)/.test(indexPageText)) {
+  failures.push("index core routes should be collapsed initially");
+}
+if (/<details class="repair-catalog"[^>]*\sopen(?:\s|=|>)/.test(indexPageText)) {
+  failures.push("index repair catalog should be collapsed initially");
+}
+
+const baseLayoutText = fs.readFileSync(
+  new URL("../src/layouts/BaseLayout.astro", import.meta.url),
+  "utf8"
+);
+if (!baseLayoutText.includes('<a class="brand" href="/">自由英作文</a>')) {
+  failures.push("site header lost learner-facing series identity");
+}
+for (const forbidden of ["prototype", "English Curriculum"]) {
+  if (baseLayoutText.includes(forbidden)) {
+    failures.push(`site header exposes development label: ${forbidden}`);
+  }
+}
+
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optional=${p1OptionalIds.length}`);
@@ -1189,6 +1243,7 @@ console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4Wr
 console.log("[generic-audit] p4 full-set review floor=PASS");
 console.log("[generic-audit] p4 presentation hierarchy=PASS");
 console.log("[generic-audit] viewer UX guardrails=PASS");
+console.log("[generic-audit] index entry UX guardrails=PASS");
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
 for (const id of samples) {
   console.log(`[generic-audit] ${id} ${JSON.stringify(summaries.get(id) ?? null)}`);

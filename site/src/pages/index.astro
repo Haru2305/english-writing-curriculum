@@ -6,151 +6,167 @@ import { P2_ACCELERATED_ROUTE } from "../data/p2-accelerated-route.js";
 import { P3_ACCELERATED_ROUTE } from "../data/p3-accelerated-route.js";
 
 const lessons = getLessonCatalog();
-const representatives = lessons.filter((lesson) => lesson.representative);
 const lessonById = new Map(lessons.map((lesson) => [lesson.id, lesson]));
-const acceleratedP1 = P1_ACCELERATED_ROUTE.map((item, index) => ({
-  ...item,
-  step: index + 1,
-  lesson: lessonById.get(item.id)
-})).filter((item) => item.lesson);
-const acceleratedP2 = P2_ACCELERATED_ROUTE.map((item, index) => ({
-  ...item,
-  step: index + 1,
-  lesson: lessonById.get(item.id)
-})).filter((item) => item.lesson);
-const acceleratedP3 = P3_ACCELERATED_ROUTE.map((item, index) => ({
-  ...item,
-  step: index + 1,
-  lesson: lessonById.get(item.id)
-})).filter((item) => item.lesson);
-const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle) => ({
-  bundle,
-  lessons: lessons.filter((lesson) => lesson.bundle === bundle)
-}));
+
+function learnerFocus(focus = "") {
+  return focus
+    .replace(/^B\d{3}\s+Checkpoint｜/i, "チェック回｜")
+    .replace(/^P\d\s+Final Checkpoint｜/i, "最終チェック｜")
+    .replace(/^P\d\s+Final Gate｜/i, "最終チェック｜")
+    .replace(/^P\d入口｜/i, "入口｜");
+}
+
+function learnerTitle(title = "") {
+  return title
+    .replace(/筑波P\d+\s+Final Gate/gi, "筑波 最終チェック")
+    .replace(/P\d+\s+Bridge\s+\d+\s+Checkpoint/gi, "チェック回")
+    .replace(/P\d+\s+Final Checkpoint/gi, "最終チェック")
+    .replace(/P\d+\s+Final Gate/gi, "最終チェック")
+    .replace(/B\d{3}\s+Checkpoint/gi, "チェック回")
+    .replace(/Bundle\s+\d+\s+Checkpoint/gi, "チェック回")
+    .replace(/P\d+入口/gi, "入口")
+    .replace(/\bB\d{3}\b/gi, "")
+    .replace(/\bP[1-4]\b/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/｜\s*｜/g, "｜")
+    .trim();
+}
+
+function buildRoute(source) {
+  return source
+    .map((item, index) => ({
+      ...item,
+      step: index + 1,
+      focus: learnerFocus(item.focus),
+      lesson: lessonById.get(item.id)
+    }))
+    .filter((item) => item.lesson);
+}
+
+const foundationRoute = buildRoute(P1_ACCELERATED_ROUTE);
+const structureRoute = buildRoute(P2_ACCELERATED_ROUTE);
+const practiceRoute = buildRoute(P3_ACCELERATED_ROUTE);
+const tsukubaRoute = lessons
+  .filter((lesson) => Number(lesson.id.slice(1)) >= 205)
+  .map((lesson, index) => ({
+    step: index + 1,
+    focus: `Day ${index + 1}`,
+    lesson
+  }));
+
+const routes = [
+  {
+    id: "route-foundation",
+    label: "基礎",
+    title: "比較・因果・主張を固める",
+    count: foundationRoute.length,
+    range: "E001–E042",
+    description: "自由英作文の理由づけに必要な比較・因果・主張の強さ・提案を15回で通します。",
+    route: foundationRoute
+  },
+  {
+    id: "route-structure",
+    label: "構成・要約",
+    title: "文から段落、要約、英作文へ",
+    count: structureRoute.length,
+    range: "E043–E096",
+    description: "長い文の骨格、段落機能、複数資料、要約から90–110語Writingまでをつなぎます。",
+    route: structureRoute
+  },
+  {
+    id: "route-practice",
+    label: "実戦",
+    title: "初見資料から判断して書く",
+    count: practiceRoute.length,
+    range: "E097–E204",
+    description: "未知概念・複数資料・因果やバイアスを読み、要約・評価・提案まで実戦形式で仕上げます。",
+    route: practiceRoute
+  },
+  {
+    id: "route-tsukuba",
+    label: "筑波対策",
+    title: "30日で本番形式へ",
+    count: tsukubaRoute.length,
+    range: "E205–E234",
+    description: "60分のパーツ演習から始め、最後は120分フルセットを安定して回す30日です。",
+    route: tsukubaRoute
+  }
+];
+
+const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle) => {
+  const groupLessons = lessons.filter((lesson) => lesson.bundle === bundle);
+  return {
+    lessons: groupLessons,
+    range: `${groupLessons[0]?.id}–${groupLessons[groupLessons.length - 1]?.id}`
+  };
+});
 ---
 
-<BaseLayout title="英語教材｜スマホビューア">
-  <p class="eyebrow">Mobile lesson viewer</p>
-  <h1>英語教材</h1>
+<BaseLayout title="自由英作文｜教材ビューア">
+  <p class="eyebrow">自由英作文</p>
+  <h1>今日の教材を選ぶ</h1>
   <p class="lead">
-    E001〜E234をスマホで読みやすく見るための閲覧専用ビューアです。問題・英作文・解答解説はGitHub上のcanonical教材から表示します。
+    基本ルートは上から1回ずつ進めます。チェック回で弱点が出たときだけ補修教材へ戻り、終えた段階は飛ばしてかまいません。
   </p>
 
+  <section class="entry-guide" aria-labelledby="entry-guide-heading">
+    <div class="index-section-heading">
+      <h2 id="entry-guide-heading">どこから始める？</h2>
+      <p>初めてなら「基礎」から。すでに身についている段階は、その次から始めます。</p>
+    </div>
+
+    <div class="route-stage-grid">
+      {routes.map((route) => (
+        <article class="route-stage-card">
+          <p class="route-stage-label">{route.label}</p>
+          <h3>{route.title}</h3>
+          <p>{route.description}</p>
+          <div class="route-stage-meta">
+            <span>{route.count}回</span>
+            <span>{route.range}</span>
+          </div>
+          <div class="route-stage-actions">
+            <a class="route-start-link" href={"/" + route.route[0].lesson.slug + "/"}>
+              {route.route[0].lesson.id}から始める
+            </a>
+            <a class="route-outline-link" href={"#" + route.id}>ルートを見る</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
   <a class="thinking-tools-entry" href="/thinking-tools/">
-    <small>共通ガイド</small>
+    <small>迷ったときの共通ガイド</small>
     <strong>思考ツール</strong>
-    <span>問題を見たとき、何を考えるか迷ったらここを見る</span>
+    <span>問題を見て何を考えればよいか分からないときに使う</span>
   </a>
 
-  <section class="index-section accelerated-p1-section" aria-labelledby="accelerated-p1-heading">
+  <section class="index-section core-routes-section" aria-labelledby="core-routes-heading">
     <div class="index-section-heading">
-      <h2 id="accelerated-p1-heading">P1短縮ルート｜15回</h2>
-      <p>
-        P1の全42回を順番に消化せず、まずこの15回を進めます。Checkpointで詰まった技能だけ、全教材一覧から同Bundleの補修回へ戻ります。
-      </p>
+      <p class="eyebrow">基本ルート</p>
+      <h2 id="core-routes-heading">上から1回ずつ進める</h2>
+      <p>各段階のルートだけを主線として進めます。補修教材はここには混ぜません。</p>
     </div>
 
-    <div class="accelerated-route-list">
-      {acceleratedP1.map((item) => (
-        <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
-          <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
-          <span class="accelerated-route-main">
-            <strong>{item.lesson.id}｜{item.lesson.title}</strong>
-            <small>{item.focus}</small>
-          </span>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <section class="index-section accelerated-p1-section" aria-labelledby="accelerated-p2-heading">
-    <div class="index-section-heading">
-      <h2 id="accelerated-p2-heading">P2短縮ルート｜30回</h2>
-      <p>
-        P2の全54回を順番に消化せず、この30回で構文・段落・複数資料・要約・60→80→90語Writingを通します。Checkpointで弱点が出た技能だけ補修回へ戻ります。
-      </p>
-    </div>
-
-    <div class="accelerated-route-list">
-      {acceleratedP2.map((item) => (
-        <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
-          <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
-          <span class="accelerated-route-main">
-            <strong>{item.lesson.id}｜{item.lesson.title}</strong>
-            <small>{item.focus}</small>
-          </span>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <section class="index-section accelerated-p1-section" aria-labelledby="accelerated-p3-heading">
-    <div class="index-section-heading">
-      <h2 id="accelerated-p3-heading">P3短縮ルート｜54回</h2>
-      <p>
-        P3は各Bundleを「重要な実戦技能2回＋Checkpoint 1回」に圧縮します。残り54回は、Checkpointで弱点が出た技能だけ補修します。
-      </p>
-    </div>
-
-    <details class="bundle-group">
-      <summary>
-        <strong>54回のCore Routeを見る</strong>
-        <span>E097–E204</span>
-        <small>P3</small>
-      </summary>
-      <div class="accelerated-route-list">
-        {acceleratedP3.map((item) => (
-          <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
-            <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
-            <span class="accelerated-route-main">
-              <strong>{item.lesson.id}｜{item.lesson.title}</strong>
-              <small>{item.focus}</small>
-            </span>
-          </a>
-        ))}
-      </div>
-    </details>
-  </section>
-
-  <section class="index-section" aria-labelledby="representative-heading">
-    <div class="index-section-heading">
-      <p class="eyebrow">Representative lessons</p>
-      <h2 id="representative-heading">代表教材</h2>
-      <p>形式ごとの表示を細かく調整した教材です。</p>
-    </div>
-
-    <div class="card-list">
-      {representatives.map((lesson) => (
-        <a class="lesson-card" href={"/" + lesson.slug + "/"}>
-          <small>{lesson.minutes ? "目安" + lesson.minutes + "分" : lesson.phase}</small>
-          <strong>{lesson.id}｜{lesson.title}</strong>
-          <span>{lesson.phase} / {lesson.bundle}</span>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <section class="index-section all-lessons-section" aria-labelledby="all-lessons-heading">
-    <div class="index-section-heading">
-      <p class="eyebrow">E001–E234</p>
-      <h2 id="all-lessons-heading">全教材</h2>
-      <p>全234教材。bundleを開くと、その中の教材へ移動できます。</p>
-    </div>
-
-    <div class="bundle-list">
-      {bundles.map((group, index) => (
-        <details class="bundle-group" open={index === 0}>
+    <div class="core-route-stack">
+      {routes.map((route) => (
+        <details class="core-route-details" id={route.id}>
           <summary>
-            <strong>{group.bundle}</strong>
-            <span>{group.lessons[0]?.id}–{group.lessons[group.lessons.length - 1]?.id}</span>
-            <small>{group.lessons[0]?.phase}</small>
+            <span class="core-route-summary-main">
+              <small>{route.label}</small>
+              <strong>{route.title}</strong>
+            </span>
+            <span class="core-route-summary-meta">{route.count}回｜{route.range}</span>
           </summary>
-          <div class="bundle-lessons">
-            {group.lessons.map((lesson) => (
-              <a href={"/" + lesson.slug + "/"} class={lesson.representative ? "bundle-lesson representative" : "bundle-lesson"}>
-                <span>{lesson.id}</span>
-                <strong>{lesson.title}</strong>
-                {lesson.representative && <small>代表</small>}
+          <div class="accelerated-route-list">
+            {route.route.map((item) => (
+              <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
+                <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
+                <span class="accelerated-route-main">
+                  <strong>{item.lesson.id}｜{learnerTitle(item.lesson.title)}</strong>
+                  <small>{item.focus}</small>
+                </span>
               </a>
             ))}
           </div>
@@ -159,7 +175,43 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
     </div>
   </section>
 
+  <section class="index-section repair-section" aria-labelledby="repair-heading">
+    <details class="repair-catalog">
+      <summary>
+        <span>
+          <small>必要なときだけ</small>
+          <strong id="repair-heading">補修・全教材</strong>
+        </span>
+        <span>E001–E234</span>
+      </summary>
+      <div class="repair-catalog-body">
+        <p>
+          基本ルートのチェック回で弱点が見つかったときに開きます。全234教材を最初から順番に消化する必要はありません。
+        </p>
+
+        <div class="bundle-list">
+          {bundles.map((group) => (
+            <details class="bundle-group">
+              <summary>
+                <strong>{group.range}</strong>
+                <span>{group.lessons.length}教材</span>
+              </summary>
+              <div class="bundle-lessons">
+                {group.lessons.map((lesson) => (
+                  <a href={"/" + lesson.slug + "/"} class="bundle-lesson">
+                    <span>{lesson.id}</span>
+                    <strong>{learnerTitle(lesson.title)}</strong>
+                  </a>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </details>
+  </section>
+
   <p class="note">
-    このサイトは閲覧専用です。答案入力・ログイン・進捗保存はありません。
+    閲覧専用です。答案入力・ログイン・進捗保存はありません。
   </p>
 </BaseLayout>
