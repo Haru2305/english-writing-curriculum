@@ -259,14 +259,17 @@ let p4DoYouThinkCount = 0;
 let p4LegacyWritingFormulaCount = 0;
 const p4WritingModes = new Set();
 
-for (const entry of generic.filter((item) => {
+for (const entry of catalog.filter((item) => {
   const n = Number(item.id.slice(1));
   return n >= 205 && n <= 234;
 })) {
   const raw = fs.readFileSync(entry.filePath, "utf8");
   const split = splitRaw(raw);
-  const promptWindows = [...split.problem.matchAll(/([\s\S]{0,900}?)Write about 100 English words\./g)]
-    .map((match) => match[0]);
+  const writeMatches = [...split.problem.matchAll(/Write about 100 English words\./g)];
+  const promptWindows = writeMatches.map((match) => {
+    const start = Math.max(0, match.index - 900);
+    return split.problem.slice(start, match.index + match[0].length);
+  });
 
   p4WritingPromptCount += promptWindows.length;
 
