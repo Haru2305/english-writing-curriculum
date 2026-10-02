@@ -24,7 +24,7 @@ export function reviewPresentation(title = "") {
     return { kind: "learning", label: "実戦チェック" };
   }
 
-  if (/^(?:到達目安|P\d Final Gate 判定|最終チェック判定|筑波 最終チェック判定)$/i.test(text)) {
+  if (/^(?:到達目安|P\d Final Gate 判定|最終チェック\s*判定|筑波 最終チェック\s*判定)$/i.test(text)) {
     return { kind: "learning", label: "到達判定" };
   }
 
