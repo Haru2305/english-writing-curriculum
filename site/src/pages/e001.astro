@@ -4,7 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
-import { toLearnerText, toLearnerLabel } from "../lib/learner-text.js";
+import { toLearnerText, toLearnerLabel, toLearnerLessonNumber } from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 
 const sourcePath = path.resolve(process.cwd(), "../bundles/B001/E001.md");
@@ -306,7 +306,8 @@ const problemHeader = takeHeader(beforeMarker.replace(/_+\s*$/m, "").trimEnd());
 const answerLines = afterMarker.trim().split("\n");
 
 const title = toLearnerLabel(problemHeader.titleLine.replace(/^E001｜/, ""));
-const pageTitle = "E001｜" + title;
+const lessonLabel = toLearnerLessonNumber("E001");
+const pageTitle = lessonLabel + "｜" + title;
 const timeMatch = problemHeader.metaLine.match(/目安\s*[^｜]+/);
 const learnerMeta = timeMatch?.[0]?.trim() ?? "";
 const problemSections = parseSections(problemHeader.bodyLines);
@@ -430,13 +431,13 @@ const reviewExtraSections = [
 const answerNotice = findSection(answerSections, "まず確認");
 ---
 
-<BaseLayout title={pageTitle} description="E001 自由英作文教材">
+<BaseLayout title={pageTitle} description={lessonLabel + " 自由英作文教材"}>
   <article>
     <header class="lesson-header">
       <div class="series-mark" aria-label="シリーズと教材番号">
         <span>自由英作文</span>
         <span aria-hidden="true">/</span>
-        <strong>E001</strong>
+        <strong>{lessonLabel}</strong>
       </div>
       <h1 class="lesson-title">{title}</h1>
       {learnerMeta && <p class="lesson-meta">{learnerMeta}</p>}
@@ -767,7 +768,7 @@ const answerNotice = findSection(answerSections, "まず確認");
 
     <nav class="nav-row" aria-label="教材ナビゲーション">
       <a class="nav-link" href="/">一覧へ</a>
-      <a class="nav-link" href="/e002/">E002 →</a>
+      <a class="nav-link" href="/e002/">{toLearnerLessonNumber("E002")} →</a>
     </nav>
   </article>
 </BaseLayout>
