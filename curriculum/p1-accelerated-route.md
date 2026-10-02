@@ -48,7 +48,6 @@ Checkpointで迷った技能に対応する教材だけ戻る。
 - E014 — The number of / A number of、主語動詞一致
 - E016 — automationとtask
 - E017 — complement / supplement / compensate for
-- E019 — 越境課題へのTransfer
 
 ### B004
 - E019 — 越境課題と協力
