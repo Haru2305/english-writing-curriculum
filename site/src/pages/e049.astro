@@ -4,6 +4,7 @@ import path from "node:path";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "../components/LessonSections.astro";
 import PrintButton from "../components/PrintButton.astro";
+import { toLearnerText } from "../lib/learner-text.js";
 import ThinkingToolsCue from "../components/ThinkingToolsCue.astro";
 
 const sourcePath = path.resolve(process.cwd(), "../bundles/B009/E049.md");
@@ -230,7 +231,7 @@ const problemHeader = takeHeader(beforeMarker.replace(/_+\s*$/m, "").trimEnd());
 const problemSections = parseSections(problemHeader.bodyLines);
 const answerSections = parseSections(afterMarker.trim().split("\n"));
 
-const title = problemHeader.titleLine.replace(/^E049｜/, "");
+const title = toLearnerText(problemHeader.titleLine.replace(/^E049｜/, ""));
 const pageTitle = "E049｜" + title;
 const timeMatch = problemHeader.metaLine.match(/目安\s*[^｜]+/);
 const learnerMeta = timeMatch?.[0]?.trim() ?? "";
