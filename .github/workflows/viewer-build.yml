@@ -33,6 +33,8 @@ jobs:
         run: npm install
       - name: Audit generic renderer
         run: npm run audit:generic
+      - name: Audit Core 99 independent timing
+        run: node scripts/audit-core99-time-model.mjs
       - name: Audit learner-facing labels
         run: node scripts/audit-learner-labels.mjs
       - name: Build
