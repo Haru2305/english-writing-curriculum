@@ -1196,8 +1196,8 @@ for (const required of [
   "学習を始める",
   "教材番号から開く",
   "筑波大対策",
-  "教材一覧",
-  "学習段階から教材を開く",
+  "通常ルート",
+  "4段階で仕上げる",
   "文の論理をつくる",
   "まとまりのある英文を書く",
   "資料を読み取って書く",
@@ -1217,6 +1217,8 @@ for (const forbidden of [
   "E001から始める",
   "最初の教材を開く",
   "途中から続ける",
+  "教材一覧",
+  "学習段階から教材を開く",
   "補修・全教材",
   "E001〜E234",
   "E205から始める",
@@ -1243,6 +1245,18 @@ for (const forbidden of [
 }
 if (/<details class="core-route-details"[^>]*\sopen(?:\s|=|>)/.test(indexPageText)) {
   failures.push("index core routes should be collapsed initially");
+}
+
+if (
+  !indexPageText.includes('class="core-route-stage"')
+  || !indexPageText.includes("route.practice")
+  || !indexPageText.includes("route.goal")
+  || !indexPageText.includes("通常ルート {route.count}回")
+) {
+  failures.push("index learning-stage summaries lost practice/outcome context");
+}
+if (!globalCssText.includes("grid-template-columns: 34px minmax(0, 1fr) auto 18px;")) {
+  failures.push("index learning-stage summary layout can wrap the disclosure icon into a stray row");
 }
 if (/<details class="repair-catalog"[^>]*\sopen(?:\s|=|>)/.test(indexPageText)) {
   failures.push("index repair catalog should be collapsed initially");
