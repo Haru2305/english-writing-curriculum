@@ -387,6 +387,28 @@ if (timingMismatches.length) {
   );
 }
 
+const staleSixty = [];
+for (const id of coreIds) {
+  const target = timingPlan.get(id);
+  if (target === 60) continue;
+  const entry = catalog.get(id);
+  const problem = splitRaw(fs.readFileSync(entry.filePath, "utf8")).problem;
+  const staleLines = problem
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) =>
+      line.includes("60分")
+      && !/Post-solve\s*\d+\s*分/i.test(line)
+      && !/演習目安\s*\d+\s*分/.test(line)
+    );
+  if (staleLines.length) {
+    staleSixty.push(`${id}: ${staleLines.join(" || ")}`);
+  }
+}
+if (staleSixty.length) {
+  throw new Error("Stale 60-minute learner copy after retiming: " + staleSixty.join(" ; "));
+}
+
 function round(value) {
   return value == null ? null : Math.round(value * 10) / 10;
 }
