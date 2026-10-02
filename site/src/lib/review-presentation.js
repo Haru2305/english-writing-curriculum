@@ -1,7 +1,7 @@
 import { toLearnerText } from "./learner-text.js";
 
 const QUESTION_HEADING = /^(?:Q\d+|\d+)\s*(?:[｜:：.]|\s+)/i;
-const WRITING_REVIEW = /^(?:Nuance Check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Model answer|Model output|Model short output|Model writing|Model summary|モデル答案|別解|自己修正|Self-correction)/i;
+const WRITING_REVIEW = /^(?:Nuance Check|Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Model answer|Model output|Model short output|Model writing|Model summary|モデル答案|別解)/i;
 
 export function reviewPresentation(title = "") {
   const raw = String(title).trim();
@@ -13,6 +13,30 @@ export function reviewPresentation(title = "") {
 
   if (text === "まず確認") {
     return { kind: "intro", label: "" };
+  }
+
+  if (/^(?:自己修正|Self-correction)$/i.test(text)) {
+    return { kind: "learning", label: "振り返り" };
+  }
+
+  if (/^(?:B\d{3} Checkpoint|P\d Final Gate Check|Pass standard)$/i.test(text)) {
+    return { kind: "learning", label: "実戦チェック" };
+  }
+
+  if (/^(?:到達目安|P\d Final Gate 判定)$/i.test(text)) {
+    return { kind: "learning", label: "到達判定" };
+  }
+
+  if (/^30日間の最終固定$/i.test(text)) {
+    return { kind: "learning", label: "本番手順" };
+  }
+
+  if (/^(?:思考の再利用|思考転用|思考再会)/i.test(text)) {
+    return { kind: "learning", label: "思考・転用" };
+  }
+
+  if (/^Final Gate｜Q3Bの読み方/i.test(text)) {
+    return { kind: "question", label: "設問解説" };
   }
 
   if (QUESTION_HEADING.test(text) || WRITING_REVIEW.test(text)) {
