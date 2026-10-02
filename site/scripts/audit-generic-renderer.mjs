@@ -1168,6 +1168,16 @@ for (const required of [
 if (genericViewText.includes("<LessonSections sections={groups.review} answer />")) {
   failures.push("generic viewer reverted to fully expanded REVIEW");
 }
+if (!genericViewText.includes("toLearnerLessonNumber")) {
+  failures.push("generic viewer does not sanitize learner-facing lesson numbers");
+}
+if (
+  genericViewText.includes("<strong>{id}</strong>")
+  || genericViewText.includes("{previous.id}</a>")
+  || genericViewText.includes("{next.id} →")
+) {
+  failures.push("generic viewer exposes internal E lesson codes");
+}
 
 const globalCssText = fs.readFileSync(
   new URL("../src/styles/global.css", import.meta.url),
@@ -1192,7 +1202,9 @@ for (const required of [
   "まとまりのある英文を書く",
   "資料を読み取って書く",
   "筑波大形式で仕上げる",
-  "補修・全教材"
+  "追加練習を探す",
+  "全教材を見る",
+  "教材1〜234"
 ]) {
   if (!indexPageText.includes(required)) {
     failures.push(`index learner entry is missing: ${required}`);
@@ -1205,6 +1217,10 @@ for (const forbidden of [
   "E001から始める",
   "最初の教材を開く",
   "途中から続ける",
+  "補修・全教材",
+  "E001〜E234",
+  "E205から始める",
+  "例：E086",
   "学習ロードマップ",
   "教材はこの順に進む",
   "各段階の教材を見る",
@@ -1238,8 +1254,12 @@ if ((indexPageText.match(/class="entry-primary(?:-button)?"/g) ?? []).length !==
 if (!indexPageText.includes('href="/e205/"')) {
   failures.push("index Tsukuba entry link is missing");
 }
-if (!indexPageText.includes('id="lesson-jump-form"') || !indexPageText.includes("E001〜E234の教材番号")) {
-  failures.push("index continuation-by-lesson-number control is missing");
+if (
+  !indexPageText.includes('id="lesson-jump-form"')
+  || !indexPageText.includes("教材1〜234")
+  || !indexPageText.includes('placeholder="例：86"')
+) {
+  failures.push("index learner-facing lesson-number control is missing");
 }
 
 const baseLayoutText = fs.readFileSync(
