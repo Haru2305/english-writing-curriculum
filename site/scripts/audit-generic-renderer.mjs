@@ -309,7 +309,7 @@ for (const entry of catalog.filter((item) => {
   const raw = fs.readFileSync(entry.filePath, "utf8");
   const split = splitRaw(raw);
   const matches = [...split.answer.matchAll(
-    /Model (?:answer|writing) \((\d+) words\)\s*\n+([\s\S]*?)(?=\n\n(?:B\d{3}|P4|自己修正|到達目安|---|構成|Planning|Route|3A補正|本番|Final Gate|30日間|解説補強))/
+    /Model (?:answer|writing) \((\d+) words\)\s*\n+([\s\S]*?)(?=\n\n(?:B\d{3}|P4|自己修正|到達目安|---|構成|Planning|Route|3A補正|本番|Final Gate|30日間|解説補強))/g
   )];
 
   for (const match of matches) {
