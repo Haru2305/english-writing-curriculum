@@ -95,6 +95,7 @@ Current:
 - B035–B039 / E205–E234 Published
 - P4 completed at B039 / E234
 - E234 = P4 Final Gate
+- 2026-10-02 end-to-end audit completed: `curriculum/p4-end-to-end-audit.md`
 - 2027年度詳細募集要項公開後にP4形式を再検証する
 
 ## Curriculum-wide Content Consolidation — E001–E234

@@ -58,11 +58,11 @@ P4本文の本格作成前に必ず確認:
 
 ## Verified format basis
 
-As of 2026-09-30:
+As of 2026-10-02:
 
 - University of Tsukuba official 2026 general-selection schedule: foreign language 10:00–12:00 (120 minutes) for the medical program on the first examination day.
 - University FAQ: no listening test in the second-stage examination.
-- University 2027 selection outline is published, but the detailed 2027 general-selection application guidelines are not yet available.
+- University 2027 selection outline is published. As of 2026-10-02, the official application-guidelines page still lists the 2026 detailed general-selection guidelines, so the detailed 2027 general-selection application guidelines are not yet available.
 - Akahon / Kyogakusha trend summary: typically three major questions; Questions 1–2 are long reading passages; Question 3 since 2020 combines reading-based word-order/grammar work and English composition; written Japanese explanation and other constructed responses are common; composition tasks are generally in roughly the 50–100-word range.
 
 Sources:
@@ -94,6 +94,8 @@ B036 Days 7–12:
 10. 100-minute Semi-full B / Q2-style science reading + Q3A + Q3B
 11. 110-minute Semi-full C / Q1-style reading + Q2-style reading
 12. 120-minute B036 Checkpoint / Q1 + Q2 + Q3A + Q3B
+
+Day 12 is the **first full-format diagnostic exposure**, not a new minimum daily workload. Days 13–14 deliberately remove one late section at a time to repair fatigue-specific weakness before full four-section repetition begins on Day 15.
 
 B037 Days 13–18:
 13. 100-minute Semi-full D / Q1 + Q2 + Q3A; protect designated-position accuracy after reading fatigue
@@ -146,9 +148,19 @@ B039 Days 25–30:
 - Q1: animal-reference / “who” vs “that” passage; Japanese 50–60-character explanation, cloze, content choice.
 - Q2: rogue-planet science passage; Japanese 40–60-character explanation, cloze, sentence insertion.
 - Q3A: 3 word-order items with designated word positions.
-- Q3B: identify the health challenge with the greatest effect on one’s generation, explain why, and give a concrete example in about 100 words.
+- Q3B: a short health-challenge stimulus followed by free composition; identify the challenge with the greatest effect on one’s generation, explain why, and give a concrete example in about 100 words. This is a Q3B-local stimulus, not a requirement to synthesize Q1/Q2.
 
 ## P4 priority after paper review
+
+### Q3B fidelity rule
+
+Q3B is treated as **prompt-/stimulus-based free composition**, not as a compulsory synthesis of Q1/Q2.
+
+- do not require the learner to quote or reuse an idea from Q1/Q2
+- if background knowledge is needed, put the necessary cue inside the Q3B prompt itself
+- keep the task answerable from the Q3B prompt plus ordinary knowledge
+- use P3 reasoning skills internally, but do not turn P4 free composition back into a P3 source-integration task
+
 
 1. Strict-character-limit Japanese content explanation
 2. Long-passage logical structure and reference tracking
@@ -176,7 +188,7 @@ The University of Tsukuba does not publish the main English front-exam paper on 
 - B038 / E223–E228: Published
 - B039 / E229–E234: Published
 - Coverage: Days 1–30
-- Status date: 2026-09-30
+- Status date: 2026-10-02
 - P4 authoring status: Complete
 - Final Gate: E234 / Day 30
 - Next action before learner use: revalidate the 2027 detailed official admissions guidelines when released
