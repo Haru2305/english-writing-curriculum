@@ -16,6 +16,17 @@ function learnerFocus(focus = "") {
     .replace(/^P\d入口｜/i, "入口｜");
 }
 
+function learnerTitle(title = "") {
+  return title
+    .replace(/^筑波P\d+\s+Final Gate[｜：:]\s*/i, "筑波 最終チェック｜")
+    .replace(/^P\d+\s+Bridge\s+\d+\s+Checkpoint[｜：:]\s*/i, "チェック回｜")
+    .replace(/^P\d+\s+Final Checkpoint[｜：:]\s*/i, "最終チェック｜")
+    .replace(/^P\d+\s+Final Gate[｜：:]\s*/i, "最終チェック｜")
+    .replace(/^B\d+\s+Checkpoint[｜：:]\s*/i, "チェック回｜")
+    .replace(/^Bundle\s+\d+\s+Checkpoint[｜：:]\s*/i, "チェック回｜")
+    .replace(/^P\d+入口[｜：:]\s*/i, "入口｜");
+}
+
 function buildRoute(source) {
   return source
     .map((item, index) => ({
@@ -148,7 +159,7 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
               <a class="accelerated-route-item" href={"/" + item.lesson.slug + "/"}>
                 <span class="accelerated-route-step">{String(item.step).padStart(2, "0")}</span>
                 <span class="accelerated-route-main">
-                  <strong>{item.lesson.id}｜{item.lesson.title}</strong>
+                  <strong>{item.lesson.id}｜{learnerTitle(item.lesson.title)}</strong>
                   <small>{item.focus}</small>
                 </span>
               </a>
@@ -184,7 +195,7 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
                 {group.lessons.map((lesson) => (
                   <a href={"/" + lesson.slug + "/"} class="bundle-lesson">
                     <span>{lesson.id}</span>
-                    <strong>{lesson.title}</strong>
+                    <strong>{learnerTitle(lesson.title)}</strong>
                   </a>
                 ))}
               </div>
