@@ -102,10 +102,12 @@ function targetWords(text = "") {
 function targetJapaneseChars(text = "") {
   const targets = [];
   const value = String(text);
-  for (const match of value.matchAll(/(\d+)\s*[–—\-〜~]\s*(\d+)\s*字/g)) {
+  const rangePattern = /(\d+)\s*[–—\-〜~]\s*(\d+)\s*字/g;
+  for (const match of value.matchAll(rangePattern)) {
     targets.push((Number(match[1]) + Number(match[2])) / 2);
   }
-  for (const match of value.matchAll(/(?:約\s*)?(\d+)\s*字(?:以内|程度)?/g)) {
+  const withoutRanges = value.replace(rangePattern, "");
+  for (const match of withoutRanges.matchAll(/(?:約\s*)?(\d+)\s*字(?:以内|程度)?/g)) {
     targets.push(Number(match[1]));
   }
   return [...new Set(targets)];
