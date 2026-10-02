@@ -15,17 +15,17 @@ P2はP1より新規技能が多いため、P1ほど大胆には削らない。�
 | 1 | E043 | 節境界・有限動詞：長い文の骨格 |
 | 2 | E045 | 表現認識→想起 |
 | 3 | E046 | Correct：主語・動詞・数・前置詞 |
-| 4 | E048 | B008 Checkpoint |
+| 4 | E048 | B008 Checkpoint＋timed processing Fast Introduce |
 | 5 | E050 | 照応：this / they / such |
 | 6 | E053 | 4文段落・cohesion |
-| 7 | E054 | B009 Checkpoint |
+| 7 | E054 | B009 Checkpoint＋context / Natural Fast Introduce |
 | 8 | E055 | 段落機能 |
 | 9 | E058 | 長い名詞句をほどく |
-| 10 | E060 | B010 Checkpoint |
+| 10 | E060 | B010 Checkpoint＋main point / output switch Fast Introduce |
 | 11 | E061 | 筆者態度・確信度 |
-| 12 | E066 | B011 Checkpoint |
+| 12 | E066 | B011 Checkpoint＋information flow Fast Introduce |
 | 13 | E068 | 複数本文比較 |
-| 14 | E071 | 2本文→複数形式 |
+| 14 | E071 | 2本文→複数形式＋format adaptation Fast Introduce |
 | 15 | E072 | B012 Checkpoint |
 | 16 | E073 | 未知題材耐性 |
 | 17 | E074 | 本文＋表の統合 |
@@ -33,7 +33,7 @@ P2はP1より新規技能が多いため、P1ほど大胆には削らない。�
 | 19 | E079 | 名詞化・圧縮構造 |
 | 20 | E080 | 推論 |
 | 21 | E081 | 要約 |
-| 22 | E084 | B014 Checkpoint |
+| 22 | E084 | B014 Checkpoint＋source-set reading Fast Introduce |
 | 23 | E085 | 60–80語：precision |
 | 24 | E086 | 80–100語：free transfer |
 | 25 | E087 | 90–110語：effective paragraph |
@@ -93,7 +93,8 @@ P2はP1より新規技能が多いため、P1ほど大胆には削らない。�
 2. 各Checkpointを解く
 3. Checkpointで明確な弱点が出た技能だけ、同BundleのOptionalへ戻る
 4. Optionalを全部消化しない
-5. E096終了後はP3へ進む
+5. Optionalのcanonical Introduceを飛ばした技能は、最初のCore遭遇でFast Introduceとして短く導入する
+6. E096終了後はP3へ進む
 
 ## Time implication
 
