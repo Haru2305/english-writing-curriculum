@@ -48,6 +48,21 @@ E001–E234の全てのIdeaを学習者に明示するのではなく、**反復
 
 目的は cue-dependent recall ではなく spontaneous transfer。
 
+## Accelerated-route override
+
+The Introduce / Recall / Transfer table below remains the canonical path for the full E001–E234 corpus.
+
+For the accelerated P1–P3 route, a canonical Introduce lesson may be Targeted Review rather than Core. In that case:
+
+- the first Core encounter is treated as **Fast Introduce**
+- the Core lesson must be understandable without completing the skipped lesson
+- do not write learner-facing text that assumes the learner completed an Optional lesson
+- give only the minimum concept definition needed at that Core encounter; do not restore a long explanation chapter
+- do not make an Optional lesson mandatory solely to preserve the original Introduce / Recall label
+- advanced Priority A evidence concepts used directly in P4 should keep their canonical Introduce lesson in Core where practical
+
+This override preserves the compressed route without breaking concept continuity.
+
 ## Visibility rule
 
 - 1教材に learner-facing Core を大量表示しない
