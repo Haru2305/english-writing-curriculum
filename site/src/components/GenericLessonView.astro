@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "./LessonSections.astro";
 import PrintButton from "./PrintButton.astro";
 import { reviewPresentation } from "../lib/review-presentation.js";
+import { toLearnerLabel } from "../lib/learner-text.js";
 import { toLearnerText } from "../lib/learner-text.js";
 
 const {
@@ -12,6 +13,7 @@ const {
 } = Astro.props;
 
 const { id, title, minutes, groups, hasWriting, hasReview } = lesson;
+const learnerTitle = toLearnerLabel(title);
 const learnerTitle = toLearnerText(title);
 
 const supportTarget = hasWriting ? "write-support" : "challenge-support";
