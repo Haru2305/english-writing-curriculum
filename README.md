@@ -30,6 +30,7 @@ GitHubで編集・監査した内容をQA通過後にDriveへPublishedする。
 - P1 default route (2026-10 onward): **15 Core lessons + 27 Targeted Review lessons**; full E001–E042 corpus remains available
 - P2 default route (2026-10 onward): **30 Core lessons + 24 Targeted Review lessons**; full E043–E096 corpus remains available
 - P3 default route (2026-10 onward): **54 Core lessons + 54 Targeted Review lessons**; full E097–E204 corpus remains available
+- Pre-P4 accelerated Core: **99 lessons total**; final audit in `curriculum/core99-final-audit.md`
 - P3 final section: **B031–B034**
 - Planned P3 end: **E204前後**
 - P3 Final Gate: **B034**
@@ -51,6 +52,7 @@ english-writing-curriculum/
 │   ├── p1-accelerated-route.md
 │   ├── p2-accelerated-route.md
 │   ├── p3-accelerated-route.md
+│   ├── core99-final-audit.md
 │   ├── content-framework.md
 │   ├── argument-construction.md
 │   ├── argument-bridge-revisions.md
