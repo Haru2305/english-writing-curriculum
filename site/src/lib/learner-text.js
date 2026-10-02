@@ -81,14 +81,28 @@ export function toLearnerLessonNumber(id = "") {
 
 function timingParts(text = "") {
   const raw = String(text);
+  const directExercise = raw.match(/[＝=]\s*演習\s*(\d+)\s*分/i);
   const core = raw.match(/[＝=]\s*Core\s*(\d+)\s*分/i);
+  const post = raw.match(/Post-solve\s*(\d+)\s*分/i);
   const beforeTotal = raw.split(/[＝=]/)[0];
-  const post = beforeTotal.match(/Post-solve\s*(\d+)\s*分/i);
   const componentMinutes = [...beforeTotal.matchAll(/(\d+)\s*分/g)].map((match) => Number(match[1]));
+
+  if (directExercise) {
+    return {
+      total: Number(directExercise[1]),
+      post: post ? Number(post[1]) : 0,
+      exercise: Number(directExercise[1]),
+      direct: true
+    };
+  }
+
   const total = core ? Number(core[1]) : componentMinutes.reduce((sum, value) => sum + value, 0);
+  const postMinutes = post ? Number(post[1]) : 0;
   return {
     total: total || null,
-    post: post ? Number(post[1]) : 0
+    post: postMinutes,
+    exercise: total ? Math.max(0, total - postMinutes) : null,
+    direct: false
   };
 }
 
@@ -97,19 +111,24 @@ export function toLearnerTimingText(text = "", lessonId = "") {
   if (!/Post-solve\s*\d+\s*分/i.test(cleaned)) return cleaned;
 
   const number = Number(String(lessonId).replace(/\D/g, ""));
-  const { total, post } = timingParts(cleaned);
+  const { total, post, exercise, direct } = timingParts(cleaned);
   if (!total) return cleaned;
 
   if (number >= 205) {
     return cleaned
-      .replace(/\s*\/\s*Post-solve\s*\d+\s*分/i, ` / 予備 ${post}分`)
+      .replace(/\s*\/\s*Post-solve\s*\d+\s*分(?:（時間外）)?/i, ` / 予備 ${post}分`)
       .replace(/[＝=]\s*Core\s*\d+\s*分/i, `＝ 本番演習 ${total}分`)
       .trim();
   }
 
-  const exercise = Math.max(0, total - post);
+  if (direct) {
+    return cleaned
+      .replace(/\s*\/\s*Post-solve\s*\d+\s*分(?:（時間外）)?/i, "")
+      .trim();
+  }
+
   return cleaned
-    .replace(/\s*\/\s*Post-solve\s*\d+\s*分/i, "")
+    .replace(/\s*\/\s*Post-solve\s*\d+\s*分(?:（時間外）)?/i, "")
     .replace(/[＝=]\s*Core\s*\d+\s*分/i, "")
     .replace(/\s+$/, "")
     .concat(` ＝ 演習 ${exercise}分`);
@@ -118,7 +137,7 @@ export function toLearnerTimingText(text = "", lessonId = "") {
 export function learnerTimingMeta(text = "", lessonId = "", fallbackMinutes = null) {
   const number = Number(String(lessonId).replace(/\D/g, ""));
   const cleaned = toLearnerText(text);
-  const { total: parsedTotal, post } = timingParts(cleaned);
+  const { total: parsedTotal, post, exercise: parsedExercise } = timingParts(cleaned);
   const total = parsedTotal || Number(fallbackMinutes || 0) || null;
   if (!total) return "";
 
@@ -126,7 +145,7 @@ export function learnerTimingMeta(text = "", lessonId = "", fallbackMinutes = nu
     return `本番演習 ${total}分｜答え・解説は終了後`;
   }
 
-  const exercise = Math.max(0, total - post);
+  const exercise = parsedExercise ?? Math.max(0, total - post);
   return `演習目安 ${exercise}分｜答え・解説は時間外`;
 }
 
