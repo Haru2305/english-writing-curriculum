@@ -570,6 +570,7 @@ if (p4WordOrderCount < 60) {
 let p4WritingPromptCount = 0;
 let p4DoYouThinkCount = 0;
 let p4LegacyWritingFormulaCount = 0;
+let p4CrossSectionWritingDependencyCount = 0;
 const p4WritingModes = new Set();
 
 for (const entry of catalog.filter((item) => {
@@ -585,6 +586,11 @@ for (const entry of catalog.filter((item) => {
   });
 
   p4WritingPromptCount += promptWindows.length;
+
+  if (/use at least one idea from the reading(?:s)?|problem described in the reading|discussed in the reading/i.test(split.problem)) {
+    p4CrossSectionWritingDependencyCount += 1;
+    failures.push(`${entry.id}: P4 Q3B should not require evidence from Q1/Q2`);
+  }
 
   for (const prompt of promptWindows) {
     if (/Do you think/i.test(prompt)) p4DoYouThinkCount += 1;
@@ -688,6 +694,26 @@ if (p4LegacyWritingFormulaCount > 1) {
 }
 if (p4WritingModes.size < 5) {
   failures.push(`P4 writing prompt-mode diversity too low: ${[...p4WritingModes].join(", ")}`);
+}
+
+for (const entry of catalog.filter((item) => {
+  const n = Number(item.id.slice(1));
+  return n >= 223 && n <= 234;
+})) {
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const timingArea = split.problem.slice(0, 1800);
+  const reviewMinutes = [...timingArea.matchAll(/(?:Final review|Review)\s+(\d+)分/g)]
+    .map((match) => Number(match[1]));
+
+  if (!reviewMinutes.length) {
+    failures.push(`${entry.id}: full-set timing is missing a final review allocation`);
+    continue;
+  }
+
+  if (reviewMinutes.some((minutes) => minutes < 5)) {
+    failures.push(`${entry.id}: full-set final review fell below 5 minutes: ${reviewMinutes.join("/")}`);
+  }
 }
 
 const sentinels = {
@@ -1033,7 +1059,8 @@ console.log(`[generic-audit] p3Accelerated=${P3_ACCELERATED_IDS.length}, p3Optio
 console.log(`[generic-audit] core99Writing=${core99WritingCount}, substantial=${core99SubstantialWritingCount}, summaries=${core99SummaryOutputCount}, rawSkills=${core99RawCodes.size}/${allRawCodes.size}`);
 console.log("[generic-audit] core99 workload guardrails=PASS");
 console.log(`[generic-audit] p1CoreReviewTailChars=${p1CoreReviewTailChars}`);
-console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
+console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}, crossSectionDeps=${p4CrossSectionWritingDependencyCount}`);
+console.log("[generic-audit] p4 full-set review floor=PASS");
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
 for (const id of samples) {
   console.log(`[generic-audit] ${id} ${JSON.stringify(summaries.get(id) ?? null)}`);
