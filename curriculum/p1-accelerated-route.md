@@ -14,7 +14,7 @@ P1の全42教材を順番に必修化しない。
 |---:|---|---|
 | 1 | E001 | 比較の土台：differ from / differ in |
 | 2 | E002 | 因果の強さ：cause / lead to / result in / contribute to |
-| 3 | E006 | B001 Checkpoint：比較・因果・提案・増減 |
+| 3 | E006 | B001 Checkpoint：比較・因果＋suggest / rise・raise の Fast Introduce |
 | 4 | E008 | 主張の強さ：argue / may / can / should |
 | 5 | E012 | B002 Checkpoint：立場・便益・投資・危機対応 |
 | 6 | E015 | 「なくす」と「緩和する」の区別、efficiency / resilience |
@@ -79,7 +79,8 @@ Checkpointで迷った技能に対応する教材だけ戻る。
 2. 各Checkpointを解く
 3. Checkpointで明確な弱点が出た技能だけ、同Bundle内のOptional教材へ戻る
 4. Optionalを全部消化しようとしない
-5. E042終了後はP2へ進む
+5. OptionalのIntroduce lessonを飛ばした技能は、最初のCore遭遇でFast Introduceとして短く導入する
+6. E042終了後はP2へ進む
 
 P1の目的は「基礎教材を完走すること」ではなく、P2以降のWritingに必要な最低限の比較・因果・claim strength・trade-off・priority・qualification・proposalを使える状態にすること。
 
