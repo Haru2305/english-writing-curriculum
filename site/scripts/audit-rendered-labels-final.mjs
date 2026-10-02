@@ -7,7 +7,7 @@ const patterns = [
   ["bundle-word", /\bBundle\s*\d*\b/gi],
   ["checkpoint", /\bCheckpoint\b/gi],
   ["final-gate", /\bFinal\s+Gate\b/gi],
-  ["bridge", /\bBridge(?:\s+\d+)?\b/gi],
+  ["bridge-authoring", /(?:\bBridge\s+\d+\b|次のBridge|\bBridge complete\b)/gi],
   ["internal-family", /\b(?:LEXG|IDEA|ARG|AC|TH|EV|LT|RQ|RF|WF|WQ|WP|WT|SS|TF)\d{1,4}\b/gi]
 ];
 
