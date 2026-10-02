@@ -27,6 +27,10 @@ function stripAuthoringBodyLabels(text = "") {
     .replace(/\bB\d{3}\s+Final Check/g, "最終確認")
     .replace(/\bB039\s*\/\s*Day25〜30では/g, "Day25〜30では")
     .replace(/\bB\d{3}\b/g, "")
+    .replace(/\bBridge\s+\d+で/g, "確認回で")
+    .replace(/次のBridge/g, "次の確認回")
+    .replace(/\bBridge complete\b/gi, "確認回完了")
+    .replace(/\bBridge\s+\d+\b/gi, "確認回")
     // Phase names are removed only in authoring contexts. Bare P1–P4 can mean paragraph numbers.
     .replace(/\bP1で作った/g, "これまでに作った")
     .replace(/\bP2で導入した/g, "前段階で導入した")
