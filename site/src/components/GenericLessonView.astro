@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonSections from "./LessonSections.astro";
 import PrintButton from "./PrintButton.astro";
+import { reviewPresentation } from "../lib/review-presentation.js";
 
 const {
   lesson,
@@ -12,6 +13,20 @@ const {
 const { id, title, minutes, groups, hasWriting, hasReview } = lesson;
 
 const supportTarget = hasWriting ? "write-support" : "challenge-support";
+
+const reviewAnswerSections = groups.review.filter(
+  (section) => reviewPresentation(section.title).kind === "answer-list"
+);
+const reviewQuestionSections = groups.review.filter(
+  (section) => reviewPresentation(section.title).kind === "question"
+);
+const reviewWritingSections = groups.review.filter(
+  (section) => reviewPresentation(section.title).kind === "writing"
+);
+const reviewLearningSections = groups.review.filter((section) => {
+  const kind = reviewPresentation(section.title).kind;
+  return kind === "learning" || kind === "intro";
+});
 ---
 
 <BaseLayout title={id + "｜" + title} description={id + " 英語教材"}>
@@ -97,7 +112,45 @@ const supportTarget = hasWriting ? "write-support" : "challenge-support";
           </nav>
 
           <div class="generic-review-body">
-            <LessonSections sections={groups.review} answer />
+            {reviewAnswerSections.length > 0 && (
+              <LessonSections sections={reviewAnswerSections} answer />
+            )}
+
+            {reviewQuestionSections.length > 0 && (
+              <details class="review-cluster review-cluster-question">
+                <summary>
+                  <strong>設問解説</strong>
+                  <small>問題ごとの根拠・処理を見る</small>
+                </summary>
+                <div class="review-cluster-body">
+                  <LessonSections sections={reviewQuestionSections} answer />
+                </div>
+              </details>
+            )}
+
+            {reviewWritingSections.length > 0 && (
+              <details class="review-cluster review-cluster-writing">
+                <summary>
+                  <strong>Writing解説</strong>
+                  <small>模範解答・構成を見る</small>
+                </summary>
+                <div class="review-cluster-body">
+                  <LessonSections sections={reviewWritingSections} answer />
+                </div>
+              </details>
+            )}
+
+            {reviewLearningSections.length > 0 && (
+              <details class="review-cluster review-cluster-learning">
+                <summary>
+                  <strong>思考・振り返り</strong>
+                  <small>転用・到達判定・本番手順を見る</small>
+                </summary>
+                <div class="review-cluster-body">
+                  <LessonSections sections={reviewLearningSections} answer />
+                </div>
+              </details>
+            )}
           </div>
         </div>
       </details>

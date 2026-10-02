@@ -40,8 +40,12 @@ export function reviewPresentation(title = "") {
     return { kind: "question", label: "設問解説" };
   }
 
-  if (MODEL_WRITING_REVIEW.test(text)) {
+  if (MODEL_WRITING_REVIEW.test(text) || /^Writing解説$/i.test(text)) {
     return { kind: "writing", label: "Writing解説" };
+  }
+
+  if (/^Reading answers$/i.test(text)) {
+    return { kind: "question", label: "設問解説" };
   }
 
   if (QUESTION_HEADING.test(text) || WRITING_REVIEW.test(text)) {

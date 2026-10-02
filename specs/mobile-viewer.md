@@ -41,8 +41,9 @@ viewerは教材制作者向けの内部分類を見せるのではなく、解�
 2. 教材を開く
 3. 問題セットを縦1カラムで読む
 4. 解き終わったら「解答・解説を見る」をタップ
-5. 同じページ内で解答・解説を読む
-6. 一覧 / 前後教材へ移動
+5. まずコンパクトな解答一覧を確認する
+6. 必要な「設問解説 / Writing解説 / 思考・振り返り」だけ開く
+7. 一覧 / 隣接する前後教材へ移動
 
 ## Mobile UI rules
 
@@ -51,6 +52,9 @@ viewerは教材制作者向けの内部分類を見せるのではなく、解�
 - no horizontal two-pane layout
 - no wide navigation table
 - answer/explanation hidden initially
+- REVIEWを開いた直後はcompact answer listだけを直接表示し、詳細解説は段階開示する
+- generic REVIEWは「設問解説 / Writing解説 / 思考・振り返り」を別々の折りたたみにする
+- dedicated rendererでも前後ナビは代表教材チェーンではなく、実際の隣接lessonを使う
 - tap target for answer reveal must be large
 - safe-area padding for mobile browsers
 - long English passages use normal wrapping, not fixed-width preformatted text
