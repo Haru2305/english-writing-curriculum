@@ -361,10 +361,10 @@ for (const id of core99Ids) {
   const split = splitRaw(raw);
   const problemLines = split.problem.split("\n").map((line) => line.trim()).filter(Boolean);
   const allocationLine = problemLines.find((line) =>
-    /(?:＝\s*Core\s*\d+\s*分|\bCore\s*\d+\s*分|目安\s*\d+\s*分|\b\d+\s*min(?:utes?)?\b)/i.test(line)
+    /(?:＝\s*演習\s*\d+\s*分|＝\s*Core\s*\d+\s*分|\bCore\s*\d+\s*分|演習目安\s*\d+\s*分|目安\s*\d+\s*分|\b\d+\s*min(?:utes?)?\b)/i.test(line)
   ) ?? "";
   const explicitMinutes =
-    Number(allocationLine.match(/(?:＝\s*Core\s*|\bCore\s*|目安\s*)(\d+)\s*分/i)?.[1] ?? 0)
+    Number(allocationLine.match(/(?:＝\s*演習\s*|＝\s*Core\s*|\bCore\s*|演習目安\s*|目安\s*)(\d+)\s*分/i)?.[1] ?? 0)
     || Number(allocationLine.match(/\b(\d+)\s*min(?:utes?)?\b/i)?.[1] ?? 0)
     || null;
 
@@ -372,8 +372,8 @@ for (const id of core99Ids) {
   const kind = coreCheckpointSet.has(id) ? "checkpoint" : "regular";
   const caps = workloadCaps[entry.phase]?.[kind];
 
-  if (explicitMinutes == null || explicitMinutes < 45 || explicitMinutes > 60) {
-    failures.push(`${id}: Core workload target should stay within 45–60 minutes, found ${explicitMinutes ?? "none"}`);
+  if (explicitMinutes == null || explicitMinutes < 30 || explicitMinutes > 60) {
+    failures.push(`${id}: Core timed-practice target should stay within the approved 30–60 minute envelope, found ${explicitMinutes ?? "none"}`);
   }
   if (!caps) {
     failures.push(`${id}: no workload cap configured for ${entry.phase}/${kind}`);
@@ -1218,9 +1218,9 @@ for (const required of [
   "書く",
   "教材番号から開く",
   "問題の考え方を見る",
-  "1回 約45〜50分",
-  "1回 約50〜55分",
-  "1回 約55〜60分",
+  "通常30〜45分｜チェック回40〜50分",
+  "通常30〜50分｜チェック回45〜60分",
+  "通常35〜55分｜チェック回50〜60分",
   "本編",
   "99回で、初見問題に対応する力を作る",
   "読む・考える土台を作る",
