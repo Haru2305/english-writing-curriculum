@@ -215,8 +215,8 @@ for (const id of p3CheckpointIds) {
 for (const id of [
   "E097", "E104", "E109", "E117", "E122", "E127", "E133",
   "E141", "E145", "E147", "E153", "E157", "E159", "E163", "E165",
-  "E169", "E171", "E175", "E177", "E182", "E183", "E189", "E190",
-  "E194", "E195", "E201", "E202", "E204"
+  "E170", "E171", "E175", "E183", "E185", "E189", "E190",
+  "E194", "E195", "E197", "E201", "E202", "E204"
 ]) {
   if (!p3RouteSet.has(id)) failures.push(`P3 accelerated route missing milestone ${id}`);
 }
@@ -348,6 +348,16 @@ console.log(`[core99][CONCEPTS] total=${learnerConceptRows.length}, skippedIntro
 for (const row of skippedIntroductions) {
   const downstreamCore = [...row.recall, ...row.transfer].filter((id) => core99Ids.includes(id));
   console.log(`[core99][CONCEPT-SKIP] ${row.idea} intro=${row.introduce} downstreamCore=${downstreamCore.join(",") || "none"}`);
+}
+
+for (const row of skippedIntroductions) {
+  for (const id of [...row.recall, ...row.transfer].filter((candidate) => core99Ids.includes(candidate))) {
+    const entry = catalog.find((item) => item.id === id);
+    const raw = fs.readFileSync(entry.filePath, "utf8");
+    if (raw.includes(row.introduce)) {
+      console.log(`[core99][CONCEPT-REF] ${row.idea} core=${id} explicitly references optional intro=${row.introduce}`);
+    }
+  }
 }
 
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
