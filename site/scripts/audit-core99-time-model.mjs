@@ -83,27 +83,32 @@ function explicitTimedMinutes(problem = "") {
 
 function targetWords(text = "") {
   const targets = [];
-  for (const match of String(text).matchAll(/(\d+)\s*[–—-]\s*(\d+)\s*words?/gi)) {
+  const value = String(text);
+  for (const match of value.matchAll(/(\d+)\s*[–—\-〜~]\s*(\d+)\s*(?:English\s*)?words?/gi)) {
     targets.push((Number(match[1]) + Number(match[2])) / 2);
   }
-  for (const match of String(text).matchAll(/(?:about|approximately)\s*(\d+)\s*words?/gi)) {
+  for (const match of value.matchAll(/(\d+)\s*[–—\-〜~]\s*(\d+)\s*語/g)) {
+    targets.push((Number(match[1]) + Number(match[2])) / 2);
+  }
+  for (const match of value.matchAll(/(?:about|approximately)\s*(\d+)\s*(?:English\s*)?words?/gi)) {
     targets.push(Number(match[1]));
   }
-  for (const match of String(text).matchAll(/約\s*(\d+)\s*語/g)) {
+  for (const match of value.matchAll(/約\s*(\d+)\s*語/g)) {
     targets.push(Number(match[1]));
   }
-  return targets;
+  return [...new Set(targets)];
 }
 
 function targetJapaneseChars(text = "") {
   const targets = [];
-  for (const match of String(text).matchAll(/(\d+)\s*[–—-]\s*(\d+)\s*字/g)) {
+  const value = String(text);
+  for (const match of value.matchAll(/(\d+)\s*[–—\-〜~]\s*(\d+)\s*字/g)) {
     targets.push((Number(match[1]) + Number(match[2])) / 2);
   }
-  for (const match of String(text).matchAll(/(?:約|以内|程度)?\s*(\d+)\s*字/g)) {
+  for (const match of value.matchAll(/(?:約\s*)?(\d+)\s*字(?:以内|程度)?/g)) {
     targets.push(Number(match[1]));
   }
-  return targets;
+  return [...new Set(targets)];
 }
 
 function isReadingLike(title = "") {
