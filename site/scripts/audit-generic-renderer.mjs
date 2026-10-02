@@ -273,6 +273,39 @@ coreRouteDiagnostics("P1", P1_ACCELERATED_IDS, p1AllIds);
 coreRouteDiagnostics("P2", P2_ACCELERATED_IDS, p2AllIds);
 coreRouteDiagnostics("P3", P3_ACCELERATED_IDS, p3AllIds);
 
+
+const core99Ids = [...P1_ACCELERATED_IDS, ...P2_ACCELERATED_IDS, ...P3_ACCELERATED_IDS];
+const allP1P3Ids = [...p1AllIds, ...p2AllIds, ...p3AllIds];
+
+function metaCodesFor(id) {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const meta = raw.split("\n").find((line) => /^P[123]\b/.test(line.trim())) ?? "";
+  return new Set(meta.match(/\b(?:A|RQ|RF|WF|WT|WQ|D|SS)\d{2}\b/g) ?? []);
+}
+
+const allP1P3Codes = new Set(allP1P3Ids.flatMap((id) => [...metaCodesFor(id)]));
+const core99Codes = new Set(core99Ids.flatMap((id) => [...metaCodesFor(id)]));
+const core99MissingCodes = [...allP1P3Codes].filter((code) => !core99Codes.has(code)).sort();
+
+const core99Output = core99Ids.map((id) => {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const lesson = parseGenericLesson(raw, id);
+  const split = splitRaw(raw);
+  const substantialWriting = lesson.groups.writing.some((section) =>
+    /Writing Task|Judgment Writing|Evaluation Writing|Proposal Writing|Trade-off Writing|Summary-linked Writing|Text-linked Writing|Final Writing|Part .*Writing/i.test(section.title)
+  );
+  const hasSummaryTask = /^Summary Task$|^Japanese Summary Task$/m.test(split.problem);
+  const hasEnglishSummary = lesson.groups.writing.some((section) => /English Summary/i.test(section.title));
+  return { id, substantialWriting, hasSummaryTask, hasEnglishSummary };
+});
+
+const substantialCount = core99Output.filter((item) => item.substantialWriting).length;
+const summaryOutputCount = core99Output.filter((item) => item.hasSummaryTask || item.hasEnglishSummary).length;
+
+console.log(`[core99][ALL] core=${core99Ids.length}, codes=${core99Codes.size}/${allP1P3Codes.size}, missingCodes=${core99MissingCodes.join(",") || "none"}, substantialWriting=${substantialCount}, summaryOutput=${summaryOutputCount}`);
+
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
 
