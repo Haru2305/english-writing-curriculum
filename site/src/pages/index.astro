@@ -106,6 +106,7 @@ const tsukubaSpecialization = {
   description: "本編で作った力を、筑波の120分と出題形式に合わせる",
   practice: "長文読解／日本語記述／語句整序／約100語英作文／時間配分",
   goal: "120分で全形式を回し、最後の見直しまで含めて再現する",
+  time: "60分 → 90〜120分 → 120分",
   count: tsukubaRoute.length,
   range: "教材205〜234",
   route: tsukubaRoute
@@ -189,9 +190,9 @@ const additionalLessonCount = additionalBundles.reduce(
   </section>
 
   <a class="thinking-tools-entry compact-thinking-tools-entry" href="/thinking-tools/">
-    <small>困ったとき</small>
-    <strong>思考ツールを見る</strong>
-    <span>何を考えればよいか分からないときの共通ガイド</span>
+    <small>問題で止まったとき</small>
+    <strong>問題の考え方を見る</strong>
+    <span>何を答える → 何を根拠にする → どう答案にする、の順番に戻る</span>
   </a>
 
   <section class="index-section core-routes-section" aria-labelledby="core-routes-heading">
@@ -216,7 +217,7 @@ const additionalLessonCount = additionalBundles.reduce(
             </span>
             <span class="core-route-summary-meta">
               <strong>通常ルート {route.count}回</strong>
-              <small>{route.range}</small>
+              <small>{route.time}｜{route.range}</small>
             </span>
           </summary>
           <div class="accelerated-route-list">
@@ -260,7 +261,7 @@ const additionalLessonCount = additionalBundles.reduce(
         </span>
         <span class="core-route-summary-meta">
           <strong>{tsukubaSpecialization.count}日</strong>
-          <small>{tsukubaSpecialization.range}</small>
+          <small>{tsukubaSpecialization.time}｜{tsukubaSpecialization.range}</small>
         </span>
       </summary>
       <div class="accelerated-route-list">
