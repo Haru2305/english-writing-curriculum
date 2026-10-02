@@ -97,7 +97,7 @@ function lineClass(line, sectionTitle = "") {
             </details>
           ) : (
             <section class="micro-group">
-              <h3 class="micro-group-title">{userText(unit.title)}</h3>
+              <h3 class="micro-group-title">{userLabel(unit.title)}</h3>
               <div class="micro-group-body">
                 {unit.blocks.map((block) => (
                   <div class={"micro-block " + blockClass(block.lines, section.title)}>
