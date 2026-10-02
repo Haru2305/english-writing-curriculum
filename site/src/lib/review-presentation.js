@@ -20,11 +20,11 @@ export function reviewPresentation(title = "") {
     return { kind: "learning", label: "振り返り" };
   }
 
-  if (/^(?:B\d{3} Checkpoint|P\d Final Gate Check|Pass standard)$/i.test(text)) {
+  if (/^(?:B\d{3} Checkpoint|P\d Final Gate Check|チェック回|筑波 チェック回|最終チェック|筑波 最終チェック|Pass standard)$/i.test(text)) {
     return { kind: "learning", label: "実戦チェック" };
   }
 
-  if (/^(?:到達目安|P\d Final Gate 判定)$/i.test(text)) {
+  if (/^(?:到達目安|P\d Final Gate 判定|最終チェック判定|筑波 最終チェック判定)$/i.test(text)) {
     return { kind: "learning", label: "到達判定" };
   }
 
@@ -36,7 +36,7 @@ export function reviewPresentation(title = "") {
     return { kind: "learning", label: "思考・転用" };
   }
 
-  if (/^Final Gate｜Q3Bの読み方/i.test(text)) {
+  if (/^(?:Final Gate|最終チェック)｜Q3Bの読み方/i.test(text)) {
     return { kind: "question", label: "設問解説" };
   }
 
