@@ -64,6 +64,23 @@ for (const mode of modes) {
         coreRoutesSection: rect(".core-routes-section"),
         repairSection: rect(".repair-section"),
         routeStartLinks,
+        routeHeadings: [...document.querySelectorAll(".route-stage-card h3")].map((el) => ({
+          text: el.textContent.trim(),
+          color: getComputedStyle(el).color,
+          fontFamily: getComputedStyle(el).fontFamily,
+          fontSize: getComputedStyle(el).fontSize,
+          height: Math.round(el.getBoundingClientRect().height)
+        })),
+        coreHeading: (() => {
+          const el = document.querySelector("#core-routes-heading");
+          return el ? {
+            text: el.textContent.trim(),
+            color: getComputedStyle(el).color,
+            fontFamily: getComputedStyle(el).fontFamily,
+            fontSize: getComputedStyle(el).fontSize,
+            height: Math.round(el.getBoundingClientRect().height)
+          } : null;
+        })(),
         internalTokens: [...new Set(internalTokens)]
       };
     }, state);
