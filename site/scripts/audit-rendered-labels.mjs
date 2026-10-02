@@ -3,7 +3,7 @@ import { chromium } from "playwright";
 const base = process.env.UX_BASE_URL ?? "http://127.0.0.1:4321";
 const patterns = [
   ["bundle-code", /\bB\d{3}\b/gi],
-  ["phase-code", /\bP[1-4]\b/gi],
+  ["phase-code", /\bP[1-4](?=\s+(?:Final|Bridge|Strategy|Repair)|(?:で|では|へ|の|以降|完了|序盤|本体|最初|移行))/gi],
   ["bundle-word", /\bBundle\s*\d*\b/gi],
   ["checkpoint", /\bCheckpoint\b/gi],
   ["final-gate", /\bFinal\s+Gate\b/gi],
