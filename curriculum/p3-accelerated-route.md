@@ -88,7 +88,9 @@ E201 / E202 / E204
 2. 各Checkpointで、時間内に要求された処理を再現できるか確認する
 3. 弱点が明確な技能だけ、同BundleのOptionalへ戻る
 4. Optionalを「未消化教材」として全部埋めない
-5. E204を通過したらP4へ進む
+5. Optionalのcanonical Introduceを飛ばした技能は、Checkpointより前の最初のCore遭遇でFast Introduceとして短く導入する
+6. Checkpointでは新しい技能名を初導入しない
+7. E204を通過したらP4へ進む
 
 ## Volume
 
