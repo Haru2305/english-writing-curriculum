@@ -72,6 +72,8 @@ const routes = [
     id: "route-foundation",
     title: "文の論理をつくる",
     description: "比較・因果・主張を、英語の文として組み立てる",
+    practice: "比較・因果・主張／語句の使い分け／短いWriting",
+    goal: "理由→仕組み→具体例の筋道を、短い英文で最後まで通す",
     count: foundationRoute.length,
     range: "教材1〜42",
     route: foundationRoute
@@ -80,6 +82,8 @@ const routes = [
     id: "route-structure",
     title: "まとまりのある英文を書く",
     description: "文をつなぎ、段落・要約・自由英作文へ広げる",
+    practice: "文の骨格／段落構成／要約／自由英作文",
+    goal: "複数文をつないで、まとまりのある答案を自力で作る",
     count: structureRoute.length,
     range: "教材43〜96",
     route: structureRoute
@@ -88,6 +92,8 @@ const routes = [
     id: "route-practice",
     title: "資料を読み取って書く",
     description: "初見の文章・図表から必要な情報を選び、答案を作る",
+    practice: "初見文章・図表／情報選択／要約／判断・提案・評価",
+    goal: "資料を根拠にして、読み取りから英作文まで一続きで処理する",
     count: practiceRoute.length,
     range: "教材97〜204",
     route: practiceRoute
@@ -96,6 +102,8 @@ const routes = [
     id: "route-tsukuba",
     title: "筑波大形式で仕上げる",
     description: "過去問形式で、時間内に読み・考え・書く",
+    practice: "長文読解／語句整序／記述／自由英作文／時間配分",
+    goal: "本番の順序と時間配分で、最後まで答案を完成させる",
     count: tsukubaRoute.length,
     range: "教材205〜234",
     route: tsukubaRoute
@@ -168,20 +176,28 @@ const additionalLessonCount = additionalBundles.reduce(
 
   <section class="index-section core-routes-section" aria-labelledby="core-routes-heading">
     <div class="index-section-heading">
-      <p class="eyebrow">教材一覧</p>
-      <h2 id="core-routes-heading">学習段階から教材を開く</h2>
-      <p>今取り組む段階だけ開けば大丈夫です。</p>
+      <p class="eyebrow">通常ルート</p>
+      <h2 id="core-routes-heading">4段階で仕上げる</h2>
+      <p>今の段階を開くと、通常ルートで進める教材だけが表示されます。</p>
     </div>
 
     <div class="core-route-stack">
-      {routes.map((route) => (
+      {routes.map((route, index) => (
         <details class="core-route-details" id={route.id}>
           <summary>
+            <span class="core-route-stage" aria-hidden="true">{index + 1}</span>
             <span class="core-route-summary-main">
               <strong>{route.title}</strong>
-              <small>{route.description}</small>
+              <small class="core-route-description">{route.description}</small>
+              <span class="core-route-summary-points">
+                <span><b>練習</b>{route.practice}</span>
+                <span><b>到達</b>{route.goal}</span>
+              </span>
             </span>
-            <span class="core-route-summary-meta">{route.count}回｜{route.range}</span>
+            <span class="core-route-summary-meta">
+              <strong>通常ルート {route.count}回</strong>
+              <small>{route.range}</small>
+            </span>
           </summary>
           <div class="accelerated-route-list">
             {route.route.map((item) => (
