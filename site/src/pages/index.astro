@@ -58,19 +58,17 @@ const routes = [
   {
     id: "route-foundation",
     label: "基礎",
-    title: "比較・因果・主張を固める",
+    title: "比較・因果・主張",
     count: foundationRoute.length,
     range: "E001–E042",
-    description: "自由英作文の理由づけに必要な比較・因果・主張の強さ・提案を15回で通します。",
     route: foundationRoute
   },
   {
     id: "route-structure",
     label: "構成・要約",
-    title: "文から段落、要約、英作文へ",
+    title: "文・段落・要約・英作文",
     count: structureRoute.length,
     range: "E043–E096",
-    description: "長い文の骨格、段落機能、複数資料、要約から90–110語Writingまでをつなぎます。",
     route: structureRoute
   },
   {
@@ -79,16 +77,14 @@ const routes = [
     title: "初見資料から判断して書く",
     count: practiceRoute.length,
     range: "E097–E204",
-    description: "未知概念・複数資料・因果やバイアスを読み、要約・評価・提案まで実戦形式で仕上げます。",
     route: practiceRoute
   },
   {
     id: "route-tsukuba",
-    label: "筑波対策",
-    title: "30日で本番形式へ",
+    label: "筑波30日",
+    title: "本番形式を120分で回す",
     count: tsukubaRoute.length,
     range: "E205–E234",
-    description: "60分のパーツ演習から始め、最後は120分フルセットを安定して回す30日です。",
     route: tsukubaRoute
   }
 ];
@@ -104,49 +100,78 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
 
 <BaseLayout title="自由英作文｜教材ビューア">
   <p class="eyebrow">自由英作文</p>
-  <h1>今日の教材を選ぶ</h1>
+  <h1>まず1回やる</h1>
   <p class="lead">
-    基本ルートは上から1回ずつ進めます。チェック回で弱点が出たときだけ補修教材へ戻り、終えた段階は飛ばしてかまいません。
+    初めて使うなら、迷わずE001から始めてください。途中まで進んでいるなら、その教材番号から続けられます。
   </p>
 
-  <section class="entry-guide" aria-labelledby="entry-guide-heading">
+  <section class="entry-primary" aria-labelledby="entry-primary-heading">
+    <small>初めて使う</small>
+    <h2 id="entry-primary-heading">E001から始める</h2>
+    <p>比較と因果からスタートして、英作文の土台を作ります。</p>
+    <a class="entry-primary-button" href="/e001/">最初の教材を開く</a>
+  </section>
+
+  <section class="entry-secondary" aria-label="途中から始める">
+    <form class="lesson-jump-form" id="lesson-jump-form">
+      <label for="lesson-jump-input">
+        <strong>途中から続ける</strong>
+        <span>教材番号を入力</span>
+      </label>
+      <div class="lesson-jump-controls">
+        <input
+          id="lesson-jump-input"
+          name="lesson"
+          inputmode="text"
+          autocomplete="off"
+          placeholder="例：E086"
+          aria-describedby="lesson-jump-help"
+        />
+        <button type="submit">開く</button>
+      </div>
+      <small id="lesson-jump-help">E001〜E234</small>
+      <p class="lesson-jump-error" id="lesson-jump-error" role="alert" hidden></p>
+    </form>
+
+    <a class="entry-secondary-link" href="/e205/">
+      <small>筑波を受けるなら</small>
+      <strong>30日対策へ</strong>
+      <span>E205から始める</span>
+    </a>
+  </section>
+
+  <section class="index-section roadmap-section" aria-labelledby="roadmap-heading">
     <div class="index-section-heading">
-      <h2 id="entry-guide-heading">どこから始める？</h2>
-      <p>初めてなら「基礎」から。すでに身についている段階は、その次から始めます。</p>
+      <p class="eyebrow">学習ロードマップ</p>
+      <h2 id="roadmap-heading">教材はこの順に進む</h2>
+      <p>ここは選択肢ではなく、全体像です。初めてなら上から順に進めます。</p>
     </div>
 
-    <div class="route-stage-grid">
-      {routes.map((route) => (
-        <article class="route-stage-card">
-          <p class="route-stage-label">{route.label}</p>
-          <h3>{route.title}</h3>
-          <p>{route.description}</p>
-          <div class="route-stage-meta">
-            <span>{route.count}回</span>
-            <span>{route.range}</span>
-          </div>
-          <div class="route-stage-actions">
-            <a class="route-start-link" href={"/" + route.route[0].lesson.slug + "/"}>
-              {route.route[0].lesson.id}から始める
-            </a>
-            <a class="route-outline-link" href={"#" + route.id}>ルートを見る</a>
-          </div>
-        </article>
+    <div class="roadmap-list">
+      {routes.map((route, index) => (
+        <div class="roadmap-item">
+          <span class="roadmap-number">{index + 1}</span>
+          <span class="roadmap-main">
+            <small>{route.label}</small>
+            <strong>{route.title}</strong>
+          </span>
+          <span class="roadmap-meta">{route.count}回</span>
+        </div>
       ))}
     </div>
   </section>
 
-  <a class="thinking-tools-entry" href="/thinking-tools/">
-    <small>迷ったときの共通ガイド</small>
-    <strong>思考ツール</strong>
-    <span>問題を見て何を考えればよいか分からないときに使う</span>
+  <a class="thinking-tools-entry compact-thinking-tools-entry" href="/thinking-tools/">
+    <small>困ったとき</small>
+    <strong>思考ツールを見る</strong>
+    <span>何を考えればよいか分からないときの共通ガイド</span>
   </a>
 
   <section class="index-section core-routes-section" aria-labelledby="core-routes-heading">
     <div class="index-section-heading">
-      <p class="eyebrow">基本ルート</p>
-      <h2 id="core-routes-heading">上から1回ずつ進める</h2>
-      <p>各段階のルートだけを主線として進めます。補修教材はここには混ぜません。</p>
+      <p class="eyebrow">ルート一覧</p>
+      <h2 id="core-routes-heading">各段階の教材を見る</h2>
+      <p>必要な段階だけ開いて、上から順に進めます。</p>
     </div>
 
     <div class="core-route-stack">
@@ -186,7 +211,7 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
       </summary>
       <div class="repair-catalog-body">
         <p>
-          基本ルートのチェック回で弱点が見つかったときに開きます。全234教材を最初から順番に消化する必要はありません。
+          チェック回で弱点が見つかったときに使います。全234教材を最初から順番に消化する必要はありません。
         </p>
 
         <div class="bundle-list">
@@ -214,4 +239,30 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
   <p class="note">
     閲覧専用です。答案入力・ログイン・進捗保存はありません。
   </p>
+
+  <script is:inline>
+    (() => {
+      const form = document.getElementById("lesson-jump-form");
+      const input = document.getElementById("lesson-jump-input");
+      const error = document.getElementById("lesson-jump-error");
+      if (!form || !input || !error) return;
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const raw = String(input.value || "").trim().toUpperCase();
+        const normalized = raw.match(/^E?\s*0*(\d{1,3})$/);
+        const number = normalized ? Number(normalized[1]) : NaN;
+
+        if (!Number.isInteger(number) || number < 1 || number > 234) {
+          error.textContent = "E001〜E234の教材番号を入力してください";
+          error.hidden = false;
+          input.focus();
+          return;
+        }
+
+        error.hidden = true;
+        window.location.href = "/e" + String(number).padStart(3, "0") + "/";
+      });
+    })();
+  </script>
 </BaseLayout>
