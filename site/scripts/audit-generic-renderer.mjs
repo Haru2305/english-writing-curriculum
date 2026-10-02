@@ -318,6 +318,54 @@ for (const row of learnerConceptRows) {
 }
 
 
+
+function workloadRecord(id) {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const lesson = parseGenericLesson(raw, id);
+  const problemLines = split.problem.split("\n").map((line) => line.trim()).filter(Boolean);
+  const allocationLine = problemLines.find((line, index) =>
+    index > 0 && /(?:＝\s*Core\s*\d+\s*分|\bCore\s*\d+\s*分|目安\s*\d+\s*分|\b\d+\s*min(?:utes?)?\b)/i.test(line)
+  ) ?? "";
+  const explicitMinutes =
+    Number(allocationLine.match(/(?:＝\s*Core\s*|\bCore\s*|目安\s*)(\d+)\s*分/i)?.[1] ?? 0)
+    || Number(allocationLine.match(/\b(\d+)\s*min(?:utes?)?\b/i)?.[1] ?? 0)
+    || null;
+  const questionCount = new Set(
+    [...split.problem.matchAll(/(?:^|\n)(Q\d+)\b/g)].map((match) => match[1])
+  ).size;
+  const wordLimitMatches = [...split.problem.matchAll(/(\d+)\s*[–-]\s*(\d+)\s+English words|about\s+(\d+)\s+English words/gi)];
+  const maxWritingWords = wordLimitMatches.reduce((max, match) => {
+    const upper = Number(match[2] ?? match[3] ?? 0);
+    return Math.max(max, upper);
+  }, 0);
+  const nonAnswerProblem = split.problem.replace(/^---[\s\S]*?---\s*/m, "");
+  return {
+    id,
+    phase: entry.phase,
+    problemChars: nonAnswerProblem.length,
+    answerChars: split.answer.length,
+    totalChars: nonAnswerProblem.length + split.answer.length,
+    questionCount,
+    writingSections: lesson.groups.writing.length,
+    maxWritingWords,
+    explicitMinutes,
+    allocationLine: allocationLine.slice(0, 180)
+  };
+}
+
+const workload = core99Ids.map(workloadRecord);
+for (const phase of ["P1", "P2", "P3"]) {
+  const rows = workload.filter((row) => row.phase === phase);
+  const sorted = [...rows].sort((a, b) => b.totalChars - a.totalChars);
+  const avg = Math.round(rows.reduce((sum, row) => sum + row.totalChars, 0) / rows.length);
+  console.log(`[workload][${phase}] count=${rows.length}, avgChars=${avg}, heaviest=${sorted.slice(0, 8).map((row) => row.id + ":" + row.totalChars).join(",")}`);
+}
+for (const row of workload) {
+  console.log(`[workload][item] ${JSON.stringify(row)}`);
+}
+
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
 
