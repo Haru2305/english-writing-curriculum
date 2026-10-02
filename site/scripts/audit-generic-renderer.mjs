@@ -1183,12 +1183,9 @@ const indexPageText = fs.readFileSync(
   "utf8"
 );
 for (const required of [
-  "まず1回やる",
-  "E001から始める",
-  "最初の教材を開く",
-  "途中から続ける",
-  "教材番号を入力",
-  "筑波大形式の演習へ",
+  "学習を始める",
+  "教材番号から開く",
+  "筑波大対策",
   "教材一覧",
   "学習段階から教材を開く",
   "文の論理をつくる",
@@ -1202,6 +1199,12 @@ for (const required of [
   }
 }
 for (const forbidden of [
+  "まず1回やる",
+  "初めて使う",
+  "初めて使うなら",
+  "E001から始める",
+  "最初の教材を開く",
+  "途中から続ける",
   "学習ロードマップ",
   "教材はこの順に進む",
   "各段階の教材を見る",
@@ -1229,11 +1232,11 @@ if (/<details class="repair-catalog"[^>]*\sopen(?:\s|=|>)/.test(indexPageText)) 
   failures.push("index repair catalog should be collapsed initially");
 }
 
-if ((indexPageText.match(/class="entry-primary-button"/g) ?? []).length !== 1) {
-  failures.push("index should have exactly one primary start CTA");
+if ((indexPageText.match(/class="entry-primary(?:-button)?"/g) ?? []).length !== 0) {
+  failures.push("index should not restore the oversized first-time E001 entry");
 }
-if (!indexPageText.includes('href="/e001/"') || !indexPageText.includes('href="/e205/"')) {
-  failures.push("index primary/tsukuba entry links are missing");
+if (!indexPageText.includes('href="/e205/"')) {
+  failures.push("index Tsukuba entry link is missing");
 }
 if (!indexPageText.includes('id="lesson-jump-form"') || !indexPageText.includes("E001〜E234の教材番号")) {
   failures.push("index continuation-by-lesson-number control is missing");

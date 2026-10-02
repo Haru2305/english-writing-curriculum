@@ -100,23 +100,12 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
 
 <BaseLayout title="自由英作文｜教材ビューア">
   <p class="eyebrow">自由英作文</p>
-  <h1>まず1回やる</h1>
-  <p class="lead">
-    初めて使うなら、迷わずE001から始めてください。途中まで進んでいるなら、その教材番号から続けられます。
-  </p>
+  <h1>学習を始める</h1>
 
-  <section class="entry-primary" aria-labelledby="entry-primary-heading">
-    <small>初めて使う</small>
-    <h2 id="entry-primary-heading">E001から始める</h2>
-    <p>比較と因果からスタートして、英作文の土台を作ります。</p>
-    <a class="entry-primary-button" href="/e001/">最初の教材を開く</a>
-  </section>
-
-  <section class="entry-secondary" aria-label="途中から始める">
+  <section class="entry-secondary" aria-label="教材を開く">
     <form class="lesson-jump-form" id="lesson-jump-form">
       <label for="lesson-jump-input">
-        <strong>途中から続ける</strong>
-        <span>教材番号を入力</span>
+        <strong>教材番号から開く</strong>
       </label>
       <div class="lesson-jump-controls">
         <input
@@ -134,8 +123,7 @@ const bundles = [...new Set(lessons.map((lesson) => lesson.bundle))].map((bundle
     </form>
 
     <a class="entry-secondary-link" href="/e205/">
-      <small>筑波を受けるなら</small>
-      <strong>筑波大形式の演習へ</strong>
+      <strong>筑波大対策</strong>
       <span>E205から始める</span>
     </a>
   </section>
