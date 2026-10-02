@@ -253,6 +253,63 @@ if (p4WordOrderCount < 60) {
   failures.push(`P4 word-order coverage unexpectedly low: ${p4WordOrderCount}`);
 }
 
+
+let p4WritingPromptCount = 0;
+let p4DoYouThinkCount = 0;
+let p4LegacyWritingFormulaCount = 0;
+const p4WritingModes = new Set();
+
+for (const entry of catalog.filter((item) => {
+  const n = Number(item.id.slice(1));
+  return n >= 205 && n <= 234;
+})) {
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const writeMatches = [...split.problem.matchAll(/Write about 100 English words\./g)];
+  const promptWindows = writeMatches.map((match) => {
+    const start = Math.max(0, match.index - 900);
+    return split.problem.slice(start, match.index + match[0].length);
+  });
+
+  p4WritingPromptCount += promptWindows.length;
+
+  for (const prompt of promptWindows) {
+    if (/Do you think/i.test(prompt)) p4DoYouThinkCount += 1;
+    if (/State your position, explain your reason/i.test(prompt)) {
+      p4LegacyWritingFormulaCount += 1;
+    }
+
+    if (/priority over|address first|Which one of these problems/i.test(prompt)) {
+      p4WritingModes.add("priority");
+    }
+    if (/Under what conditions|conditions should/i.test(prompt)) {
+      p4WritingModes.add("conditional");
+    }
+    if (/Design |How should|What policy should|What .* rule should|What should the .* require/i.test(prompt)) {
+      p4WritingModes.add("design");
+    }
+    if (/Which design|Which system|Which kinds|compare at least two|better than another/i.test(prompt)) {
+      p4WritingModes.add("comparison");
+    }
+    if (/Where should .* draw the line|when attendance should|when .* should affect/i.test(prompt)) {
+      p4WritingModes.add("boundary");
+    }
+  }
+}
+
+if (p4WritingPromptCount !== 23) {
+  failures.push(`P4 writing prompt count changed: ${p4WritingPromptCount} (expected 23)`);
+}
+if (p4DoYouThinkCount > 1) {
+  failures.push(`P4 writing reverted toward Do-you-think repetition: ${p4DoYouThinkCount} prompts`);
+}
+if (p4LegacyWritingFormulaCount > 1) {
+  failures.push(`P4 writing reverted toward position/reason/example boilerplate: ${p4LegacyWritingFormulaCount} prompts`);
+}
+if (p4WritingModes.size < 5) {
+  failures.push(`P4 writing prompt-mode diversity too low: ${[...p4WritingModes].join(", ")}`);
+}
+
 const sentinels = {
   E002: {
     review: ["Q1. B", "Q3. C"]
@@ -404,6 +461,7 @@ for (const [id, checks] of Object.entries(p4PresentationChecks)) {
 
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
+console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
 for (const id of samples) {
   console.log(`[generic-audit] ${id} ${JSON.stringify(summaries.get(id) ?? null)}`);
 }
