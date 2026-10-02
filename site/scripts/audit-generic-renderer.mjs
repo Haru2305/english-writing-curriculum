@@ -638,6 +638,57 @@ for (const id of ["E219", "E222", "E228", "E234"]) {
   }
 }
 
+
+function sectionText(section) {
+  return (section?.units ?? [])
+    .flatMap((unit) => [
+      unit.title ?? "",
+      ...(unit.lines ?? []),
+      ...(unit.blocks ?? []).flatMap((block) => block.lines ?? [])
+    ])
+    .filter(Boolean)
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const p1p3ModelInventory = [];
+
+for (const entry of catalog.filter((item) => Number(item.id.slice(1)) <= 204)) {
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const lesson = parseGenericLesson(raw, entry.id);
+  const models = lesson.groups.review.filter((section) =>
+    /^(?:Model answer|Model output|Model short output|Model writing|Model summary|モデル答案)/i.test(section.title)
+  );
+
+  for (const section of models) {
+    const text = sectionText(section);
+    if (!text) continue;
+    const words = text.split(/\s+/).filter(Boolean).length;
+    const sentences = (text.match(/[.!?](?=\s|$)/g) ?? []).length;
+    const features = {
+      reason: /\bbecause\b|\bsince\b|\btherefore\b|\bso that\b/i.test(text),
+      contrast: /\bhowever\b|\bwhile\b|\balthough\b|\bwhereas\b|\bbut\b/i.test(text),
+      qualification: /\bmay\b|\bmight\b|\bunless\b|\bonly if\b|\bdepends? on\b|\bnot necessarily\b/i.test(text),
+      example: /\bfor example\b|\bfor instance\b|\bsuch as\b/i.test(text)
+    };
+    p1p3ModelInventory.push({
+      id: entry.id,
+      phase: entry.phase,
+      title: section.title,
+      words,
+      sentences,
+      features,
+      text: text.slice(0, 900)
+    });
+  }
+}
+
+console.log(`[model-gradient] total=${p1p3ModelInventory.length}`);
+for (const record of p1p3ModelInventory) {
+  console.log(`[model-gradient][item] ${JSON.stringify(record)}`);
+}
+
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optional=${p1OptionalIds.length}`);
