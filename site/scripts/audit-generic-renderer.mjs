@@ -16,7 +16,7 @@ const answerMarkers = [
   "Answers and Explanations"
 ];
 
-const writingCue = /^(?:Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Prompt|Planning|Plan→Draft→Revise|Part\s+(?:\d+|[A-Z])\s*[｜:：].*(?:Q3B|Writing|Composition))/im;
+const writingCue = /^(?:Guided Writing|Short Writing|Mini Writing|Writing Task|Short Output|English Summary|Final Writing|Judgment Writing|Evaluation Writing|Proposal Writing|Trade-off Writing|Summary-linked Writing|Text-linked Writing|Prompt|Planning|Plan→Draft→Revise|Part\s+(?:\d+|[A-Z])\s*[｜:：].*(?:Q3B|Writing|Composition))/im;
 const supportCue = /^(?:Self-check|Revision Check|P4 Final Gate Check)/im;
 const answerItem = /^(?:Q\d+|\d+)\s*(?:[｜:：.]\s*|\s+)(?:解答例|解答|完成|[A-D](?:\b|\s)|[A-D]\s+.+)/i;
 
@@ -523,6 +523,88 @@ for (const [id, checks] of Object.entries(p4PresentationChecks)) {
     if (!actual || actual.kind !== expectedKind || actual.label !== expectedLabel) {
       failures.push(`${id}: review presentation mismatch for ${title}: ${JSON.stringify(actual)}`);
     }
+  }
+}
+
+
+
+function parsedLesson(id) {
+  const entry = catalog.find((item) => item.id === id);
+  if (!entry) throw new Error(`missing lesson ${id}`);
+  return parseGenericLesson(fs.readFileSync(entry.filePath, "utf8"), id);
+}
+
+function writingBody(section) {
+  return [
+    section?.title ?? "",
+    ...(section?.units ?? []).flatMap((unit) => [
+      unit.title ?? "",
+      ...(unit.lines ?? []),
+      ...(unit.blocks ?? []).flatMap((block) => block.lines ?? [])
+    ])
+  ].filter(Boolean).join(" ");
+}
+
+for (const [id, title, requiredText] of [
+  ["E001", "Mini Writing", "2〜3文"],
+  ["E053", "Short Writing", "4-sentence paragraph"],
+  ["E085", "Writing Task", "60–80 English words"],
+  ["E086", "Writing Task", "80–100 English words"],
+  ["E087", "Writing Task", "90–110 English words"],
+  ["E097", "Writing Task", "100–120 English words"]
+]) {
+  const lesson = parsedLesson(id);
+  const section = lesson.groups.writing.find((item) => item.title === title);
+  const body = writingBody(section);
+  if (!section || !body.includes(requiredText)) {
+    failures.push(`${id}: writing-gradient milestone missing ${title} / ${requiredText}`);
+  }
+}
+
+const advancedWritingPairs = {
+  E141: "Judgment Writing",
+  E144: "Proposal Writing",
+  E147: "Evaluation Writing",
+  E150: "Proposal Writing",
+  E153: "Evaluation Writing",
+  E156: "Proposal Writing",
+  E159: "Evaluation Writing",
+  E162: "Proposal Writing",
+  E165: "Evaluation Writing",
+  E168: "Proposal Writing",
+  E171: "Evaluation Writing",
+  E174: "Proposal Writing",
+  E177: "Evaluation Writing",
+  E180: "Proposal Writing",
+  E183: "Trade-off Writing",
+  E186: "Trade-off Writing",
+  E189: "Evaluation Writing",
+  E192: "Evaluation Writing",
+  E195: "Summary-linked Writing",
+  E198: "Text-linked Writing",
+  E202: "Evaluation Writing",
+  E204: "Final Writing"
+};
+
+for (const [id, secondTitle] of Object.entries(advancedWritingPairs)) {
+  const titles = parsedLesson(id).groups.writing.map((section) => section.title);
+  if (!titles.includes("English Summary") || !titles.includes(secondTitle)) {
+    failures.push(`${id}: advanced P3 dual-output structure not split: ${titles.join(" / ")}`);
+  }
+}
+
+const p4PlanningLessons = ["E208", "E212", "E218"];
+for (const id of p4PlanningLessons) {
+  const titles = parsedLesson(id).groups.writing.map((section) => section.title);
+  if (!titles.includes("Planning")) {
+    failures.push(`${id}: expected explicit P4 planning scaffold missing`);
+  }
+}
+
+for (const id of ["E219", "E222", "E228", "E234"]) {
+  const titles = parsedLesson(id).groups.writing.map((section) => section.title);
+  if (titles.includes("Planning")) {
+    failures.push(`${id}: late P4 should not regain explicit Planning scaffold`);
   }
 }
 
