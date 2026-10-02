@@ -1183,14 +1183,16 @@ const indexPageText = fs.readFileSync(
   "utf8"
 );
 for (const required of [
-  "今日の教材を選ぶ",
-  "どこから始める？",
-  "基本ルート",
-  "補修・全教材",
-  "比較・因果・主張を固める",
-  "文から段落、要約、英作文へ",
-  "初見資料から判断して書く",
-  "30日で本番形式へ"
+  "まず1回やる",
+  "E001から始める",
+  "最初の教材を開く",
+  "途中から続ける",
+  "教材番号を入力",
+  "30日対策へ",
+  "学習ロードマップ",
+  "教材はこの順に進む",
+  "各段階の教材を見る",
+  "補修・全教材"
 ]) {
   if (!indexPageText.includes(required)) {
     failures.push(`index learner entry is missing: ${required}`);
@@ -1216,6 +1218,16 @@ if (/<details class="core-route-details"[^>]*\sopen(?:\s|=|>)/.test(indexPageTex
 }
 if (/<details class="repair-catalog"[^>]*\sopen(?:\s|=|>)/.test(indexPageText)) {
   failures.push("index repair catalog should be collapsed initially");
+}
+
+if ((indexPageText.match(/class="entry-primary-button"/g) ?? []).length !== 1) {
+  failures.push("index should have exactly one primary start CTA");
+}
+if (!indexPageText.includes('href="/e001/"') || !indexPageText.includes('href="/e205/"')) {
+  failures.push("index primary/tsukuba entry links are missing");
+}
+if (!indexPageText.includes('id="lesson-jump-form"') || !indexPageText.includes("E001〜E234の教材番号")) {
+  failures.push("index continuation-by-lesson-number control is missing");
 }
 
 const baseLayoutText = fs.readFileSync(
