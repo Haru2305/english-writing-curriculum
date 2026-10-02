@@ -53,6 +53,7 @@ english-writing-curriculum/
 │   ├── p2-accelerated-route.md
 │   ├── p3-accelerated-route.md
 │   ├── core99-final-audit.md
+│   ├── core99-workload-audit.md
 │   ├── content-framework.md
 │   ├── argument-construction.md
 │   ├── argument-bridge-revisions.md

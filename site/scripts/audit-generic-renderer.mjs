@@ -318,6 +318,61 @@ for (const row of learnerConceptRows) {
 }
 
 
+
+const coreCheckpointSet = new Set([
+  ...p1CheckpointIds,
+  ...p2CheckpointIds,
+  ...p3CheckpointIds
+]);
+
+const workloadCaps = {
+  P1: {
+    regular: { problemChars: 5900, answerChars: 2900 },
+    checkpoint: { problemChars: 6000, answerChars: 2600 }
+  },
+  P2: {
+    regular: { problemChars: 5800, answerChars: 3500 },
+    checkpoint: { problemChars: 6500, answerChars: 3000 }
+  },
+  P3: {
+    regular: { problemChars: 4300, answerChars: 3600 },
+    checkpoint: { problemChars: 4500, answerChars: 4300 }
+  }
+};
+
+for (const id of core99Ids) {
+  const entry = catalog.find((item) => item.id === id);
+  const raw = fs.readFileSync(entry.filePath, "utf8");
+  const split = splitRaw(raw);
+  const problemLines = split.problem.split("\n").map((line) => line.trim()).filter(Boolean);
+  const allocationLine = problemLines.find((line) =>
+    /(?:＝\s*Core\s*\d+\s*分|\bCore\s*\d+\s*分|目安\s*\d+\s*分|\b\d+\s*min(?:utes?)?\b)/i.test(line)
+  ) ?? "";
+  const explicitMinutes =
+    Number(allocationLine.match(/(?:＝\s*Core\s*|\bCore\s*|目安\s*)(\d+)\s*分/i)?.[1] ?? 0)
+    || Number(allocationLine.match(/\b(\d+)\s*min(?:utes?)?\b/i)?.[1] ?? 0)
+    || null;
+
+  const problemText = split.problem.replace(/^---[\s\S]*?---\s*/m, "");
+  const kind = coreCheckpointSet.has(id) ? "checkpoint" : "regular";
+  const caps = workloadCaps[entry.phase]?.[kind];
+
+  if (explicitMinutes == null || explicitMinutes < 45 || explicitMinutes > 60) {
+    failures.push(`${id}: Core workload target should stay within 45–60 minutes, found ${explicitMinutes ?? "none"}`);
+  }
+  if (!caps) {
+    failures.push(`${id}: no workload cap configured for ${entry.phase}/${kind}`);
+    continue;
+  }
+  if (problemText.length > caps.problemChars) {
+    failures.push(`${id}: Core problem-side workload grew too large (${problemText.length} > ${caps.problemChars} chars)`);
+  }
+  if (split.answer.length > caps.answerChars) {
+    failures.push(`${id}: Core answer/explanation workload grew too large (${split.answer.length} > ${caps.answerChars} chars)`);
+  }
+}
+
+
 if (catalog.length !== 234) failures.push(`catalog count: ${catalog.length}`);
 if (generic.length !== 226) failures.push(`generic count: ${generic.length}`);
 
@@ -961,6 +1016,7 @@ console.log(`[generic-audit] p1Accelerated=${P1_ACCELERATED_IDS.length}, p1Optio
 console.log(`[generic-audit] p2Accelerated=${P2_ACCELERATED_IDS.length}, p2Optional=${p2OptionalIds.length}, p1p2Core=${P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length}`);
 console.log(`[generic-audit] p3Accelerated=${P3_ACCELERATED_IDS.length}, p3Optional=${p3OptionalIds.length}, preP4Core=${P1_ACCELERATED_IDS.length + P2_ACCELERATED_IDS.length + P3_ACCELERATED_IDS.length}`);
 console.log(`[generic-audit] core99Writing=${core99WritingCount}, substantial=${core99SubstantialWritingCount}, summaries=${core99SummaryOutputCount}, rawSkills=${core99RawCodes.size}/${allRawCodes.size}`);
+console.log("[generic-audit] core99 workload guardrails=PASS");
 console.log(`[generic-audit] p1CoreReviewTailChars=${p1CoreReviewTailChars}`);
 console.log(`[generic-audit] p4Writing=${p4WritingPromptCount}, modes=${[...p4WritingModes].join(",")}, doYouThink=${p4DoYouThinkCount}, legacyFormula=${p4LegacyWritingFormulaCount}`);
 console.log(`[generic-audit] p4Models=${p4ModelAnswerCount}, iThinkOpenings=${p4ModelIThinkCount}`);
