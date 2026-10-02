@@ -216,6 +216,73 @@ for (const [title, expectedKind, expectedLabel] of [
   }
 }
 
+
+for (const [id, expectedPrefixes] of Object.entries({
+  E210: ["1｜", "2｜", "3｜A", "4｜3番目 be / 5番目 as", "Writing｜"],
+  E216: ["1｜", "4｜C → B → D → A", "9｜3番目 what / 5番目 notice", "11｜3番目 whether / 5番目 reflects", "Writing｜"],
+  E234: ["1｜", "5｜B → D → A → C", "10｜3番目 only when / 5番目 reliably predict", "12｜3番目 what a measure / 5番目 as well as", "Writing｜"]
+})) {
+  const entry = generic.find((item) => item.id === id);
+  const lesson = parseGenericLesson(fs.readFileSync(entry.filePath, "utf8"), id);
+  const answerList = lesson.groups.review[0];
+  const answerListLines = answerList?.units.flatMap((unit) => unit.lines ?? []) ?? [];
+
+  if (answerList?.title !== "解答一覧") {
+    failures.push(`${id}: answer list is not first in REVIEW`);
+    continue;
+  }
+
+  for (const prefix of expectedPrefixes) {
+    if (!answerListLines.some((line) => line.startsWith(prefix))) {
+      failures.push(`${id}: answer list missing ${prefix}`);
+    }
+  }
+}
+
+const p4PresentationChecks = {
+  E210: [
+    ["1｜解答例", "question", "設問解説"],
+    ["Model writing (98 words)", "question", "設問解説"],
+    ["B035 Checkpoint", "learning", "実戦チェック"],
+    ["自己修正", "learning", "振り返り"],
+    ["到達目安", "learning", "到達判定"],
+    ["思考の再利用", "learning", "思考・転用"]
+  ],
+  E216: [
+    ["9 完成", "question", "設問解説"],
+    ["Model answer (105 words)", "question", "設問解説"],
+    ["B036 Checkpoint", "learning", "実戦チェック"],
+    ["自己修正", "learning", "振り返り"],
+    ["到達目安", "learning", "到達判定"],
+    ["思考の再利用", "learning", "思考・転用"]
+  ],
+  E234: [
+    ["10 完成", "question", "設問解説"],
+    ["Model answer (100 words)", "question", "設問解説"],
+    ["P4 Final Gate 判定", "learning", "到達判定"],
+    ["30日間の最終固定", "learning", "本番手順"],
+    ["自己修正", "learning", "振り返り"],
+    ["Final Gate｜Q3Bの読み方", "question", "設問解説"],
+    ["考え方", "learning", "思考・転用"],
+    ["思考の再利用", "learning", "思考・転用"]
+  ]
+};
+
+for (const [id, checks] of Object.entries(p4PresentationChecks)) {
+  const entry = generic.find((item) => item.id === id);
+  const lesson = parseGenericLesson(fs.readFileSync(entry.filePath, "utf8"), id);
+  const reviewKinds = new Map(
+    lesson.groups.review.map((section) => [section.title, reviewPresentation(section.title)])
+  );
+
+  for (const [title, expectedKind, expectedLabel] of checks) {
+    const actual = reviewKinds.get(title);
+    if (!actual || actual.kind !== expectedKind || actual.label !== expectedLabel) {
+      failures.push(`${id}: review presentation mismatch for ${title}: ${JSON.stringify(actual)}`);
+    }
+  }
+}
+
 const samples = ["E002", "E042", "E086", "E120", "E204", "E207", "E210", "E216", "E234"];
 console.log(`[generic-audit] corpus=${catalog.length}, dedicated=8, generic=${generic.length}`);
 for (const id of samples) {
