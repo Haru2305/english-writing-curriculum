@@ -457,17 +457,25 @@ P1/P2より圧縮後の依存切れは少なく、主要修正は「Optionalで�
 
 ### B027–B030 — bias / measurement / operational evidence
 
-判定：**Keep**
+判定：**Keep with one route swap**
 
 P3後半のEvidence概念が明確にCoreへ残っている。
 
 - E157: self-selection bias
 - E163: regression to the mean
-- E169系のbase-rate reasoningを経由しつつ、CoreではE170でaverage / peak / distributionを扱う
+- E169: base-rate reasoning
+- E170: aggregate average vs peak / subgroup
 - E175: survivorship / visible-case bias
 - E180: freshness / current-decision evidence
 
-題材を難しくするだけでなく、「見えた数字をそのまま結論にしない」処理が積み上がる。
+通貫監査では、E147 → E153 → E159 → E165 → E171 と、5 Bundle連続で「二案比較→要約→評価」が第2 Core枠に並ぶことを確認した。
+
+比較評価はすでに十分反復されているため、B029は **E171をTargeted Reviewへ戻し、E169をCoreへ復帰**。
+これによりCore数を増やさず、
+**selection bias → regression to the mean → base rate → aggregate/subgroup → visible-case bias**
+というEvidenceの幅を広げた。
+
+題材を難しくするだけでなく、「見えた数字をそのまま結論にしない」処理が段階的に積み上がる。
 
 ### B031–B034 — causal inference / proxy / distribution / feedback / Final Gate
 
@@ -549,3 +557,25 @@ P3 Core 54は削減不要。
 に限定した。
 
 新規問題追加・Core数増加は不要。
+
+
+## Core 99 end-to-end note
+
+Phase単位の品質監査後、99本を一本の教材として再監査した。
+
+修正した点:
+1. P1→P2でE042の統合判断からE043の有限動詞へ戻るため、E043に「難度低下ではなく速度・精度の再固定」というBridge説明を追加
+2. P3 Viewer routeだけE185→E183となっていた実装順序を、正本のE183→E185→E186へ修正
+3. P3中盤の二案比較template連続を1本減らし、E171→E169へCore/Optionalを交換
+4. route dataの意図しない順序変更を防ぐため、accelerated routeはlesson ID昇順をCIで要求
+
+維持した点:
+- Core 99本という総量
+- 全Checkpoint / Final Gate
+- P2 E078–E084の推論・要約集中区間
+- P3 E131–E138の日本語統合・文挿入集中区間
+- E204→P4の接続
+
+したがって最終方針は引き続き、
+**Core = main line / Optional = repair**
+とし、99本からの追加圧縮は行わない。
