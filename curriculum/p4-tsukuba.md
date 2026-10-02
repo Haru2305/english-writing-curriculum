@@ -148,7 +148,7 @@ B039 Days 25–30:
 - Q1: animal-reference / “who” vs “that” passage; Japanese 50–60-character explanation, cloze, content choice.
 - Q2: rogue-planet science passage; Japanese 40–60-character explanation, cloze, sentence insertion.
 - Q3A: 3 word-order items with designated word positions.
-- Q3B: identify the health challenge with the greatest effect on one’s generation, explain why, and give a concrete example in about 100 words.
+- Q3B: a short health-challenge stimulus followed by free composition; identify the challenge with the greatest effect on one’s generation, explain why, and give a concrete example in about 100 words. This is a Q3B-local stimulus, not a requirement to synthesize Q1/Q2.
 
 ## P4 priority after paper review
 
@@ -188,7 +188,7 @@ The University of Tsukuba does not publish the main English front-exam paper on 
 - B038 / E223–E228: Published
 - B039 / E229–E234: Published
 - Coverage: Days 1–30
-- Status date: 2026-09-30
+- Status date: 2026-10-02
 - P4 authoring status: Complete
 - Final Gate: E234 / Day 30
 - Next action before learner use: revalidate the 2027 detailed official admissions guidelines when released
