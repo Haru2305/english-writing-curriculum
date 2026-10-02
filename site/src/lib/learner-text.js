@@ -109,6 +109,7 @@ export function toLearnerLabel(text = "") {
     .replace(/^Checkpoint 解説ルート$/i, "チェック回の解説ルート")
     .replace(/^Checkpoint$/i, "チェック回")
     .replace(/Bridge\s+\d+/gi, "確認回")
+    .replace(/\bBridge\b/gi, "確認回")
     .replace(/^P\d+\s+最終確認$/i, "最終チェック");
 
   return toLearnerText(normalized)
