@@ -15,10 +15,60 @@ function sectionTitle(title = "") {
 }
 
 function displayLine(line = "", title = "") {
-  if (userLabel(title) === "時間配分") {
-    return toLearnerTimingText(line, lessonId);
+  const text = userLabel(title) === "時間配分"
+    ? toLearnerTimingText(line, lessonId)
+    : userText(line);
+  // Markdown bullets are drawn by CSS (.bullet-line::before), never as a literal "- ".
+  return text.replace(/^-\s+(?=\S)/, "");
+}
+
+const BULLET_LINE = /^-\s+\S/;
+const NUMBERED_LINE = /^\d+[.．]\s/;
+// A short single line that opens with a particle can only be the tail of a sentence
+// that the source split around a list ("今回は、" / 1. … / "を拾う。").
+const SENTENCE_TAIL = /^(?:を|の|に|と|へ|が|は(?!い)|から|まで|です|となる|ように)/;
+
+function listKind(lines) {
+  if (!lines.length) return null;
+  if (lines.every((line) => BULLET_LINE.test(line))) return "bullet";
+  if (lines.every((line) => NUMBERED_LINE.test(line))) return "numbered";
+  return null;
+}
+
+function lastLineKind(line = "") {
+  if (BULLET_LINE.test(line)) return "bullet";
+  if (NUMBERED_LINE.test(line)) return "numbered";
+  return "text";
+}
+
+function shouldJoinBlocks(prevLines, nextLines) {
+  if (nextLines.length === 1 && nextLines[0].length <= 16 && SENTENCE_TAIL.test(nextLines[0])) return true;
+  const nextKind = listKind(nextLines);
+  if (!nextKind) return false;
+  const last = prevLines.at(-1) ?? "";
+  return lastLineKind(last) === nextKind || /[、:：]$/.test(last);
+}
+
+// The source separates every list item with a blank line, which would render each one as its
+// own spaced block. Join them (and their lead-in / tail lines) back into one visual block.
+function joinBlocks(items = []) {
+  const joined = [];
+  for (const item of items) {
+    const prev = joined.at(-1);
+    if (Array.isArray(item.lines) && Array.isArray(prev?.lines) && shouldJoinBlocks(prev.lines, item.lines)) {
+      joined[joined.length - 1] = { ...prev, lines: [...prev.lines, ...item.lines] };
+    } else {
+      joined.push(item);
+    }
   }
-  return userText(line);
+  return joined;
+}
+
+function sectionUnits(section) {
+  if (isAnswerList(section.title) || section.title === "Reading") return section.units;
+  return joinBlocks(section.units).map((unit) =>
+    unit.type === "subgroup" ? { ...unit, blocks: joinBlocks(unit.blocks) } : unit
+  );
 }
 
 function isCollapsibleSubgroup(title) {
@@ -81,6 +131,7 @@ function lineClass(line, sectionTitle = "") {
   if (/^\d+[.．]\s/.test(line)) return "numbered-item";
   if (/^differ (from|in) \+/.test(line)) return "key-definition";
   if (/^-\s*(Answer|Reason|Mechanism|Support|Qualification|Return)\s*:/.test(line)) return "structure-line";
+  if (BULLET_LINE.test(line)) return "bullet-line";
   if (/^[-→]/.test(line)) return "flow-line";
   return "";
 }
@@ -98,7 +149,7 @@ function lineClass(line, sectionTitle = "") {
       <p class="timing-guidance">時間を測るのは問題を解くところまで。答え・解説はタイマーを止めてから確認します。</p>
     )}
     <div class="content-group-body">
-      {section.units.map((unit) =>
+      {sectionUnits(section).map((unit) =>
         unit.type === "subgroup" ? (
           isCollapsibleSubgroup(unit.title) ? (
             <details class="micro-group collapsible-micro-group">
