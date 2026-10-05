@@ -1760,6 +1760,10 @@ h1 {
   text-decoration: none;
 }
 
+.site-tool-link + .site-tool-link {
+  margin-left: 0;
+}
+
 .thinking-tools-entry {
   display: block;
   margin-top: 24px;
@@ -2173,6 +2177,51 @@ h1 {
   font-family: var(--textbook-font);
   font-size: 15px;
   line-height: 1.75;
+}
+
+/* Expression bank page */
+.expression-example {
+  margin: 9px 0 0;
+  padding: 7px 0 7px 12px;
+  border-left: 3px solid #d9d8d0;
+}
+
+.expression-example p {
+  margin: 0;
+  font-family: var(--textbook-font);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.expression-example a {
+  display: inline-block;
+  margin-top: 2px;
+  color: #77776f;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.thinking-tool-card > .expression-caution {
+  margin-top: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #55554e;
+}
+
+.expression-caution strong {
+  margin-right: 8px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #efeee8;
+  font-size: 10px;
+}
+
+.expression-count {
+  margin: 18px 0 0;
+  color: #85857d;
+  font-size: 11px;
+  text-align: right;
 }
 
 @media print {

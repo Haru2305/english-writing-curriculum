@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { loadExpressions } from "../data/expression-bank.js";
+
+const groups = loadExpressions();
+const total = groups.reduce((sum, group) => sum + group.items.length, 0);
+---
+
+<BaseLayout
+  title="表現集｜自由英作文"
+  description="どのテーマの答案でも使える英語表現を、役割ごとに並べたページ"
+>
+  <article class="thinking-tools-page expressions-page">
+    <header class="thinking-tools-header">
+      <p class="eyebrow">書くときに迷ったら</p>
+      <h1>表現集</h1>
+      <p class="lead">
+        答案の中で「今、何をしたいか」から表現を探すページです。
+        例文は、教材のモデル答案から取っています。
+      </p>
+    </header>
+
+    <nav class="thinking-tools-index" aria-label="表現の分類">
+      {groups.map((group) => (
+        <a href={"#" + group.id}>{group.title}</a>
+      ))}
+    </nav>
+
+    <div class="thinking-tool-groups">
+      {groups.map((group) => (
+        <section class="thinking-tool-group" id={group.id}>
+          <header>
+            <h2>{group.title}</h2>
+            <p>{group.lead}</p>
+          </header>
+
+          <div class="thinking-tool-list">
+            {group.items.map((item) => (
+              <article class="thinking-tool-card expression-card" id={item.expr_id}>
+                <div class="thinking-tool-card-head">
+                  <div>
+                    <h3>{item.pattern}</h3>
+                    <span>{item.meaning_ja}</span>
+                  </div>
+                  <small>
+                    {item.origin === "supplement"
+                      ? "補充"
+                      : `${item.used_in_lessons}教材で使用`}
+                  </small>
+                </div>
+
+                <blockquote class="expression-example">
+                  <p lang="en">{item.example1}</p>
+                  {item.source1 && item.source1 !== "-" && (
+                    <a href={"/" + item.source1.toLowerCase() + "/"}>{item.source1}</a>
+                  )}
+                </blockquote>
+                {item.example2 && (
+                  <blockquote class="expression-example">
+                    <p lang="en">{item.example2}</p>
+                    {item.source2 && item.source2 !== "-" && (
+                      <a href={"/" + item.source2.toLowerCase() + "/"}>{item.source2}</a>
+                    )}
+                  </blockquote>
+                )}
+
+                <p class="expression-caution"><strong>注意</strong>{item.caution}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <p class="expression-count">全{total}項目</p>
+
+    <nav class="nav-row" aria-label="ナビゲーション">
+      <a class="nav-link" href="/">トップへ戻る</a>
+    </nav>
+  </article>
+</BaseLayout>
