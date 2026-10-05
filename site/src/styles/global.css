@@ -51,7 +51,7 @@ a { color: inherit; }
   padding: 3px 7px;
   border: 1px solid #c8c8c1;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 12px;
   color: #66665f;
 }
 
@@ -66,7 +66,7 @@ a { color: inherit; }
 
 .eyebrow {
   margin: 0 0 8px;
-  color: #707068;
+  color: #62625c;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -106,7 +106,7 @@ h1 {
 .lesson-card:active { transform: scale(0.99); }
 
 .lesson-card small {
-  color: #77776f;
+  color: #62625c;
   font-size: 12px;
   font-weight: 700;
 }
@@ -121,7 +121,7 @@ h1 {
 .lesson-card span {
   display: block;
   margin-top: 7px;
-  color: #6a6a63;
+  color: #62625c;
   font-size: 13px;
 }
 
@@ -133,7 +133,7 @@ h1 {
 
 .lesson-id {
   margin: 0 0 7px;
-  color: #6e6e67;
+  color: #62625c;
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.05em;
@@ -146,7 +146,7 @@ h1 {
 
 .lesson-meta {
   margin: 12px 0 0;
-  color: #6f6f68;
+  color: #62625c;
   font-size: 13px;
 }
 
@@ -240,7 +240,7 @@ h1 {
 .collapsible-micro-group > summary::after {
   content: "＋";
   flex: 0 0 auto;
-  color: #77776f;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
@@ -284,7 +284,7 @@ h1 {
   border-left: 3px solid #8a897f;
   background: #f4f3ee;
   color: #5f5f59;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
@@ -375,11 +375,11 @@ h1 {
 
 .flow-step {
   flex: 0 0 auto;
-  color: #74746d;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
 }
@@ -470,11 +470,11 @@ h1 {
 }
 
 .answer-stage > summary small {
-  color: #6c6c65;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.4;
 }
 
@@ -578,11 +578,11 @@ h1 {
 .flow-kicker {
   display: block;
   margin-bottom: 2px;
-  color: #77776f;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.12em;
 }
@@ -605,7 +605,7 @@ h1 {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.55;
 }
 
@@ -690,7 +690,7 @@ h1 {
 .support-details > summary {
   padding: 7px 0;
   border-top: 1px dashed #c9c8c0;
-  color: #73736c;
+  color: #62625c;
   font-size: 12px;
 }
 
@@ -715,7 +715,7 @@ h1 {
 
 .answer-notice-text {
   margin: 0;
-  color: #77776f;
+  color: #62625c;
   font-size: 12px;
   line-height: 1.65;
 }
@@ -743,8 +743,8 @@ h1 {
 .answer-stage > summary small {
   display: block;
   margin-top: 3px;
-  color: #77776f;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
 }
 
 .answer-stage-primary > summary {
@@ -837,11 +837,11 @@ h1 {
   align-items: center;
   gap: 7px;
   margin: 0 0 8px;
-  color: #707068;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -878,7 +878,7 @@ h1 {
 }
 
 .review-trigger span {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.13em;
 }
@@ -901,11 +901,11 @@ h1 {
 .cue-label {
   display: block;
   margin-bottom: 8px;
-  color: #74746d;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.12em;
 }
@@ -923,11 +923,11 @@ h1 {
 }
 
 .lesson-key small {
-  color: #77776f;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
 }
 
@@ -959,7 +959,7 @@ h1 {
 }
 
 .write-map-arrow {
-  color: #8a8982;
+  color: #62625c;
   font-size: 13px;
 }
 
@@ -1009,8 +1009,8 @@ h1 {
 }
 
 .reference-dock-head > span {
-  color: #77776f;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.1em;
 }
@@ -1036,7 +1036,7 @@ h1 {
   background: #202124;
   color: #fff;
   font: inherit;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -1149,11 +1149,11 @@ h1 {
   position: absolute;
   left: 2px;
   top: 17px;
-  color: #8a8982;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -1267,8 +1267,8 @@ h1 {
 }
 
 .compact-answer-list span {
-  color: #77776f;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -1326,7 +1326,7 @@ h1 {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.04em;
 }
@@ -1349,11 +1349,11 @@ h1 {
 }
 
 .question-review-answer span {
-  color: #77776f;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.07em;
 }
@@ -1374,7 +1374,7 @@ h1 {
   background: #fff;
   color: #55554f;
   font: inherit;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -1639,7 +1639,7 @@ h1 {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -1771,8 +1771,8 @@ h1 {
 }
 
 .thinking-tools-entry small {
-  color: #77776f;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -1809,7 +1809,7 @@ h1 {
 
 .thinking-tool-cue-head a {
   color: #66665f;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -1839,8 +1839,8 @@ h1 {
 }
 
 .thinking-tool-chip small {
-  color: #77776f;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
 }
 
 .thinking-tools-header {
@@ -1897,7 +1897,7 @@ h1 {
   border: 1px solid #cac9c1;
   border-radius: 999px;
   color: #606059;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
 }
 
@@ -1943,7 +1943,7 @@ h1 {
 
 .thinking-stuck-card > summary::after {
   content: "＋";
-  color: #77776f;
+  color: #62625c;
   font-size: 14px;
   font-weight: 900;
 }
@@ -1962,8 +1962,8 @@ h1 {
 .thinking-stuck-card > summary small {
   display: block;
   margin-top: 3px;
-  color: #6b6b64;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   line-height: 1.55;
 }
 
@@ -1982,7 +1982,7 @@ h1 {
 .thinking-stuck-card li strong {
   display: block;
   color: #4f4f49;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
 }
 
@@ -2018,7 +2018,7 @@ h1 {
 
 .thinking-tools-library > summary::after {
   content: "＋";
-  color: #77776f;
+  color: #62625c;
   font-size: 14px;
   font-weight: 900;
 }
@@ -2029,8 +2029,8 @@ h1 {
 
 .thinking-tools-library > summary span:first-child small {
   display: block;
-  color: #77776f;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -2042,8 +2042,8 @@ h1 {
 }
 
 .thinking-tools-library > summary > span:last-of-type {
-  color: #77776f;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -2090,7 +2090,7 @@ h1 {
   border-radius: 999px;
   background: #fff;
   color: #55554f;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   text-decoration: none;
 }
@@ -2156,15 +2156,15 @@ h1 {
 .thinking-tool-card-head span {
   display: block;
   margin-top: 2px;
-  color: #77776f;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 700;
 }
 
 .thinking-tool-card-head > small {
   flex: 0 0 auto;
-  color: #85857d;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -2211,11 +2211,11 @@ h1 {
 }
 
 .passage-locator {
-  color: #85857d;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   padding-top: 4px;
 }
@@ -2387,8 +2387,8 @@ h1 {
 }
 
 .exam-task-type {
-  color: #6f6f68;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.03em;
 }
@@ -2416,8 +2416,8 @@ h1 {
 
 .exam-review-type {
   margin: 0 0 4px;
-  color: #85857d;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.06em;
 }
@@ -2473,14 +2473,14 @@ h1 {
 }
 
 .writing-process-card strong {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.07em;
 }
 
 .writing-process-card small {
-  color: #7b7a73;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
 }
 
 .writing-process-card p {
@@ -2596,7 +2596,7 @@ h1 {
 .model-sentence-row > span {
   padding-top: 2px;
   color: #66655e;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -2780,7 +2780,7 @@ h1 {
 
 .review-cluster > summary::after {
   content: "＋";
-  color: #77776f;
+  color: #62625c;
   font-size: 15px;
   font-weight: 800;
 }
@@ -2795,8 +2795,8 @@ h1 {
 }
 
 .review-cluster > summary small {
-  color: #6b6b64;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   line-height: 1.45;
   text-align: right;
 }
@@ -2904,7 +2904,7 @@ h1 {
   display: block;
   margin-top: 4px;
   color: #62625c;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.55;
 }
 
@@ -2942,8 +2942,8 @@ h1 {
 
 .lesson-jump-form label span,
 .entry-secondary-link span {
-  color: #77776f;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
 }
 
 .lesson-jump-controls {
@@ -2981,14 +2981,14 @@ h1 {
 .lesson-jump-form > small {
   display: block;
   margin-top: 5px;
-  color: #888880;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
 }
 
 .lesson-jump-error {
   margin: 7px 0 0;
   color: #8a2d2d;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -3040,8 +3040,8 @@ h1 {
 
 .route-stage-label {
   margin: 0 0 5px;
-  color: #6f6f68;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
 }
@@ -3067,8 +3067,8 @@ h1 {
   display: flex;
   gap: 8px;
   margin-top: 11px;
-  color: #74746d;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -3145,7 +3145,7 @@ h1 {
   grid-row: 1;
   align-self: center;
   content: "＋";
-  color: #77776f;
+  color: #62625c;
   font-size: 15px;
   font-weight: 900;
 }
@@ -3185,8 +3185,8 @@ h1 {
 .core-route-description {
   display: block;
   margin-top: 2px;
-  color: #6f6f68;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.5;
 }
@@ -3201,7 +3201,7 @@ h1 {
 .core-route-summary-points > span {
   min-width: 0;
   color: #55554f;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -3211,8 +3211,8 @@ h1 {
   padding: 1px 5px;
   border: 1px solid #d8d7cf;
   border-radius: 999px;
-  color: #6b6b64;
-  font-size: 9px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 900;
   vertical-align: 1px;
 }
@@ -3227,13 +3227,13 @@ h1 {
 
 .core-route-summary-meta strong {
   color: #565650;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
 }
 
 .core-route-summary-meta small {
-  color: #85857d;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -3313,8 +3313,8 @@ h1 {
 .repair-catalog > summary span:first-child small {
   display: block;
   margin-bottom: 3px;
-  color: #77776f;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 900;
 }
 
@@ -3328,8 +3328,8 @@ h1 {
 }
 
 .repair-catalog > summary > span:last-child {
-  color: #6c6c65;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -3449,8 +3449,8 @@ h1 {
 
 .accelerated-route-step {
   padding-top: 2px;
-  color: #74746d;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.05em;
 }
@@ -3467,7 +3467,7 @@ h1 {
   display: block;
   margin-top: 3px;
   color: #686861;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.55;
 }
 
@@ -3511,8 +3511,8 @@ h1 {
 }
 
 .bundle-group > summary small {
-  color: #85857d;
-  font-size: 10px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -3541,8 +3541,8 @@ h1 {
 }
 
 .bundle-lesson > span {
-  color: #74746d;
-  font-size: 11px;
+  color: #62625c;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -3558,7 +3558,7 @@ h1 {
   border: 1px solid #cbc9c1;
   border-radius: 999px;
   color: #62625c;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -3663,7 +3663,7 @@ h1 {
   }
 
   .answer-list-label {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .answer-list-value {
@@ -3751,7 +3751,7 @@ h1 {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
 }
@@ -3793,11 +3793,11 @@ h1 {
 .generic-review-body .review-learning-group .review-kind-label {
   display: inline-block;
   margin: 0 0 5px;
-  color: #716f66;
+  color: #62625c;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, "BIZ UDPMincho", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
 }
@@ -3829,4 +3829,101 @@ h1 {
     background: transparent !important;
     break-inside: avoid-page;
   }
+}
+
+
+/* ---- Layout robustness ------------------------------------------------------------------
+   A single-column grid has an `auto` track, which grows to the min-content of its widest child
+   (a 620px data table, a nowrap row of reference chips). The track then outgrows the viewport
+   and the overflow is clipped or scrolls the whole page. Pin the track to the container width;
+   wide children keep scrolling inside their own scroll containers. */
+.lesson-flow,
+.answer-flow,
+.answer-stage-body,
+.content-stack,
+.generic-review-body,
+.question-review-list,
+.card-list,
+.core-route-stack {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* ---- Markdown bullets ------------------------------------------------------------------- */
+.lesson-line.bullet-line {
+  position: relative;
+  padding-left: 1.25em;
+}
+
+.lesson-line.bullet-line::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  top: 4px;
+}
+
+/* ---- Japanese line breaking -------------------------------------------------------------
+   Keep phrases together and avoid a single trailing character on the last line. Both are
+   progressive enhancements: browsers without support fall back to the previous behaviour. */
+.page-shell {
+  line-break: strict;
+  word-break: auto-phrase;
+}
+
+.page-shell p,
+.page-shell li {
+  text-wrap: pretty;
+}
+
+.page-shell h1,
+.page-shell h2,
+.page-shell h3 {
+  text-wrap: balance;
+}
+
+/* ---- Touch targets ----------------------------------------------------------------------
+   44px for standalone controls, 40px for dense rows of pills. The header keeps its 54px height
+   (sticky offsets elsewhere depend on it) by trading padding for the taller links. */
+.site-header {
+  padding-block: 5px;
+}
+
+.brand,
+.site-tool-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.print-problem-button,
+.review-close-button,
+.reference-dialog-close {
+  min-height: 44px;
+  padding-inline: 14px;
+}
+
+.reference-button,
+.inline-reference-button,
+.generic-review-nav a,
+.thinking-tool-chip,
+.thinking-tools-index a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.thinking-tool-cue-head a {
+  padding: 14px 6px;
+  margin: -14px -6px;
+}
+
+/* Short labels such as "1"–"6" would otherwise make a 26px-wide button. */
+.reference-button {
+  min-width: 40px;
+  justify-content: center;
+}
+
+/* Padding (not flex) keeps the native disclosure marker on <summary>. */
+.question-review-extra > summary,
+.support-details > summary {
+  padding-block: 13px;
 }
