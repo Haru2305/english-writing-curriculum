@@ -772,7 +772,7 @@ if (e002Entry) {
     failures.push("E002: answer list is empty");
   }
 
-  for (const prefix of ["Q1｜B", "Q2｜", "Q3｜C", "Q4｜B", "Nuance 1｜from", "Nuance 2｜in", "Nuance 3｜contribute to", "Guided Writing｜"]) {
+  for (const prefix of ["Q1｜B", "Q2｜", "Q3｜C", "Q4｜A", "Nuance 1｜from", "Nuance 2｜in", "Nuance 3｜contribute to", "Guided Writing｜"]) {
     if (!answerKeyLines.some((line) => line.startsWith(prefix))) {
       failures.push(`E002: answer list missing ${prefix}`);
     }
@@ -787,7 +787,7 @@ const e002ReviewKinds = new Map(
 
 for (const [title, expectedKind, expectedLabel] of [
   ["Q1. B", "question", "設問解説"],
-  ["Q4. B", "question", "設問解説"],
+  ["Q4. A", "question", "設問解説"],
   ["本文の因果骨格", "learning", "本文整理"],
   ["LEXG003｜Pre-solveの整理と本文での因果の強さ", "learning", "表現整理"],
   ["LEXG195 Review", "learning", "表現整理"],
