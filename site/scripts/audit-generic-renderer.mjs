@@ -801,7 +801,7 @@ for (const [title, expectedKind, expectedLabel] of [
 
 
 for (const [id, expectedPrefixes] of Object.entries({
-  E210: ["1｜", "2｜", "3｜A", "4｜3番目 because publishing it / 5番目 the behavior", "Writing｜"],
+  E210: ["1｜", "2｜", "3｜C", "4｜3番目 because publishing it / 5番目 the behavior", "Writing｜"],
   E216: ["1｜", "4｜C → B → D → A", "9｜3番目 prior preference / 5番目 what the system", "10｜3番目 when people learn / 5番目 the metric", "11｜3番目 a metric rises / 5番目 the learning", "Writing｜"],
   E234: ["1｜", "5｜B → D → A → C", "10｜3番目 treatment-driven changes / 5番目 reliably predict", "11｜3番目 from an average level / 5番目 the timing of exposure", "12｜3番目 what a measure represents / 5番目 what important information", "Writing｜"]
 })) {
